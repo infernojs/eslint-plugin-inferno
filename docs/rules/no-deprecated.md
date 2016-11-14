@@ -1,28 +1,28 @@
 # Prevent usage of deprecated methods (no-deprecated)
 
-Several methods are deprecated between React versions. This rule will warn you if you try to use a deprecated method. Use the [shared settings](/README.md#configuration) to specify the React version.
+Several methods are deprecated between Inferno versions. This rule will warn you if you try to use a deprecated method. Use the [shared settings](/README.md#configuration) to specify the Inferno version.
 
 ## Rule Details
 
 The following patterns are considered warnings:
 
 ```js
-React.render(<MyComponent />, root);
+Inferno.render(<MyComponent />, root);
 
-React.unmountComponentAtNode(root);
+Inferno.unmountComponentAtNode(root);
 
-React.findDOMNode(this.refs.foo);
+Inferno.findDOMNode(this.refs.foo);
 
-React.renderToString(<MyComponent />);
+Inferno.renderToString(<MyComponent />);
 
-React.renderToStaticMarkup(<MyComponent />);
+Inferno.renderToStaticMarkup(<MyComponent />);
 ```
 
 The following patterns are not considered warnings:
 
 ```js
-ReactDOM.render(<MyComponent />, root);
+Inferno.render(<MyComponent />, root);
 
-// When [1, {"react": "0.13.0"}]
-ReactDOM.findDOMNode(this.refs.foo);
+// When [1, {"inferno": "0.13.0"}]
+Inferno.findDOMNode(this.refs.foo);
 ```

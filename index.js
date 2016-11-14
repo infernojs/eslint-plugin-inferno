@@ -1,7 +1,7 @@
 'use strict';
 
 var allRules = {
-  'jsx-uses-react': require('./lib/rules/jsx-uses-react'),
+  'jsx-uses-inferno': require('./lib/rules/jsx-uses-inferno'),
   'no-multi-comp': require('./lib/rules/no-multi-comp'),
   'prop-types': require('./lib/rules/prop-types'),
   'display-name': require('./lib/rules/display-name'),
@@ -16,7 +16,7 @@ var allRules = {
   'no-did-update-set-state': require('./lib/rules/no-did-update-set-state'),
   'no-render-return-value': require('./lib/rules/no-render-return-value'),
   'no-unescaped-entities': require('./lib/rules/no-unescaped-entities'),
-  'react-in-jsx-scope': require('./lib/rules/react-in-jsx-scope'),
+  'inferno-in-jsx-scope': require('./lib/rules/inferno-in-jsx-scope'),
   'jsx-uses-vars': require('./lib/rules/jsx-uses-vars'),
   'jsx-handler-names': require('./lib/rules/jsx-handler-names'),
   'jsx-pascal-case': require('./lib/rules/jsx-pascal-case'),
@@ -75,7 +75,7 @@ function configureAsError(rules) {
     if (!rules.hasOwnProperty(key)) {
       continue;
     }
-    result['react/' + key] = 2;
+    result['inferno/' + key] = 2;
   }
   return result;
 }
@@ -95,7 +95,7 @@ module.exports = {
   configs: {
     recommended: {
       plugin: [
-        'react'
+        'inferno'
       ],
       parserOptions: {
         ecmaFeatures: {
@@ -103,25 +103,25 @@ module.exports = {
         }
       },
       rules: {
-        'react/display-name': 2,
-        'react/jsx-no-duplicate-props': 2,
-        'react/jsx-no-undef': 2,
-        'react/jsx-uses-react': 2,
-        'react/jsx-uses-vars': 2,
-        'react/no-deprecated': 2,
-        'react/no-direct-mutation-state': 2,
-        'react/no-find-dom-node': 2,
-        'react/no-is-mounted': 2,
-        'react/no-unknown-property': 2,
-        'react/no-render-return-value': 2,
-        'react/prop-types': 2,
-        'react/react-in-jsx-scope': 2,
-        'react/require-render-return': 2
+        'inferno/display-name': 2,
+        'inferno/jsx-no-duplicate-props': 2,
+        'inferno/jsx-no-undef': 2,
+        'inferno/jsx-uses-inferno': 2,
+        'inferno/jsx-uses-vars': 2,
+        'inferno/no-deprecated': 2,
+        'inferno/no-direct-mutation-state': 2,
+        'inferno/no-find-dom-node': 2,
+        'inferno/no-is-mounted': 2,
+        'inferno/no-unknown-property': 2,
+        'inferno/no-render-return-value': 2,
+        'inferno/prop-types': 2,
+        'inferno/inferno-in-jsx-scope': 2,
+        'inferno/require-render-return': 2
       }
     },
     all: {
       plugin: [
-        'react'
+        'inferno'
       ],
       parserOptions: {
         ecmaFeatures: {

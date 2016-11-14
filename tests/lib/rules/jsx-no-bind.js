@@ -1,6 +1,6 @@
 /**
  * @fileoverview Prevents usage of Function.prototype.bind and arrow functions
- *               in React component definition.
+ *               in Inferno component definition.
  * @author Daniel Lo Nigro <dan.cx>
  */
 'use strict';
@@ -133,7 +133,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    const click = this.someMethod.bind(this);',
         '    return <div onClick={click}>Hello {this.state.name}</div>;',
@@ -145,7 +145,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  render() {',
         '    const click = this.someMethod.bind(this);',
         '    return <div onClick={click}>Hello {this.state.name}</div>;',

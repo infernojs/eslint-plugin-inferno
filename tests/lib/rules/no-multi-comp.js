@@ -30,7 +30,7 @@ ruleTester.run('no-multi-comp', rule, {
   valid: [{
     code: [
       'var Hello = require(\'./components/Hello\');',
-      'var HelloJohn = React.createClass({',
+      'var HelloJohn = Inferno.createClass({',
       '  render: function() {',
       '    return <Hello name="John" />;',
       '  }',
@@ -39,7 +39,7 @@ ruleTester.run('no-multi-comp', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -48,7 +48,7 @@ ruleTester.run('no-multi-comp', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var Heading = React.createClass({',
+      'var Heading = Inferno.createClass({',
       '  render: function() {',
       '    return (',
       '      <div>',
@@ -79,7 +79,7 @@ ruleTester.run('no-multi-comp', rule, {
       'function Hello(props) {',
       '  return <div>Hello {props.name}</div>;',
       '}',
-      'class HelloJohn extends React.Component {',
+      'class HelloJohn extends Inferno.Component {',
       '  render() {',
       '    return <Hello name="John" />;',
       '  }',
@@ -93,12 +93,12 @@ ruleTester.run('no-multi-comp', rule, {
 
   invalid: [{
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
       '});',
-      'var HelloJohn = React.createClass({',
+      'var HelloJohn = Inferno.createClass({',
       '  render: function() {',
       '    return <Hello name="John" />;',
       '  }',
@@ -106,22 +106,22 @@ ruleTester.run('no-multi-comp', rule, {
     ].join('\r'),
     parserOptions: parserOptions,
     errors: [{
-      message: 'Declare only one React component per file',
+      message: 'Declare only one Inferno component per file',
       line: 6
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
       '}',
-      'class HelloJohn extends React.Component {',
+      'class HelloJohn extends Inferno.Component {',
       '  render() {',
       '    return <Hello name="John" />;',
       '  }',
       '}',
-      'class HelloJohnny extends React.Component {',
+      'class HelloJohnny extends Inferno.Component {',
       '  render() {',
       '    return <Hello name="Johnny" />;',
       '  }',
@@ -129,10 +129,10 @@ ruleTester.run('no-multi-comp', rule, {
     ].join('\r'),
     parserOptions: parserOptions,
     errors: [{
-      message: 'Declare only one React component per file',
+      message: 'Declare only one Inferno component per file',
       line: 6
     }, {
-      message: 'Declare only one React component per file',
+      message: 'Declare only one Inferno component per file',
       line: 11
     }]
   }, {
@@ -146,7 +146,7 @@ ruleTester.run('no-multi-comp', rule, {
     ].join('\n'),
     parser: 'babel-eslint',
     errors: [{
-      message: 'Declare only one React component per file',
+      message: 'Declare only one Inferno component per file',
       line: 4
     }]
   }, {
@@ -154,7 +154,7 @@ ruleTester.run('no-multi-comp', rule, {
       'function Hello(props) {',
       '  return <div>Hello {props.name}</div>;',
       '}',
-      'class HelloJohn extends React.Component {',
+      'class HelloJohn extends Inferno.Component {',
       '  render() {',
       '    return <Hello name="John" />;',
       '  }',
@@ -162,7 +162,7 @@ ruleTester.run('no-multi-comp', rule, {
     ].join('\r'),
     parserOptions: parserOptions,
     errors: [{
-      message: 'Declare only one React component per file',
+      message: 'Declare only one Inferno component per file',
       line: 4
     }]
   }, {
@@ -180,7 +180,7 @@ ruleTester.run('no-multi-comp', rule, {
     ].join('\n'),
     parser: 'babel-eslint',
     errors: [{
-      message: 'Declare only one React component per file',
+      message: 'Declare only one Inferno component per file',
       line: 6
     }]
   }]

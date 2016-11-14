@@ -31,7 +31,7 @@ ruleTester.run('sort-prop-types', rule, {
 
   valid: [{
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  render: function() {',
       '    return <div />;',
       '  }',
@@ -40,7 +40,7 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <div />;',
@@ -50,12 +50,12 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    A: React.PropTypes.any,',
-      '    Z: React.PropTypes.string,',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string',
+      '    A: Inferno.PropTypes.any,',
+      '    Z: Inferno.PropTypes.string,',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -65,12 +65,12 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    A: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    Z: React.PropTypes.string',
+      '    a: Inferno.PropTypes.any,',
+      '    A: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    Z: Inferno.PropTypes.string',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -83,19 +83,19 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string',
       '  },',
       '  render: function() {',
       '    return <div />;',
       '  }',
       '});',
-      'var Second = React.createClass({',
+      'var Second = Inferno.createClass({',
       '  propTypes: {',
-      '    AA: React.PropTypes.any,',
-      '    ZZ: React.PropTypes.string',
+      '    AA: Inferno.PropTypes.any,',
+      '    ZZ: Inferno.PropTypes.string',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -105,30 +105,30 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '  a: React.PropTypes.string,',
-      '  z: React.PropTypes.string',
+      '  a: Inferno.PropTypes.string,',
+      '  z: Inferno.PropTypes.string',
       '};',
-      'First.propTypes.justforcheck = React.PropTypes.string;'
+      'First.propTypes.justforcheck = Inferno.PropTypes.string;'
     ].join('\n'),
     parserOptions: parserOptions
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '  a: React.PropTypes.any,',
-      '  A: React.PropTypes.any,',
-      '  z: React.PropTypes.string,',
-      '  Z: React.PropTypes.string',
+      '  a: Inferno.PropTypes.any,',
+      '  A: Inferno.PropTypes.any,',
+      '  z: Inferno.PropTypes.string,',
+      '  Z: Inferno.PropTypes.string',
       '};'
     ].join('\n'),
     options: [{
@@ -137,11 +137,11 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
-      '    a: React.PropTypes.any,',
-      '    b: React.PropTypes.any,',
-      '    c: React.PropTypes.any',
+      '    a: Inferno.PropTypes.any,',
+      '    b: Inferno.PropTypes.any,',
+      '    c: Inferno.PropTypes.any',
       '  };',
       '  render() {',
       '    return <div />;',
@@ -152,13 +152,13 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',
       '}',
       'Hello.propTypes = {',
-      '  "aria-controls": React.PropTypes.string',
+      '  "aria-controls": Inferno.PropTypes.string',
       '};'
     ].join('\n'),
     parser: 'babel-eslint',
@@ -168,11 +168,11 @@ ruleTester.run('sort-prop-types', rule, {
   }, {
     // Invalid code, should not be validated
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    c: React.PropTypes.any,',
-      '    b: React.PropTypes.any',
+      '    a: Inferno.PropTypes.any,',
+      '    c: Inferno.PropTypes.any,',
+      '    b: Inferno.PropTypes.any',
       '  };',
       '  render() {',
       '    return <div />;',
@@ -182,7 +182,7 @@ ruleTester.run('sort-prop-types', rule, {
     parser: 'babel-eslint'
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    let { a, ...b } = obj;',
       '    let c = { ...d };',
@@ -193,11 +193,11 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    barRequired: React.PropTypes.func.isRequired,',
-      '    onBar: React.PropTypes.func,',
-      '    z: React.PropTypes.any',
+      '    barRequired: Inferno.PropTypes.func.isRequired,',
+      '    onBar: Inferno.PropTypes.func,',
+      '    z: Inferno.PropTypes.any',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -207,12 +207,12 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    onBar: React.PropTypes.func,',
-      '    onFoo: React.PropTypes.func',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    onBar: Inferno.PropTypes.func,',
+      '    onFoo: Inferno.PropTypes.func',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -225,12 +225,12 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    onBar: React.PropTypes.func,',
-      '    onFoo: React.PropTypes.func',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    onBar: Inferno.PropTypes.func,',
+      '    onFoo: Inferno.PropTypes.func',
       '  };',
       '  render() {',
       '    return <div />;',
@@ -244,16 +244,16 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    onBar: React.PropTypes.func,',
-      '    onFoo: React.PropTypes.func',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    onBar: Inferno.PropTypes.func,',
+      '    onFoo: Inferno.PropTypes.func',
       '};'
     ].join('\n'),
     options: [{
@@ -262,14 +262,14 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '    barRequired: React.PropTypes.string.isRequired,',
-      '    a: React.PropTypes.any',
+      '    barRequired: Inferno.PropTypes.string.isRequired,',
+      '    a: Inferno.PropTypes.any',
       '};'
     ].join('\n'),
     options: [{
@@ -278,7 +278,7 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
@@ -293,18 +293,18 @@ ruleTester.run('sort-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '    barRequired: React.PropTypes.string.isRequired,',
-      '    fooRequired: React.PropTypes.any.isRequired,',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    onBar: React.PropTypes.func,',
-      '    onFoo: React.PropTypes.func',
+      '    barRequired: Inferno.PropTypes.string.isRequired,',
+      '    fooRequired: Inferno.PropTypes.any.isRequired,',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    onBar: Inferno.PropTypes.func,',
+      '    onFoo: Inferno.PropTypes.func',
       '};'
     ].join('\n'),
     options: [{
@@ -327,10 +327,10 @@ ruleTester.run('sort-prop-types', rule, {
 
   invalid: [{
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    z: React.PropTypes.string,',
-      '    a: React.PropTypes.any',
+      '    z: Inferno.PropTypes.string,',
+      '    a: Inferno.PropTypes.any',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -346,10 +346,10 @@ ruleTester.run('sort-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    z: React.PropTypes.any,',
-      '    Z: React.PropTypes.any',
+      '    z: Inferno.PropTypes.any,',
+      '    Z: Inferno.PropTypes.any',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -365,10 +365,10 @@ ruleTester.run('sort-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    Z: React.PropTypes.any,',
-      '    a: React.PropTypes.any',
+      '    Z: Inferno.PropTypes.any,',
+      '    a: Inferno.PropTypes.any',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -387,12 +387,12 @@ ruleTester.run('sort-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    A: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    Z: React.PropTypes.string',
+      '    a: Inferno.PropTypes.any,',
+      '    A: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    Z: Inferno.PropTypes.string',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -403,19 +403,19 @@ ruleTester.run('sort-prop-types', rule, {
     errors: 2
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    Zz: React.PropTypes.string',
+      '    a: Inferno.PropTypes.any,',
+      '    Zz: Inferno.PropTypes.string',
       '  },',
       '  render: function() {',
       '    return <div />;',
       '  }',
       '});',
-      'var Second = React.createClass({',
+      'var Second = Inferno.createClass({',
       '  propTypes: {',
-      '    aAA: React.PropTypes.any,',
-      '    ZZ: React.PropTypes.string',
+      '    aAA: Inferno.PropTypes.any,',
+      '    ZZ: Inferno.PropTypes.string',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -426,34 +426,34 @@ ruleTester.run('sort-prop-types', rule, {
     errors: 2
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '    yy: React.PropTypes.any,',
-      '    bb: React.PropTypes.string',
+      '    yy: Inferno.PropTypes.any,',
+      '    bb: Inferno.PropTypes.string',
       '};',
-      'class Second extends React.Component {',
+      'class Second extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'Second.propTypes = {',
-      '    aAA: React.PropTypes.any,',
-      '    ZZ: React.PropTypes.string',
+      '    aAA: Inferno.PropTypes.any,',
+      '    ZZ: Inferno.PropTypes.string',
       '};'
     ].join('\n'),
     parserOptions: parserOptions,
     errors: 2
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
-      '    z: React.PropTypes.any,',
-      '    y: React.PropTypes.any,',
-      '    a: React.PropTypes.any',
+      '    z: Inferno.PropTypes.any,',
+      '    y: Inferno.PropTypes.any,',
+      '    a: Inferno.PropTypes.any',
       '  };',
       '  render() {',
       '    return <div />;',
@@ -465,12 +465,12 @@ ruleTester.run('sort-prop-types', rule, {
     errors: 2
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    onFoo: React.PropTypes.func,',
-      '    onBar: React.PropTypes.func',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    onFoo: Inferno.PropTypes.func,',
+      '    onBar: Inferno.PropTypes.func',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -489,12 +489,12 @@ ruleTester.run('sort-prop-types', rule, {
     }]
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    onFoo: React.PropTypes.func,',
-      '    onBar: React.PropTypes.func',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    onFoo: Inferno.PropTypes.func,',
+      '    onBar: Inferno.PropTypes.func',
       '  };',
       '  render() {',
       '    return <div />;',
@@ -514,16 +514,16 @@ ruleTester.run('sort-prop-types', rule, {
     }]
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '    a: React.PropTypes.any,',
-      '    z: React.PropTypes.string,',
-      '    onFoo: React.PropTypes.func,',
-      '    onBar: React.PropTypes.func',
+      '    a: Inferno.PropTypes.any,',
+      '    z: Inferno.PropTypes.string,',
+      '    onFoo: Inferno.PropTypes.func,',
+      '    onBar: Inferno.PropTypes.func',
       '};'
     ].join('\n'),
     options: [{
@@ -538,12 +538,12 @@ ruleTester.run('sort-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    onBar: React.PropTypes.func,',
-      '    onFoo: React.PropTypes.func,',
-      '    z: React.PropTypes.string',
+      '    a: Inferno.PropTypes.any,',
+      '    onBar: Inferno.PropTypes.func,',
+      '    onFoo: Inferno.PropTypes.func,',
+      '    z: Inferno.PropTypes.string',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -562,11 +562,11 @@ ruleTester.run('sort-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    fooRequired: React.PropTypes.string.isRequired,',
-      '    barRequired: React.PropTypes.string.isRequired,',
-      '    a: React.PropTypes.any',
+      '    fooRequired: Inferno.PropTypes.string.isRequired,',
+      '    barRequired: Inferno.PropTypes.string.isRequired,',
+      '    a: Inferno.PropTypes.any',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -585,11 +585,11 @@ ruleTester.run('sort-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    barRequired: React.PropTypes.string.isRequired,',
-      '    onFoo: React.PropTypes.func',
+      '    a: Inferno.PropTypes.any,',
+      '    barRequired: Inferno.PropTypes.string.isRequired,',
+      '    onFoo: Inferno.PropTypes.func',
       '  },',
       '  render: function() {',
       '    return <div />;',

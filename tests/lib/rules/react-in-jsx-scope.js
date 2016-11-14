@@ -1,5 +1,5 @@
 /**
- * @fileoverview Tests for react-in-jsx-scope
+ * @fileoverview Tests for inferno-in-jsx-scope
  * @author Glen Mailer
  */
 
@@ -9,7 +9,7 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/react-in-jsx-scope');
+var rule = require('../../../lib/rules/inferno-in-jsx-scope');
 var RuleTester = require('eslint').RuleTester;
 
 var parserOptions = {
@@ -21,7 +21,7 @@ var parserOptions = {
 };
 
 var settings = {
-  react: {
+  inferno: {
     pragma: 'Foo'
   }
 };
@@ -31,19 +31,19 @@ var settings = {
 // -----------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-ruleTester.run('react-in-jsx-scope', rule, {
+ruleTester.run('inferno-in-jsx-scope', rule, {
   valid: [
-    {code: 'var React, App; <App />;', parserOptions: parserOptions},
-    {code: 'var React; <img />;', parserOptions: parserOptions},
-    {code: 'var React; <x-gif />;', parserOptions: parserOptions},
-    {code: 'var React, App, a=1; <App attr={a} />;', parserOptions: parserOptions},
-    {code: 'var React, App, a=1; function elem() { return <App attr={a} />; }', parserOptions: parserOptions},
-    {code: 'var React, App; <App />;', parserOptions: parserOptions},
+    {code: 'var Inferno, App; <App />;', parserOptions: parserOptions},
+    {code: 'var Inferno; <img />;', parserOptions: parserOptions},
+    {code: 'var Inferno; <x-gif />;', parserOptions: parserOptions},
+    {code: 'var Inferno, App, a=1; <App attr={a} />;', parserOptions: parserOptions},
+    {code: 'var Inferno, App, a=1; function elem() { return <App attr={a} />; }', parserOptions: parserOptions},
+    {code: 'var Inferno, App; <App />;', parserOptions: parserOptions},
     {code: '/** @jsx Foo */ var Foo, App; <App />;', parserOptions: parserOptions},
     {code: '/** @jsx Foo.Bar */ var Foo, App; <App />;', parserOptions: parserOptions},
     {code: [
-      'import React from \'react/addons\';',
-      'const Button = React.createClass({',
+      'import Inferno from \'inferno/addons\';',
+      'const Button = Inferno.createClass({',
       '  render() {',
       '    return (',
       '      <button {...this.props}>{this.props.children}</button>',
@@ -56,21 +56,21 @@ ruleTester.run('react-in-jsx-scope', rule, {
   ],
   invalid: [{
     code: 'var App, a = <App />;',
-    errors: [{message: '\'React\' must be in scope when using JSX'}], parserOptions: parserOptions
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}], parserOptions: parserOptions
   }, {
     code: 'var a = <App />;',
-    errors: [{message: '\'React\' must be in scope when using JSX'}], parserOptions: parserOptions
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}], parserOptions: parserOptions
   }, {
     code: 'var a = <img />;',
-    errors: [{message: '\'React\' must be in scope when using JSX'}], parserOptions: parserOptions
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}], parserOptions: parserOptions
   }, {
-    code: '/** @jsx React.DOM */ var a = <img />;',
-    errors: [{message: '\'React\' must be in scope when using JSX'}], parserOptions: parserOptions
+    code: '/** @jsx Inferno.DOM */ var a = <img />;',
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}], parserOptions: parserOptions
   }, {
-    code: '/** @jsx Foo.bar */ var React, a = <img />;',
+    code: '/** @jsx Foo.bar */ var Inferno, a = <img />;',
     errors: [{message: '\'Foo\' must be in scope when using JSX'}], parserOptions: parserOptions
   }, {
-    code: 'var React, a = <img />;',
+    code: 'var Inferno, a = <img />;',
     errors: [{message: '\'Foo\' must be in scope when using JSX'}], settings: settings, parserOptions: parserOptions
   }]
 });

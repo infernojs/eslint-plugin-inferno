@@ -10,29 +10,29 @@ This rule is off by default.
 The following patterns are considered warnings:
 
 ```js
-var Component = React.createClass({
+var Component = Inferno.createClass({
   propTypes: {
-    a: React.PropTypes.any,
-    r: React.PropTypes.array,
-    o: React.PropTypes.object
+    a: Inferno.PropTypes.any,
+    r: Inferno.PropTypes.array,
+    o: Inferno.PropTypes.object
   },
 ...
 });
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   ...
 }
 Component.propTypes = {
-  a: React.PropTypes.any,
-  r: React.PropTypes.array,
-  o: React.PropTypes.object
+  a: Inferno.PropTypes.any,
+  r: Inferno.PropTypes.array,
+  o: Inferno.PropTypes.object
 };
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   static propTypes = {
-    a: React.PropTypes.any,
-    r: React.PropTypes.array,
-    o: React.PropTypes.object
+    a: Inferno.PropTypes.any,
+    r: Inferno.PropTypes.array,
+    o: Inferno.PropTypes.object
   }
   render() {
     return <div />;
@@ -50,7 +50,7 @@ class Component extends React.Component {
 
 ### `forbid`
 
-An array of strings, with the names of `React.PropTypes` keys that are forbidden. The default value for this option is `['any', 'array', 'object']`.
+An array of strings, with the names of `Inferno.PropTypes` keys that are forbidden. The default value for this option is `['any', 'array', 'object']`.
 
 ## When not to use
 

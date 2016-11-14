@@ -7,7 +7,7 @@ Updating the state after a component update will trigger a second `render()` cal
 The following patterns are considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   componentDidUpdate: function() {
      this.setState({
         name: this.props.name.toUpperCase()
@@ -22,7 +22,7 @@ var Hello = React.createClass({
 The following patterns are not considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   componentDidUpdate: function() {
     this.props.onUpdate();
   },
@@ -33,7 +33,7 @@ var Hello = React.createClass({
 ```
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   componentDidUpdate: function() {
     this.onUpdate(function callback(newName) {
       this.setState({
@@ -62,7 +62,7 @@ By default this rule forbids any call to `this.setState` in `componentDidUpdate`
 The following patterns are considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   componentDidUpdate: function() {
      this.setState({
         name: this.props.name.toUpperCase()
@@ -75,7 +75,7 @@ var Hello = React.createClass({
 ```
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   componentDidUpdate: function() {
     this.onUpdate(function callback(newName) {
       this.setState({

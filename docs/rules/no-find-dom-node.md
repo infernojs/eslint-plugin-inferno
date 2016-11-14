@@ -1,8 +1,8 @@
 # Prevent usage of findDOMNode (no-find-dom-node)
 
-Facebook will eventually deprecate `findDOMNode` as it blocks certain improvements in React in the future.
+Facebook will eventually deprecate `findDOMNode` as it blocks certain improvements in Inferno in the future.
 
-It is recommended to use callback refs instead. See [Dan Abramov comments and examples](https://github.com/yannickcr/eslint-plugin-react/issues/678#issue-165177220).
+It is recommended to use callback refs instead. See [Dan Abramov comments and examples](https://github.com/yannickcr/eslint-plugin-inferno/issues/678#issue-165177220).
 
 ## Rule Details
 

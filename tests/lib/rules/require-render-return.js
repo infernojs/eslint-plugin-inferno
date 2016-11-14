@@ -30,7 +30,7 @@ ruleTester.run('require-render-return', rule, {
   valid: [{
     // ES6 class
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -40,7 +40,7 @@ ruleTester.run('require-render-return', rule, {
   }, {
     // ES6 class with render property
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render = () => {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -51,7 +51,7 @@ ruleTester.run('require-render-return', rule, {
   }, {
     // ES6 class with render property (implicit return)
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render = () => (',
       '    <div>Hello {this.props.name}</div>',
       '  )',
@@ -62,7 +62,7 @@ ruleTester.run('require-render-return', rule, {
   }, {
     // ES5 class
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName: \'Hello\',',
       '  render: function() {',
       '    return <div></div>',
@@ -90,7 +90,7 @@ ruleTester.run('require-render-return', rule, {
   }, {
     // Return in a switch...case
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    switch (this.props.name) {',
       '      case \'Foo\':',
@@ -105,7 +105,7 @@ ruleTester.run('require-render-return', rule, {
   }, {
     // Return in a if...else
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    if (this.props.name === \'Foo\') {',
       '      return <div>Hello Foo</div>;',
@@ -117,7 +117,7 @@ ruleTester.run('require-render-return', rule, {
     ].join('\n'),
     parserOptions: parserOptions
   }, {
-    // Not a React component
+    // Not a Inferno component
     code: [
       'class Hello {',
       '  render() {}',
@@ -126,17 +126,17 @@ ruleTester.run('require-render-return', rule, {
     parserOptions: parserOptions
   }, {
     // ES6 class without a render method
-    code: 'class Hello extends React.Component {}',
+    code: 'class Hello extends Inferno.Component {}',
     parserOptions: parserOptions
   }, {
     // ES5 class without a render method
-    code: 'var Hello = React.createClass({});',
+    code: 'var Hello = Inferno.createClass({});',
     parserOptions: parserOptions
   }, {
     // ES5 class with an imported render method
     code: [
       'var render = require(\'./render\');',
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render',
       '});'
     ].join('\n'),
@@ -154,7 +154,7 @@ ruleTester.run('require-render-return', rule, {
   invalid: [{
     // Missing return in ES5 class
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName: \'Hello\',',
       '  render: function() {}',
       '});'
@@ -166,7 +166,7 @@ ruleTester.run('require-render-return', rule, {
   }, {
     // Missing return in ES6 class
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {} ',
       '}'
     ].join('\n'),
@@ -177,7 +177,7 @@ ruleTester.run('require-render-return', rule, {
   }, {
     // Missing return (but one is present in a sub-function)
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    const names = this.props.names.map(function(name) {',
       '      return <div>{name}</div>',
@@ -192,7 +192,7 @@ ruleTester.run('require-render-return', rule, {
   }, {
     // Missing return ES6 class render property
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render = () => {',
       '    <div>Hello {this.props.name}</div>',
       '  }',

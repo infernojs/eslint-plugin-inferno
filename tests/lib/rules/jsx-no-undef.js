@@ -28,28 +28,28 @@ var ruleTester = new RuleTester();
 eslint.defineRule('no-undef', require('eslint/lib/rules/no-undef'));
 ruleTester.run('jsx-no-undef', rule, {
   valid: [{
-    code: '/*eslint no-undef:1*/ var React, App; React.render(<App />);',
+    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);',
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React, App; React.render(<App />);',
+    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);',
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React; React.render(<img />);',
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<img />);',
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React; React.render(<x-gif />);',
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<x-gif />);',
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React, app; React.render(<app.Foo />);',
+    code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.Foo />);',
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React, app; React.render(<app.foo.Bar />);',
+    code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.foo.Bar />);',
     parserOptions: parserOptions
   }, {
     code: [
       '/*eslint no-undef:1*/',
-      'var React;',
-      'class Hello extends React.Component {',
+      'var Inferno;',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <this.props.tag />',
       '  }',
@@ -58,31 +58,31 @@ ruleTester.run('jsx-no-undef', rule, {
     parserOptions: parserOptions
   }],
   invalid: [{
-    code: '/*eslint no-undef:1*/ var React; React.render(<App />);',
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<App />);',
     errors: [{
       message: '\'App\' is not defined.'
     }],
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React; React.render(<Appp.Foo />);',
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Appp.Foo />);',
     errors: [{
       message: '\'Appp\' is not defined.'
     }],
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React; React.render(<Apppp:Foo />);',
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Apppp:Foo />);',
     errors: [{
       message: '\'Apppp\' is not defined.'
     }],
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React; React.render(<appp.Foo />);',
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.Foo />);',
     errors: [{
       message: '\'appp\' is not defined.'
     }],
     parserOptions: parserOptions
   }, {
-    code: '/*eslint no-undef:1*/ var React; React.render(<appp.foo.Bar />);',
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.foo.Bar />);',
     errors: [{
       message: '\'appp\' is not defined.'
     }],

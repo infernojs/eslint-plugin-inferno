@@ -1,5 +1,5 @@
 /**
- * @fileoverview Prevent missing props validation in a React component definition
+ * @fileoverview Prevent missing props validation in a Inferno component definition
  * @author Yannick Croissant
  */
 'use strict';
@@ -20,7 +20,7 @@ var parserOptions = {
 };
 
 var settings = {
-  react: {
+  inferno: {
     pragma: 'Foo'
   }
 };
@@ -37,9 +37,9 @@ ruleTester.run('prop-types', rule, {
   valid: [
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    name: React.PropTypes.string.isRequired',
+        '    name: Inferno.PropTypes.string.isRequired',
         '  },',
         '  render: function() {',
         '    return <div>Hello {this.props.name}</div>;',
@@ -49,9 +49,9 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    name: React.PropTypes.object.isRequired',
+        '    name: Inferno.PropTypes.object.isRequired',
         '  },',
         '  render: function() {',
         '    return <div>Hello {this.props.name.firstname}</div>;',
@@ -61,7 +61,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello World</div>;',
         '  }',
@@ -70,7 +70,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello World {this.props.children}</div>;',
         '  }',
@@ -82,7 +82,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    var props = this.props;',
         '    return <div>Hello World</div>;',
@@ -92,7 +92,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    var propName = "foo";',
         '    return <div>Hello World {this.props[propName]}</div>;',
@@ -102,7 +102,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: externalPropTypes,',
         '  render: function() {',
         '    return <div>Hello {this.props.name}</div>;',
@@ -112,7 +112,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: externalPropTypes.mySharedPropTypes,',
         '  render: function() {',
         '    return <div>Hello {this.props.name}</div>;',
@@ -122,7 +122,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>Hello World</div>;',
         '  }',
@@ -131,22 +131,22 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>Hello {this.props.firstname} {this.props.lastname}</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  firstname: React.PropTypes.string',
+        '  firstname: Inferno.PropTypes.string',
         '};',
-        'Hello.propTypes.lastname = React.PropTypes.string;'
+        'Hello.propTypes.lastname = Inferno.PropTypes.string;'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    name: React.PropTypes.object.isRequired',
+        '    name: Inferno.PropTypes.object.isRequired',
         '  },',
         '  render: function() {',
         '    var user = {',
@@ -176,10 +176,10 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static get propTypes() {',
         '    return {',
-        '      name: React.PropTypes.string',
+        '      name: Inferno.PropTypes.string',
         '    };',
         '  }',
         '  render() {',
@@ -190,21 +190,21 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var { firstname, ...other } = this.props;',
         '    return <div>Hello {firstname}</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  firstname: React.PropTypes.string',
+        '  firstname: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parser: 'babel-eslint',
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var {firstname, lastname} = this.state, something = this.props;',
         '    return <div>Hello {firstname}</div>;',
@@ -214,9 +214,9 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static propTypes = {',
-        '    name: React.PropTypes.string',
+        '    name: Inferno.PropTypes.string',
         '  };',
         '  render() {',
         '    return <div>Hello {this.props.name}</div>;',
@@ -227,19 +227,19 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>Hello {this.props.firstname}</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  \'firstname\': React.PropTypes.string',
+        '  \'firstname\': Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    if (this.props.hasOwnProperty(\'firstname\')) {',
         '      return <div>Hello {this.props.firstname}</div>;',
@@ -248,44 +248,44 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  \'firstname\': React.PropTypes.string',
+        '  \'firstname\': Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.b',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {};',
-        'Hello.propTypes.a = React.PropTypes.shape({',
-        '  b: React.PropTypes.string',
+        'Hello.propTypes.a = Inferno.PropTypes.shape({',
+        '  b: Inferno.PropTypes.string',
         '});'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.b.c;',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.shape({',
-        '    b: React.PropTypes.shape({',
+        '  a: Inferno.PropTypes.shape({',
+        '    b: Inferno.PropTypes.shape({',
         '    })',
         '  })',
         '};',
-        'Hello.propTypes.a.b.c = React.PropTypes.number;'
+        'Hello.propTypes.a.b.c = Inferno.PropTypes.number;'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.b.c;',
         '    this.props.a.__.d.length;',
@@ -294,11 +294,11 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.objectOf(',
-        '    React.PropTypes.shape({',
-        '      c: React.PropTypes.number,',
-        '      d: React.PropTypes.string,',
-        '      e: React.PropTypes.array',
+        '  a: Inferno.PropTypes.objectOf(',
+        '    Inferno.PropTypes.shape({',
+        '      c: Inferno.PropTypes.number,',
+        '      d: Inferno.PropTypes.string,',
+        '      e: Inferno.PropTypes.array',
         '    })',
         '  )',
         '};'
@@ -306,7 +306,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var i = 3;',
         '    this.props.a[2].c;',
@@ -317,11 +317,11 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.arrayOf(',
-        '    React.PropTypes.shape({',
-        '      c: React.PropTypes.number,',
-        '      d: React.PropTypes.string,',
-        '      e: React.PropTypes.array',
+        '  a: Inferno.PropTypes.arrayOf(',
+        '    Inferno.PropTypes.shape({',
+        '      c: Inferno.PropTypes.number,',
+        '      d: Inferno.PropTypes.string,',
+        '      e: Inferno.PropTypes.array',
         '    })',
         '  )',
         '};'
@@ -329,23 +329,23 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.length;',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.oneOfType([',
-        '    React.PropTypes.array,',
-        '    React.PropTypes.string',
+        '  a: Inferno.PropTypes.oneOfType([',
+        '    Inferno.PropTypes.array,',
+        '    Inferno.PropTypes.string',
         '  ])',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.c;',
         '    this.props.a[2] === true;',
@@ -355,13 +355,13 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.oneOfType([',
-        '    React.PropTypes.shape({',
-        '      c: React.PropTypes.number,',
-        '      e: React.PropTypes.array',
+        '  a: Inferno.PropTypes.oneOfType([',
+        '    Inferno.PropTypes.shape({',
+        '      c: Inferno.PropTypes.number,',
+        '      e: Inferno.PropTypes.array',
         '    }).isRequired,',
-        '    React.PropTypes.arrayOf(',
-        '      React.PropTypes.bool',
+        '    Inferno.PropTypes.arrayOf(',
+        '      Inferno.PropTypes.bool',
         '    )',
         '  ])',
         '};'
@@ -369,7 +369,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.render;',
         '    this.props.a.c;',
@@ -377,13 +377,13 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.instanceOf(Hello)',
+        '  a: Inferno.PropTypes.instanceOf(Hello)',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.arr;',
         '    this.props.arr[3];',
@@ -401,17 +401,17 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  arr: React.PropTypes.array,',
-        '  bo: React.PropTypes.bool.isRequired,',
-        '  fu: React.PropTypes.func,',
-        '  numb: React.PropTypes.number,',
-        '  stri: React.PropTypes.string',
+        '  arr: Inferno.PropTypes.array,',
+        '  bo: Inferno.PropTypes.bool.isRequired,',
+        '  fu: Inferno.PropTypes.func,',
+        '  numb: Inferno.PropTypes.number,',
+        '  stri: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var { ',
         '      propX,',
@@ -421,57 +421,57 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  "propX": React.PropTypes.string,',
-        '  "aria-controls": React.PropTypes.string',
+        '  "propX": Inferno.PropTypes.string,',
+        '  "aria-controls": Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props["some.value"];',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  "some.value": React.PropTypes.string',
+        '  "some.value": Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props["arr"][1];',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  "arr": React.PropTypes.array',
+        '  "arr": Inferno.PropTypes.array',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props["arr"][1]["some.value"];',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  "arr": React.PropTypes.arrayOf(',
-        '    React.PropTypes.shape({"some.value": React.PropTypes.string})',
+        '  "arr": Inferno.PropTypes.arrayOf(',
+        '    Inferno.PropTypes.shape({"some.value": Inferno.PropTypes.string})',
         '  )',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'var TestComp1 = React.createClass({',
+        'var TestComp1 = Inferno.createClass({',
         '  propTypes: {',
-        '    size: React.PropTypes.string',
+        '    size: Inferno.PropTypes.string',
         '  },',
         '  render: function() {',
         '    var foo = {',
@@ -485,7 +485,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>{this.props.name.firstname}</div>;',
         '  }',
@@ -495,7 +495,7 @@ ruleTester.run('prop-types', rule, {
       options: [{ignore: ['name']}]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    const {firstname, lastname} = this.props.name;',
         '    return <div>{firstname} {lastname}</div>;',
@@ -511,7 +511,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    let {firstname} = this;',
         '    return <div>{firstname}</div>;',
@@ -521,9 +521,9 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    router: React.PropTypes.func',
+        '    router: Inferno.PropTypes.func',
         '  },',
         '  render: function() {',
         '    var nextPath = this.props.router.getCurrentQuery().nextPath;',
@@ -534,7 +534,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
         '    firstname: CustomValidator.string',
         '  },',
@@ -547,7 +547,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
         '    outer: CustomValidator.shape({',
         '      inner: CustomValidator.map',
@@ -562,9 +562,9 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    outer: React.PropTypes.shape({',
+        '    outer: Inferno.PropTypes.shape({',
         '      inner: CustomValidator.string',
         '    })',
         '  },',
@@ -577,10 +577,10 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
         '    outer: CustomValidator.shape({',
-        '      inner: React.PropTypes.string',
+        '      inner: Inferno.PropTypes.string',
         '    })',
         '  },',
         '  render: function() {',
@@ -592,9 +592,9 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    name: React.PropTypes.string',
+        '    name: Inferno.PropTypes.string',
         '  },',
         '  render: function() {',
         '    return <div>{this.props.name.get("test")}</div>;',
@@ -625,14 +625,14 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'const SomeComponent = React.createClass({',
+        'const SomeComponent = Inferno.createClass({',
         '  propTypes: SomeOtherComponent.propTypes',
         '});'
       ].join('\n'),
       parser: 'babel-eslint'
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    let { a, ...b } = obj;',
         '    let c = { ...d };',
@@ -643,7 +643,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static get propTypes() {}',
         '  render() {',
         '    return <div>Hello World</div>;',
@@ -653,7 +653,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static get propTypes() {}',
         '  render() {',
         '    var users = this.props.users.find(user => user.name === \'John\');',
@@ -661,13 +661,13 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  users: React.PropTypes.arrayOf(React.PropTypes.object)',
+        '  users: Inferno.PropTypes.arrayOf(Inferno.PropTypes.object)',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    const {} = this.props;',
         '    return <div>Hello</div>;',
@@ -677,7 +677,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var foo = \'fullname\';',
         '    var { [foo]: firstname } = this.props;',
@@ -688,7 +688,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  constructor(props, context) {',
         '    super(props, context)',
         '    this.state = { status: props.source.uri }',
@@ -701,7 +701,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  constructor(props, context) {',
         '    super(props, context)',
         '    this.state = { status: this.props.source.uri }',
@@ -716,7 +716,7 @@ ruleTester.run('prop-types', rule, {
       // Should not be detected as a component
       code: [
         'HelloJohn.prototype.render = function() {',
-        '  return React.createElement(Hello, {',
+        '  return Inferno.createVNode(Hello, {',
         '    name: this.props.firstname',
         '  });',
         '};'
@@ -725,12 +725,12 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'function HelloComponent() {',
-        '  class Hello extends React.Component {',
+        '  class Hello extends Inferno.Component {',
         '    render() {',
         '      return <div>Hello {this.props.name}</div>;',
         '    }',
         '  }',
-        '  Hello.propTypes = { name: React.PropTypes.string };',
+        '  Hello.propTypes = { name: Inferno.PropTypes.string };',
         '  return Hello;',
         '}',
         'module.exports = HelloComponent();'
@@ -739,8 +739,8 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'function HelloComponent() {',
-        '  var Hello = React.createClass({',
-        '    propTypes: { name: React.PropTypes.string },',
+        '  var Hello = Inferno.createClass({',
+        '    propTypes: { name: Inferno.PropTypes.string },',
         '    render: function() {',
         '      return <div>Hello {this.props.name}</div>;',
         '    }',
@@ -782,8 +782,8 @@ ruleTester.run('prop-types', rule, {
         '  return <ul>{team}</ul>;',
         '};',
         'Hello.propTypes = {',
-        '  names: React.PropTypes.array,',
-        '  company: React.PropTypes.string',
+        '  names: Inferno.PropTypes.array,',
+        '  company: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parser: 'babel-eslint'
@@ -816,14 +816,14 @@ ruleTester.run('prop-types', rule, {
         '}',
         'if (process.env.NODE_ENV !== \'production\') {',
         '  FooBar.propTypes = {',
-        '    bar: React.PropTypes.string',
+        '    bar: Inferno.PropTypes.string',
         '  }',
         '}'
       ].join('\n'),
       parser: 'babel-eslint'
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    var {...other} = this.props;',
         '    return (',
@@ -917,7 +917,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    name: string;',
         '  };',
@@ -929,7 +929,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    name: Object;',
         '  };',
@@ -942,7 +942,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {name: Object;};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.name.firstname}</div>;',
@@ -953,7 +953,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'import type Props from "fake";',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.name.firstname}</div>;',
@@ -963,7 +963,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    name: {',
         '      firstname: string;',
@@ -978,7 +978,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {name: {firstname: string;};};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.name.firstname}</div>;',
@@ -989,7 +989,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {name: {firstname: string; lastname: string;};};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.name}</div>;',
@@ -1000,7 +1000,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Person = {name: {firstname: string;}};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {people: Person[];};',
         '  render () {',
         '    var names = [];',
@@ -1016,7 +1016,7 @@ ruleTester.run('prop-types', rule, {
       code: [
         'type Person = {name: {firstname: string;}};',
         'type Props = {people: Person[];};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    var names = [];',
@@ -1032,7 +1032,7 @@ ruleTester.run('prop-types', rule, {
       code: [
         'type Person = {name: {firstname: string;}};',
         'type Props = {people: Person[]|Person;};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    var names = [];',
@@ -1051,7 +1051,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {ok: string | boolean;};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.ok}</div>;',
@@ -1062,7 +1062,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {result: {ok: string | boolean;}|{ok: number | Array}};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.result.ok}</div>;',
@@ -1073,7 +1073,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {result?: {ok?: ?string | boolean;}|{ok?: ?number | Array}};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.result.ok}</div>;',
@@ -1083,7 +1083,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props = {a: 123};',
         '  render () {',
         '    return <div>Hello</div>;',
@@ -1094,24 +1094,24 @@ ruleTester.run('prop-types', rule, {
     }, {
       // Ignore component validation if propTypes are composed using spread
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '    render() {',
         '        return  <div>Hello {this.props.firstName} {this.props.lastName}</div>;',
         '    }',
         '};',
         'const otherPropTypes = {',
-        '    lastName: React.PropTypes.string',
+        '    lastName: Inferno.PropTypes.string',
         '};',
         'Hello.propTypes = {',
         '    ...otherPropTypes,',
-        '    firstName: React.PropTypes.string',
+        '    firstName: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       // Ignore destructured function arguments
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render () {',
         '    return ["string"].map(({length}) => <div>{length}</div>);',
         '  }',
@@ -1125,7 +1125,7 @@ ruleTester.run('prop-types', rule, {
         '  firstname: string;',
         '  lastname: string;',
         '};',
-        'function Hello(props: Props): React.Element {',
+        'function Hello(props: Props): Inferno.Element {',
         '  const {firstname, lastname} = props;',
         '  return <div>Hello {firstname} {lastname}</div>',
         '}'
@@ -1137,7 +1137,7 @@ ruleTester.run('prop-types', rule, {
         '  firstname: string;',
         '  lastname: string;',
         '};',
-        'const Hello = function(props: Props): React.Element {',
+        'const Hello = function(props: Props): Inferno.Element {',
         '  const {firstname, lastname} = props;',
         '  return <div>Hello {firstname} {lastname}</div>',
         '}'
@@ -1149,7 +1149,7 @@ ruleTester.run('prop-types', rule, {
         '  firstname: string;',
         '  lastname: string;',
         '};',
-        'const Hello = (props: Props): React.Element => {',
+        'const Hello = (props: Props): Inferno.Element => {',
         '  const {firstname, lastname} = props;',
         '  return <div>Hello {firstname} {lastname}</div>',
         '}'
@@ -1187,7 +1187,7 @@ ruleTester.run('prop-types', rule, {
         'type Props = {',
         '  firstname: ?string,',
         '};',
-        'function Hello({firstname}: Props): React$Element {',
+        'function Hello({firstname}: Props): Inferno$Element {',
         '  return <div>Hello {firstname}</div>;',
         '}'
       ].join('\n'),
@@ -1234,40 +1234,40 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'let Greetings = class extends React.Component {',
+        'let Greetings = class extends Inferno.Component {',
         '  render () {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
         '};',
         'Greetings.propTypes = {',
-        '  name: React.PropTypes.string',
+        '  name: Inferno.PropTypes.string',
         '}'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
         'let Greetings = {',
-        '  Hello: class extends React.Component {',
+        '  Hello: class extends Inferno.Component {',
         '    render () {',
         '      return <div>Hello {this.props.name}</div>;',
         '    }',
         '  }',
         '}',
         'Greetings.Hello.propTypes = {',
-        '  name: React.PropTypes.string',
+        '  name: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parserOptions: parserOptions
     }, {
       code: [
         'let Greetings = {};',
-        'Greetings.Hello = class extends React.Component {',
+        'Greetings.Hello = class extends Inferno.Component {',
         '  render () {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
         '};',
         'Greetings.Hello.propTypes = {',
-        '  name: React.PropTypes.string',
+        '  name: Inferno.PropTypes.string',
         '}'
       ].join('\n'),
       parserOptions: parserOptions
@@ -1307,7 +1307,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    return <div>{this.props.name}</div>;',
         '  }',
@@ -1317,7 +1317,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    return <div>{this.props.name}</div>;',
         '  }',
@@ -1327,7 +1327,7 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>{this.props.name}</div>;',
         '  }',
@@ -1337,9 +1337,9 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    name: React.PropTypes.object.isRequired',
+        '    name: Inferno.PropTypes.object.isRequired',
         '  },',
         '  render: function() {',
         '    return <div>{this.props.name}</div>;',
@@ -1350,9 +1350,9 @@ ruleTester.run('prop-types', rule, {
       parserOptions: parserOptions
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    name: React.PropTypes.object.isRequired',
+        '    name: Inferno.PropTypes.object.isRequired',
         '  },',
         '  render: function() {',
         '    return <div>{this.props.name}</div>;',
@@ -1367,9 +1367,9 @@ ruleTester.run('prop-types', rule, {
   invalid: [
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
-        '    return React.createElement("div", {}, this.props.name);',
+        '    return Inferno.createVNode("div", {}, this.props.name);',
         '  }',
         '});'
       ].join('\n'),
@@ -1384,7 +1384,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
@@ -1399,7 +1399,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
@@ -1414,7 +1414,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        '/** @extends React.Component */',
+        '/** @extends Inferno.Component */',
         'class Hello extends ChildComponent {',
         '  render() {',
         '    return <div>Hello {this.props.name}</div>;',
@@ -1430,13 +1430,13 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>Hello {this.props.firstname} {this.props.lastname}</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  firstname: React.PropTypes.string',
+        '  firstname: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parserOptions: parserOptions,
@@ -1445,15 +1445,15 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  name: React.PropTypes.string',
+        '  name: Inferno.PropTypes.string',
         '};',
-        'class HelloBis extends React.Component {',
+        'class HelloBis extends Inferno.Component {',
         '  render() {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
@@ -1465,15 +1465,15 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {',
-        '    name: React.PropTypes.string.isRequired',
+        '    name: Inferno.PropTypes.string.isRequired',
         '  },',
         '  render: function() {',
         '    return <div>Hello {this.props.name} and {this.props.propWithoutTypeDefinition}</div>;',
         '  }',
         '});',
-        'var Hello2 = React.createClass({',
+        'var Hello2 = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
@@ -1487,14 +1487,14 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var { firstname, lastname } = this.props;',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  firstname: React.PropTypes.string',
+        '  firstname: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parserOptions: parserOptions,
@@ -1503,9 +1503,9 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static propTypes: { ',
-        '    firstname: React.PropTypes.string',
+        '    firstname: Inferno.PropTypes.string',
         '  };',
         '  render() {',
         '    return <div>Hello {this.props.firstname}</div>;',
@@ -1519,14 +1519,14 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.b',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.shape({',
+        '  a: Inferno.PropTypes.shape({',
         '  })',
         '};'
       ].join('\n'),
@@ -1536,15 +1536,15 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.b.c;',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.shape({',
-        '    b: React.PropTypes.shape({',
+        '  a: Inferno.PropTypes.shape({',
+        '    b: Inferno.PropTypes.shape({',
         '    })',
         '  })',
         '};'
@@ -1555,7 +1555,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.b.c;',
         '    this.props.a.__.d.length;',
@@ -1564,8 +1564,8 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.objectOf(',
-        '    React.PropTypes.shape({',
+        '  a: Inferno.PropTypes.objectOf(',
+        '    Inferno.PropTypes.shape({',
         '    })',
         '  )',
         '};'
@@ -1579,7 +1579,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var i = 3;',
         '    this.props.a[2].c;',
@@ -1590,8 +1590,8 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.arrayOf(',
-        '    React.PropTypes.shape({',
+        '  a: Inferno.PropTypes.arrayOf(',
+        '    Inferno.PropTypes.shape({',
         '    })',
         '  )',
         '};'
@@ -1605,7 +1605,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props.a.length;',
         '    this.props.a.b;',
@@ -1617,10 +1617,10 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  a: React.PropTypes.oneOfType([',
-        '    React.PropTypes.shape({',
-        '      c: React.PropTypes.number,',
-        '      e: React.PropTypes.array',
+        '  a: Inferno.PropTypes.oneOfType([',
+        '    Inferno.PropTypes.shape({',
+        '      c: Inferno.PropTypes.number,',
+        '      e: Inferno.PropTypes.array',
         '    })',
         '  ])',
         '};'
@@ -1632,7 +1632,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var { ',
         '      "aria-controls": ariaControls, ',
@@ -1642,7 +1642,7 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  "aria-controls": React.PropTypes.string',
+        '  "aria-controls": Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parser: 'babel-eslint',
@@ -1651,7 +1651,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props["some.value"];',
         '    return <div>Hello</div>;',
@@ -1666,7 +1666,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props["arr"][1];',
         '    return <div>Hello</div>;',
@@ -1681,15 +1681,15 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    this.props["arr"][1]["some.value"];',
         '    return <div>Hello</div>;',
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  "arr": React.PropTypes.arrayOf(',
-        '    React.PropTypes.shape({})',
+        '  "arr": Inferno.PropTypes.arrayOf(',
+        '    Inferno.PropTypes.shape({})',
         '  )',
         '};'
       ].join('\n'),
@@ -1699,7 +1699,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var text;',
         '    text = \'Hello \';',
@@ -1714,7 +1714,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var {\'props\': {firstname}} = this;',
         '    return <div>Hello {firstname}</div>;',
@@ -1727,7 +1727,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    if (true) {',
         '      return <span>{this.props.firstname}</span>',
@@ -1737,7 +1737,7 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Hello.propTypes = {',
-        '  lastname: React.PropTypes.string',
+        '  lastname: Inferno.PropTypes.string',
         '}'
       ].join('\n'),
       parser: 'babel-eslint',
@@ -1817,7 +1817,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    var props = {firstname: \'John\'};',
         '    return <div>Hello {props.firstname} {this.props.lastname}</div>;',
@@ -1830,7 +1830,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  constructor(props, context) {',
         '    super(props, context)',
         '    this.state = { status: props.source }',
@@ -1843,7 +1843,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  constructor(props, context) {',
         '    super(props, context)',
         '    this.state = { status: props.source.uri }',
@@ -1857,7 +1857,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  constructor(props, context) {',
         '    super(props, context)',
         '    this.state = { status: this.props.source }',
@@ -1870,7 +1870,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  constructor(props, context) {',
         '    super(props, context)',
         '    this.state = { status: this.props.source.uri }',
@@ -1885,7 +1885,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'function HelloComponent() {',
-        '  class Hello extends React.Component {',
+        '  class Hello extends Inferno.Component {',
         '    render() {',
         '      return <div>Hello {this.props.name}</div>;',
         '    }',
@@ -1901,7 +1901,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'function HelloComponent() {',
-        '  var Hello = React.createClass({',
+        '  var Hello = Inferno.createClass({',
         '    render: function() {',
         '      return <div>Hello {this.props.name}</div>;',
         '    }',
@@ -1965,7 +1965,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'for (var key in foo) {',
-        '  var Hello = React.createClass({',
+        '  var Hello = Inferno.createClass({',
         '    render: function() {',
         '      return <div>Hello {this.props.name}</div>;',
         '    }',
@@ -1979,9 +1979,9 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'var propTypes = {',
-        '  firstname: React.PropTypes.string',
+        '  firstname: Inferno.PropTypes.string',
         '};',
-        'class Test extends React.Component {',
+        'class Test extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <div>{this.props.firstname} {this.props.lastname}</div>',
@@ -2004,7 +2004,7 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Test.propTypes = {',
-        '  firstname: React.PropTypes.string',
+        '  firstname: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parser: 'babel-eslint',
@@ -2023,7 +2023,7 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '}',
         'Test.propTypes = {',
-        '  firstname: React.PropTypes.string',
+        '  firstname: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       parser: 'babel-eslint',
@@ -2032,7 +2032,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {};',
         '  render () {',
         '    return <div>Hello {this.props.name}</div>;',
@@ -2045,7 +2045,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    name: Object;',
         '  };',
@@ -2061,7 +2061,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {name: Object;};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.firstname}</div>;',
@@ -2074,7 +2074,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    name: {',
         '      firstname: string;',
@@ -2092,7 +2092,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {name: {firstname: string;};};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.name.lastname}</div>;',
@@ -2105,7 +2105,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {person: {name: {firstname: string;};};};',
         '  render () {',
         '    return <div>Hello {this.props.person.name.lastname}</div>;',
@@ -2119,7 +2119,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {person: {name: {firstname: string;};};};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.person.name.lastname}</div>;',
@@ -2133,7 +2133,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Person = {name: {firstname: string;}};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {people: Person[];};',
         '  render () {',
         '    var names = [];',
@@ -2152,7 +2152,7 @@ ruleTester.run('prop-types', rule, {
       code: [
         'type Person = {name: {firstname: string;}};',
         'type Props = {people: Person[];};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    var names = [];',
@@ -2170,7 +2170,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'type Props = {result?: {ok: string | boolean;}|{ok: number | Array}};',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.result.notok}</div>;',
@@ -2183,7 +2183,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'let Greetings = class extends React.Component {',
+        'let Greetings = class extends Inferno.Component {',
         '  render () {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
@@ -2197,7 +2197,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'let Greetings = {',
-        '  Hello: class extends React.Component {',
+        '  Hello: class extends Inferno.Component {',
         '    render () {',
         '      return <div>Hello {this.props.name}</div>;',
         '    }',
@@ -2212,7 +2212,7 @@ ruleTester.run('prop-types', rule, {
     }, {
       code: [
         'let Greetings = {};',
-        'Greetings.Hello = class extends React.Component {',
+        'Greetings.Hello = class extends Inferno.Component {',
         '  render () {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
@@ -2269,7 +2269,7 @@ ruleTester.run('prop-types', rule, {
         'type Props = {',
         '  firstname: ?string,',
         '};',
-        'function Hello({firstname, lastname}: Props): React$Element {',
+        'function Hello({firstname, lastname}: Props): Inferno$Element {',
         '  return <div>Hello {firstname} {lastname}</div>;',
         '}'
       ].join('\n'),
@@ -2279,7 +2279,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  constructor(props, context) {',
         '    super(props, context)',
         '    const firstname = props.firstname;',
@@ -2324,7 +2324,7 @@ ruleTester.run('prop-types', rule, {
       ]
     }, {
       code: [
-        'class Hello extends React.PureComponent {',
+        'class Hello extends Inferno.PureComponent {',
         '  render() {',
         '    return <div>Hello {this.props.name}</div>;',
         '  }',
@@ -2370,7 +2370,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  propTypes: {},',
         '  render: function() {',
         '    return <div>{this.props.firstname}</div>;',
@@ -2400,7 +2400,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static get propTypes() {',
         '    return {};',
         '  }',
@@ -2418,7 +2418,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  render() {',
         '    return <div>{this.props.firstname}</div>;',
         '  }',
@@ -2434,7 +2434,7 @@ ruleTester.run('prop-types', rule, {
       }]
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() {',
         '    return <div>{this.props.firstname}</div>;',
         '  }',

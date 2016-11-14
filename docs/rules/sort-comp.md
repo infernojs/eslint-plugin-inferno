@@ -1,8 +1,8 @@
 # Enforce component methods order (sort-comp)
 
-When creating React components it is more convenient to always follow the same organisation for methods order to helps you to easily find lifecyle methods, event handlers, etc.
+When creating Inferno components it is more convenient to always follow the same organisation for methods order to helps you to easily find lifecyle methods, event handlers, etc.
 
-**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/reactjs/react-codemod/blob/master/transforms/sort-comp.js) in [react-codemod](https://www.npmjs.com/package/react-codemod).
+**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/infernojs/inferno-codemod/blob/master/transforms/sort-comp.js) in [inferno-codemod](https://www.npmjs.com/package/inferno-codemod).
 
 ## Rule Details
 
@@ -16,7 +16,7 @@ With default configuration the following organisation must be followed:
 The following patterns are considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   render: function() {
     return <div>Hello</div>;
   },
@@ -27,7 +27,7 @@ var Hello = React.createClass({
 The following patterns are not considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   displayName : 'Hello',
   render: function() {
     return <div>Hello</div>;
@@ -41,7 +41,7 @@ This rule can take one argument to customize the components organisation.
 
 ```
 ...
-"react/sort-comp": [<enabled>, { order: <order>, groups: <groups> }]
+"inferno/sort-comp": [<enabled>, { order: <order>, groups: <groups> }]
 ...
 ```
 
@@ -96,7 +96,7 @@ You can override this configuration to match your needs.
 For example, if you want to place your event handlers (`onClick`, `onSubmit`, etc.) before `render` but the other methods after it:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'static-methods',
     'lifecycle',
@@ -110,7 +110,7 @@ For example, if you want to place your event handlers (`onClick`, `onSubmit`, et
 With the above configuration, the following patterns are considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   render: function() {
     return <div>Hello</div>;
   },
@@ -121,7 +121,7 @@ var Hello = React.createClass({
 With the above configuration, the following patterns are not considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   onClick: function() {},
   render: function() {
     return <div>Hello</div>;
@@ -132,7 +132,7 @@ var Hello = React.createClass({
 If you want to split your `render` method into smaller ones and keep them just before render:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'static-methods',
     'lifecycle',
@@ -151,7 +151,7 @@ If you want to split your `render` method into smaller ones and keep them just b
 With the above configuration, the following patterns are considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   renderButton: function() {},
   onClick: function() {},
   render: function() {
@@ -163,7 +163,7 @@ var Hello = React.createClass({
 With the above configuration, the following patterns are not considered warnings:
 
 ```js
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   onClick: function() {},
   renderButton: function() {},
   render: function() {
@@ -175,7 +175,7 @@ var Hello = React.createClass({
 If you want to flow annotations to be at the top:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'type-annotations',
     'static-methods',
@@ -189,7 +189,7 @@ If you want to flow annotations to be at the top:
 With the above configuration, the following patterns are considered warnings:
 
 ```js
-class Hello extends React.Component<any, Props, void> {
+class Hello extends Inferno.Component<any, Props, void> {
   onClick() { this._someElem = true; }
   props: Props;
   _someElem: bool;
@@ -203,7 +203,7 @@ With the above configuration, the following patterns are not considered warnings
 
 ```js
 type Props = {};
-class Hello extends React.Component<any, Props, void> {
+class Hello extends Inferno.Component<any, Props, void> {
   props: Props;
   _someElem: bool;
   onClick() { this._someElem = true; }

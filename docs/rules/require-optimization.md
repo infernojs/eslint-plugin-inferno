@@ -1,26 +1,26 @@
-# Enforce React components to have a shouldComponentUpdate method (require-optimization)
+# Enforce Inferno components to have a shouldComponentUpdate method (require-optimization)
 
-This rule prevents you from creating React components without declaring a `shouldComponentUpdate` method.
+This rule prevents you from creating Inferno components without declaring a `shouldComponentUpdate` method.
 
 ## Rule Details
 
 The following patterns are considered warnings:
 
 ```js
-class YourComponent extends React.Component {
+class YourComponent extends Inferno.Component {
 
 }
 ```
 
 ```js
-React.createClass({
+Inferno.createClass({
 });
 ```
 
 The following patterns are not considered warnings:
 
 ```js
-class YourComponent extends React.Component {
+class YourComponent extends Inferno.Component {
 	shouldComponentUpdate () {
 		return false;
 	}
@@ -28,7 +28,7 @@ class YourComponent extends React.Component {
 ```
 
 ```js
-React.createClass({
+Inferno.createClass({
 	shouldComponentUpdate: function () {
 		return false;
 	}
@@ -36,14 +36,14 @@ React.createClass({
 ```
 
 ```js
-React.createClass({
+Inferno.createClass({
 	mixins: [PureRenderMixin]
 });
 ```
 
 ```js
-@reactMixin.decorate(PureRenderMixin)
-React.createClass({
+@infernoMixin.decorate(PureRenderMixin)
+Inferno.createClass({
 
 });
 ```
@@ -69,7 +69,7 @@ The following patterns are not warnings:
 ```js
 // ['pureRender']
 @pureRender
-class Hello extends React.Component {}
+class Hello extends Inferno.Component {}
 ```
 
 ### Example

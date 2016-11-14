@@ -1,5 +1,5 @@
 /**
- * @fileoverview Prefer es6 class instead of createClass for React Component
+ * @fileoverview Prefer es6 class instead of createClass for Inferno Component
  * @author Dan Hamilton
  */
 'use strict';
@@ -30,7 +30,7 @@ ruleTester.run('prefer-es6-class', rule, {
 
   valid: [{
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -40,7 +40,7 @@ ruleTester.run('prefer-es6-class', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'export default class Hello extends React.Component {',
+      'export default class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -56,7 +56,7 @@ ruleTester.run('prefer-es6-class', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -66,7 +66,7 @@ ruleTester.run('prefer-es6-class', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -78,7 +78,7 @@ ruleTester.run('prefer-es6-class', rule, {
 
   invalid: [{
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName: \'Hello\',',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
@@ -91,7 +91,7 @@ ruleTester.run('prefer-es6-class', rule, {
     }]
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -104,7 +104,7 @@ ruleTester.run('prefer-es6-class', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',

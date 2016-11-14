@@ -1,4 +1,4 @@
-# Prevent missing props validation in a React component definition (prop-types)
+# Prevent missing props validation in a Inferno component definition (prop-types)
 
 PropTypes improve the reusability of your component by validating the received data.
 
@@ -9,15 +9,15 @@ It can warn other developers if they make a mistake while reusing the component 
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   render: function() {
     return <div>Hello {this.props.name}</div>;
   }
 });
 
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   propTypes: {
-    firstname: React.PropTypes.string.isRequired
+    firstname: Inferno.PropTypes.string.isRequired
   },
   render: function() {
     return <div>Hello {this.props.firstname} {this.props.lastname}</div>; // lastname type is not defined in propTypes
@@ -32,9 +32,9 @@ function Hello({ name }) {
 Examples of correct usage without warnings:
 
 ```jsx
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   propTypes: {
-    name: React.PropTypes.string.isRequired,
+    name: Inferno.PropTypes.string.isRequired,
   },
   render: function() {
     return <div>Hello {this.props.name}</div>;
@@ -42,19 +42,19 @@ var Hello = React.createClass({
 });
 
 // Or in ES6:
-class HelloEs6 extends React.Component {
+class HelloEs6 extends Inferno.Component {
   render() {
     return <div>Hello {this.props.name}</div>;
   }
 }
 HelloEs6.propTypes = {
-  name: React.PropTypes.string.isRequired,
+  name: Inferno.PropTypes.string.isRequired,
 };
 
 // ES6 + Public Class Fields (draft: https://tc39.github.io/proposal-class-public-fields/)
-class HelloEs6WithPublicClassField extends React.Component {
+class HelloEs6WithPublicClassField extends Inferno.Component {
   static propTypes = {
-    name: React.PropTypes.string.isRequired,
+    name: Inferno.PropTypes.string.isRequired,
   }
   render() {
     return <div>Hello {this.props.name}</div>;
@@ -65,15 +65,15 @@ class HelloEs6WithPublicClassField extends React.Component {
 The following patterns are not considered warnings:
 
 ```jsx
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   render: function() {
     return <div>Hello World</div>;
   }
 });
 
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   propTypes: {
-    name: React.PropTypes.string.isRequired
+    name: Inferno.PropTypes.string.isRequired
   },
   render: function() {
     return <div>Hello {this.props.name}</div>;
@@ -81,7 +81,7 @@ var Hello = React.createClass({
 });
 
 // Referencing an external object disable the rule for the component
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   propTypes: myPropTypes,
   render: function() {
     return <div>Hello {this.props.name}</div>;
@@ -92,7 +92,7 @@ function Hello({ name }) {
   return <div>Hello {name}</div>;
 }
 Hello.propTypes = {
-  name: React.PropTypes.string.isRequired,
+  name: Inferno.PropTypes.string.isRequired,
 };
 ```
 
@@ -117,13 +117,13 @@ It would seem that some common properties such as `props.children` or `props.cla
 (and alike) need to be treated as exceptions.
 
 As it aptly noticed in
-[#7](https://github.com/yannickcr/eslint-plugin-react/issues/7)
+[#7](https://github.com/yannickcr/eslint-plugin-inferno/issues/7)
 
 > Why should children be an exception?
 > Most components don't need `this.props.children`, so that makes it extra important
 to document `children` in the propTypes.
 
-Generally, you should use `React.PropTypes.node` for `children`. It accepts
+Generally, you should use `Inferno.PropTypes.node` for `children`. It accepts
 anything that can be rendered: numbers, strings, elements or an array containing
 these types.
 
@@ -131,10 +131,10 @@ Since 2.0.0 children is no longer ignored for props validation.
 
 ## About component detection
 
-For this rule to work we need to detect React components, this could be very hard since components could be declared in a lot of ways.
+For this rule to work we need to detect Inferno components, this could be very hard since components could be declared in a lot of ways.
 
 For now we should detect components created with:
 
-* `React.createClass()`
-* an ES6 class that inherit from `React.Component` or `Component`
-* a stateless function that return JSX or the result of a `React.createElement` call.
+* `Inferno.createClass()`
+* an ES6 class that inherit from `inferno-component` or `InfernoComponent`
+* a stateless function that return JSX or the result of a `Inferno.createVNode` call.

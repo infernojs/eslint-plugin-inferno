@@ -1,5 +1,5 @@
 /**
- * @fileoverview Prevent missing displayName in a React component definition
+ * @fileoverview Prevent missing displayName in a Inferno component definition
  * @author Yannick Croissant
  */
 'use strict';
@@ -22,7 +22,7 @@ var parserOptions = {
 };
 
 var settings = {
-  react: {
+  inferno: {
     pragma: 'Foo'
   }
 };
@@ -36,7 +36,7 @@ ruleTester.run('display-name', rule, {
 
   valid: [{
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName: \'Hello\',',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
@@ -49,7 +49,7 @@ ruleTester.run('display-name', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -89,7 +89,7 @@ ruleTester.run('display-name', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  static get displayName() {',
       '    return \'Hello\';',
       '  }',
@@ -104,7 +104,7 @@ ruleTester.run('display-name', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  static displayName = \'Widget\';',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
@@ -118,7 +118,7 @@ ruleTester.run('display-name', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -127,7 +127,7 @@ ruleTester.run('display-name', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -146,7 +146,7 @@ ruleTester.run('display-name', rule, {
   }, {
     code: [
       'var Hello;',
-      'Hello = React.createClass({',
+      'Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -155,7 +155,7 @@ ruleTester.run('display-name', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'module.exports = React.createClass({',
+      'module.exports = Inferno.createClass({',
       '  "displayName": "Hello",',
       '  "render": function() {',
       '    return <div>Hello {this.props.name}</div>;',
@@ -165,7 +165,7 @@ ruleTester.run('display-name', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName: \'Hello\',',
       '  render: function() {',
       '    let { a, ...b } = obj;',
@@ -265,7 +265,7 @@ ruleTester.run('display-name', rule, {
     parser: 'babel-eslint'
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>{this._renderHello()}</div>;',
       '  },',
@@ -277,7 +277,7 @@ ruleTester.run('display-name', rule, {
     parser: 'babel-eslint'
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName: \'Hello\',',
       '  render: function() {',
       '    return <div>{this._renderHello()}</div>;',
@@ -335,7 +335,7 @@ ruleTester.run('display-name', rule, {
     parser: 'babel-eslint'
   }, {
     code: [
-      'import React, { createClass } from \'react\';',
+      'import Inferno, { createClass } from \'inferno\';',
       'export default createClass({',
       '  displayName: \'Foo\',',
       '  render() {',
@@ -349,7 +349,7 @@ ruleTester.run('display-name', rule, {
     parser: 'babel-eslint'
   }, {
     code: [
-      'import React, {Component} from "react";',
+      'import Inferno, {Component} from "inferno";',
       'function someDecorator(ComposedComponent) {',
       '  return class MyDecorator extends Component {',
       '    render() {return <ComposedComponent {...this.props} />;}',
@@ -382,9 +382,9 @@ ruleTester.run('display-name', rule, {
 
   invalid: [{
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
-      '    return React.createElement("div", {}, "text content");',
+      '    return Inferno.createVNode("div", {}, "text content");',
       '  }',
       '});'
     ].join('\n'),
@@ -397,7 +397,7 @@ ruleTester.run('display-name', rule, {
     }]
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -412,7 +412,7 @@ ruleTester.run('display-name', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -428,7 +428,7 @@ ruleTester.run('display-name', rule, {
   }, {
     code: [
       'function HelloComponent() {',
-      '  return React.createClass({',
+      '  return Inferno.createClass({',
       '    render: function() {',
       '      return <div>Hello {this.props.name}</div>;',
       '    }',
@@ -465,7 +465,7 @@ ruleTester.run('display-name', rule, {
     }]
   }, {
     code: [
-      'module.exports = React.createClass({',
+      'module.exports = Inferno.createClass({',
       '  render() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -477,7 +477,7 @@ ruleTester.run('display-name', rule, {
     }]
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  _renderHello: function() {',
       '    return <span>Hello {this.props.name}</span>;',
       '  },',

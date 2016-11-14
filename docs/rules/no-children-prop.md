@@ -4,7 +4,7 @@ Children should always be actual children, not passed in as a prop.
 
 When using JSX, the children should be nested between the opening and closing
 tags. When not using JSX, the children should be passed as additional
-arguments to `React.createElement`.
+arguments to `Inferno.createVNode`.
 
 ## Rule Details
 
@@ -16,7 +16,7 @@ The following patterns are considered warnings:
 <MyComponent children={<AnotherComponent />} />
 <MyComponent children={['Child 1', 'Child 2']} />
 
-React.createElement("div", { children: 'Children' })
+Inferno.createVNode(2, "div", { children: 'Children' })
 ```
 
 The following patterns are not considered warnings:
@@ -31,6 +31,6 @@ The following patterns are not considered warnings:
   <span>Child 2</span>
 </MyComponent>
 
-React.createElement("div", {}, 'Children')
-React.createElement("div", 'Child 1', 'Child 2')
+Inferno.createVNode(2, "div", {}, 'Children')
+Inferno.createVNode(2, "div", null, ['Child 1', 'Child 2'])
 ```

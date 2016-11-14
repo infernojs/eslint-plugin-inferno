@@ -31,7 +31,7 @@ The set of forbidden extensions is configurable. By default '.jsx' is blocked. I
 
 ```js
 "rules": {
-  "react/require-extension": [1, { "extensions": [".js", ".jsx"] }],
+  "inferno/require-extension": [1, { "extensions": [".js", ".jsx"] }],
 }
 ```
 

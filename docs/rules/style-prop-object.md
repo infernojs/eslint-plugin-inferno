@@ -19,14 +19,14 @@ const styles = true;
 ```
 
 ```js
-React.createElement("div", { style: "color: 'red'" });
+Inferno.createVNode("div", { style: "color: 'red'" });
 
-React.createElement("div", { style: true });
+Inferno.createVNode("div", { style: true });
 
-React.createElement("Hello", { style: true });
+Inferno.createVNode("Hello", { style: true });
 
 const styles = true;
-React.createElement("div", { style: styles });
+Inferno.createVNode("div", { style: styles });
 ```
 
 
@@ -42,10 +42,10 @@ const styles = { color: "red" };
 ```
 
 ```js
-React.createElement("div", { style: { color: 'red' }});
+Inferno.createVNode("div", { style: { color: 'red' }});
 
-React.createElement("Hello", { style: { color: 'red' }});
+Inferno.createVNode("Hello", { style: { color: 'red' }});
 
 const styles = { height: '100px' };
-React.createElement("div", { style: styles });
+Inferno.createVNode("div", { style: styles });
 ```
