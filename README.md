@@ -83,6 +83,7 @@ Finally, enable all of the rules that you would like to use.  Use [our preset](#
 * [inferno/forbid-component-props](docs/rules/forbid-component-props.md): Forbid certain props on Components
 * [inferno/forbid-prop-types](docs/rules/forbid-prop-types.md): Forbid certain propTypes
 * [inferno/no-children-prop](docs/rules/no-children-prop.md): Prevent passing children as props
+* [inferno/no-array-index-key](docs/rules/no-array-index-key.md): Prevent using Array index in `key` props
 * [inferno/no-danger](docs/rules/no-danger.md): Prevent usage of dangerous JSX properties
 * [inferno/no-danger-with-children](docs/rules/no-danger-with-children.md): Prevent problem with children and props.dangerouslySetInnerHTML
 * [inferno/no-deprecated](docs/rules/no-deprecated.md): Prevent usage of deprecated methods
@@ -117,7 +118,7 @@ Finally, enable all of the rules that you would like to use.  Use [our preset](#
 * [inferno/jsx-filename-extension](docs/rules/jsx-filename-extension.md): Restrict file extensions that may contain JSX
 * [inferno/jsx-first-prop-new-line](docs/rules/jsx-first-prop-new-line.md): Enforce position of the first prop in JSX (fixable)
 * [inferno/jsx-handler-names](docs/rules/jsx-handler-names.md): Enforce event handler naming conventions in JSX
-* [inferno/jsx-indent](docs/rules/jsx-indent.md): Validate JSX indentation
+* [inferno/jsx-indent](docs/rules/jsx-indent.md): Validate JSX indentation (fixable)
 * [inferno/jsx-indent-props](docs/rules/jsx-indent-props.md): Validate props indentation in JSX (fixable)
 * [inferno/jsx-key](docs/rules/jsx-key.md): Validate JSX has key prop when in array or iterator
 * [inferno/jsx-max-props-per-line](docs/rules/jsx-max-props-per-line.md): Limit maximum of props on a single line in JSX
