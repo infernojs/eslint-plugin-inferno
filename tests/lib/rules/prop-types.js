@@ -1415,6 +1415,19 @@ ruleTester.run('prop-types', rule, {
           jsx: true
         }
       }
+    }, {
+      code: [
+        'export class Example extends Component {',
+        '  static propTypes = {',
+        '    onDelete: React.PropTypes.func.isRequired',
+        '  }',
+        '  handleDeleteConfirm = () => {',
+        '    this.props.onDelete();',
+        '  };',
+        '  handleSubmit = async ({certificate, key}) => {};',
+        '}'
+      ].join('\n'),
+      parser: 'babel-eslint'
     }
   ],
 
@@ -2555,6 +2568,47 @@ ruleTester.run('prop-types', rule, {
         '  }',
         '  render() {',
         '    return <Greeting onSelect={this.onSelect} />;',
+        '  }',
+        '}'
+      ].join('\n'),
+      parser: 'babel-eslint',
+      errors: [
+        {message: '\'foo\' is missing in props validation'}
+      ]
+    }, {
+      code: [
+        'class Hello extends Component {',
+        '  static propTypes = {',
+        '    bar: PropTypes.func',
+        '  }',
+        '  componentWillReceiveProps(nextProps) {',
+        '    if (nextProps.foo) {',
+        '      return;',
+        '    }',
+        '  }',
+        '  render() {',
+        '    return <div bar={this.props.bar} />;',
+        '  }',
+        '}'
+      ].join('\n'),
+      parser: 'babel-eslint',
+      errors: [
+        {message: '\'foo\' is missing in props validation'}
+      ]
+    }, {
+      code: [
+        'class Hello extends Component {',
+        '  static propTypes = {',
+        '    bar: PropTypes.func',
+        '  }',
+        '  componentWillReceiveProps(nextProps) {',
+        '    const {foo} = nextProps;',
+        '    if (foo) {',
+        '      return;',
+        '    }',
+        '  }',
+        '  render() {',
+        '    return <div bar={this.props.bar} />;',
         '  }',
         '}'
       ].join('\n'),
