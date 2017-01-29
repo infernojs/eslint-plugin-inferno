@@ -10,13 +10,13 @@ Inferno specific linting rules for ESLint
 Install [ESLint](https://www.github.com/eslint/eslint) either locally or globally.
 
 ```sh
-$ npm install eslint
+$ npm install eslint --save-dev
 ```
 
 If you installed `ESLint` globally, you have to install Inferno plugin globally too. Otherwise, install it locally.
 
 ```sh
-$ npm install eslint-plugin-inferno
+$ npm install eslint-plugin-inferno --save-dev
 ```
 
 # Configuration

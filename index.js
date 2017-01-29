@@ -1,5 +1,7 @@
 'use strict';
 
+var has = require('has');
+
 var allRules = {
   'jsx-uses-inferno': require('./lib/rules/jsx-uses-inferno'),
   'no-multi-comp': require('./lib/rules/no-multi-comp'),
@@ -63,7 +65,7 @@ var allRules = {
 function filterRules(rules, predicate) {
   var result = {};
   for (var key in rules) {
-    if (rules.hasOwnProperty(key) && predicate(rules[key])) {
+    if (has(rules, key) && predicate(rules[key])) {
       result[key] = rules[key];
     }
   }
@@ -73,7 +75,7 @@ function filterRules(rules, predicate) {
 function configureAsError(rules) {
   var result = {};
   for (var key in rules) {
-    if (!rules.hasOwnProperty(key)) {
+    if (!has(rules, key)) {
       continue;
     }
     result['inferno/' + key] = 2;
