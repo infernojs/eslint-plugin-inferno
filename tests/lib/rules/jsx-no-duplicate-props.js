@@ -56,6 +56,6 @@ ruleTester.run('jsx-no-duplicate-props', rule, {
     {code: '<App a="a" b="b" a="a" />;', errors: [expectedError], parserOptions: parserOptions},
     {code: '<App A a />;', options: ignoreCaseArgs, errors: [expectedError], parserOptions: parserOptions},
     {code: '<App a b c A />;', options: ignoreCaseArgs, errors: [expectedError], parserOptions: parserOptions},
-    {code: '<App A="a" b="b" B="B" />;', options: ignoreCaseArgs, errors: [expectedError], parserOptions: parserOptions},
+    {code: '<App A="a" b="b" B="B" />;', options: ignoreCaseArgs, errors: [expectedError], parserOptions: parserOptions}
   ]
 });
