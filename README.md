@@ -169,7 +169,6 @@ The rules enabled in this configuration are:
 * [inferno/no-is-mounted](docs/rules/no-is-mounted.md)
 * [inferno/no-unknown-property](docs/rules/no-unknown-property.md)
 * [inferno/no-render-return-value](docs/rules/no-render-return-value.md)
-* [inferno/prop-types](docs/rules/prop-types.md)
 * [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md)
 
 ## All
