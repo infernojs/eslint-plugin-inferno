@@ -77,15 +77,5 @@ ruleTester.run('no-unknown-property', rule, {
     output: '<div onMouseDown="bar"></div>;',
     errors: [{message: 'Unknown property \'onmousedown\' found, use \'onMouseDown\' instead'}],
     parserOptions: parserOptions
-  }, {
-    code: '<use xlink:href="bar" />;',
-    output: '<use xlinkHref="bar" />;',
-    errors: [{message: 'Unknown property \'xlink:href\' found, use \'xlinkHref\' instead'}],
-    parserOptions: parserOptions
-  }, {
-    code: '<rect clip-path="bar" />;',
-    output: '<rect clipPath="bar" />;',
-    errors: [{message: 'Unknown property \'clip-path\' found, use \'clipPath\' instead'}],
-    parserOptions: parserOptions
   }]
 });
