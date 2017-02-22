@@ -1,5 +1,5 @@
 /**
- * @fileoverview Tests for jsx-uses-react
+ * @fileoverview Tests for jsx-uses-inferno
  * @author Glen Mailer
  */
 
@@ -22,7 +22,7 @@ var parserOptions = {
 };
 
 var settings = {
-  react: {
+  inferno: {
     pragma: 'Foo'
   }
 };
@@ -32,22 +32,22 @@ var settings = {
 // -----------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-eslint.defineRule('jsx-uses-react', require('../../../lib/rules/jsx-uses-react'));
+eslint.defineRule('jsx-uses-inferno', require('../../../lib/rules/jsx-uses-inferno'));
 ruleTester.run('no-unused-vars', rule, {
   valid: [
-    {code: '/*eslint jsx-uses-react:1*/ var React; <div />;', parserOptions: parserOptions},
-    {code: '/*eslint jsx-uses-react:1*/ var React; (function () { <div /> })();', parserOptions: parserOptions},
-    {code: '/*eslint jsx-uses-react:1*/ /** @jsx Foo */ var Foo; <div />;', parserOptions: parserOptions},
-    {code: '/*eslint jsx-uses-react:1*/ var Foo; <div />;', settings: settings, parserOptions: parserOptions}
+    {code: '/*eslint jsx-uses-inferno:1*/ var Inferno; <div />;', parserOptions: parserOptions},
+    {code: '/*eslint jsx-uses-inferno:1*/ var Inferno; (function () { <div /> })();', parserOptions: parserOptions},
+    {code: '/*eslint jsx-uses-inferno:1*/ /** @jsx Foo */ var Foo; <div />;', parserOptions: parserOptions},
+    {code: '/*eslint jsx-uses-inferno:1*/ var Foo; <div />;', settings: settings, parserOptions: parserOptions}
   ],
   invalid: [{
-    code: '/*eslint jsx-uses-react:1*/ var React;',
-    errors: [{message: dot('\'React\' is defined but never used')}], parserOptions: parserOptions
+    code: '/*eslint jsx-uses-inferno:1*/ var Inferno;',
+    errors: [{message: dot('\'Inferno\' is defined but never used')}], parserOptions: parserOptions
   }, {
-    code: '/*eslint jsx-uses-react:1*/ /** @jsx Foo */ var React; <div />;',
-    errors: [{message: dot('\'React\' is defined but never used')}], parserOptions: parserOptions
+    code: '/*eslint jsx-uses-inferno:1*/ /** @jsx Foo */ var Inferno; <div />;',
+    errors: [{message: dot('\'Inferno\' is defined but never used')}], parserOptions: parserOptions
   }, {
-    code: '/*eslint jsx-uses-react:1*/ var React; <div />;',
-    errors: [{message: dot('\'React\' is defined but never used')}], settings: settings, parserOptions: parserOptions
+    code: '/*eslint jsx-uses-inferno:1*/ var Inferno; <div />;',
+    errors: [{message: dot('\'Inferno\' is defined but never used')}], settings: settings, parserOptions: parserOptions
   }]
 });

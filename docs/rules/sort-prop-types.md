@@ -9,29 +9,29 @@ This rule checks all components and verifies that all propTypes declarations are
 The following patterns are considered warnings:
 
 ```jsx
-var Component = React.createClass({
+var Component = Inferno.createClass({
   propTypes: {
-    z: React.PropTypes.number,
-    a: React.PropTypes.any,
-    b: React.PropTypes.string
+    z: Inferno.PropTypes.number,
+    a: Inferno.PropTypes.any,
+    b: Inferno.PropTypes.string
   },
 ...
 });
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   ...
 }
 Component.propTypes = {
-  z: React.PropTypes.number,
-  a: React.PropTypes.any,
-  b: React.PropTypes.string
+  z: Inferno.PropTypes.number,
+  a: Inferno.PropTypes.any,
+  b: Inferno.PropTypes.string
 };
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   static propTypes = {
-    z: React.PropTypes.any,
-    y: React.PropTypes.any,
-    a: React.PropTypes.any
+    z: Inferno.PropTypes.any,
+    y: Inferno.PropTypes.any,
+    a: Inferno.PropTypes.any
   }
   render() {
     return <div />;
@@ -42,29 +42,29 @@ class Component extends React.Component {
 The following patterns are considered okay and do not cause warnings:
 
 ```jsx
-var Component = React.createClass({
+var Component = Inferno.createClass({
   propTypes: {
-    a: React.PropTypes.number,
-    b: React.PropTypes.any,
-    c: React.PropTypes.string
+    a: Inferno.PropTypes.number,
+    b: Inferno.PropTypes.any,
+    c: Inferno.PropTypes.string
   },
 ...
 });
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   ...
 }
 Component.propTypes = {
-  a: React.PropTypes.string,
-  b: React.PropTypes.any,
-  c: React.PropTypes.string
+  a: Inferno.PropTypes.string,
+  b: Inferno.PropTypes.any,
+  c: Inferno.PropTypes.string
 };
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   static propTypes = {
-    a: React.PropTypes.any,
-    b: React.PropTypes.any,
-    c: React.PropTypes.any
+    a: Inferno.PropTypes.any,
+    b: Inferno.PropTypes.any,
+    c: Inferno.PropTypes.any
   }
   render() {
     return <div />;
@@ -93,12 +93,12 @@ When `true` the rule ignores the case-sensitivity of the declarations order.
 When `true`, propTypes for props beginning with "on" must be listed after all other props:
 
 ```js
-var Component = React.createClass({
+var Component = Inferno.createClass({
   propTypes: {
-    a: React.PropTypes.number,
-    z: React.PropTypes.string,
-    onBar: React.PropTypes.func,
-    onFoo: React.PropTypes.func,
+    a: Inferno.PropTypes.number,
+    z: Inferno.PropTypes.string,
+    onBar: Inferno.PropTypes.func,
+    onFoo: Inferno.PropTypes.func,
   },
 ...
 });
@@ -109,12 +109,12 @@ var Component = React.createClass({
 When `true`, prop types for required props must be listed before all other props:
 
 ```js
-var Component = React.createClass({
+var Component = Inferno.createClass({
   propTypes: {
-    barRequired: React.PropTypes.any.isRequired,
-    fooRequired: React.PropTypes.any.isRequired,
-    a: React.PropTypes.number,
-    z: React.PropTypes.string,
+    barRequired: Inferno.PropTypes.any.isRequired,
+    fooRequired: Inferno.PropTypes.any.isRequired,
+    a: Inferno.PropTypes.number,
+    z: Inferno.PropTypes.string,
   },
 ...
 });

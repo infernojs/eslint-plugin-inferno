@@ -1,13 +1,13 @@
 # Prevent using string references (no-string-refs)
 
-Currently, two ways are supported by React to refer to components. The first one, providing a string identifier is considered legacy in the official documentation. Referring to components by setting a property on the `this` object in the reference callback is preferred.
+Currently, two ways are supported by Inferno to refer to components. The first one, providing a string identifier is considered legacy in the official documentation. Referring to components by setting a property on the `this` object in the reference callback is preferred.
 
 ## Rule Details
 
 Invalid:
 
 ```jsx
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
  render: function() {
   return <div ref="hello">Hello, world.</div>;
  }
@@ -15,7 +15,7 @@ var Hello = React.createClass({
 ```
 
 ```jsx
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   componentDidMount: function() {
     var component = this.refs.hello;
     // ...do something with component
@@ -29,7 +29,7 @@ var Hello = React.createClass({
 Valid:
 
 ```jsx
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   componentDidMount: function() {
     var component = this.hello;
     // ...do something with component

@@ -39,8 +39,8 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}{bar}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string.isRequired,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string.isRequired,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};'
       ].join('\n')
     },
@@ -50,8 +50,8 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}{bar}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
         'MyStatelessComponent.defaultProps = {',
         '  foo: "foo"',
@@ -71,9 +71,9 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}{bar}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {',
-        '  bar: React.PropTypes.string.isRequired',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
-        'MyStatelessComponent.propTypes.foo = React.PropTypes.string;',
+        'MyStatelessComponent.propTypes.foo = Inferno.PropTypes.string;',
         'MyStatelessComponent.defaultProps = {',
         '  foo: "foo"',
         '};'
@@ -85,9 +85,9 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}{bar}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {',
-        '  bar: React.PropTypes.string.isRequired',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
-        'MyStatelessComponent.propTypes.foo = React.PropTypes.string;',
+        'MyStatelessComponent.propTypes.foo = Inferno.PropTypes.string;',
         'MyStatelessComponent.defaultProps = {};',
         'MyStatelessComponent.defaultProps.foo = "foo";'
       ].join('\n')
@@ -98,7 +98,7 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {};',
-        'MyStatelessComponent.propTypes.foo = React.PropTypes.string;',
+        'MyStatelessComponent.propTypes.foo = Inferno.PropTypes.string;',
         'MyStatelessComponent.defaultProps = {};',
         'MyStatelessComponent.defaultProps.foo = "foo";'
       ].join('\n')
@@ -106,8 +106,8 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'const types = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
 
         'function MyStatelessComponent({ foo, bar }) {',
@@ -129,8 +129,8 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}{bar}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
         'MyStatelessComponent.defaultProps = defaults;'
       ].join('\n')
@@ -141,8 +141,8 @@ ruleTester.run('require-default-props', rule, {
         '  foo: "foo"',
         '};',
         'const types = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
 
         'function MyStatelessComponent({ foo, bar }) {',
@@ -154,29 +154,29 @@ ruleTester.run('require-default-props', rule, {
     },
 
     //
-    // React.createClass components
+    // Inferno.createClass components
     {
       code: [
-        'var Greeting = React.createClass({',
+        'var Greeting = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello {this.props.foo} {this.props.bar}</div>;',
         '  },',
         '  propTypes: {',
-        '    foo: React.PropTypes.string.isRequired,',
-        '    bar: React.PropTypes.string.isRequired',
+        '    foo: Inferno.PropTypes.string.isRequired,',
+        '    bar: Inferno.PropTypes.string.isRequired',
         '  }',
         '});'
       ].join('\n')
     },
     {
       code: [
-        'var Greeting = React.createClass({',
+        'var Greeting = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello {this.props.foo} {this.props.bar}</div>;',
         '  },',
         '  propTypes: {',
-        '    foo: React.PropTypes.string,',
-        '    bar: React.PropTypes.string.isRequired',
+        '    foo: Inferno.PropTypes.string,',
+        '    bar: Inferno.PropTypes.string.isRequired',
         '  },',
         '  getDefaultProps: function() {',
         '    return {',
@@ -188,13 +188,13 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'var Greeting = React.createClass({',
+        'var Greeting = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello {this.props.foo} {this.props.bar}</div>;',
         '  },',
         '  propTypes: {',
-        '    foo: React.PropTypes.string,',
-        '    bar: React.PropTypes.string',
+        '    foo: Inferno.PropTypes.string,',
+        '    bar: Inferno.PropTypes.string',
         '  },',
         '  getDefaultProps: function() {',
         '    return {',
@@ -207,7 +207,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'var Greeting = React.createClass({',
+        'var Greeting = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello {this.props.foo} {this.props.bar}</div>;',
         '  }',
@@ -219,7 +219,7 @@ ruleTester.run('require-default-props', rule, {
     // ES6 class component
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -227,8 +227,8 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  foo: React.PropTypes.string.isRequired,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string.isRequired,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
         'Greeting.defaultProps = {',
         '  foo: "foo"',
@@ -237,7 +237,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -245,8 +245,8 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
         'Greeting.defaultProps = {',
         '  foo: "foo"',
@@ -255,7 +255,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -266,7 +266,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -274,9 +274,9 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  bar: React.PropTypes.string.isRequired',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
-        'Greeting.propTypes.foo = React.PropTypes.string;',
+        'Greeting.propTypes.foo = Inferno.PropTypes.string;',
         'Greeting.defaultProps = {',
         '  foo: "foo"',
         '};'
@@ -284,7 +284,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -292,16 +292,16 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  bar: React.PropTypes.string.isRequired',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
-        'Greeting.propTypes.foo = React.PropTypes.string;',
+        'Greeting.propTypes.foo = Inferno.PropTypes.string;',
         'Greeting.defaultProps = {};',
         'Greeting.defaultProps.foo = "foo";'
       ].join('\n')
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -309,7 +309,7 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {};',
-        'Greeting.propTypes.foo = React.PropTypes.string;',
+        'Greeting.propTypes.foo = Inferno.PropTypes.string;',
         'Greeting.defaultProps = {};',
         'Greeting.defaultProps.foo = "foo";'
       ].join('\n')
@@ -318,13 +318,13 @@ ruleTester.run('require-default-props', rule, {
     //
     // edge cases
 
-    // not a react component
+    // not a inferno component
     {
       code: [
         'function NotAComponent({ foo, bar }) {}',
         'NotAComponent.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};'
       ].join('\n')
     },
@@ -338,7 +338,7 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  bar: React.PropTypes.string.isRequired',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};'
       ].join('\n')
     },
@@ -347,8 +347,8 @@ ruleTester.run('require-default-props', rule, {
       code: [
         'const defaults = require("./defaults");',
         'const types = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string',
         '};',
 
         'function MyStatelessComponent({ foo, bar }) {',
@@ -375,7 +375,7 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};',
         'MyStatelessComponent.defaultProps = require("./defaults").foo;',
 
@@ -387,7 +387,7 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};',
         'MyStatelessComponent.defaultProps = require("./defaults").foo;',
         'MyStatelessComponent.defaultProps.bar = "bar";',
@@ -402,7 +402,7 @@ ruleTester.run('require-default-props', rule, {
         'import defaults from "./defaults";',
 
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};',
         'MyStatelessComponent.defaultProps = defaults;',
 
@@ -417,7 +417,7 @@ ruleTester.run('require-default-props', rule, {
         'import { foo } from "./defaults";',
 
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};',
         'MyStatelessComponent.defaultProps = foo;',
 
@@ -440,7 +440,7 @@ ruleTester.run('require-default-props', rule, {
       code: [
         'MyStatelessComponent.propTypes = {',
         '  ...stuff,',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};',
         'MyStatelessComponent.defaultProps = {',
         ' foo: "foo"',
@@ -453,7 +453,7 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};',
         'MyStatelessComponent.defaultProps = {',
         ' ...defaults,',
@@ -465,7 +465,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -474,13 +474,13 @@ ruleTester.run('require-default-props', rule, {
         '}',
         'Greeting.propTypes = {',
         '  ...someProps,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};'
       ].join('\n')
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -488,8 +488,8 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
         'Greeting.defaultProps = {',
         '  ...defaults,',
@@ -499,7 +499,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -507,8 +507,8 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
         'Greeting.defaultProps = {',
         '  ...defaults,',
@@ -525,7 +525,7 @@ ruleTester.run('require-default-props', rule, {
         '  foo: string',
         '};',
 
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
 
         '  render() {',
@@ -542,7 +542,7 @@ ruleTester.run('require-default-props', rule, {
         '  bar?: string',
         '};',
 
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
 
         '  render() {',
@@ -558,7 +558,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    foo: string,',
         '    bar?: string',
@@ -577,7 +577,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    foo: string',
         '  };',
@@ -669,7 +669,7 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'import type Props from "fake";',
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
         '  render () {',
         '    return <div>Hello {this.props.name.firstname}</div>;',
@@ -732,8 +732,8 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}{bar}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};'
       ].join('\n'),
       errors: [{
@@ -748,10 +748,10 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}{bar}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
-        'MyStatelessComponent.propTypes.baz = React.propTypes.string;'
+        'MyStatelessComponent.propTypes.baz = Inferno.propTypes.string;'
       ].join('\n'),
       errors: [
         {
@@ -769,8 +769,8 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'const types = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
 
         'function MyStatelessComponent({ foo, bar }) {',
@@ -794,8 +794,8 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>{foo}{bar}</div>;',
         '}',
         'MyStatelessComponent.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string',
         '};',
         'MyStatelessComponent.defaultProps = defaults;'
       ].join('\n'),
@@ -811,8 +811,8 @@ ruleTester.run('require-default-props', rule, {
         '  foo: "foo"',
         '};',
         'const types = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string',
         '};',
 
         'function MyStatelessComponent({ foo, bar }) {',
@@ -829,16 +829,16 @@ ruleTester.run('require-default-props', rule, {
     },
 
     //
-    // React.createClass components
+    // Inferno.createClass components
     {
       code: [
-        'var Greeting = React.createClass({',
+        'var Greeting = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello {this.props.foo} {this.props.bar}</div>;',
         '  },',
         '  propTypes: {',
-        '    foo: React.PropTypes.string,',
-        '    bar: React.PropTypes.string.isRequired',
+        '    foo: Inferno.PropTypes.string,',
+        '    bar: Inferno.PropTypes.string.isRequired',
         '  }',
         '});'
       ].join('\n'),
@@ -850,13 +850,13 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'var Greeting = React.createClass({',
+        'var Greeting = Inferno.createClass({',
         '  render: function() {',
         '    return <div>Hello {this.props.foo} {this.props.bar}</div>;',
         '  },',
         '  propTypes: {',
-        '    foo: React.PropTypes.string,',
-        '    bar: React.PropTypes.string',
+        '    foo: Inferno.PropTypes.string,',
+        '    bar: Inferno.PropTypes.string',
         '  },',
         '  getDefaultProps: function() {',
         '    return {',
@@ -876,7 +876,7 @@ ruleTester.run('require-default-props', rule, {
     // ES6 class component
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -884,8 +884,8 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};'
       ].join('\n'),
       errors: [{
@@ -896,7 +896,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -904,8 +904,8 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string',
         '};',
         'Greeting.defaultProps = {',
         '  foo: "foo"',
@@ -919,7 +919,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -927,9 +927,9 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  bar: React.PropTypes.string.isRequired',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
-        'Greeting.propTypes.foo = React.PropTypes.string;'
+        'Greeting.propTypes.foo = Inferno.PropTypes.string;'
       ].join('\n'),
       errors: [{
         message: 'propType "foo" is not required, but has no corresponding defaultProp declaration.',
@@ -939,7 +939,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -947,9 +947,9 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {',
-        '  bar: React.PropTypes.string',
+        '  bar: Inferno.PropTypes.string',
         '};',
-        'Greeting.propTypes.foo = React.PropTypes.string;',
+        'Greeting.propTypes.foo = Inferno.PropTypes.string;',
         'Greeting.defaultProps = {};',
         'Greeting.defaultProps.foo = "foo";'
       ].join('\n'),
@@ -961,7 +961,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -969,7 +969,7 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'Greeting.propTypes = {};',
-        'Greeting.propTypes.foo = React.PropTypes.string;',
+        'Greeting.propTypes.foo = Inferno.PropTypes.string;',
         'Greeting.defaultProps = {};',
         'Greeting.defaultProps.bar = "bar";'
       ].join('\n'),
@@ -981,7 +981,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -989,8 +989,8 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'const props = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
         'Greeting.propTypes = props;'
       ].join('\n'),
@@ -1002,7 +1002,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -1010,8 +1010,8 @@ ruleTester.run('require-default-props', rule, {
         '  }',
         '}',
         'const props = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string',
         '};',
         'const defaults = {',
         '  foo: "foo"',
@@ -1030,10 +1030,10 @@ ruleTester.run('require-default-props', rule, {
     // ES6 classes with static getter methods
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static get propTypes() {',
         '    return {',
-        '      name: React.PropTypes.string',
+        '      name: Inferno.PropTypes.string',
         '    };',
         '  }',
         '  render() {',
@@ -1049,11 +1049,11 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static get propTypes() {',
         '    return {',
-        '      foo: React.PropTypes.string,',
-        '      bar: React.PropTypes.string',
+        '      foo: Inferno.PropTypes.string,',
+        '      bar: Inferno.PropTypes.string',
         '    };',
         '  }',
         '  static get defaultProps() {',
@@ -1075,10 +1075,10 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'const props = {',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};',
 
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static get propTypes() {',
         '    return props;',
         '  }',
@@ -1099,11 +1099,11 @@ ruleTester.run('require-default-props', rule, {
         '  bar: "world"',
         '};',
 
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static get propTypes() {',
         '    return {',
-        '      foo: React.PropTypes.string,',
-        '      bar: React.PropTypes.string',
+        '      foo: Inferno.PropTypes.string,',
+        '      bar: Inferno.PropTypes.string',
         '    };',
         '  }',
         '  static get defaultProps() {',
@@ -1125,15 +1125,15 @@ ruleTester.run('require-default-props', rule, {
     // ES6 classes with property initializers
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
         '    );',
         '  }',
         '  static propTypes = {',
-        '    foo: React.PropTypes.string,',
-        '    bar: React.PropTypes.string.isRequired',
+        '    foo: Inferno.PropTypes.string,',
+        '    bar: Inferno.PropTypes.string.isRequired',
         '  };',
         '}'
       ].join('\n'),
@@ -1146,15 +1146,15 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
         '    );',
         '  }',
         '  static propTypes = {',
-        '    foo: React.PropTypes.string,',
-        '    bar: React.PropTypes.string',
+        '    foo: Inferno.PropTypes.string,',
+        '    bar: Inferno.PropTypes.string',
         '  };',
         '  static defaultProps = {',
         '    foo: "foo"',
@@ -1171,10 +1171,10 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'const props = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string.isRequired',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string.isRequired',
         '};',
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -1193,13 +1193,13 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'const props = {',
-        '  foo: React.PropTypes.string,',
-        '  bar: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string,',
+        '  bar: Inferno.PropTypes.string',
         '};',
         'const defaults = {',
         '  foo: "foo"',
         '};',
-        'class Greeting extends React.Component {',
+        'class Greeting extends Inferno.Component {',
         '  render() {',
         '    return (',
         '      <h1>Hello, {this.props.foo} {this.props.bar}</h1>',
@@ -1222,13 +1222,13 @@ ruleTester.run('require-default-props', rule, {
     {
       code: [
         'let Greetings = {};',
-        'Greetings.Hello = class extends React.Component {',
+        'Greetings.Hello = class extends Inferno.Component {',
         '  render () {',
         '    return <div>Hello {this.props.foo}</div>;',
         '  }',
         '}',
         'Greetings.Hello.propTypes = {',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       errors: [{
@@ -1243,7 +1243,7 @@ ruleTester.run('require-default-props', rule, {
         '  return <div>Hello {this.props.foo}</div>;',
         '}',
         'Greetings.propTypes = {',
-        '  foo: React.PropTypes.string',
+        '  foo: Inferno.PropTypes.string',
         '};'
       ].join('\n'),
       errors: [{
@@ -1257,7 +1257,7 @@ ruleTester.run('require-default-props', rule, {
     // with Flow annotations
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    foo?: string,',
         '    bar?: string',
@@ -1286,7 +1286,7 @@ ruleTester.run('require-default-props', rule, {
         '  bar?: string',
         '};',
 
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
 
         '  render() {',
@@ -1307,7 +1307,7 @@ ruleTester.run('require-default-props', rule, {
         '  foo?: string',
         '};',
 
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
 
         '  static defaultProps: { foo: string };',
@@ -1326,7 +1326,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    foo: string,',
         '    bar?: string',
@@ -1346,7 +1346,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    foo?: string,',
         '    bar?: string',
@@ -1373,7 +1373,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    foo?: string',
         '  };',
@@ -1399,7 +1399,7 @@ ruleTester.run('require-default-props', rule, {
         '  bar?: string',
         '};',
 
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
 
         '  render() {',
@@ -1425,7 +1425,7 @@ ruleTester.run('require-default-props', rule, {
         '  bar?: string',
         '};',
 
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: Props;',
 
         '  static defaultProps: { foo: string, bar: string };',
@@ -1448,7 +1448,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  props: {',
         '    foo?: string,',
         '    bar?: string',
@@ -1765,7 +1765,7 @@ ruleTester.run('require-default-props', rule, {
     },
     {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  static propTypes = {',
         '    foo: PropTypes.string',
         '  };',

@@ -41,13 +41,13 @@ describe('configurations', function() {
   it('should export a \'recommended\' configuration', function() {
     assert(plugin.configs.recommended);
     Object.keys(plugin.configs.recommended.rules).forEach(function (configName) {
-      assert.equal(configName.indexOf('react/'), 0);
-      var ruleName = configName.substring('react/'.length);
+      assert.equal(configName.indexOf('inferno/'), 0);
+      var ruleName = configName.substring('inferno/'.length);
       assert(plugin.rules[ruleName]);
     });
 
     ruleFiles.forEach(function(ruleName) {
-      var inRecommendedConfig = Boolean(plugin.configs.recommended.rules['react/' + ruleName]);
+      var inRecommendedConfig = Boolean(plugin.configs.recommended.rules['inferno/' + ruleName]);
       var isRecommended = plugin.rules[ruleName].meta.docs.recommended;
       if (inRecommendedConfig) {
         assert(isRecommended, ruleName + ' metadata should mark it as recommended');
@@ -59,12 +59,12 @@ describe('configurations', function() {
   it('should export a \'all\' configuration', function() {
     assert(plugin.configs.all);
     Object.keys(plugin.configs.all.rules).forEach(function(configName) {
-      assert.equal(configName.indexOf('react/'), 0);
+      assert.equal(configName.indexOf('inferno/'), 0);
       assert.equal(plugin.configs.all.rules[configName], 2);
     });
     ruleFiles.forEach(function(ruleName) {
       var inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
-      var inAllConfig = Boolean(plugin.configs.all.rules['react/' + ruleName]);
+      var inAllConfig = Boolean(plugin.configs.all.rules['inferno/' + ruleName]);
       assert(inDeprecatedRules ^ inAllConfig);
     });
   });

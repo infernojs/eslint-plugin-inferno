@@ -34,7 +34,7 @@ ruleTester.run('forbid-prop-types', rule, {
 
   valid: [{
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  render: function() {',
       '    return <div />;',
       '  }',
@@ -43,7 +43,7 @@ ruleTester.run('forbid-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <div />;',
@@ -53,12 +53,12 @@ ruleTester.run('forbid-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    s: React.PropTypes.string,',
-      '    n: React.PropTypes.number,',
-      '    i: React.PropTypes.instanceOf,',
-      '    b: React.PropTypes.bool',
+      '    s: Inferno.PropTypes.string,',
+      '    n: Inferno.PropTypes.number,',
+      '    i: Inferno.PropTypes.instanceOf,',
+      '    b: Inferno.PropTypes.bool',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -68,9 +68,9 @@ ruleTester.run('forbid-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.array',
+      '    a: Inferno.PropTypes.array',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -83,9 +83,9 @@ ruleTester.run('forbid-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    o: React.PropTypes.object',
+      '    o: Inferno.PropTypes.object',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -98,9 +98,9 @@ ruleTester.run('forbid-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    o: React.PropTypes.object,',
+      '    o: Inferno.PropTypes.object,',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -113,21 +113,21 @@ ruleTester.run('forbid-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '  a: React.PropTypes.string,',
-      '  b: React.PropTypes.string',
+      '  a: Inferno.PropTypes.string,',
+      '  b: Inferno.PropTypes.string',
       '};',
-      'First.propTypes.justforcheck = React.PropTypes.string;'
+      'First.propTypes.justforcheck = Inferno.PropTypes.string;'
     ].join('\n'),
     parserOptions: parserOptions
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
@@ -139,24 +139,24 @@ ruleTester.run('forbid-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',
       '}',
       'Hello.propTypes = {',
-      '  "aria-controls": React.PropTypes.string',
+      '  "aria-controls": Inferno.PropTypes.string',
       '};'
     ].join('\n'),
     parser: 'babel-eslint'
   }, {
     // Invalid code, should not be validated
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  propTypes: {',
-      '    a: React.PropTypes.any,',
-      '    c: React.PropTypes.any,',
-      '    b: React.PropTypes.any',
+      '    a: Inferno.PropTypes.any,',
+      '    c: Inferno.PropTypes.any,',
+      '    b: Inferno.PropTypes.any',
       '  };',
       '  render() {',
       '    return <div />;',
@@ -166,7 +166,7 @@ ruleTester.run('forbid-prop-types', rule, {
     parser: 'babel-eslint'
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    let { a, ...b } = obj;',
       '    let c = { ...d };',
@@ -177,7 +177,7 @@ ruleTester.run('forbid-prop-types', rule, {
     parserOptions: parserOptions
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  propTypes: {',
       '    retailer: PropTypes.instanceOf(Map).isRequired,',
       '    requestRetailer: PropTypes.func.isRequired',
@@ -191,9 +191,9 @@ ruleTester.run('forbid-prop-types', rule, {
   }, {
     // Proptypes declared with a spread property
     code: [
-      'class Test extends react.component {',
+      'class Test extends inferno.component {',
       '  static propTypes = {',
-      '    intl: React.propTypes.number,',
+      '    intl: Inferno.propTypes.number,',
       '    ...propTypes',
       '  };',
       '}'
@@ -203,9 +203,9 @@ ruleTester.run('forbid-prop-types', rule, {
 
   invalid: [{
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any',
+      '    a: Inferno.PropTypes.any',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -221,9 +221,9 @@ ruleTester.run('forbid-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    n: React.PropTypes.number',
+      '    n: Inferno.PropTypes.number',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -242,9 +242,9 @@ ruleTester.run('forbid-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.any.isRequired',
+      '    a: Inferno.PropTypes.any.isRequired',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -260,9 +260,9 @@ ruleTester.run('forbid-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.array',
+      '    a: Inferno.PropTypes.array',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -278,9 +278,9 @@ ruleTester.run('forbid-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.array.isRequired',
+      '    a: Inferno.PropTypes.array.isRequired',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -296,9 +296,9 @@ ruleTester.run('forbid-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.object',
+      '    a: Inferno.PropTypes.object',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -314,9 +314,9 @@ ruleTester.run('forbid-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.object.isRequired',
+      '    a: Inferno.PropTypes.object.isRequired',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -332,10 +332,10 @@ ruleTester.run('forbid-prop-types', rule, {
     }]
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.array,',
-      '    o: React.PropTypes.object',
+      '    a: Inferno.PropTypes.array,',
+      '    o: Inferno.PropTypes.object',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -346,10 +346,10 @@ ruleTester.run('forbid-prop-types', rule, {
     errors: 2
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    s: React.PropTypes.shape({,',
-      '      o: React.PropTypes.object',
+      '    s: Inferno.PropTypes.shape({,',
+      '      o: Inferno.PropTypes.object',
       '    })',
       '  },',
       '  render: function() {',
@@ -361,17 +361,17 @@ ruleTester.run('forbid-prop-types', rule, {
     errors: 1
   }, {
     code: [
-      'var First = React.createClass({',
+      'var First = Inferno.createClass({',
       '  propTypes: {',
-      '    a: React.PropTypes.array',
+      '    a: Inferno.PropTypes.array',
       '  },',
       '  render: function() {',
       '    return <div />;',
       '  }',
       '});',
-      'var Second = React.createClass({',
+      'var Second = Inferno.createClass({',
       '  propTypes: {',
-      '    o: React.PropTypes.object',
+      '    o: Inferno.PropTypes.object',
       '  },',
       '  render: function() {',
       '    return <div />;',
@@ -382,33 +382,33 @@ ruleTester.run('forbid-prop-types', rule, {
     errors: 2
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'First.propTypes = {',
-      '    a: React.PropTypes.array,',
-      '    o: React.PropTypes.object',
+      '    a: Inferno.PropTypes.array,',
+      '    o: Inferno.PropTypes.object',
       '};',
-      'class Second extends React.Component {',
+      'class Second extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
       '}',
       'Second.propTypes = {',
-      '    a: React.PropTypes.array,',
-      '    o: React.PropTypes.object',
+      '    a: Inferno.PropTypes.array,',
+      '    o: Inferno.PropTypes.object',
       '};'
     ].join('\n'),
     parserOptions: parserOptions,
     errors: 4
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
-      '    a: React.PropTypes.array,',
-      '    o: React.PropTypes.object',
+      '    a: Inferno.PropTypes.array,',
+      '    o: Inferno.PropTypes.object',
       '  };',
       '  render() {',
       '    return <div />;',
@@ -420,7 +420,7 @@ ruleTester.run('forbid-prop-types', rule, {
     errors: 2
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  propTypes: {',
       '    retailer: PropTypes.instanceOf(Map).isRequired,',
       '    requestRetailer: PropTypes.func.isRequired',
@@ -437,8 +437,8 @@ ruleTester.run('forbid-prop-types', rule, {
     errors: 1
   }, {
     code: [
-      'var object = React.PropTypes.object;',
-      'var Hello = React.createClass({',
+      'var object = Inferno.PropTypes.object;',
+      'var Hello = Inferno.createClass({',
       '  propTypes: {',
       '    retailer: object,',
       '  },',

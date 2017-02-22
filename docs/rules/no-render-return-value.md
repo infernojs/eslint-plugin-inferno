@@ -1,24 +1,24 @@
-# Prevent usage of the return value of React.render (no-render-return-value)
+# Prevent usage of the return value of Inferno.render (no-render-return-value)
 
-> `ReactDOM.render()` currently returns a reference to the root `ReactComponent` instance. However, using this return value is legacy and should be avoided because future versions of React may render components asynchronously in some cases. If you need a reference to the root `ReactComponent` instance, the preferred solution is to attach a [callback ref](http://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) to the root element.
+> `Inferno.render()` currently returns a reference to the root `InfernoComponent` instance. However, using this return value is legacy and should be avoided because future versions of Inferno may render components asynchronously in some cases. If you need a reference to the root `InfernoComponent` instance, the preferred solution is to attach a [callback ref](http://facebook.github.io/inferno/docs/more-about-refs.html#the-ref-callback-attribute) to the root element.
 
-Source: [React Top-Level API documentation](http://facebook.github.io/react/docs/top-level-api.html#reactdom.render)
+Source: [Inferno Top-Level API documentation](http://facebook.github.io/inferno/docs/top-level-api.html#infernodom.render)
 
 ## Rule Details
 
-This rule will warn you if you try to use the `ReactDOM.render()` return value.
+This rule will warn you if you try to use the `Inferno.render()` return value.
 
 The following pattern is considered a warning:
 
 ```jsx
-const inst = ReactDOM.render(<App />, document.body);
+const inst = Inferno.render(<App />, document.body);
 doSomethingWithInst(inst);
 ```
 
 The following patterns are not considered warnings:
 
 ```jsx
-ReactDOM.render(<App ref={doSomethingWithInst} />, document.body);
+Inferno.render(<App ref={doSomethingWithInst} />, document.body);
 
-ReactDOM.render(<App />, document.body, doSomethingWithInst);
+Inferno.render(<App />, document.body, doSomethingWithInst);
 ```

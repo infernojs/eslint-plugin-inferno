@@ -77,19 +77,19 @@ ruleTester.run('no-danger-with-children', rule, {
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("div", { dangerouslySetInnerHTML: { __html: "HTML" } });',
+      code: 'Inferno.createVNode("div", { dangerouslySetInnerHTML: { __html: "HTML" } });',
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("div", {}, "Children");',
+      code: 'Inferno.createVNode("div", {}, "Children");',
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("Hello", { dangerouslySetInnerHTML: { __html: "HTML" } });',
+      code: 'Inferno.createVNode("Hello", { dangerouslySetInnerHTML: { __html: "HTML" } });',
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("Hello", {}, "Children");',
+      code: 'Inferno.createVNode("Hello", {}, "Children");',
       parserOptions: parserOptions
     }
   ],
@@ -140,7 +140,7 @@ ruleTester.run('no-danger-with-children', rule, {
     },
     {
       code: [
-        'React.createElement(',
+        'Inferno.createVNode(',
         '  "div",',
         '  { dangerouslySetInnerHTML: { __html: "HTML" } },',
         '  "Children"',
@@ -151,7 +151,7 @@ ruleTester.run('no-danger-with-children', rule, {
     },
     {
       code: [
-        'React.createElement(',
+        'Inferno.createVNode(',
         '  "div",',
         '  {',
         '    dangerouslySetInnerHTML: { __html: "HTML" },',
@@ -164,7 +164,7 @@ ruleTester.run('no-danger-with-children', rule, {
     },
     {
       code: [
-        'React.createElement(',
+        'Inferno.createVNode(',
         '  "Hello",',
         '  { dangerouslySetInnerHTML: { __html: "HTML" } },',
         '  "Children"',
@@ -175,7 +175,7 @@ ruleTester.run('no-danger-with-children', rule, {
     },
     {
       code: [
-        'React.createElement(',
+        'Inferno.createVNode(',
         '  "Hello",',
         '  {',
         '    dangerouslySetInnerHTML: { __html: "HTML" },',
@@ -189,7 +189,7 @@ ruleTester.run('no-danger-with-children', rule, {
     {
       code: [
         'const props = { dangerouslySetInnerHTML: { __html: "HTML" } };',
-        'React.createElement("div", props, "Children");'
+        'Inferno.createVNode("div", props, "Children");'
       ].join('\n'),
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}],
       parserOptions: parserOptions
@@ -197,7 +197,7 @@ ruleTester.run('no-danger-with-children', rule, {
     {
       code: [
         'const props = { children: "Children", dangerouslySetInnerHTML: { __html: "HTML" } };',
-        'React.createElement("div", props);'
+        'Inferno.createVNode("div", props);'
       ].join('\n'),
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}],
       parserOptions: parserOptions
@@ -207,7 +207,7 @@ ruleTester.run('no-danger-with-children', rule, {
         'const moreProps = { children: "Children" };',
         'const otherProps = { ...moreProps };',
         'const props = { ...otherProps, dangerouslySetInnerHTML: { __html: "HTML" } };',
-        'React.createElement("div", props);'
+        'Inferno.createVNode("div", props);'
       ].join('\n'),
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}],
       parserOptions: parserOptions

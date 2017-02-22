@@ -30,7 +30,7 @@ ruleTester.run('sort-comp', rule, {
   valid: [{
     // Must validate a full class
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName : \'\',',
       '  propTypes: {},',
       '  contextTypes: {},',
@@ -56,7 +56,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must validate a class with missing groups
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello</div>;',
       '  }',
@@ -66,7 +66,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must put a custom method in 'everything-else'
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  onClick: function() {},',
       '  render: function() {',
       '    return <button onClick={this.onClick}>Hello</button>;',
@@ -77,7 +77,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must allow us to re-order the groups
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName : \'Hello\',',
       '  render: function() {',
       '    return <button onClick={this.onClick}>Hello</button>;',
@@ -96,7 +96,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must allow us to create a RegExp-based group
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  customHandler() {}',
       '  render() {',
       '    return <div>Hello</div>;',
@@ -116,7 +116,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must allow us to create a named group
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  customHandler() {}',
       '  render() {',
       '    return <div>Hello</div>;',
@@ -141,7 +141,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must allow a method to be in different places if it's matches multiple patterns
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',
@@ -159,7 +159,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must allow us to use 'constructor' as a method name
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  displayName() {}',
       '  render() {',
@@ -195,7 +195,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must ignore spread operator
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  ...proto,',
       '  render: function() {',
       '    return <div>Hello</div>;',
@@ -206,7 +206,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Type Annotations should be first
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  props: { text: string };',
       '  constructor() {}',
       '  render() {',
@@ -228,7 +228,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Properties with Type Annotations should not be at the top
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  props: { text: string };',
       '  constructor() {}',
       '  state: Object = {};',
@@ -253,7 +253,7 @@ ruleTester.run('sort-comp', rule, {
   invalid: [{
     // Must force a lifecycle method to be placed before render
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello</div>;',
       '  },',
@@ -263,11 +263,11 @@ ruleTester.run('sort-comp', rule, {
     parserOptions: parserOptions,
     errors: [{message: 'render should be placed after displayName'}]
   }, {
-    // Must run rule when render uses createElement instead of JSX
+    // Must run rule when render uses createVNode instead of JSX
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
-      '    return React.createElement("div", null, "Hello");',
+      '    return Inferno.createVNode("div", null, "Hello");',
       '  },',
       '  displayName : \'Hello\',',
       '});'
@@ -277,7 +277,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must force a custom method to be placed before render
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    return <div>Hello</div>;',
       '  },',
@@ -289,7 +289,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must force a custom method to be placed after render if no 'everything-else' group is specified
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  displayName: \'Hello\',',
       '  onClick: function() {},',
       '  render: function() {',
@@ -308,7 +308,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Must validate static properties
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div></div>',
       '  }',
@@ -321,7 +321,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Type Annotations should not be at the top by default
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  props: { text: string };',
       '  constructor() {}',
       '  state: Object = {};',
@@ -336,7 +336,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Type Annotations should be first
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  props: { text: string };',
       '  render() {',
@@ -358,7 +358,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     // Properties with Type Annotations should not be at the top
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  props: { text: string };',
       '  state: Object = {};',
       '  constructor() {}',
@@ -380,7 +380,7 @@ ruleTester.run('sort-comp', rule, {
     }]
   }, {
     code: [
-      'export default class View extends React.Component {',
+      'export default class View extends Inferno.Component {',
       '  componentDidMountOk() {}',
       '  getB() {}',
       '  componentWillMount() {}',

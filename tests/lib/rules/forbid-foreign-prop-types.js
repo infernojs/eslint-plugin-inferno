@@ -63,7 +63,7 @@ ruleTester.run('forbid-foreign-prop-types', rule, {
 
   invalid: [{
     code: [
-      'var Foo = React.createClass({',
+      'var Foo = Inferno.createClass({',
       '  propTypes: Bar.propTypes,',
       '  render: function() {',
       '    return <Foo className="bar" />;',
@@ -78,7 +78,7 @@ ruleTester.run('forbid-foreign-prop-types', rule, {
   },
   {
     code: [
-      'var Foo = React.createClass({',
+      'var Foo = Inferno.createClass({',
       '  propTypes: Bar["propTypes"],',
       '  render: function() {',
       '    return <Foo className="bar" />;',
@@ -94,7 +94,7 @@ ruleTester.run('forbid-foreign-prop-types', rule, {
   {
     code: [
       'var { propTypes } = SomeComponent',
-      'var Foo = React.createClass({',
+      'var Foo = Inferno.createClass({',
       '  propTypes,',
       '  render: function() {',
       '    return <Foo className="bar" />;',
@@ -110,7 +110,7 @@ ruleTester.run('forbid-foreign-prop-types', rule, {
   {
     code: [
       'var { propTypes: things, ...foo } = SomeComponent',
-      'var Foo = React.createClass({',
+      'var Foo = Inferno.createClass({',
       '  propTypes,',
       '  render: function() {',
       '    return <Foo className="bar" />;',
@@ -125,7 +125,7 @@ ruleTester.run('forbid-foreign-prop-types', rule, {
   },
   {
     code: [
-      'class MyComponent extends React.Component {',
+      'class MyComponent extends Inferno.Component {',
       '  static fooBar = {',
       '    baz: Qux.propTypes.baz',
       '  };',
@@ -140,7 +140,7 @@ ruleTester.run('forbid-foreign-prop-types', rule, {
   {
     code: [
       'var { propTypes: typesOfProps } = SomeComponent',
-      'var Foo = React.createClass({',
+      'var Foo = Inferno.createClass({',
       '  propTypes: typesOfProps,',
       '  render: function() {',
       '    return <Foo className="bar" />;',

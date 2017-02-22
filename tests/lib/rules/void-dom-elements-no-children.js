@@ -44,34 +44,34 @@ ruleTester.run('void-dom-elements-no-children', rule, {
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("div", {}, "Foo");',
+      code: 'Inferno.createElement("div", {}, "Foo");',
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("div", { children: "Foo" });',
+      code: 'Inferno.createElement("div", { children: "Foo" });',
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("div", { dangerouslySetInnerHTML: { __html: "Foo" } });',
+      code: 'Inferno.createElement("div", { dangerouslySetInnerHTML: { __html: "Foo" } });',
       parserOptions: parserOptions
     }, {
       code: 'document.createElement("img")',
       parserOptions: parserOptions
     }, {
-      code: 'React.createElement("img");',
+      code: 'Inferno.createElement("img");',
       parserOptions: parserOptions
     }, {
       code: [
-        'import React from "react";',
-        'const { createElement } = React;',
+        'import Inferno from "inferno";',
+        'const { createElement } = Inferno;',
         'createElement("div")'
       ].join('\n'),
       parser: 'babel-eslint',
       parserOptions: parserOptions
     }, {
       code: [
-        'import React from "react";',
-        'const { createElement } = React;',
+        'import Inferno from "inferno";',
+        'const { createElement } = Inferno;',
         'createElement("img")'
       ].join('\n'),
       parser: 'babel-eslint',
@@ -100,24 +100,24 @@ ruleTester.run('void-dom-elements-no-children', rule, {
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("br", {}, "Foo");',
+      code: 'Inferno.createElement("br", {}, "Foo");',
       errors: [{message: errorMessage('br')}],
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("br", { children: "Foo" });',
+      code: 'Inferno.createElement("br", { children: "Foo" });',
       errors: [{message: errorMessage('br')}],
       parserOptions: parserOptions
     },
     {
-      code: 'React.createElement("br", { dangerouslySetInnerHTML: { __html: "Foo" } });',
+      code: 'Inferno.createElement("br", { dangerouslySetInnerHTML: { __html: "Foo" } });',
       errors: [{message: errorMessage('br')}],
       parserOptions: parserOptions
     },
     {
       code: [
-        'import React from "react";',
-        'const createElement = React.createElement;',
+        'import Inferno from "inferno";',
+        'const createElement = Inferno.createElement;',
         'createElement("img", {}, "Foo");'
       ].join('\n'),
       errors: [{message: errorMessage('img')}],
@@ -126,8 +126,8 @@ ruleTester.run('void-dom-elements-no-children', rule, {
     },
     {
       code: [
-        'import React from "react";',
-        'const createElement = React.createElement;',
+        'import Inferno from "inferno";',
+        'const createElement = Inferno.createElement;',
         'createElement("img", { children: "Foo" });'
       ].join('\n'),
       errors: [{message: errorMessage('img')}],
@@ -136,8 +136,8 @@ ruleTester.run('void-dom-elements-no-children', rule, {
     },
     {
       code: [
-        'import React from "react";',
-        'const createElement = React.createElement;',
+        'import Inferno from "inferno";',
+        'const createElement = Inferno.createElement;',
         'createElement("img", { dangerouslySetInnerHTML: { __html: "Foo" } });'
       ].join('\n'),
       errors: [{message: errorMessage('img')}],

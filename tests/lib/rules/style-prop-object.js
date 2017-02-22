@@ -100,7 +100,7 @@ ruleTester.run('style-prop-object', rule, {
     {
       code: [
         'const styles = Object.assign({ color: \'red\' }, mystyles);',
-        'React.createElement("div", { style: styles });'
+        'Inferno.createVNode("div", { style: styles });'
       ].join('\n'),
       parserOptions: assign({sourceType: 'module'}, parserOptions)
     },
@@ -110,7 +110,7 @@ ruleTester.run('style-prop-object', rule, {
     },
     {
       code: [
-        'React.createElement(MyCustomElem, {',
+        'Inferno.createVNode(MyCustomElem, {',
         '  [style]: true',
         '}, \'My custom Elem\')'
       ].join('\n'),
@@ -158,7 +158,7 @@ ruleTester.run('style-prop-object', rule, {
     },
     {
       code: [
-        'React.createElement("div", {',
+        'Inferno.createVNode("div", {',
         '  style: undefined',
         '})'
       ].join('\n'),
@@ -167,7 +167,7 @@ ruleTester.run('style-prop-object', rule, {
     {
       code: [
         'let style;',
-        'React.createElement("div", {',
+        'Inferno.createVNode("div", {',
         '  style',
         '})'
       ].join('\n'),
@@ -194,7 +194,7 @@ ruleTester.run('style-prop-object', rule, {
     },
     {
       code: [
-        'React.createElement("div", {',
+        'Inferno.createVNode("div", {',
         '  style: null',
         '})'
       ].join('\n'),
@@ -203,7 +203,7 @@ ruleTester.run('style-prop-object', rule, {
     {
       code: [
         'const MyComponent = (props) => {',
-        '  React.createElement(MyCustomElem, {',
+        '  Inferno.createVNode(MyCustomElem, {',
         '    ...props',
         '  });',
         '};'

@@ -34,7 +34,7 @@ It takes an option as the second parameter which can be `"tab"` for tab-based in
 
 ```js
 ...
-"react/jsx-indent": [<enabled>, 'tab'|<number>]
+"inferno/jsx-indent": [<enabled>, 'tab'|<number>]
 ...
 ```
 
@@ -81,7 +81,7 @@ The following patterns are not warnings:
 
 ```js
 ...
-"react/jsx-indent": [<enabled>, 'tab'|<number>, {indentLogicalExpressions: true}]
+"inferno/jsx-indent": [<enabled>, 'tab'|<number>, {indentLogicalExpressions: true}]
 ...
 ```
 

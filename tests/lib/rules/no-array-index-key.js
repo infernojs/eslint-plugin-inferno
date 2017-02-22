@@ -63,14 +63,14 @@ ruleTester.run('no-array-index-key', rule, {
     },
 
     {
-      code: 'foo.map((baz, i) => React.cloneElement(someChild, { ...someChild.props }))',
+      code: 'foo.map((baz, i) => Inferno.cloneElement(someChild, { ...someChild.props }))',
       parserOptions: parserOptions
     },
 
     {
       code: [
         'foo.map((item, i) => {',
-        '  return React.cloneElement(someChild, {',
+        '  return Inferno.cloneElement(someChild, {',
         '    key: item.id',
         '  })',
         '})'
@@ -137,7 +137,7 @@ ruleTester.run('no-array-index-key', rule, {
     },
 
     {
-      code: 'foo.map((baz, i) => React.cloneElement(someChild, { ...someChild.props, key: i }))',
+      code: 'foo.map((baz, i) => Inferno.cloneElement(someChild, { ...someChild.props, key: i }))',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
@@ -145,7 +145,7 @@ ruleTester.run('no-array-index-key', rule, {
     {
       code: [
         'foo.map((item, i) => {',
-        '  return React.cloneElement(someChild, {',
+        '  return Inferno.cloneElement(someChild, {',
         '    key: i',
         '  })',
         '})'
@@ -203,61 +203,61 @@ ruleTester.run('no-array-index-key', rule, {
     },
 
     {
-      code: 'foo.map((bar, i) => React.createElement(\'Foo\', { key: i }))',
+      code: 'foo.map((bar, i) => Inferno.createElement(\'Foo\', { key: i }))',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.map((bar, i) => React.createElement(\'Foo\', { key: `foo-${i}` }))',
+      code: 'foo.map((bar, i) => Inferno.createElement(\'Foo\', { key: `foo-${i}` }))',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.map((bar, i) => React.createElement(\'Foo\', { key: \'foo-\' + i }))',
+      code: 'foo.map((bar, i) => Inferno.createElement(\'Foo\', { key: \'foo-\' + i }))',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.map((bar, i) => React.createElement(\'Foo\', { key: \'foo-\' + i + \'-bar\' }))',
+      code: 'foo.map((bar, i) => Inferno.createElement(\'Foo\', { key: \'foo-\' + i + \'-bar\' }))',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.forEach((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.forEach((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.filter((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.filter((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.some((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.some((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.every((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.every((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.find((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.find((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     },
 
     {
-      code: 'foo.findIndex((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.findIndex((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}],
       parserOptions: parserOptions
     }

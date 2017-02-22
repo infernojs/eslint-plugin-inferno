@@ -56,7 +56,7 @@ ruleTester.run('jsx-no-comment-textnodes', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  foo: (<div>{/* valid */}</div>),',
         '  render() {',
         '    return this.foo;',

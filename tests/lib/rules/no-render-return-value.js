@@ -27,36 +27,36 @@ ruleTester.run('no-render-return-value', rule, {
 
   valid: [{
     code: [
-      'ReactDOM.render(<div />, document.body);'
+      'Inferno.render(<div />, document.body);'
     ].join('\n'),
     parserOptions: parserOptions
   }, {
     code: [
       'let node;',
-      'ReactDOM.render(<div ref={ref => node = ref}/>, document.body);'
+      'Inferno.render(<div ref={ref => node = ref}/>, document.body);'
     ].join('\n'),
     parserOptions: parserOptions
   }, {
-    code: 'ReactDOM.render(<div ref={ref => this.node = ref}/>, document.body);',
+    code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
     parserOptions: parserOptions,
     settings: {
-      react: {
+      inferno: {
         version: '0.14.0'
       }
     }
   }, {
-    code: 'React.render(<div ref={ref => this.node = ref}/>, document.body);',
+    code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
     parserOptions: parserOptions,
     settings: {
-      react: {
+      inferno: {
         version: '0.14.0'
       }
     }
   }, {
-    code: 'React.render(<div ref={ref => this.node = ref}/>, document.body);',
+    code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
     parserOptions: parserOptions,
     settings: {
-      react: {
+      inferno: {
         version: '0.13.0'
       }
     }
@@ -65,70 +65,70 @@ ruleTester.run('no-render-return-value', rule, {
 
   invalid: [{
     code: [
-      'var Hello = ReactDOM.render(<div />, document.body);'
+      'var Hello = Inferno.render(<div />, document.body);'
     ].join('\n'),
     parserOptions: parserOptions,
     errors: [{
-      message: 'Do not depend on the return value from ReactDOM.render'
+      message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
     code: [
       'var o = {',
-      '  inst: ReactDOM.render(<div />, document.body)',
+      '  inst: Inferno.render(<div />, document.body)',
       '};'
     ].join('\n'),
     parserOptions: parserOptions,
     errors: [{
-      message: 'Do not depend on the return value from ReactDOM.render'
+      message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
     code: [
       'function render () {',
-      '  return ReactDOM.render(<div />, document.body)',
+      '  return Inferno.render(<div />, document.body)',
       '}'
     ].join('\n'),
     parserOptions: parserOptions,
     errors: [{
-      message: 'Do not depend on the return value from ReactDOM.render'
+      message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
-    code: 'var render = (a, b) => ReactDOM.render(a, b)',
+    code: 'var render = (a, b) => Inferno.render(a, b)',
     parserOptions: parserOptions,
     errors: [{
-      message: 'Do not depend on the return value from ReactDOM.render'
+      message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
-    code: 'var inst = React.render(<div />, document.body);',
+    code: 'var inst = Inferno.render(<div />, document.body);',
     parserOptions: parserOptions,
     settings: {
-      react: {
+      inferno: {
         version: '0.14.0'
       }
     },
     errors: [{
-      message: 'Do not depend on the return value from React.render'
+      message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
-    code: 'var inst = ReactDOM.render(<div />, document.body);',
+    code: 'var inst = Inferno.render(<div />, document.body);',
     parserOptions: parserOptions,
     settings: {
-      react: {
+      inferno: {
         version: '0.14.0'
       }
     },
     errors: [{
-      message: 'Do not depend on the return value from ReactDOM.render'
+      message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
-    code: 'var inst = React.render(<div />, document.body);',
+    code: 'var inst = Inferno.render(<div />, document.body);',
     parserOptions: parserOptions,
     settings: {
-      react: {
+      inferno: {
         version: '0.13.0'
       }
     },
     errors: [{
-      message: 'Do not depend on the return value from React.render'
+      message: 'Do not depend on the return value from Inferno.render'
     }]
   }]
 });
