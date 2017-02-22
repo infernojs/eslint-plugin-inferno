@@ -7,7 +7,7 @@ injected as a text node in JSX statements.
 
 The following patterns are considered warnings:
 
-```js
+```jsx
 var Hello = function() {
   return (
     <div>// empty div</div>
@@ -25,7 +25,7 @@ var Hello = function() {
 
 The following patterns are not considered warnings:
 
-```js
+```jsx
 var Hello = function() {
   return <div>{/* empty div */}</div>;
 }
@@ -45,7 +45,7 @@ var Hello = function() {
 It's possible you may want to legitimately output comment start characters (`//` or `/*`)
 in a JSX text node. In which case, you can do the following:
 
-```js
+```jsx
 var Hello = function() {
   return (
     <div>{'/* This will be output as a text node */'}</div>

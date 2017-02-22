@@ -1428,6 +1428,39 @@ ruleTester.run('no-unused-prop-types', rule, {
         '};'
       ].join('\n'),
       parserOptions: parserOptions
+    }, {
+      // `no-unused-prop-types` in jsx expressions - [Issue #885]
+      code: [
+        'const PagingBlock = function(props) {',
+        '  return (',
+        '    <span>',
+        '      <a onClick={() => props.previousPage()}/>',
+        '      <a onClick={() => props.nextPage()}/>',
+        '    </span>',
+        ' );',
+        '};',
+
+        'PagingBlock.propTypes = {',
+        '  nextPage: Inferno.PropTypes.func.isRequired,',
+        '  previousPage: Inferno.PropTypes.func.isRequired,',
+        '};'
+      ].join('\n'),
+      parserOptions: parserOptions
+    }, {
+      // `no-unused-prop-types` rest param props in jsx expressions - [Issue #885]
+      code: [
+        'const PagingBlock = function(props) {',
+        '  return (',
+        '    <SomeChild {...props} />',
+        ' );',
+        '};',
+
+        'PagingBlock.propTypes = {',
+        '  nextPage: Inferno.PropTypes.func.isRequired,',
+        '  previousPage: Inferno.PropTypes.func.isRequired,',
+        '};'
+      ].join('\n'),
+      parserOptions: parserOptions
     }
   ],
 

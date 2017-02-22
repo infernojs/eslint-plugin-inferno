@@ -9,7 +9,7 @@ This rule is off by default.
 
 The following patterns are considered warnings:
 
-```js
+```jsx
 var Component = Inferno.createClass({
   propTypes: {
     a: Inferno.PropTypes.any,
@@ -44,7 +44,7 @@ class Component extends Inferno.Component {
 
 ```js
 ...
-"react/forbid-prop-types": [<enabled>, { "forbid": [<string>] }]
+"inferno/forbid-prop-types": [<enabled>, { "forbid": [<string>] }]
 ...
 ```
 

@@ -1392,7 +1392,7 @@ ruleTester.run('prop-types', rule, {
         '  +firstname: string;',
         '  -lastname: string;',
         '};',
-        'function Hello(props: Props): React.Element {',
+        'function Hello(props: Props): Inferno.Element {',
         '  const {firstname, lastname} = props;',
         '  return <div>Hello {firstname} {lastname}</div>',
         '}'
@@ -1400,7 +1400,7 @@ ruleTester.run('prop-types', rule, {
       parser: 'babel-eslint'
     }, {
       code: [
-        'class Hello extends React.Component {',
+        'class Hello extends Inferno.Component {',
         '  async onSelect({ name }) {',
         '    return null;',
         '  }',
@@ -1419,7 +1419,7 @@ ruleTester.run('prop-types', rule, {
       code: [
         'export class Example extends Component {',
         '  static propTypes = {',
-        '    onDelete: React.PropTypes.func.isRequired',
+        '    onDelete: Inferno.PropTypes.func.isRequired',
         '  }',
         '  handleDeleteConfirm = () => {',
         '    this.props.onDelete();',

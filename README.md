@@ -33,7 +33,7 @@ Add `plugins` section and specify ESLint-plugin-Inferno as a plugin.
 
 You can also specify some settings that will be shared across all the plugin rules.
 
-```js
+```json5
 {
   "settings": {
     "inferno": {
@@ -81,11 +81,10 @@ Finally, enable all of the rules that you would like to use.  Use [our preset](#
 
 * [inferno/display-name](docs/rules/display-name.md): Prevent missing `displayName` in a Inferno component definition
 * [inferno/forbid-component-props](docs/rules/forbid-component-props.md): Forbid certain props on Components
-* [inferno/forbid-prop-types](docs/rules/forbid-prop-types.md): Forbid certain propTypes
+* [inferno/forbid-elements](docs/rules/forbid-elements.md): Forbid certain elements
 * [inferno/no-children-prop](docs/rules/no-children-prop.md): Prevent passing children as props
+* [inferno/forbid-foreign-prop-types](docs/rules/forbid-foreign-prop-types.md): Forbid foreign propTypes
 * [inferno/no-array-index-key](docs/rules/no-array-index-key.md): Prevent using Array index in `key` props
-* [inferno/no-danger](docs/rules/no-danger.md): Prevent usage of dangerous JSX properties
-* [inferno/no-danger-with-children](docs/rules/no-danger-with-children.md): Prevent problem with children and props.dangerouslySetInnerHTML
 * [inferno/no-deprecated](docs/rules/no-deprecated.md): Prevent usage of deprecated methods
 * [inferno/no-did-mount-set-state](docs/rules/no-did-mount-set-state.md): Prevent usage of `setState` in `componentDidMount`
 * [inferno/no-did-update-set-state](docs/rules/no-did-update-set-state.md): Prevent usage of `setState` in `componentDidUpdate`
@@ -106,8 +105,9 @@ Finally, enable all of the rules that you would like to use.  Use [our preset](#
 * [inferno/require-render-return](docs/rules/require-render-return.md): Enforce ES5 or ES6 class for returning value in render function
 * [inferno/self-closing-comp](docs/rules/self-closing-comp.md): Prevent extra closing tags for components without children (fixable)
 * [inferno/sort-comp](docs/rules/sort-comp.md): Enforce component methods order
-* [inferno/sort-prop-types](docs/rules/sort-prop-types.md): Enforce propTypes declarations alphabetical sorting
+* [inferno/require-default-props](docs/rules/require-default-props.md): Enforce a defaultProps definition for every prop that is not a required prop
 * [inferno/style-prop-object](docs/rules/style-prop-object.md): Enforce style prop value being an object
+* [inferno/void-dom-elements-no-children](docs/rules/void-dom-elements-no-children.md): Prevent void DOM elements (e.g. `<img />`, `<br />`) from receiving children
 
 ## JSX-specific rules
 
@@ -148,7 +148,7 @@ This plugin exports a `recommended` configuration that enforce Inferno good prac
 
 To enable this configuration use the `extends` property in your `.eslintrc` config file:
 
-```js
+```json
 {
   "extends": ["eslint:recommended", "plugin:inferno/recommended"]
 }
@@ -169,6 +169,7 @@ The rules enabled in this configuration are:
 * [inferno/no-is-mounted](docs/rules/no-is-mounted.md)
 * [inferno/no-unknown-property](docs/rules/no-unknown-property.md)
 * [inferno/no-render-return-value](docs/rules/no-render-return-value.md)
+* [inferno/prop-types](docs/rules/prop-types.md)
 * [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md)
 
 ## All
@@ -176,7 +177,7 @@ The rules enabled in this configuration are:
 This plugin also exports an `all` configuration that includes every available rule.
 This pairs well with the `eslint:all` rule.
 
-```js
+```json
 {
   "plugins": [
     "inferno"

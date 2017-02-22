@@ -1,0 +1,1109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0f0e585c-4d59-4182-bf3d-8dd6585fc951" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CHANGELOG.md" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/rules/jsx-uses-react.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-uses-inferno.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/rules/react-in-jsx-scope.md" afterPath="$PROJECT_DIR$/docs/rules/inferno-in-jsx-scope.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/rules/jsx-uses-react.js" afterPath="$PROJECT_DIR$/lib/rules/jsx-uses-inferno.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/rules/react-in-jsx-scope.js" afterPath="$PROJECT_DIR$/lib/rules/inferno-in-jsx-scope.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/display-name.md" afterPath="$PROJECT_DIR$/docs/rules/display-name.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/forbid-elements.md" afterPath="$PROJECT_DIR$/docs/rules/forbid-elements.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/forbid-prop-types.md" afterPath="$PROJECT_DIR$/docs/rules/forbid-prop-types.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/jsx-boolean-value.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-boolean-value.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/jsx-filename-extension.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-filename-extension.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/jsx-indent.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-indent.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/jsx-no-bind.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-no-bind.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/jsx-no-comment-textnodes.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-no-comment-textnodes.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/jsx-pascal-case.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-pascal-case.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/jsx-uses-vars.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-uses-vars.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/jsx-wrap-multilines.md" afterPath="$PROJECT_DIR$/docs/rules/jsx-wrap-multilines.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-array-index-key.md" afterPath="$PROJECT_DIR$/docs/rules/no-array-index-key.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-children-prop.md" afterPath="$PROJECT_DIR$/docs/rules/no-children-prop.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-danger-with-children.md" afterPath="$PROJECT_DIR$/docs/rules/no-danger-with-children.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-danger.md" afterPath="$PROJECT_DIR$/docs/rules/no-danger.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-deprecated.md" afterPath="$PROJECT_DIR$/docs/rules/no-deprecated.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-did-mount-set-state.md" afterPath="$PROJECT_DIR$/docs/rules/no-did-mount-set-state.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-did-update-set-state.md" afterPath="$PROJECT_DIR$/docs/rules/no-did-update-set-state.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-direct-mutation-state.md" afterPath="$PROJECT_DIR$/docs/rules/no-direct-mutation-state.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-find-dom-node.md" afterPath="$PROJECT_DIR$/docs/rules/no-find-dom-node.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-is-mounted.md" afterPath="$PROJECT_DIR$/docs/rules/no-is-mounted.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-multi-comp.md" afterPath="$PROJECT_DIR$/docs/rules/no-multi-comp.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-render-return-value.md" afterPath="$PROJECT_DIR$/docs/rules/no-render-return-value.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-set-state.md" afterPath="$PROJECT_DIR$/docs/rules/no-set-state.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-string-refs.md" afterPath="$PROJECT_DIR$/docs/rules/no-string-refs.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-unknown-property.md" afterPath="$PROJECT_DIR$/docs/rules/no-unknown-property.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/no-unused-prop-types.md" afterPath="$PROJECT_DIR$/docs/rules/no-unused-prop-types.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/prefer-es6-class.md" afterPath="$PROJECT_DIR$/docs/rules/prefer-es6-class.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/prefer-stateless-function.md" afterPath="$PROJECT_DIR$/docs/rules/prefer-stateless-function.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/prop-types.md" afterPath="$PROJECT_DIR$/docs/rules/prop-types.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/require-default-props.md" afterPath="$PROJECT_DIR$/docs/rules/require-default-props.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/require-extension.md" afterPath="$PROJECT_DIR$/docs/rules/require-extension.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/require-optimization.md" afterPath="$PROJECT_DIR$/docs/rules/require-optimization.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/require-render-return.md" afterPath="$PROJECT_DIR$/docs/rules/require-render-return.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/sort-comp.md" afterPath="$PROJECT_DIR$/docs/rules/sort-comp.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/sort-prop-types.md" afterPath="$PROJECT_DIR$/docs/rules/sort-prop-types.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/style-prop-object.md" afterPath="$PROJECT_DIR$/docs/rules/style-prop-object.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/rules/void-dom-elements-no-children.md" afterPath="$PROJECT_DIR$/docs/rules/void-dom-elements-no-children.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/display-name.js" afterPath="$PROJECT_DIR$/lib/rules/display-name.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/forbid-elements.js" afterPath="$PROJECT_DIR$/lib/rules/forbid-elements.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/jsx-no-bind.js" afterPath="$PROJECT_DIR$/lib/rules/jsx-no-bind.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/jsx-no-literals.js" afterPath="$PROJECT_DIR$/lib/rules/jsx-no-literals.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/no-array-index-key.js" afterPath="$PROJECT_DIR$/lib/rules/no-array-index-key.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/no-children-prop.js" afterPath="$PROJECT_DIR$/lib/rules/no-children-prop.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/no-comment-textnodes.js" afterPath="$PROJECT_DIR$/lib/rules/no-comment-textnodes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/no-danger-with-children.js" afterPath="$PROJECT_DIR$/lib/rules/no-danger-with-children.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/no-deprecated.js" afterPath="$PROJECT_DIR$/lib/rules/no-deprecated.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/no-multi-comp.js" afterPath="$PROJECT_DIR$/lib/rules/no-multi-comp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/no-render-return-value.js" afterPath="$PROJECT_DIR$/lib/rules/no-render-return-value.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/no-unused-prop-types.js" afterPath="$PROJECT_DIR$/lib/rules/no-unused-prop-types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/prefer-es6-class.js" afterPath="$PROJECT_DIR$/lib/rules/prefer-es6-class.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/prefer-stateless-function.js" afterPath="$PROJECT_DIR$/lib/rules/prefer-stateless-function.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/prop-types.js" afterPath="$PROJECT_DIR$/lib/rules/prop-types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/require-default-props.js" afterPath="$PROJECT_DIR$/lib/rules/require-default-props.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/require-extension.js" afterPath="$PROJECT_DIR$/lib/rules/require-extension.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/require-optimization.js" afterPath="$PROJECT_DIR$/lib/rules/require-optimization.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/style-prop-object.js" afterPath="$PROJECT_DIR$/lib/rules/style-prop-object.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/void-dom-elements-no-children.js" afterPath="$PROJECT_DIR$/lib/rules/void-dom-elements-no-children.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/rules/wrap-multilines.js" afterPath="$PROJECT_DIR$/lib/rules/wrap-multilines.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/util/Components.js" afterPath="$PROJECT_DIR$/lib/util/Components.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/util/pragma.js" afterPath="$PROJECT_DIR$/lib/util/pragma.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/util/variable.js" afterPath="$PROJECT_DIR$/lib/util/variable.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/util/version.js" afterPath="$PROJECT_DIR$/lib/util/version.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/index.js" afterPath="$PROJECT_DIR$/tests/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/display-name.js" afterPath="$PROJECT_DIR$/tests/lib/rules/display-name.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/forbid-component-props.js" afterPath="$PROJECT_DIR$/tests/lib/rules/forbid-component-props.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/forbid-elements.js" afterPath="$PROJECT_DIR$/tests/lib/rules/forbid-elements.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/forbid-foreign-prop-types.js" afterPath="$PROJECT_DIR$/tests/lib/rules/forbid-foreign-prop-types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/forbid-prop-types.js" afterPath="$PROJECT_DIR$/tests/lib/rules/forbid-prop-types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/jsx-no-bind.js" afterPath="$PROJECT_DIR$/tests/lib/rules/jsx-no-bind.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/jsx-no-comment-textnodes.js" afterPath="$PROJECT_DIR$/tests/lib/rules/jsx-no-comment-textnodes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/jsx-no-literals.js" afterPath="$PROJECT_DIR$/tests/lib/rules/jsx-no-literals.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/jsx-no-undef.js" afterPath="$PROJECT_DIR$/tests/lib/rules/jsx-no-undef.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/jsx-uses-react.js" afterPath="$PROJECT_DIR$/tests/lib/rules/jsx-uses-react.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/jsx-uses-vars.js" afterPath="$PROJECT_DIR$/tests/lib/rules/jsx-uses-vars.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/jsx-wrap-multilines.js" afterPath="$PROJECT_DIR$/tests/lib/rules/jsx-wrap-multilines.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-array-index-key.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-array-index-key.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-children-prop.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-children-prop.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-comment-textnodes.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-comment-textnodes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-danger-with-children.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-danger-with-children.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-deprecated.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-deprecated.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-did-mount-set-state.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-did-mount-set-state.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-did-update-set-state.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-did-update-set-state.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-direct-mutation-state.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-direct-mutation-state.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-find-dom-node.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-find-dom-node.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-is-mounted.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-is-mounted.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-multi-comp.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-multi-comp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-render-return-value.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-render-return-value.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-set-state.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-set-state.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-string-refs.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-string-refs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-unescaped-entities.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-unescaped-entities.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/no-unused-prop-types.js" afterPath="$PROJECT_DIR$/tests/lib/rules/no-unused-prop-types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/prefer-es6-class.js" afterPath="$PROJECT_DIR$/tests/lib/rules/prefer-es6-class.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/prefer-stateless-function.js" afterPath="$PROJECT_DIR$/tests/lib/rules/prefer-stateless-function.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/prop-types.js" afterPath="$PROJECT_DIR$/tests/lib/rules/prop-types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/react-in-jsx-scope.js" afterPath="$PROJECT_DIR$/tests/lib/rules/react-in-jsx-scope.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/require-default-props.js" afterPath="$PROJECT_DIR$/tests/lib/rules/require-default-props.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/require-optimization.js" afterPath="$PROJECT_DIR$/tests/lib/rules/require-optimization.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/require-render-return.js" afterPath="$PROJECT_DIR$/tests/lib/rules/require-render-return.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/sort-comp.js" afterPath="$PROJECT_DIR$/tests/lib/rules/sort-comp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/sort-prop-types.js" afterPath="$PROJECT_DIR$/tests/lib/rules/sort-prop-types.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/style-prop-object.js" afterPath="$PROJECT_DIR$/tests/lib/rules/style-prop-object.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/void-dom-elements-no-children.js" afterPath="$PROJECT_DIR$/tests/lib/rules/void-dom-elements-no-children.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/lib/rules/wrap-multilines.js" afterPath="$PROJECT_DIR$/tests/lib/rules/wrap-multilines.js" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="186">
+                <caret line="120" column="3" lean-forward="false" selection-start-line="120" selection-start-column="3" selection-end-line="120" selection-end-column="3" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forbid-foreign-prop-types.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/rules/forbid-foreign-prop-types.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="34">
+                <caret line="2" column="244" lean-forward="false" selection-start-line="2" selection-start-column="244" selection-end-line="2" selection-end-column="244" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forbid-prop-types.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/rules/forbid-prop-types.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="283">
+                <caret line="46" column="1" lean-forward="false" selection-start-line="46" selection-start-column="1" selection-end-line="46" selection-end-column="1" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jsx-indent.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/rules/jsx-indent.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="186">
+                <caret line="83" column="1" lean-forward="false" selection-start-line="83" selection-start-column="1" selection-end-line="83" selection-end-column="1" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="no-array-index-key.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/rules/no-array-index-key.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="68">
+                <caret line="4" column="143" lean-forward="false" selection-start-line="4" selection-start-column="143" selection-end-line="4" selection-end-column="143" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="require-default-props.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/rules/require-default-props.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="453">
+                <caret line="191" column="78" lean-forward="false" selection-start-line="191" selection-start-column="78" selection-end-line="191" selection-end-column="78" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="display-name.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/lib/rules/display-name.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="588" column="28" lean-forward="false" selection-start-line="588" selection-start-column="28" selection-end-line="588" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="require-default-props.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/lib/rules/require-default-props.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="320" column="13" lean-forward="false" selection-start-line="320" selection-start-column="13" selection-end-line="320" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="void-dom-elements-no-children.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/lib/rules/void-dom-elements-no-children.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="141" column="19" lean-forward="true" selection-start-line="141" selection-start-column="19" selection-end-line="141" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>require defaul</find>
+      <find>require-default-props</find>
+      <find>les should be exported by the plugin should export</find>
+      <find>default-props</find>
+      <find>equire-default-props</find>
+      <find>should export</find>
+      <find>defaultProps</find>
+      <find>propTypes</find>
+      <find>jsx-no-duplicate-props</find>
+      <find>name.</find>
+      <find>120</find>
+      <find>ReactDOM</find>
+      <find>React</find>
+      <find>react</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Inferno</replace>
+      <replace>inferno</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/reports</dir>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/tests/lib/rules/prop-types.js" />
+        <option value="$PROJECT_DIR$/tests/lib/rules/react-in-jsx-scope.js" />
+        <option value="$PROJECT_DIR$/lib/rules/jsx-no-duplicate-props.js" />
+        <option value="$PROJECT_DIR$/.eslintrc" />
+        <option value="$PROJECT_DIR$/tests/lib/rules/jsx-no-duplicate-props.js" />
+        <option value="$PROJECT_DIR$/docs/rules/forbid-elements.md" />
+        <option value="$PROJECT_DIR$/docs/rules/no-array-index-key.md" />
+        <option value="$PROJECT_DIR$/docs/rules/require-default-props.md" />
+        <option value="$PROJECT_DIR$/docs/rules/void-dom-elements-no-children.md" />
+        <option value="$PROJECT_DIR$/lib/rules/forbid-elements.js" />
+        <option value="$PROJECT_DIR$/lib/rules/no-array-index-key.js" />
+        <option value="$PROJECT_DIR$/lib/rules/require-default-props.js" />
+        <option value="$PROJECT_DIR$/lib/rules/void-dom-elements-no-children.js" />
+        <option value="$PROJECT_DIR$/lib/util/Components.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/docs/rules/forbid-prop-types.md" />
+        <option value="$PROJECT_DIR$/docs/rules/jsx-indent.md" />
+        <option value="$PROJECT_DIR$/tests/lib/rules/display-name.js" />
+        <option value="$PROJECT_DIR$/tests/lib/rules/require-default-props.js" />
+        <option value="$PROJECT_DIR$/tests/lib/rules/void-dom-elements-no-children.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1855" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource ProjectPane="true" />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eslint-plugin-inferno" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="nodejs_interpreter_path" value="$USER_HOME$/node/bin/node" />
+    <property name="js-jscs-nodeInterpreter" value="$USER_HOME$/node/bin/node" />
+    <property name="nodejs.mocha.mocha_node_package_dir" value="$PROJECT_DIR$/node_modules/mocha" />
+    <property name="editor.config.accepted" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="package&#9;FILE&#9;file:///media/sk/ssd-data/GIT/eslint-plugin-inferno/package.json" />
+  </component>
+  <component name="RunManager" selected="Mocha.Unnamed">
+    <configuration default="false" name="test" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="unit-test" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="unit-test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="test-debug" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test-debug" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+    <configuration default="false" name="Unnamed" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options>tests/**/*.js</extra-mocha-options>
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory>$USER_HOME$/test</test-directory>
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Mocha.Unnamed" />
+      <item index="1" class="java.lang.String" itemvalue="npm.test" />
+      <item index="2" class="java.lang.String" itemvalue="npm.unit-test" />
+      <item index="3" class="java.lang.String" itemvalue="npm.test-debug" />
+    </list>
+    <recent_temporary>
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="npm.test-debug" />
+        <item index="1" class="java.lang.String" itemvalue="npm.unit-test" />
+        <item index="2" class="java.lang.String" itemvalue="npm.test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f0e585c-4d59-4182-bf3d-8dd6585fc951" name="Default" comment="" />
+      <created>1482065391340</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1482065391340</updated>
+      <workItem from="1482065392503" duration="1157000" />
+      <workItem from="1485683802409" duration="428000" />
+      <workItem from="1485706178183" duration="6104000" />
+      <workItem from="1485713080171" duration="439000" />
+      <workItem from="1487755169466" duration="328000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Unnamed - 2017.01.29 at 20h 02m 27s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 02m 39s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 03m 03s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 03m 18s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 03m 47s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 04m 03s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 04m 57s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 05m 24s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 06m 16s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Unnamed - 2017.01.29 at 20h 06m 27s.xml">
+      <configuration name="Unnamed" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="8456000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23962882" sideWeight="0.3956386" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23962882" sideWeight="0.60436136" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38935283" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/lib/rules/jsx-no-duplicate-props.js</url>
+          <line>48</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/lib/rules/jsx-no-duplicate-props.js</url>
+          <line>42</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/lib/rules/jsx-no-duplicate-props.js</url>
+          <line>52</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="13" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.eslintrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2567">
+          <caret line="151" column="26" lean-forward="false" selection-start-line="151" selection-start-column="26" selection-end-line="151" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="55" lean-forward="false" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/jsx-no-duplicate-props.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="53" lean-forward="false" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/jsx-no-duplicate-props.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1487753867414" expanded="true" signature="322:1354" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="662:1352" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="783:1347" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="826:1341" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="900:1331" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="1137:1273" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="1166:1259" ph="{&quot;node&quot;: decl...}" />
+            <marker date="1487753867414" expanded="true" signature="1279:1321" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/jsx-max-props-per-line.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1487753867424" expanded="true" signature="4115:4186" ph="{&quot;parserOptions&quot;: parserOptions...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="50" lean-forward="false" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/no-array-index-key.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="70" lean-forward="false" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/prop-types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/prop-types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43367">
+          <caret line="2551" column="36" lean-forward="false" selection-start-line="2551" selection-start-column="36" selection-end-line="2551" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/react-in-jsx-scope.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="50" lean-forward="false" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/no-array-index-key.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="70" lean-forward="true" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/prop-types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/prop-types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43367">
+          <caret line="2551" column="36" lean-forward="false" selection-start-line="2551" selection-start-column="36" selection-end-line="2551" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/react-in-jsx-scope.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="5" lean-forward="false" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/no-array-index-key.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="70" lean-forward="false" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/prop-types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/prop-types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43367">
+          <caret line="2551" column="36" lean-forward="false" selection-start-line="2551" selection-start-column="36" selection-end-line="2551" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/react-in-jsx-scope.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/coverage/coverage.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="0" column="281024" lean-forward="false" selection-start-line="0" selection-start-column="281024" selection-end-line="0" selection-end-column="281024" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="71" lean-forward="false" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/istanbul/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2567">
+          <caret line="151" column="26" lean-forward="false" selection-start-line="151" selection-start-column="26" selection-end-line="151" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/jsx-max-props-per-line.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="20" lean-forward="false" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+          <folding>
+            <marker date="1487753867424" expanded="true" signature="4115:4186" ph="{&quot;parserOptions&quot;: parserOptions...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/jsx-no-duplicate-props.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <marker date="1487753867414" expanded="true" signature="322:1354" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="662:1352" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="783:1347" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="826:1341" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="900:1331" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="1137:1273" ph="{...}" />
+            <marker date="1487753867414" expanded="true" signature="1166:1259" ph="{&quot;node&quot;: decl...}" />
+            <marker date="1487753867414" expanded="true" signature="1279:1321" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/jsx-no-duplicate-props.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="68" lean-forward="false" selection-start-line="54" selection-start-column="68" selection-end-line="54" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/rules/forbid-elements.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="658">
+            <caret line="52" column="68" lean-forward="false" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/rules/void-dom-elements-no-children.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="476">
+            <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/forbid-elements.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/no-array-index-key.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="135" column="13" lean-forward="false" selection-start-line="135" selection-start-column="13" selection-end-line="135" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/require-default-props.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="525" column="18" lean-forward="false" selection-start-line="525" selection-start-column="18" selection-end-line="525" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/rules/void-dom-elements-no-children.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="656">
+          <caret line="137" column="18" lean-forward="false" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/util/Components.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="294" column="15" lean-forward="false" selection-start-line="294" selection-start-column="15" selection-end-line="294" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="186">
+            <caret line="120" column="3" lean-forward="false" selection-start-line="120" selection-start-column="3" selection-end-line="120" selection-end-column="3" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="110" column="0" lean-forward="false" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/rules/forbid-foreign-prop-types.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="34">
+            <caret line="2" column="244" lean-forward="false" selection-start-line="2" selection-start-column="244" selection-end-line="2" selection-end-column="244" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/rules/forbid-prop-types.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="283">
+            <caret line="46" column="1" lean-forward="false" selection-start-line="46" selection-start-column="1" selection-end-line="46" selection-end-column="1" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/rules/jsx-indent.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="186">
+            <caret line="83" column="1" lean-forward="false" selection-start-line="83" selection-start-column="1" selection-end-line="83" selection-end-column="1" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/rules/no-array-index-key.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="68">
+            <caret line="4" column="143" lean-forward="false" selection-start-line="4" selection-start-column="143" selection-end-line="4" selection-end-column="143" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/rules/require-default-props.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="453">
+            <caret line="191" column="78" lean-forward="false" selection-start-line="191" selection-start-column="78" selection-end-line="191" selection-end-column="78" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/display-name.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="588" column="28" lean-forward="false" selection-start-line="588" selection-start-column="28" selection-end-line="588" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/require-default-props.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="320" column="13" lean-forward="false" selection-start-line="320" selection-start-column="13" selection-end-line="320" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/rules/void-dom-elements-no-children.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="141" column="19" lean-forward="true" selection-start-line="141" selection-start-column="19" selection-end-line="141" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

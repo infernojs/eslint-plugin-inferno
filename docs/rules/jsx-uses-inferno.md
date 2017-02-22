@@ -19,7 +19,7 @@ var Inferno = require('inferno');
 // nothing to do with Inferno
 ```
 
-```js
+```jsx
 /** @jsx Foo */
 var Inferno = require('inferno');
 
@@ -28,13 +28,13 @@ var Hello = <div>Hello {this.props.name}</div>;
 
 The following patterns are not considered warnings:
 
-```js
+```jsx
 var Inferno = require('inferno');
 
 var Hello = <div>Hello {this.props.name}</div>;
 ```
 
-```js
+```jsx
 /** @jsx Foo */
 var Foo = require('foo');
 

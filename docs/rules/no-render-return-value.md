@@ -10,14 +10,14 @@ This rule will warn you if you try to use the `Inferno.render()` return value.
 
 The following pattern is considered a warning:
 
-```js
+```jsx
 const inst = Inferno.render(<App />, document.body);
 doSomethingWithInst(inst);
 ```
 
 The following patterns are not considered warnings:
 
-```js
+```jsx
 Inferno.render(<App ref={doSomethingWithInst} />, document.body);
 
 Inferno.render(<App />, document.body, doSomethingWithInst);

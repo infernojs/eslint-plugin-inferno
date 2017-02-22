@@ -34,7 +34,7 @@ It takes an option as the second parameter which can be `"tab"` for tab-based in
 
 ```js
 ...
-"jsx-indent": [<enabled>, 'tab'|<number>]
+"inferno/jsx-indent": [<enabled>, 'tab'|<number>]
 ...
 ```
 
@@ -74,6 +74,68 @@ The following patterns are not warnings:
 // [2, 0]
 <App>
 <Hello />
+</App>
+```
+
+#### indentLogicalExpressions
+
+```js
+...
+"inferno/jsx-indent": [<enabled>, 'tab'|<number>, {indentLogicalExpressions: true}]
+...
+```
+
+By default this is set to false. When enabled, an additional indentation is required when the JSX is the right of a LogicalExpression
+
+The following patterns are considered warnings:
+
+```jsx
+// 2 spaces indentation with indentLogicalExpressions as false
+// [2, 2, {indentLogicalExpressions: false}]
+<App>
+  {
+    condition &&
+      <Container>
+        <Child></Child>
+      </Container>
+  }
+</App>
+
+// 2 spaces indentation with indentLogicalExpressions as true
+// [2, 2, {indentLogicalExpressions: true}]
+<App>
+  {
+    condition &&
+    <Container>
+      <Child></Child>
+    </Container>
+  }
+</App>
+```
+
+The following patterns are not warnings:
+
+```jsx
+// 2 spaces indentation with indentLogicalExpressions as true
+// [2, 2, {indentLogicalExpressions: true}]
+<App>
+  {
+    condition &&
+      <Container>
+        <Child></Child>
+      </Container>
+  }
+</App>
+
+// 2 spaces indentation with indentLogicalExpressions as false
+// [2, 2, {indentLogicalExpressions: false}]
+<App>
+  {
+    condition &&
+    <Container>
+      <Child></Child>
+    </Container>
+  }
 </App>
 ```
 

@@ -6,7 +6,7 @@ Several methods are deprecated between Inferno versions. This rule will warn you
 
 The following patterns are considered warnings:
 
-```js
+```jsx
 Inferno.render(<MyComponent />, root);
 
 Inferno.unmountComponentAtNode(root);
@@ -20,7 +20,7 @@ Inferno.renderToStaticMarkup(<MyComponent />);
 
 The following patterns are not considered warnings:
 
-```js
+```jsx
 Inferno.render(<MyComponent />, root);
 
 // When [1, {"inferno": "0.13.0"}]

@@ -6,7 +6,7 @@ When writing the `render` method in a component it is easy to forget to return t
 
 The following patterns are considered warnings:
 
-```js
+```jsx
 var Hello = Inferno.createClass({
   render() {
     <div>Hello</div>;
@@ -22,7 +22,7 @@ class Hello extends Inferno.Component {
 
 The following patterns are not considered warnings:
 
-```js
+```jsx
 var Hello = Inferno.createClass({
   render() {
     return <div>Hello</div>;

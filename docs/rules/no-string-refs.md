@@ -6,7 +6,7 @@ Currently, two ways are supported by Inferno to refer to components. The first o
 
 Invalid:
 
-```js
+```jsx
 var Hello = Inferno.createClass({
  render: function() {
   return <div ref="hello">Hello, world.</div>;
@@ -14,7 +14,7 @@ var Hello = Inferno.createClass({
 });
 ```
 
-```js
+```jsx
 var Hello = Inferno.createClass({
   componentDidMount: function() {
     var component = this.refs.hello;
@@ -28,7 +28,7 @@ var Hello = Inferno.createClass({
 
 Valid:
 
-```js
+```jsx
 var Hello = Inferno.createClass({
   componentDidMount: function() {
     var component = this.hello;
