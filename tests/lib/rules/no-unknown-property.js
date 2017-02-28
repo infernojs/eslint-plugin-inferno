@@ -48,11 +48,6 @@ ruleTester.run('no-unknown-property', rule, {
     errors: [{message: 'Unknown property \'class\' found, use \'className\' instead'}],
     parserOptions: parserOptions
   }, {
-    code: '<div for="bar"></div>;',
-    output: '<div htmlFor="bar"></div>;',
-    errors: [{message: 'Unknown property \'for\' found, use \'htmlFor\' instead'}],
-    parserOptions: parserOptions
-  }, {
     code: '<div accept-charset="bar"></div>;',
     output: '<div acceptCharset="bar"></div>;',
     errors: [{message: 'Unknown property \'accept-charset\' found, use \'acceptCharset\' instead'}],
