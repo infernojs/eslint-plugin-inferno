@@ -517,7 +517,7 @@ ruleTester.run('jsx-indent', rule, {
      '    </App>',
      '  );',
      '}'
-     ].join('\n'), */
+    ].join('\n'), */
     options: [2],
     parserOptions: parserOptions,
     errors: [{message: 'Expected indentation of 4 space characters but found 0.'}]

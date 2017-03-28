@@ -120,7 +120,6 @@ module.exports = {
         'inferno/no-is-mounted': 2,
         'inferno/no-unknown-property': 2,
         'inferno/no-render-return-value': 2,
-        'inferno/inferno-in-jsx-scope': 0,
         'inferno/require-render-return': 2
       }
     },
