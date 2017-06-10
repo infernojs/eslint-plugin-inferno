@@ -1,4 +1,4 @@
-# Prevent missing Inferno when using JSX (inferno-in-jsx-scope)
+# Prevent missing Inferno when using JSX (inferno/inferno-in-jsx-scope)
 
 When using JSX, `<a />` expands to `Inferno.createVNode(2, "a")`. Therefore the
 `Inferno` variable must be in scope.

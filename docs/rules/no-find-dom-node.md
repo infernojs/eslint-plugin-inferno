@@ -1,4 +1,4 @@
-# Prevent usage of findDOMNode (no-find-dom-node)
+# Prevent usage of findDOMNode (inferno/no-find-dom-node)
 
 Facebook will eventually deprecate `findDOMNode` as it blocks certain improvements in Inferno in the future.
 

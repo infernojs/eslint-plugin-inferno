@@ -13,9 +13,10 @@ var rule = require('../../../lib/rules/inferno-in-jsx-scope');
 var RuleTester = require('eslint').RuleTester;
 
 var parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
+    experimentalObjectRestSpread: true,
     jsx: true
   }
 };
@@ -30,17 +31,17 @@ var settings = {
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+var ruleTester = new RuleTester({parserOptions});
 ruleTester.run('inferno-in-jsx-scope', rule, {
   valid: [
-    {code: 'var Inferno, App; <App />;', parserOptions: parserOptions},
-    {code: 'var Inferno; <img />;', parserOptions: parserOptions},
-    {code: 'var Inferno; <x-gif />;', parserOptions: parserOptions},
-    {code: 'var Inferno, App, a=1; <App attr={a} />;', parserOptions: parserOptions},
-    {code: 'var Inferno, App, a=1; function elem() { return <App attr={a} />; }', parserOptions: parserOptions},
-    {code: 'var Inferno, App; <App />;', parserOptions: parserOptions},
-    {code: '/** @jsx Foo */ var Foo, App; <App />;', parserOptions: parserOptions},
-    {code: '/** @jsx Foo.Bar */ var Foo, App; <App />;', parserOptions: parserOptions},
+    {code: 'var Inferno, App; <App />;'},
+    {code: 'var Inferno; <img />;'},
+    {code: 'var Inferno; <x-gif />;'},
+    {code: 'var Inferno, App, a=1; <App attr={a} />;'},
+    {code: 'var Inferno, App, a=1; function elem() { return <App attr={a} />; }'},
+    {code: 'var Inferno, App; <App />;'},
+    {code: '/** @jsx Foo */ var Foo, App; <App />;'},
+    {code: '/** @jsx Foo.Bar */ var Foo, App; <App />;'},
     {code: [
       'import Inferno from \'inferno/addons\';',
       'const Button = Inferno.createClass({',
@@ -51,26 +52,26 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
       '  }',
       '});',
       'export default Button;'
-    ].join('\n'), parserOptions: parserOptions},
-    {code: 'var Foo, App; <App />;', settings: settings, parserOptions: parserOptions}
+    ].join('\n')},
+    {code: 'var Foo, App; <App />;', settings: settings}
   ],
   invalid: [{
     code: 'var App, a = <App />;',
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}], parserOptions: parserOptions
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
   }, {
     code: 'var a = <App />;',
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}], parserOptions: parserOptions
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
   }, {
     code: 'var a = <img />;',
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}], parserOptions: parserOptions
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
   }, {
     code: '/** @jsx Inferno.DOM */ var a = <img />;',
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}], parserOptions: parserOptions
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
   }, {
     code: '/** @jsx Foo.bar */ var Inferno, a = <img />;',
-    errors: [{message: '\'Foo\' must be in scope when using JSX'}], parserOptions: parserOptions
+    errors: [{message: '\'Foo\' must be in scope when using JSX'}]
   }, {
     code: 'var Inferno, a = <img />;',
-    errors: [{message: '\'Foo\' must be in scope when using JSX'}], settings: settings, parserOptions: parserOptions
+    errors: [{message: '\'Foo\' must be in scope when using JSX'}], settings: settings
   }]
 });

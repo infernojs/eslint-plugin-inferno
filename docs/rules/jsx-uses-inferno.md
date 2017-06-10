@@ -1,4 +1,4 @@
-# Prevent Inferno to be incorrectly marked as unused (jsx-uses-inferno)
+# Prevent Inferno to be incorrectly marked as unused (inferno/jsx-uses-inferno)
 
 JSX expands to a call to `Inferno.createVNode`, a file which includes `Inferno`
 but only uses JSX should consider the `Inferno` variable as used.

@@ -1,4 +1,4 @@
-# Prevent usage of dangerous JSX properties (no-danger)
+# Prevent usage of dangerous JSX properties (inferno/no-danger)
 
 Dangerous properties in Inferno are those whose behavior is known to be a common source of application vulnerabilities. The properties names clearly indicate they are dangerous and should be avoided unless great care is taken.
 

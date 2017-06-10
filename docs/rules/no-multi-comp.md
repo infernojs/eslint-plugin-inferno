@@ -1,4 +1,4 @@
-# Prevent multiple component definition per file (no-multi-comp)
+# Prevent multiple component definition per file (inferno/no-multi-comp)
 
 Declaring only one component per file improves readability and reusability of components.
 
@@ -36,7 +36,7 @@ var HelloJohn = Inferno.createClass({
 
 ```js
 ...
-"no-multi-comp": [<enabled>, { "ignoreStateless": <boolean> }]
+"inferno/no-multi-comp": [<enabled>, { "ignoreStateless": <boolean> }]
 ...
 ```
 

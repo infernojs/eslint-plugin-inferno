@@ -37,8 +37,7 @@ You can also specify some settings that will be shared across all the plugin rul
 {
   "settings": {
     "inferno": {
-      "pragma": "Inferno",  // Pragma to use, default to "Inferno"
-      "version": "1.0" // Inferno version, default to the latest Inferno stable release
+      "pragma": "Inferno"  // Pragma to use, default to "Inferno"
     }
   }
 }
@@ -79,13 +78,10 @@ Finally, enable all of the rules that you would like to use.  Use [our preset](#
 
 # List of supported rules
 
-* [inferno/display-name](docs/rules/display-name.md): Prevent missing `displayName` in a Inferno component definition
 * [inferno/forbid-component-props](docs/rules/forbid-component-props.md): Forbid certain props on Components
 * [inferno/forbid-elements](docs/rules/forbid-elements.md): Forbid certain elements
 * [inferno/no-children-prop](docs/rules/no-children-prop.md): Prevent passing children as props
-* [inferno/forbid-foreign-prop-types](docs/rules/forbid-foreign-prop-types.md): Forbid foreign propTypes
 * [inferno/no-array-index-key](docs/rules/no-array-index-key.md): Prevent using Array index in `key` props
-* [inferno/no-deprecated](docs/rules/no-deprecated.md): Prevent usage of deprecated methods
 * [inferno/no-did-mount-set-state](docs/rules/no-did-mount-set-state.md): Prevent usage of `setState` in `componentDidMount`
 * [inferno/no-did-update-set-state](docs/rules/no-did-update-set-state.md): Prevent usage of `setState` in `componentDidUpdate`
 * [inferno/no-direct-mutation-state](docs/rules/no-direct-mutation-state.md): Prevent direct mutation of `this.state`
@@ -96,24 +92,23 @@ Finally, enable all of the rules that you would like to use.  Use [our preset](#
 * [inferno/no-string-refs](docs/rules/no-string-refs.md): Prevent using string references in `ref` attribute.
 * [inferno/no-unescaped-entities](docs/rules/no-unescaped-entities.md): Prevent invalid characters from appearing in markup
 * [inferno/no-unknown-property](docs/rules/no-unknown-property.md): Prevent usage of unknown DOM property (fixable)
-* [inferno/no-unused-prop-types](docs/rules/no-unused-prop-types.md): Prevent definitions of unused prop types
 * [inferno/prefer-es6-class](docs/rules/prefer-es6-class.md): Enforce ES5 or ES6 class for Inferno Components
 * [inferno/prefer-stateless-function](docs/rules/prefer-stateless-function.md): Enforce stateless Inferno Components to be written as a pure function
-* [inferno/prop-types](docs/rules/prop-types.md): Prevent missing props validation in a Inferno component definition
 * [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md): Prevent missing `Inferno` when using JSX
 * [inferno/require-optimization](docs/rules/require-optimization.md): Enforce Inferno components to have a shouldComponentUpdate method
 * [inferno/require-render-return](docs/rules/require-render-return.md): Enforce ES5 or ES6 class for returning value in render function
-* [inferno/self-closing-comp](docs/rules/self-closing-comp.md): Prevent extra closing tags for components without children (fixable)
+* [inferno/no-will-update-set-state](docs/rules/no-will-update-set-state.md): Prevent usage of `setState` in `componentWillUpdate`
 * [inferno/sort-comp](docs/rules/sort-comp.md): Enforce component methods order
-* [inferno/require-default-props](docs/rules/require-default-props.md): Enforce a defaultProps definition for every prop that is not a required prop
 * [inferno/style-prop-object](docs/rules/style-prop-object.md): Enforce style prop value being an object
 * [inferno/void-dom-elements-no-children](docs/rules/void-dom-elements-no-children.md): Prevent void DOM elements (e.g. `<img />`, `<br />`) from receiving children
+* [inferno/require-optimization](docs/rules/require-optimization.md): Enforce Inferno components to have a `shouldComponentUpdate` method
 
 ## JSX-specific rules
 
 * [inferno/jsx-boolean-value](docs/rules/jsx-boolean-value.md): Enforce boolean attributes notation in JSX (fixable)
 * [inferno/jsx-closing-bracket-location](docs/rules/jsx-closing-bracket-location.md): Validate closing bracket location in JSX (fixable)
 * [inferno/jsx-curly-spacing](docs/rules/jsx-curly-spacing.md): Enforce or disallow spaces inside of curly braces in JSX attributes (fixable)
+* [inferno/jsx-closing-tag-location](docs/rules/jsx-closing-tag-location.md): Validate closing tag location in JSX (fixable)
 * [inferno/jsx-equals-spacing](docs/rules/jsx-equals-spacing.md): Enforce or disallow spaces around equal signs in JSX attributes (fixable)
 * [inferno/jsx-filename-extension](docs/rules/jsx-filename-extension.md): Restrict file extensions that may contain JSX
 * [inferno/jsx-first-prop-new-line](docs/rules/jsx-first-prop-new-line.md): Enforce position of the first prop in JSX (fixable)
@@ -123,6 +118,7 @@ Finally, enable all of the rules that you would like to use.  Use [our preset](#
 * [inferno/jsx-key](docs/rules/jsx-key.md): Validate JSX has key prop when in array or iterator
 * [inferno/jsx-max-props-per-line](docs/rules/jsx-max-props-per-line.md): Limit maximum of props on a single line in JSX
 * [inferno/jsx-no-bind](docs/rules/jsx-no-bind.md): Prevent usage of `.bind()` and arrow functions in JSX props
+* [inferno/jsx-max-props-per-line](docs/rules/jsx-max-props-per-line.md): Limit maximum of props on a single line in JSX (fixable)
 * [inferno/jsx-no-comment-textnodes](docs/rules/jsx-no-comment-textnodes.md): Prevent comments from being inserted as text nodes
 * [inferno/jsx-no-duplicate-props](docs/rules/jsx-no-duplicate-props.md): Prevent duplicate props in JSX
 * [inferno/jsx-no-literals](docs/rules/jsx-no-literals.md): Prevent usage of unwrapped JSX strings
@@ -158,19 +154,25 @@ See [ESLint documentation](http://eslint.org/docs/user-guide/configuring#extendi
 
 The rules enabled in this configuration are:
 
-* [inferno/display-name](docs/rules/display-name.md)
+* [inferno/jsx-key](docs/rules/jsx-key.md)
+* [inferno/jsx-no-comment-textnodes](docs/rules/jsx-no-comment-textnodes.md)
 * [inferno/jsx-no-duplicate-props](docs/rules/jsx-no-duplicate-props.md)
 * [inferno/jsx-no-undef](docs/rules/jsx-no-undef.md)
 * [inferno/jsx-uses-inferno](docs/rules/jsx-uses-inferno.md)
+* [inferno/jsx-no-target-blank](docs/rules/jsx-no-target-blank.md)
 * [inferno/jsx-uses-vars](docs/rules/jsx-uses-vars.md)
-* [inferno/no-deprecated](docs/rules/no-deprecated.md)
+* [inferno/no-direct-mutation-state](docs/rules/no-direct-mutation-state.md)
+* [inferno/no-find-dom-node](docs/rules/no-find-dom-node.md)
+* [inferno/no-children-prop](docs/rules/no-children-prop.md)
+* [inferno/no-danger-with-children](docs/rules/no-danger-with-children.md)
+* [inferno/no-render-return-value](docs/rules/no-render-return-value.md)
+* [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md)
 * [inferno/no-direct-mutation-state](docs/rules/no-direct-mutation-state.md)
 * [inferno/no-find-dom-node](docs/rules/no-find-dom-node.md)
 * [inferno/no-is-mounted](docs/rules/no-is-mounted.md)
+* [inferno/no-string-refs](docs/rules/no-string-refs.md)
+* [inferno/no-unescaped-entities](docs/rules/no-unescaped-entities.md)
 * [inferno/no-unknown-property](docs/rules/no-unknown-property.md)
-* [inferno/no-render-return-value](docs/rules/no-render-return-value.md)
-* [inferno/prop-types](docs/rules/prop-types.md)
-* [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md)
 
 ## All
 

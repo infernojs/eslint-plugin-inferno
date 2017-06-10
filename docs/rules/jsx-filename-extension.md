@@ -1,4 +1,4 @@
-# Restrict file extensions that may contain JSX (jsx-filename-extension)
+# Restrict file extensions that may contain JSX (inferno/jsx-filename-extension)
 
 ## Rule Details
 
@@ -26,7 +26,7 @@ The set of allowed extensions is configurable. By default '.jsx' is allowed. If 
 
 ```js
 "rules": {
-  "inferno/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+  "inferno/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
 }
 ```
 

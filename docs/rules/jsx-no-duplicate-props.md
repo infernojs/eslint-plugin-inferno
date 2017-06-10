@@ -1,4 +1,4 @@
-# Prevent duplicate properties in JSX (jsx-no-duplicate-props)
+# Prevent duplicate properties in JSX (inferno/jsx-no-duplicate-props)
 
 Creating JSX elements with duplicate props can cause unexpected behavior in your application.
 
@@ -20,7 +20,7 @@ The following patterns are not considered warnings:
 
 ```js
 ...
-"jsx-no-duplicate-props": [<enabled>, { "ignoreCase": <boolean> }]
+"inferno/jsx-no-duplicate-props": [<enabled>, { "ignoreCase": <boolean> }]
 ...
 ```
 

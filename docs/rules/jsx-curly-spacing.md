@@ -1,4 +1,4 @@
-# Enforce or disallow spaces inside of curly braces in JSX attributes. (jsx-curly-spacing)
+# Enforce or disallow spaces inside of curly braces in JSX attributes. (inferno/jsx-curly-spacing)
 
 While formatting preferences are very personal, a number of style guides require or disallow spaces between curly braces.
 
@@ -20,7 +20,7 @@ There are two main options for the rule:
 Depending on your coding conventions, you can choose either option by specifying it in your configuration:
 
 ```json
-"jsx-curly-spacing": [2, "always"]
+"inferno/jsx-curly-spacing": [2, "always"]
 ```
 
 #### never
@@ -68,7 +68,7 @@ The following patterns are not warnings:
 By default, braces spanning multiple lines are allowed with either setting. If you want to disallow them you can specify an additional `allowMultiline` property with the value `false`:
 
 ```json
-"jsx-curly-spacing": [2, "never", {"allowMultiline": false}]
+"inferno/jsx-curly-spacing": [2, "never", {"allowMultiline": false}]
 ```
 
 When `"never"` is used and `allowMultiline` is `false`, the following patterns are considered warnings:
@@ -112,7 +112,7 @@ The following patterns are not warnings:
 You can specify an additional `spacing` property that is an object with the following possible values:
 
 ```json
-"jsx-curly-spacing": [2, "always", {"spacing": {
+"inferno/jsx-curly-spacing": [2, "always", {"spacing": {
   "objectLiterals": "never"
 }}]
 ```

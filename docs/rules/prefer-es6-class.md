@@ -6,7 +6,7 @@ Inferno offers you two way to create traditional components: using the ES5 `Infe
 
 ```js
 ...
-"prefer-es6-class": [<enabled>, <mode>]
+"inferno/prefer-es6-class": [<enabled>, <mode>]
 ...
 ```
 

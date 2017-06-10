@@ -1,4 +1,4 @@
-# Enforce PascalCase for user-defined JSX components (jsx-pascal-case)
+# Enforce PascalCase for user-defined JSX components (inferno/jsx-pascal-case)
 
 Enforces coding style that user-defined JSX components are defined and referenced in PascalCase.
 
@@ -40,7 +40,7 @@ The following patterns are not considered warnings:
 
 ```js
 ...
-"jsx-pascal-case": [<enabled>, { allowAllCaps: <allowAllCaps>, ignore: <ignore> }]
+"inferno/jsx-pascal-case": [<enabled>, { allowAllCaps: <allowAllCaps>, ignore: <ignore> }]
 ...
 ```
 

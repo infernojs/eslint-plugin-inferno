@@ -12,8 +12,10 @@ var rule = require('../../../lib/rules/no-render-return-value');
 var RuleTester = require('eslint').RuleTester;
 
 var parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 8,
+  sourceType: 'module',
   ecmaFeatures: {
+    experimentalObjectRestSpread: true,
     jsx: true
   }
 };
@@ -22,23 +24,20 @@ var parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+var ruleTester = new RuleTester({parserOptions});
 ruleTester.run('no-render-return-value', rule, {
 
   valid: [{
     code: [
       'Inferno.render(<div />, document.body);'
-    ].join('\n'),
-    parserOptions: parserOptions
+    ].join('\n')
   }, {
     code: [
       'let node;',
       'Inferno.render(<div ref={ref => node = ref}/>, document.body);'
-    ].join('\n'),
-    parserOptions: parserOptions
+    ].join('\n')
   }, {
     code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
-    parserOptions: parserOptions,
     settings: {
       inferno: {
         version: '0.14.0'
@@ -46,7 +45,6 @@ ruleTester.run('no-render-return-value', rule, {
     }
   }, {
     code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
-    parserOptions: parserOptions,
     settings: {
       inferno: {
         version: '0.14.0'
@@ -54,7 +52,6 @@ ruleTester.run('no-render-return-value', rule, {
     }
   }, {
     code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
-    parserOptions: parserOptions,
     settings: {
       inferno: {
         version: '0.13.0'
@@ -67,7 +64,6 @@ ruleTester.run('no-render-return-value', rule, {
     code: [
       'var Hello = Inferno.render(<div />, document.body);'
     ].join('\n'),
-    parserOptions: parserOptions,
     errors: [{
       message: 'Do not depend on the return value from Inferno.render'
     }]
@@ -77,7 +73,6 @@ ruleTester.run('no-render-return-value', rule, {
       '  inst: Inferno.render(<div />, document.body)',
       '};'
     ].join('\n'),
-    parserOptions: parserOptions,
     errors: [{
       message: 'Do not depend on the return value from Inferno.render'
     }]
@@ -87,19 +82,16 @@ ruleTester.run('no-render-return-value', rule, {
       '  return Inferno.render(<div />, document.body)',
       '}'
     ].join('\n'),
-    parserOptions: parserOptions,
     errors: [{
       message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
     code: 'var render = (a, b) => Inferno.render(a, b)',
-    parserOptions: parserOptions,
     errors: [{
       message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
     code: 'var inst = Inferno.render(<div />, document.body);',
-    parserOptions: parserOptions,
     settings: {
       inferno: {
         version: '0.14.0'
@@ -110,7 +102,6 @@ ruleTester.run('no-render-return-value', rule, {
     }]
   }, {
     code: 'var inst = Inferno.render(<div />, document.body);',
-    parserOptions: parserOptions,
     settings: {
       inferno: {
         version: '0.14.0'
@@ -121,7 +112,6 @@ ruleTester.run('no-render-return-value', rule, {
     }]
   }, {
     code: 'var inst = Inferno.render(<div />, document.body);',
-    parserOptions: parserOptions,
     settings: {
       inferno: {
         version: '0.13.0'

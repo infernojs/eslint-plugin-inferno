@@ -10,10 +10,10 @@
 
 var rule = require('../../../lib/rules/style-prop-object');
 var RuleTester = require('eslint').RuleTester;
-var assign = require('object.assign');
 
 var parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 8,
+  sourceType: 'module',
   ecmaFeatures: {
     experimentalObjectRestSpread: true,
     jsx: true
@@ -24,16 +24,14 @@ var parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+var ruleTester = new RuleTester({parserOptions});
 ruleTester.run('style-prop-object', rule, {
   valid: [
     {
-      code: '<div style={{ color: "red" }} />',
-      parserOptions: parserOptions
+      code: '<div style={{ color: "red" }} />'
     },
     {
-      code: '<Hello style={{ color: "red" }} />',
-      parserOptions: parserOptions
+      code: '<Hello style={{ color: "red" }} />'
     },
     {
       code: [
@@ -41,8 +39,7 @@ ruleTester.run('style-prop-object', rule, {
         '  const styles = { color: "red" };',
         '  return <div style={styles} />;',
         '}'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
@@ -50,8 +47,7 @@ ruleTester.run('style-prop-object', rule, {
         '  const styles = { color: "red" };',
         '  return <Hello style={styles} />;',
         '}'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
@@ -59,16 +55,14 @@ ruleTester.run('style-prop-object', rule, {
         'function redDiv() {',
         '  return <div style={styles} />;',
         '}'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'function redDiv(props) {',
         '  return <div style={props.styles} />;',
         '}'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
@@ -76,8 +70,7 @@ ruleTester.run('style-prop-object', rule, {
         'function redDiv() {',
         '  return <div style={styles} />;',
         '}'
-      ].join('\n'),
-      parserOptions: assign({sourceType: 'module'}, parserOptions)
+      ].join('\n')
     },
     {
       code: [
@@ -87,82 +80,79 @@ ruleTester.run('style-prop-object', rule, {
         '  return <div style={styles} />;',
         '}'
       ].join('\n'),
-      parserOptions: assign({sourceType: 'module'}, parserOptions)
+      parserOptions: {
+        ecmaVersion: 8,
+        sourceType: 'module',
+        ecmaFeatures: {
+          experimentalObjectRestSpread: true,
+          jsx: true
+        }
+      }
     },
     {
       code: [
         'const otherProps = { style: { color: "red" } };',
         'const { a, b, ...props } = otherProps;',
         '<div {...props} />'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'const styles = Object.assign({ color: \'red\' }, mystyles);',
         'Inferno.createVNode("div", { style: styles });'
       ].join('\n'),
-      parserOptions: assign({sourceType: 'module'}, parserOptions)
+      parserOptions: Object.assign({sourceType: 'module'}, parserOptions)
     },
     {
-      code: '<div style></div>',
-      parserOptions: parserOptions
+      code: '<div style></div>'
     },
     {
       code: [
         'Inferno.createVNode(MyCustomElem, {',
         '  [style]: true',
         '}, \'My custom Elem\')'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'let style;',
         '<div style={style}></div>'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'let style = null;',
         '<div style={style}></div>'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'let style = undefined;',
         '<div style={style}></div>'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
-      code: '<div style={undefined}></div>',
-      parserOptions: parserOptions
+      code: '<div style={undefined}></div>'
     },
     {
       code: [
         'const props = { style: undefined };',
         '<div {...props} />'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'const otherProps = { style: undefined };',
         'const { a, b, ...props } = otherProps;',
         '<div {...props} />'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'Inferno.createVNode("div", {',
         '  style: undefined',
         '})'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
@@ -170,35 +160,30 @@ ruleTester.run('style-prop-object', rule, {
         'Inferno.createVNode("div", {',
         '  style',
         '})'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
-      code: '<div style={null}></div>',
-      parserOptions: parserOptions
+      code: '<div style={null}></div>'
     },
     {
       code: [
         'const props = { style: null };',
         '<div {...props} />'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'const otherProps = { style: null };',
         'const { a, b, ...props } = otherProps;',
         '<div {...props} />'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
         'Inferno.createVNode("div", {',
         '  style: null',
         '})'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     },
     {
       code: [
@@ -207,8 +192,7 @@ ruleTester.run('style-prop-object', rule, {
         '    ...props',
         '  });',
         '};'
-      ].join('\n'),
-      parserOptions: parserOptions
+      ].join('\n')
     }
   ],
   invalid: [
@@ -219,8 +203,7 @@ ruleTester.run('style-prop-object', rule, {
         line: 1,
         column: 6,
         type: 'JSXAttribute'
-      }],
-      parserOptions: parserOptions
+      }]
     },
     {
       code: '<Hello style="color: \'red\'" />',
@@ -229,8 +212,7 @@ ruleTester.run('style-prop-object', rule, {
         line: 1,
         column: 8,
         type: 'JSXAttribute'
-      }],
-      parserOptions: parserOptions
+      }]
     },
     {
       code: '<div style={true} />',
@@ -239,8 +221,7 @@ ruleTester.run('style-prop-object', rule, {
         line: 1,
         column: 6,
         type: 'JSXAttribute'
-      }],
-      parserOptions: parserOptions
+      }]
     },
     {
       code: [
@@ -254,8 +235,7 @@ ruleTester.run('style-prop-object', rule, {
         line: 3,
         column: 22,
         type: 'Identifier'
-      }],
-      parserOptions: parserOptions
+      }]
     },
     {
       code: [
@@ -269,8 +249,7 @@ ruleTester.run('style-prop-object', rule, {
         line: 3,
         column: 24,
         type: 'Identifier'
-      }],
-      parserOptions: parserOptions
+      }]
     },
     {
       code: [
@@ -284,8 +263,7 @@ ruleTester.run('style-prop-object', rule, {
         line: 3,
         column: 22,
         type: 'Identifier'
-      }],
-      parserOptions: parserOptions
+      }]
     }
   ]
 });

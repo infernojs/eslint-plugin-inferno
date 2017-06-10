@@ -12,8 +12,10 @@ var rule = require('../../../lib/rules/jsx-max-props-per-line');
 var RuleTester = require('eslint').RuleTester;
 
 var parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 8,
+  sourceType: 'module',
   ecmaFeatures: {
+    experimentalObjectRestSpread: true,
     jsx: true
   }
 };
@@ -22,41 +24,76 @@ var parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+var ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-max-props-per-line', rule, {
   valid: [{
-    code: '<App />',
-    parserOptions: parserOptions
+    code: '<App />'
   }, {
-    code: '<App foo />',
-    parserOptions: parserOptions
+    code: '<App foo />'
   }, {
     code: '<App foo bar />',
-    options: [{maximum: 2}],
-    parserOptions: parserOptions
+    options: [{maximum: 2}]
   }, {
     code: '<App foo bar />',
-    options: [{when: 'multiline'}],
-    parserOptions: parserOptions
+    options: [{when: 'multiline'}]
   }, {
     code: '<App foo {...this.props} />',
-    options: [{when: 'multiline'}],
-    parserOptions: parserOptions
+    options: [{when: 'multiline'}]
   }, {
     code: '<App foo bar baz />',
-    options: [{maximum: 2, when: 'multiline'}],
-    parserOptions: parserOptions
+    options: [{maximum: 2, when: 'multiline'}]
   }, {
     code: '<App {...this.props} bar />',
-    options: [{maximum: 2}],
-    parserOptions: parserOptions
+    options: [{maximum: 2}]
   }, {
     code: [
       '<App',
       '  foo',
       '  bar',
       '/>'
+    ].join('\n')
+  }, {
+    code: [
+      '<App',
+      '  foo bar',
+      '  baz',
+      '/>'
     ].join('\n'),
+    options: [{maximum: 2}]
+  }],
+
+  invalid: [{
+    code: '<App foo bar baz />;',
+    output: [
+      '<App foo',
+      'bar',
+      'baz />;'
+    ].join('\n'),
+    errors: [{message: 'Prop `bar` must be placed on a new line'}],
+    parserOptions: parserOptions
+  }, {
+    code: '<App foo bar baz />;',
+    output: [
+      '<App foo bar',
+      'baz />;'
+    ].join('\n'),
+    options: [{maximum: 2}],
+    errors: [{message: 'Prop `baz` must be placed on a new line'}]
+  }, {
+    code: '<App {...this.props} bar />;',
+    output: [
+      '<App {...this.props}',
+      'bar />;'
+    ].join('\n'),
+    errors: [{message: 'Prop `bar` must be placed on a new line'}],
+    parserOptions: parserOptions
+  }, {
+    code: '<App bar {...this.props} />;',
+    output: [
+      '<App bar',
+      '{...this.props} />;'
+    ].join('\n'),
+    errors: [{message: 'Prop `this.props` must be placed on a new line'}],
     parserOptions: parserOptions
   }, {
     code: [
@@ -65,31 +102,10 @@ ruleTester.run('jsx-max-props-per-line', rule, {
       '  baz',
       '/>'
     ].join('\n'),
-    options: [{maximum: 2}],
-    parserOptions: parserOptions
-  }],
-
-  invalid: [{
-    code: '<App foo bar baz />;',
-    errors: [{message: 'Prop `bar` must be placed on a new line'}],
-    parserOptions: parserOptions
-  }, {
-    code: '<App foo bar baz />;',
-    options: [{maximum: 2}],
-    errors: [{message: 'Prop `baz` must be placed on a new line'}],
-    parserOptions: parserOptions
-  }, {
-    code: '<App {...this.props} bar />;',
-    errors: [{message: 'Prop `bar` must be placed on a new line'}],
-    parserOptions: parserOptions
-  }, {
-    code: '<App bar {...this.props} />;',
-    errors: [{message: 'Prop `this.props` must be placed on a new line'}],
-    parserOptions: parserOptions
-  }, {
-    code: [
+    output: [
       '<App',
-      '  foo bar',
+      '  foo',
+      'bar',
       '  baz',
       '/>'
     ].join('\n'),
@@ -102,6 +118,13 @@ ruleTester.run('jsx-max-props-per-line', rule, {
       '  baz',
       '/>'
     ].join('\n'),
+    output: [
+      '<App',
+      '  foo',
+      '{...this.props}',
+      '  baz',
+      '/>'
+    ].join('\n'),
     errors: [{message: 'Prop `this.props` must be placed on a new line'}],
     parserOptions: parserOptions
   }, {
@@ -111,12 +134,24 @@ ruleTester.run('jsx-max-props-per-line', rule, {
       '  }} bar',
       '/>'
     ].join('\n'),
+    output: [
+      '<App',
+      '  foo={{',
+      '  }}',
+      'bar',
+      '/>'
+    ].join('\n'),
     errors: [{message: 'Prop `bar` must be placed on a new line'}],
     parserOptions: parserOptions
   }, {
     code: [
       '<App foo={{',
       '}} bar />'
+    ].join('\n'),
+    output: [
+      '<App foo={{',
+      '}}',
+      'bar />'
     ].join('\n'),
     errors: [{message: 'Prop `bar` must be placed on a new line'}],
     parserOptions: parserOptions
@@ -125,13 +160,22 @@ ruleTester.run('jsx-max-props-per-line', rule, {
       '<App foo bar={{',
       '}} baz />'
     ].join('\n'),
+    output: [
+      '<App foo bar={{',
+      '}}',
+      'baz />'
+    ].join('\n'),
     options: [{maximum: 2}],
-    errors: [{message: 'Prop `baz` must be placed on a new line'}],
-    parserOptions: parserOptions
+    errors: [{message: 'Prop `baz` must be placed on a new line'}]
   }, {
     code: [
       '<App foo={{',
       '}} {...rest} />'
+    ].join('\n'),
+    output: [
+      '<App foo={{',
+      '}}',
+      '{...rest} />'
     ].join('\n'),
     errors: [{message: 'Prop `rest` must be placed on a new line'}],
     parserOptions: parserOptions
@@ -140,6 +184,12 @@ ruleTester.run('jsx-max-props-per-line', rule, {
       '<App {',
       '  ...this.props',
       '} bar />'
+    ].join('\n'),
+    output: [
+      '<App {',
+      '  ...this.props',
+      '}',
+      'bar />'
     ].join('\n'),
     errors: [{message: 'Prop `bar` must be placed on a new line'}],
     parserOptions: parserOptions
@@ -151,17 +201,31 @@ ruleTester.run('jsx-max-props-per-line', rule, {
       '  ...rest',
       '} />'
     ].join('\n'),
+    output: [
+      '<App {',
+      '  ...this.props',
+      '}',
+      '{',
+      '  ...rest',
+      '} />'
+    ].join('\n'),
     errors: [{message: 'Prop `rest` must be placed on a new line'}],
     parserOptions: parserOptions
   }, {
     code: [
       '<App',
       '  foo={{',
-      '  }} bar baz',
+      '  }} bar baz bor',
+      '/>'
+    ].join('\n'),
+    output: [
+      '<App',
+      '  foo={{',
+      '  }} bar',
+      'baz bor',
       '/>'
     ].join('\n'),
     options: [{maximum: 2}],
-    errors: [{message: 'Prop `baz` must be placed on a new line'}],
-    parserOptions: parserOptions
+    errors: [{message: 'Prop `baz` must be placed on a new line'}]
   }]
 });

@@ -9,13 +9,14 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var eslint = require('eslint').linter;
+var eslint = require('eslint');
 var rule = require('../../../lib/rules/jsx-no-undef');
-var RuleTester = require('eslint').RuleTester;
+var RuleTester = eslint.RuleTester;
 
 var parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 8,
   ecmaFeatures: {
+    experimentalObjectRestSpread: true,
     jsx: true
   }
 };
@@ -24,27 +25,22 @@ var parserOptions = {
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-eslint.defineRule('no-undef', require('eslint/lib/rules/no-undef'));
+var ruleTester = new RuleTester({parserOptions});
+var linter = ruleTester.linter || eslint.linter;
+linter.defineRule('no-undef', require('eslint/lib/rules/no-undef'));
 ruleTester.run('jsx-no-undef', rule, {
   valid: [{
-    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);',
-    parserOptions: parserOptions
+    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);'
   }, {
-    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);',
-    parserOptions: parserOptions
+    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);'
   }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<img />);',
-    parserOptions: parserOptions
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<img />);'
   }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<x-gif />);',
-    parserOptions: parserOptions
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<x-gif />);'
   }, {
-    code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.Foo />);',
-    parserOptions: parserOptions
+    code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.Foo />);'
   }, {
-    code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.foo.Bar />);',
-    parserOptions: parserOptions
+    code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.foo.Bar />);'
   }, {
     code: [
       '/*eslint no-undef:1*/',
@@ -54,38 +50,76 @@ ruleTester.run('jsx-no-undef', rule, {
       '    return <this.props.tag />',
       '  }',
       '}'
+    ].join('\n')
+  }, {
+    code: 'var Inferno; Inferno.render(<Text />);',
+    globals: {
+      Text: true
+    }
+  }, {
+    code: [
+      'import Text from "cool-module";',
+      'const TextWrapper = function (props) {',
+      '  return (',
+      '    <Text />',
+      '  );',
+      '};'
     ].join('\n'),
-    parserOptions: parserOptions
+    parserOptions: Object.assign({sourceType: 'module'}, parserOptions),
+    options: [{
+      allowGlobals: false
+    }],
+    parser: 'babel-eslint'
   }],
   invalid: [{
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<App />);',
     errors: [{
       message: '\'App\' is not defined.'
-    }],
-    parserOptions: parserOptions
+    }]
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Appp.Foo />);',
     errors: [{
       message: '\'Appp\' is not defined.'
-    }],
-    parserOptions: parserOptions
+    }]
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Apppp:Foo />);',
     errors: [{
       message: '\'Apppp\' is not defined.'
-    }],
-    parserOptions: parserOptions
+    }]
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.Foo />);',
     errors: [{
       message: '\'appp\' is not defined.'
-    }],
-    parserOptions: parserOptions
+    }]
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.foo.Bar />);',
     errors: [{
       message: '\'appp\' is not defined.'
+    }]
+  }, {
+    code: [
+      'const TextWrapper = function (props) {',
+      '  return (',
+      '    <Text />',
+      '  );',
+      '};',
+      'export default TextWrapper;'
+    ].join('\n'),
+    parserOptions: Object.assign({sourceType: 'module'}, parserOptions),
+    errors: [{
+      message: '\'Text\' is not defined.'
     }],
-    parserOptions: parserOptions
+    options: [{
+      allowGlobals: false
+    }],
+    parser: 'babel-eslint',
+    globals: {
+      Text: true
+    }
+  }, {
+    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Foo />);',
+    errors: [{
+      message: '\'Foo\' is not defined.'
+    }]
   }]
 });

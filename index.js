@@ -5,8 +5,6 @@ var has = require('has');
 var allRules = {
   'jsx-uses-inferno': require('./lib/rules/jsx-uses-inferno'),
   'no-multi-comp': require('./lib/rules/no-multi-comp'),
-  'prop-types': require('./lib/rules/prop-types'),
-  'display-name': require('./lib/rules/display-name'),
   'jsx-wrap-multilines': require('./lib/rules/jsx-wrap-multilines'),
   'self-closing-comp': require('./lib/rules/self-closing-comp'),
   'jsx-no-comment-textnodes': require('./lib/rules/jsx-no-comment-textnodes'),
@@ -14,12 +12,12 @@ var allRules = {
   'no-danger': require('./lib/rules/no-danger'),
   'no-set-state': require('./lib/rules/no-set-state'),
   'no-is-mounted': require('./lib/rules/no-is-mounted'),
-  'no-deprecated': require('./lib/rules/no-deprecated'),
   'no-did-mount-set-state': require('./lib/rules/no-did-mount-set-state'),
   'no-did-update-set-state': require('./lib/rules/no-did-update-set-state'),
   'no-render-return-value': require('./lib/rules/no-render-return-value'),
   'no-unescaped-entities': require('./lib/rules/no-unescaped-entities'),
   'inferno-in-jsx-scope': require('./lib/rules/inferno-in-jsx-scope'),
+  'no-will-update-set-state': require('./lib/rules/no-will-update-set-state'),
   'jsx-uses-vars': require('./lib/rules/jsx-uses-vars'),
   'jsx-handler-names': require('./lib/rules/jsx-handler-names'),
   'jsx-pascal-case': require('./lib/rules/jsx-pascal-case'),
@@ -29,7 +27,6 @@ var allRules = {
   'jsx-curly-spacing': require('./lib/rules/jsx-curly-spacing'),
   'jsx-equals-spacing': require('./lib/rules/jsx-equals-spacing'),
   'jsx-sort-props': require('./lib/rules/jsx-sort-props'),
-  'sort-prop-types': require('./lib/rules/sort-prop-types'),
   'jsx-boolean-value': require('./lib/rules/jsx-boolean-value'),
   'sort-comp': require('./lib/rules/sort-comp'),
   'jsx-no-duplicate-props': require('./lib/rules/jsx-no-duplicate-props'),
@@ -38,12 +35,11 @@ var allRules = {
   'jsx-indent-props': require('./lib/rules/jsx-indent-props'),
   'jsx-indent': require('./lib/rules/jsx-indent'),
   'jsx-closing-bracket-location': require('./lib/rules/jsx-closing-bracket-location'),
+  'jsx-closing-tag-location': require('./lib/rules/jsx-closing-tag-location'),
   'jsx-space-before-closing': require('./lib/rules/jsx-space-before-closing'),
   'no-direct-mutation-state': require('./lib/rules/no-direct-mutation-state'),
   'forbid-component-props': require('./lib/rules/forbid-component-props'),
   'forbid-elements': require('./lib/rules/forbid-elements'),
-  'forbid-prop-types': require('./lib/rules/forbid-prop-types'),
-  'forbid-foreign-prop-types': require('./lib/rules/forbid-foreign-prop-types'),
   'prefer-es6-class': require('./lib/rules/prefer-es6-class'),
   'jsx-key': require('./lib/rules/jsx-key'),
   'no-string-refs': require('./lib/rules/no-string-refs'),
@@ -56,12 +52,8 @@ var allRules = {
   'no-find-dom-node': require('./lib/rules/no-find-dom-node'),
   'no-danger-with-children': require('./lib/rules/no-danger-with-children'),
   'style-prop-object': require('./lib/rules/style-prop-object'),
-  'no-unused-prop-types': require('./lib/rules/no-unused-prop-types'),
   'no-children-prop': require('./lib/rules/no-children-prop'),
   'void-dom-elements-no-children': require('./lib/rules/void-dom-elements-no-children'),
-  'no-comment-textnodes': require('./lib/rules/no-comment-textnodes'),
-  'require-extension': require('./lib/rules/require-extension'),
-  'wrap-multilines': require('./lib/rules/wrap-multilines'),
   'jsx-tag-spacing': require('./lib/rules/jsx-tag-spacing')
 };
 
@@ -81,7 +73,7 @@ function configureAsError(rules) {
     if (!has(rules, key)) {
       continue;
     }
-    result['inferno/' + key] = 2;
+    result[`inferno/${key}`] = 2;
   }
   return result;
 }
@@ -109,17 +101,22 @@ module.exports = {
         }
       },
       rules: {
-        'inferno/display-name': 2,
+        'inferno/jsx-key': 2,
+        'inferno/jsx-no-comment-textnodes': 2,
         'inferno/jsx-no-duplicate-props': 2,
+        'inferno/jsx-no-target-blank': 2,
         'inferno/jsx-no-undef': 2,
         'inferno/jsx-uses-inferno': 2,
         'inferno/jsx-uses-vars': 2,
-        'inferno/no-deprecated': 2,
+        'inferno/no-children-prop': 2,
+        'inferno/no-danger-with-children': 2,
         'inferno/no-direct-mutation-state': 2,
         'inferno/no-find-dom-node': 2,
         'inferno/no-is-mounted': 2,
-        'inferno/no-unknown-property': 2,
         'inferno/no-render-return-value': 2,
+        'inferno/no-string-refs': 2,
+        'inferno/no-unescaped-entities': 2,
+        'inferno/no-unknown-property': 2,
         'inferno/require-render-return': 2
       }
     },

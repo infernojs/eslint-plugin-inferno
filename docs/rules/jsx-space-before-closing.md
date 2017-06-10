@@ -1,4 +1,6 @@
-# Validate spacing before closing bracket in JSX (jsx-space-before-closing)
+# Validate spacing before closing bracket in JSX (inferno/jsx-space-before-closing)
+
+**Deprecation notice**: This rule is deprecated. Please use the `"beforeSelfClosing"` option of the [jsx-tag-spacing](https://github.com/yannickcr/eslint-plugin-inferno/blob/master/docs/rules/jsx-tag-spacing.md) rule instead.
 
 Enforce or forbid spaces before the closing bracket of self-closing JSX elements.
 

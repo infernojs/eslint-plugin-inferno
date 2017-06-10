@@ -1,4 +1,4 @@
-# Prevent extra closing tags for components without children (self-closing-comp)
+# Prevent extra closing tags for components without children (inferno/self-closing-comp)
 
 Components without children can be self-closed to avoid unnecessary extra closing tag.
 
@@ -32,7 +32,7 @@ The rule can take one argument to select types of tags, which should be self-clo
 
 ```js
 ...
-"self-closing-comp": ["error", {
+"inferno/self-closing-comp": ["error", {
   "component": true,
   "html": true
 }]

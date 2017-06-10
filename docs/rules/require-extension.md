@@ -1,4 +1,4 @@
-# Restrict file extensions that may be required (require-extension)
+# Restrict file extensions that may be required (inferno/require-extension)
 
 **Deprecation notice**: This rule is deprecated. Please use the eslint-plugin-import [extensions](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/extensions.md) rule instead.
 
@@ -30,17 +30,17 @@ var eslint = require('eslint');
 The set of forbidden extensions is configurable. By default '.jsx' is blocked. If you wanted to forbid both '.jsx' and '.js', the configuration would be:
 
 ```js
-"rules": {
-  "inferno/require-extension": [1, { "extensions": [".js", ".jsx"] }],
-}
+...
+"inferno/require-extension": [1, { "extensions": [".js", ".jsx"] }],
+...
 ```
 
 To configure WebPack to resolve '.jsx' add the following to `webpack.config.js`:
 
 ```js
 resolve: {
-    extensions: ["", ".js", ".jsx"]
-  },
+  extensions: ["", ".js", ".jsx"]
+},
 ```
 
 ## When Not To Use It

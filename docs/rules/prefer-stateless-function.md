@@ -1,4 +1,4 @@
-# Enforce stateless Inferno Components to be written as a pure function (prefer-stateless-function)
+# Enforce stateless Inferno Components to be written as a pure function (inferno/prefer-stateless-function)
 
 Stateless functional components are simpler than class based components and will benefit from future Inferno performance optimizations specific to these components.
 
@@ -11,6 +11,7 @@ This rule will check your class based Inferno components for
 * extension of `Inferno.PureComponent` (if the `ignorePureComponents` flag is true)
 * presence of `ref` attribute in JSX
 * `render` method that return anything but JSX: `undefined`, `null`, etc. (only in Inferno <15.0.0, see [shared settings](https://github.com/yannickcr/eslint-plugin-inferno/blob/master/README.md#configuration) for Inferno version configuration)
+* the use of decorators
 
 If none of these elements are found, the rule will warn you to write this component as a pure function.
 
@@ -54,7 +55,7 @@ class Foo extends Inferno.Component {
 
 ```js
 ...
-"prefer-stateless-function": [<enabled>, { "ignorePureComponents": <ignorePureComponents> }]
+"inferno/prefer-stateless-function": [<enabled>, { "ignorePureComponents": <ignorePureComponents> }]
 ...
 ```
 

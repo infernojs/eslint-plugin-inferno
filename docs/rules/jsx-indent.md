@@ -1,4 +1,4 @@
-# Validate JSX indentation (jsx-indent)
+# Validate JSX indentation (inferno/jsx-indent)
 
 This option validates a specific indentation style for JSX.
 

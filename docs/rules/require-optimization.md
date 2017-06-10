@@ -1,4 +1,4 @@
-# Enforce Inferno components to have a shouldComponentUpdate method (require-optimization)
+# Enforce Inferno components to have a shouldComponentUpdate method (inferno/require-optimization)
 
 This rule prevents you from creating Inferno components without declaring a `shouldComponentUpdate` method.
 
@@ -52,7 +52,7 @@ Inferno.createClass({
 
 ```js
 ...
-"require-optimization": [<enabled>, { allowDecorators: [<allowDecorator>] }]
+"inferno/require-optimization": [<enabled>, { allowDecorators: [<allowDecorator>] }]
 ...
 ```
 
@@ -76,6 +76,6 @@ class Hello extends Inferno.Component {}
 
 ```js
 ...
-"require-optimization": [2, {allowDecorators: ['customDecorators']}]
+"inferno/require-optimization": [2, {allowDecorators: ['customDecorators']}]
 ...
 ```

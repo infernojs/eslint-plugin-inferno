@@ -1,6 +1,6 @@
-# No `.bind()` or Arrow Functions in JSX Props (jsx-no-bind)
+# No `.bind()` or Arrow Functions in JSX Props (inferno/jsx-no-bind)
 
-A `bind` call or [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) in a JSX prop will create a brand new function on every single render. This is bad for performance, as it will result in the garbage collector being invoked way more than is necessary.
+A `bind` call or [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) in a JSX prop will create a brand new function on every single render. This is bad for performance, as it will result in the garbage collector being invoked way more than is necessary. It may also cause unnecessary re-renders if a brand new function is passed as a prop to a component that uses reference equality check on the prop to determine if it should update.
 
 ## Rule Details
 
@@ -21,7 +21,7 @@ The following patterns are not considered warnings:
 ## Rule Options
 
 ```js
-"jsx-no-bind": [<enabled>, {
+"inferno/jsx-no-bind": [<enabled>, {
   "ignoreRefs": <boolean> || false,
   "allowArrowFunctions": <boolean> || false,
   "allowBind": <boolean> || false
@@ -107,8 +107,6 @@ var ListItem = Inferno.createClass({
 This will speed up rendering, as it avoids the need to create new functions (through `bind` calls) on every render.
 
 ### ES6 Classes
-
-Unfortunately [Inferno ES6 classes](https://facebook.github.io/inferno/blog/2015/01/27/inferno-v0.13.0-beta-1.html#es6-classes) do not autobind their methods like components created with the older `Inferno.createClass` syntax. There are several approaches to binding methods for ES6 classes. A basic approach is to just manually bind the methods in the constructor:
 
 ```jsx
 class Foo extends Inferno.Component {

@@ -1,4 +1,4 @@
-# Prevent using string references (no-string-refs)
+# Prevent using string references (inferno/no-string-refs)
 
 Currently, two ways are supported by Inferno to refer to components. The first one, providing a string identifier is considered legacy in the official documentation. Referring to components by setting a property on the `this` object in the reference callback is preferred.
 

@@ -1,8 +1,7 @@
-# Prevent usage of the return value of Inferno.render (no-render-return-value)
+# Prevent usage of the return value of Inferno.render (inferno/no-render-return-value)
 
 > `Inferno.render()` currently returns a reference to the root `InfernoComponent` instance. However, using this return value is legacy and should be avoided because future versions of Inferno may render components asynchronously in some cases. If you need a reference to the root `InfernoComponent` instance, the preferred solution is to attach a [callback ref](http://facebook.github.io/inferno/docs/more-about-refs.html#the-ref-callback-attribute) to the root element.
 
-Source: [Inferno Top-Level API documentation](http://facebook.github.io/inferno/docs/top-level-api.html#infernodom.render)
 
 ## Rule Details
 

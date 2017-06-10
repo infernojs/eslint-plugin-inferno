@@ -2,13 +2,12 @@
     "env": {
         "node": true
     },
-    ecmaFeatures: {
-        jsx: true
+    parserOptions: {
+      ecmaVersion: 6,
+      ecmaFeatures: {
+          jsx: true
+      }
     },
-    "globals": {
-    },
-    "plugins": [
-    ],
     "rules": {
         // Possible Errors
         "comma-dangle": [2, "never"],
@@ -62,7 +61,7 @@
         "no-lone-blocks": 2,
         "no-loop-func": 2,
         "no-multi-spaces": 2,
-        "no-multi-str": 0,
+        "no-multi-str": 2,
         "no-native-reassign": 2,
         "no-new": 2,
         "no-new-func": 2,
@@ -149,10 +148,16 @@
         "wrap-regex": 0,
         // Legacy
         "max-depth": 0,
-        "max-len": [2, 170],
+        "max-len": [2, 170, {
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true,
+          "ignoreComments": true,
+        }],
         "max-params": 0,
         "max-statements": 0,
         "no-plusplus": 0,
-        "no-prototype-builtins": 2
+        "no-prototype-builtins": 2,
+        "prefer-template": 2,
+        "template-curly-spacing": [2, "never"]
     }
 }

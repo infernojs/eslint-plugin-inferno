@@ -1,4 +1,4 @@
-# Forbid certain elements (forbid-elements)
+# Forbid certain elements (inferno/forbid-elements)
 
 You may want to forbid usage of certain elements in favor of others, (e.g. forbid all `<div />` and use `<Box />` instead). This rule allows you to configure a list of forbidden elements and to specify their desired replacements.
 
@@ -10,18 +10,18 @@ This rule checks all JSX elements and `Inferno.createElement` calls and verifies
 
 ```js
 ...
-"forbid-elements": [<enabled>, { "forbid": [<string|object>] }]
+"inferno/forbid-elements": [<enabled>, { "forbid": [<string|object>] }]
 ...
 ```
 
 ### `forbid`
 
-An array of strings and/or objects. An object in this array may have the following properties: 
+An array of strings and/or objects. An object in this array may have the following properties:
 
 * `element` (required): the name of the forbidden element (e.g. `'button'`, `'Modal'`)
 * `message`: additional message that gets reported
 
-A string item in the array is a shorthand for `{ element: string }`. 
+A string item in the array is a shorthand for `{ element: string }`.
 
 The following patterns are not considered warnings:
 
@@ -50,7 +50,7 @@ Inferno.createElement(Namespaced.Element);
 
 // [1, { "forbid": [{ "element": "button", "message": "use <Button> instead" }, "input"] }]
 <div><button /><input /></div>
-Inferno.createElement('div', {}, Inferno.createElemet('button', {}, Inferno.createElement('input')));
+Inferno.createElement('div', {}, Inferno.createElement('button', {}, Inferno.createElement('input')));
 ```
 
 ## When not to use
