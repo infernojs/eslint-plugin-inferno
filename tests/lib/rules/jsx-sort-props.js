@@ -9,10 +9,10 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/jsx-sort-props');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/jsx-sort-props');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -25,74 +25,74 @@ var parserOptions = {
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 
-var expectedError = {
+const expectedError = {
   message: 'Props should be sorted alphabetically',
   type: 'JSXAttribute'
 };
-var expectedCallbackError = {
+const expectedCallbackError = {
   message: 'Callbacks must be listed after all other props',
   type: 'JSXAttribute'
 };
-var expectedShorthandFirstError = {
+const expectedShorthandFirstError = {
   message: 'Shorthand props must be listed before all other props',
   type: 'JSXAttribute'
 };
-var expectedShorthandLastError = {
+const expectedShorthandLastError = {
   message: 'Shorthand props must be listed after all other props',
   type: 'JSXAttribute'
 };
-var expectedReservedFirstError = {
+const expectedReservedFirstError = {
   message: 'Reserved props must be listed before all other props',
   type: 'JSXAttribute'
 };
-var expectedEmptyReservedFirstError = {
+const expectedEmptyReservedFirstError = {
   message: 'A customized reserved first list must not be empty'
 };
-var expectedInvalidReservedFirstError = {
+const expectedInvalidReservedFirstError = {
   message: 'A customized reserved first list must only contain a subset of Inferno reserved props. Remove: notReserved'
 };
-var callbacksLastArgs = [{
+const callbacksLastArgs = [{
   callbacksLast: true
 }];
-var ignoreCaseAndCallbackLastArgs = [{
+const ignoreCaseAndCallbackLastArgs = [{
   callbacksLast: true,
   ignoreCase: true
 }];
-var shorthandFirstArgs = [{
+const shorthandFirstArgs = [{
   shorthandFirst: true
 }];
-var shorthandLastArgs = [{
+const shorthandLastArgs = [{
   shorthandLast: true
 }];
-var shorthandAndCallbackLastArgs = [{
+const shorthandAndCallbackLastArgs = [{
   callbacksLast: true,
   shorthandLast: true
 }];
-var ignoreCaseArgs = [{
+const ignoreCaseArgs = [{
   ignoreCase: true
 }];
-var noSortAlphabeticallyArgs = [{
+const noSortAlphabeticallyArgs = [{
   noSortAlphabetically: true
 }];
-var sortAlphabeticallyArgs = [{
+const sortAlphabeticallyArgs = [{
   noSortAlphabetically: false
 }];
-var reservedFirstAsBooleanArgs = [{
+const reservedFirstAsBooleanArgs = [{
   reservedFirst: true
 }];
-var reservedFirstAsArrayArgs = [{
+const reservedFirstAsArrayArgs = [{
   reservedFirst: ['children', 'dangerouslySetInnerHTML', 'key']
 }];
-var reservedFirstWithNoSortAlphabeticallyArgs = [{
+const reservedFirstWithNoSortAlphabeticallyArgs = [{
   noSortAlphabetically: true,
   reservedFirst: true
 }];
-var reservedFirstAsEmptyArrayArgs = [{
+const reservedFirstAsEmptyArrayArgs = [{
   reservedFirst: []
 }];
-var reservedFirstAsInvalidArrayArgs = [{
+const reservedFirstAsInvalidArrayArgs = [{
   reservedFirst: ['notReserved']
 }];
 
@@ -153,15 +153,84 @@ ruleTester.run('jsx-sort-props', rule, {
     }
   ],
   invalid: [
-    {code: '<App b a />;', errors: [expectedError]},
-    {code: '<App {...this.props} b a />;', errors: [expectedError]},
-    {code: '<App c {...this.props} b a />;', errors: [expectedError]},
-    {code: '<App a A />;', errors: [expectedError]},
-    {code: '<App B a />;', options: ignoreCaseArgs, errors: [expectedError]},
-    {code: '<App B A c />;', options: ignoreCaseArgs, errors: [expectedError]},
-    {code: '<App c="a" a="c" b="b" />;', errors: 2},
-    {code: '<App {...this.props} c="a" a="c" b="b" />;', errors: 2},
-    {code: '<App d="d" b="b" {...this.props} c="a" a="c" />;', errors: 2},
+    {
+      code: '<App b a />;',
+      errors: [expectedError],
+      output: '<App a b />;'
+    },
+    {
+      code: '<App {...this.props} b a />;',
+      errors: [expectedError],
+      output: '<App {...this.props} a b />;'
+    },
+    {
+      code: '<App c {...this.props} b a />;',
+      errors: [expectedError],
+      output: '<App c {...this.props} a b />;'
+    },
+    {
+      code: '<App a A />;',
+      errors: [expectedError],
+      output: '<App a A />;'
+    },
+    {
+      code: '<App B a />;',
+      options: ignoreCaseArgs,
+      errors: [expectedError],
+      output: '<App a B />;'
+    },
+    {
+      code: '<App B A c />;',
+      options: ignoreCaseArgs,
+      errors: [expectedError],
+      output: '<App A B c />;'
+    },
+    {
+      code: '<App c="a" a="c" b="b" />;',
+      output: '<App a="c" b="b" c="a" />;',
+      errors: 2
+    },
+    {
+      code: '<App {...this.props} c="a" a="c" b="b" />;',
+      output: '<App {...this.props} a="c" b="b" c="a" />;',
+      errors: 2
+    },
+    {
+      code: '<App d="d" b="b" {...this.props} c="a" a="c" />;',
+      output: '<App b="b" d="d" {...this.props} a="c" c="a" />;',
+      errors: 2
+    },
+    {
+      code: `
+      <App
+        a={true}
+        z
+        r
+        _onClick={function(){}}
+        onHandle={function(){}}
+        {...this.props}
+        b={false}
+        {...otherProps}
+      >
+        {test}
+      </App>
+    `,
+      output: `
+      <App
+        _onClick={function(){}}
+        a={true}
+        onHandle={function(){}}
+        r
+        z
+        {...this.props}
+        b={false}
+        {...otherProps}
+      >
+        {test}
+      </App>
+    `,
+      errors: 3
+    },
     {
       code: '<App a z onFoo onBar />;',
       errors: [expectedError],

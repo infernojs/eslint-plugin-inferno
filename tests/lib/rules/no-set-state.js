@@ -8,10 +8,10 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-set-state');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/no-set-state');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -24,110 +24,110 @@ var parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('no-set-state', rule, {
 
   valid: [{
-    code: [
-      'var Hello = function() {',
-      '  this.setState({})',
-      '};'
-    ].join('\n')
+    code: `
+      var Hello = function() {
+        this.setState({})
+      };
+    `
   }, {
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  render: function() {',
-      '    return <div>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n')
+    code: `
+      var Hello = Inferno.createClass({
+        render: function() {
+          return <div>Hello {this.props.name}</div>;
+        }
+      });
+    `
   }, {
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  componentDidUpdate: function() {',
-      '    someNonMemberFunction(arg);',
-      '    this.someHandler = this.setState;',
-      '  },',
-      '  render: function() {',
-      '    return <div>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n')
+    code: `
+      var Hello = Inferno.createClass({
+        componentDidUpdate: function() {
+          someNonMemberFunction(arg);
+          this.someHandler = this.setState;
+        },
+        render: function() {
+          return <div>Hello {this.props.name}</div>;
+        }
+      });
+    `
   }],
 
   invalid: [{
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  componentDidUpdate: function() {',
-      '    this.setState({',
-      '      name: this.props.name.toUpperCase()',
-      '    });',
-      '  },',
-      '  render: function() {',
-      '    return <div>Hello {this.state.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
+    code: `
+      var Hello = Inferno.createClass({
+        componentDidUpdate: function() {
+          this.setState({
+            name: this.props.name.toUpperCase()
+          });
+        },
+        render: function() {
+          return <div>Hello {this.state.name}</div>;
+        }
+      });
+    `,
     errors: [{
       message: 'Do not use setState'
     }]
   }, {
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  someMethod: function() {',
-      '    this.setState({',
-      '      name: this.props.name.toUpperCase()',
-      '    });',
-      '  },',
-      '  render: function() {',
-      '    return <div onClick={this.someMethod.bind(this)}>Hello {this.state.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
+    code: `
+      var Hello = Inferno.createClass({
+        someMethod: function() {
+          this.setState({
+            name: this.props.name.toUpperCase()
+          });
+        },
+        render: function() {
+          return <div onClick={this.someMethod.bind(this)}>Hello {this.state.name}</div>;
+        }
+      });
+    `,
     errors: [{
       message: 'Do not use setState'
     }]
   }, {
-    code: [
-      'class Hello extends Inferno.Component {',
-      '  someMethod() {',
-      '    this.setState({',
-      '      name: this.props.name.toUpperCase()',
-      '    });',
-      '  }',
-      '  render() {',
-      '    return <div onClick={this.someMethod.bind(this)}>Hello {this.state.name}</div>;',
-      '  }',
-      '};'
-    ].join('\n'),
+    code: `
+      class Hello extends Inferno.Component {
+        someMethod() {
+          this.setState({
+            name: this.props.name.toUpperCase()
+          });
+        }
+        render() {
+          return <div onClick={this.someMethod.bind(this)}>Hello {this.state.name}</div>;
+        }
+      };
+    `,
     errors: [{
       message: 'Do not use setState'
     }]
   }, {
-    code: [
-      'class Hello extends Inferno.Component {',
-      '  someMethod = () => {',
-      '    this.setState({',
-      '      name: this.props.name.toUpperCase()',
-      '    });',
-      '  }',
-      '  render() {',
-      '    return <div onClick={this.someMethod.bind(this)}>Hello {this.state.name}</div>;',
-      '  }',
-      '};'
-    ].join('\n'),
+    code: `
+      class Hello extends Inferno.Component {
+        someMethod = () => {
+          this.setState({
+            name: this.props.name.toUpperCase()
+          });
+        }
+        render() {
+          return <div onClick={this.someMethod.bind(this)}>Hello {this.state.name}</div>;
+        }
+      };
+    `,
     parser: 'babel-eslint',
     errors: [{
       message: 'Do not use setState'
     }]
   }, {
-    code: [
-      'class Hello extends Inferno.Component {',
-      '  render() {',
-      '    return <div onMouseEnter={() => this.setState({dropdownIndex: index})} />;',
-      '  }',
-      '};'
-    ].join('\n'),
+    code: `
+      class Hello extends Inferno.Component {
+        render() {
+          return <div onMouseEnter={() => this.setState({dropdownIndex: index})} />;
+        }
+      };
+    `,
     parser: 'babel-eslint',
     errors: [{
       message: 'Do not use setState'

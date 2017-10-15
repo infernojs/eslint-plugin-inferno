@@ -1,8 +1,8 @@
-# Enforce component methods order (inferno/sort-comp)
+# Enforce component methods order (react/sort-comp)
 
-When creating Inferno components it is more convenient to always follow the same organisation for methods order to helps you to easily find lifecyle methods, event handlers, etc.
+When creating Inferno components it is more convenient to always follow the same organisation for method order to help you easily find lifecyle methods, event handlers, etc.
 
-**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/infernojs/inferno-codemod/blob/master/transforms/sort-comp.js) in [inferno-codemod](https://www.npmjs.com/package/inferno-codemod).
+**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/reactjs/react-codemod/blob/master/transforms/sort-comp.js) in [react-codemod](https://www.npmjs.com/package/react-codemod).
 
 ## Rule Details
 
@@ -41,7 +41,7 @@ This rule can take one argument to customize the components organisation.
 
 ```js
 ...
-"inferno/sort-comp": [<enabled>, { order: <order>, groups: <groups> }]
+"react/sort-comp": [<enabled>, { order: <order>, groups: <groups> }]
 ...
 ```
 
@@ -90,13 +90,15 @@ The default configuration is:
 * `everything-else` is a special group that match all the methods that do not match any of the other groups.
 * `render` is referring to the `render` method.
 * `type-annotations`. This group is not specified by default, but can be used to enforce flow annotations to be at the top.
+* `getters` This group is not specified by default, but can be used to enforce class getters positioning.
+* `setters` This group is not specified by default, but can be used to enforce class setters positioning.
 
 You can override this configuration to match your needs.
 
 For example, if you want to place your event handlers (`onClick`, `onSubmit`, etc.) before `render` but the other methods after it:
 
 ```js
-"inferno/sort-comp": [1, {
+"react/sort-comp": [1, {
   order: [
     'static-methods',
     'lifecycle',
@@ -132,7 +134,7 @@ var Hello = Inferno.createClass({
 If you want to split your `render` method into smaller ones and keep them just before render:
 
 ```js
-"inferno/sort-comp": [1, {
+"react/sort-comp": [1, {
   order: [
     'static-methods',
     'lifecycle',
@@ -175,7 +177,7 @@ var Hello = Inferno.createClass({
 If you want to flow annotations to be at the top:
 
 ```js
-"inferno/sort-comp": [1, {
+"react/sort-comp": [1, {
   order: [
     'type-annotations',
     'static-methods',

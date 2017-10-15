@@ -9,11 +9,11 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var eslint = require('eslint');
-var rule = require('../../../lib/rules/jsx-no-undef');
-var RuleTester = eslint.RuleTester;
+const eslint = require('eslint');
+const rule = require('../../../lib/rules/jsx-no-undef');
+const RuleTester = eslint.RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   ecmaFeatures: {
     experimentalObjectRestSpread: true,
@@ -25,8 +25,8 @@ var parserOptions = {
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
-var linter = ruleTester.linter || eslint.linter;
+const ruleTester = new RuleTester({parserOptions});
+const linter = ruleTester.linter || eslint.linter;
 linter.defineRule('no-undef', require('eslint/lib/rules/no-undef'));
 ruleTester.run('jsx-no-undef', rule, {
   valid: [{
@@ -42,29 +42,29 @@ ruleTester.run('jsx-no-undef', rule, {
   }, {
     code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.foo.Bar />);'
   }, {
-    code: [
-      '/*eslint no-undef:1*/',
-      'var Inferno;',
-      'class Hello extends Inferno.Component {',
-      '  render() {',
-      '    return <this.props.tag />',
-      '  }',
-      '}'
-    ].join('\n')
+    code: `
+      /*eslint no-undef:1*/
+      var Inferno;
+      class Hello extends Inferno.Component {
+        render() {
+          return <this.props.tag />
+        }
+      }
+    `
   }, {
     code: 'var Inferno; Inferno.render(<Text />);',
     globals: {
       Text: true
     }
   }, {
-    code: [
-      'import Text from "cool-module";',
-      'const TextWrapper = function (props) {',
-      '  return (',
-      '    <Text />',
-      '  );',
-      '};'
-    ].join('\n'),
+    code: `
+      import Text from "cool-module";
+      const TextWrapper = function (props) {
+        return (
+          <Text />
+        );
+      };
+    `,
     parserOptions: Object.assign({sourceType: 'module'}, parserOptions),
     options: [{
       allowGlobals: false
@@ -97,14 +97,14 @@ ruleTester.run('jsx-no-undef', rule, {
       message: '\'appp\' is not defined.'
     }]
   }, {
-    code: [
-      'const TextWrapper = function (props) {',
-      '  return (',
-      '    <Text />',
-      '  );',
-      '};',
-      'export default TextWrapper;'
-    ].join('\n'),
+    code: `
+      const TextWrapper = function (props) {
+        return (
+          <Text />
+        );
+      };
+      export default TextWrapper;
+    `,
     parserOptions: Object.assign({sourceType: 'module'}, parserOptions),
     errors: [{
       message: '\'Text\' is not defined.'

@@ -1,12 +1,13 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.0.1",
+  "version": "7.4.0",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
     "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
     "lint": "eslint ./",
-    "test": "npm run lint && npm run unit-test",
+    "pretest": "npm run lint",
+    "test": "npm run unit-test",
     "unit-test": "istanbul cover --dir reports/coverage node_modules/mocha/bin/_mocha tests/**/*.js -- --reporter dot"
   },
   "files": [
@@ -24,14 +25,15 @@
   "dependencies": {
     "doctrine": "^2.0.0",
     "has": "^1.0.1",
-    "jsx-ast-utils": "^1.4.1"
+    "jsx-ast-utils": "^2.0.1",
+    "prop-types": "^15.6.0"
   },
   "devDependencies": {
-    "babel-eslint": "7.2.3",
-    "coveralls": "2.13.1",
-    "eslint": "^4.3.0",
+    "babel-eslint": "^8.0.1",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.9.0",
     "istanbul": "0.4.5",
-    "mocha": "3.4.2"
+    "mocha": "^4.0.1"
   },
   "peerDependencies": {
     "eslint": "^3.0.0 || ^4.0.0"

@@ -8,10 +8,10 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-direct-mutation-state');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/no-direct-mutation-state');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -26,7 +26,7 @@ require('babel-eslint');
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('no-direct-mutation-state', rule, {
 
   valid: [{
@@ -61,6 +61,36 @@ ruleTester.run('no-direct-mutation-state', rule, {
       '  }',
       '}'
     ].join('\n')
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  constructor() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n')
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  constructor() {',
+      '    this.state.foo = 1;',
+      '  }',
+      '}'
+    ].join('\n')
+  }, {
+    code: `
+      class OneComponent extends Component {
+        constructor() {
+          super();
+          class AnotherComponent extends Component {
+            constructor() {
+              super();
+            }
+          }
+          this.state = {};
+        }
+      }
+    `
   }],
 
   invalid: [{
@@ -68,6 +98,18 @@ ruleTester.run('no-direct-mutation-state', rule, {
       'var Hello = Inferno.createClass({',
       '  render: function() {',
       '    this.state.foo = "bar"',
+      '    return <div>Hello {this.props.name}</div>;',
+      '  }',
+      '});'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'var Hello = Inferno.createClass({',
+      '  render: function() {',
+      '    this.state.foo++;',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
       '});'
@@ -117,6 +159,111 @@ ruleTester.run('no-direct-mutation-state', rule, {
       message: 'Do not mutate state directly. Use setState().',
       line: 4,
       column: 5
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  constructor() {',
+      '    someFn()',
+      '  }',
+      '  someFn() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  constructor(props) {',
+      '    super(props)',
+      '    doSomethingAsync(() => {',
+      '      this.state = "bad";',
+      '    });',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  componentWillMount() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  componentDidMount() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  componentWillReceiveProps() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  shouldComponentUpdate() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  componentWillUpdate() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  componentDidUpdate() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
+    }]
+  }, {
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  componentWillUnmount() {',
+      '    this.state.foo = "bar"',
+      '  }',
+      '}'
+    ].join('\n'),
+    errors: [{
+      message: 'Do not mutate state directly. Use setState().'
     }]
   }
   /**

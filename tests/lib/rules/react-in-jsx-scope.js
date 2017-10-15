@@ -9,10 +9,10 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/inferno-in-jsx-scope');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/inferno-in-jsx-scope');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -21,7 +21,7 @@ var parserOptions = {
   }
 };
 
-var settings = {
+const settings = {
   inferno: {
     pragma: 'Foo'
   }
@@ -31,7 +31,7 @@ var settings = {
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('inferno-in-jsx-scope', rule, {
   valid: [
     {code: 'var Inferno, App; <App />;'},
@@ -42,17 +42,17 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
     {code: 'var Inferno, App; <App />;'},
     {code: '/** @jsx Foo */ var Foo, App; <App />;'},
     {code: '/** @jsx Foo.Bar */ var Foo, App; <App />;'},
-    {code: [
-      'import Inferno from \'inferno/addons\';',
-      'const Button = Inferno.createClass({',
-      '  render() {',
-      '    return (',
-      '      <button {...this.props}>{this.props.children}</button>',
-      '    )',
-      '  }',
-      '});',
-      'export default Button;'
-    ].join('\n')},
+    {code: `
+      import Inferno from 'inferno';
+      const Button = Inferno.createClass({
+        render() {
+          return (
+            <button {...this.props}>{this.props.children}</button>
+          )
+        }
+      });
+      export default Button;
+    `},
     {code: 'var Foo, App; <App />;', settings: settings}
   ],
   invalid: [{

@@ -9,10 +9,10 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-children-prop');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/no-children-prop');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -21,14 +21,14 @@ var parserOptions = {
   }
 };
 
-var JSX_ERROR = 'Do not pass children as props. Instead, nest children between the opening and closing tags.';
-var CREATE_ELEMENT_ERROR = 'Do not pass children as props. Instead, pass them as additional arguments to Inferno.createElement/createVNode.';
+const JSX_ERROR = 'Do not pass children as props. Instead, nest children between the opening and closing tags.';
+const CREATE_ELEMENT_ERROR = 'Do not pass children as props. Instead, pass them as additional arguments to Inferno.createElement/createVNode.';
 
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('no-children-prop', rule, {
   valid: [
     {
@@ -161,19 +161,19 @@ ruleTester.run('no-children-prop', rule, {
       errors: [{message: JSX_ERROR}]
     },
     {
-      code: 'Inferno.createVNode("div", {children: "Children"});',
+      code: 'Inferno.createElement("div", {children: "Children"});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
-      code: 'Inferno.createVNode("div", {children: "Children"}, "Children");',
+      code: 'Inferno.createElement("div", {children: "Children"}, "Children");',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
-      code: 'Inferno.createVNode("div", {children: Inferno.createVNode("div")});',
+      code: 'Inferno.createElement("div", {children: Inferno.createElement("div")});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
-      code: 'Inferno.createVNode("div", {children: [Inferno.createVNode("div"), Inferno.createVNode("div")]});',
+      code: 'Inferno.createElement("div", {children: [Inferno.createElement("div"), Inferno.createElement("div")]});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
@@ -181,7 +181,7 @@ ruleTester.run('no-children-prop', rule, {
       errors: [{message: JSX_ERROR}]
     },
     {
-      code: 'Inferno.createVNode(MyComponent, {children: "Children"});',
+      code: 'Inferno.createElement(MyComponent, {children: "Children"});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
@@ -189,7 +189,7 @@ ruleTester.run('no-children-prop', rule, {
       errors: [{message: JSX_ERROR}]
     },
     {
-      code: 'Inferno.createVNode(MyComponent, {children: "Children", className: "class-name"});',
+      code: 'Inferno.createElement(MyComponent, {children: "Children", className: "class-name"});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
@@ -197,7 +197,7 @@ ruleTester.run('no-children-prop', rule, {
       errors: [{message: JSX_ERROR}]
     },
     {
-      code: 'Inferno.createVNode(MyComponent, {...props, children: "Children"})',
+      code: 'Inferno.createElement(MyComponent, {...props, children: "Children"})',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     }
   ]

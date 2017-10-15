@@ -8,10 +8,10 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-danger-with-children');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/no-danger-with-children');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -24,7 +24,7 @@ var parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('no-danger-with-children', rule, {
   valid: [
     {
@@ -43,24 +43,24 @@ ruleTester.run('no-danger-with-children', rule, {
       code: '<div children="Children" />'
     },
     {
-      code: [
-        'const props = { dangerouslySetInnerHTML: { __html: "HTML" } };',
-        '<div {...props} />'
-      ].join('\n')
+      code: `
+        const props = { dangerouslySetInnerHTML: { __html: "HTML" } };
+        <div {...props} />
+      `
     },
     {
-      code: [
-        'const moreProps = { className: "eslint" };',
-        'const props = { children: "Children", ...moreProps };',
-        '<div {...props} />'
-      ].join('\n')
+      code: `
+        const moreProps = { className: "eslint" };
+        const props = { children: "Children", ...moreProps };
+        <div {...props} />
+      `
     },
     {
-      code: [
-        'const otherProps = { children: "Children" };',
-        'const { a, b, ...props } = otherProps;',
-        '<div {...props} />'
-      ].join('\n')
+      code: `
+        const otherProps = { children: "Children" };
+        const { a, b, ...props } = otherProps;
+        <div {...props} />
+      `
     },
     {
       code: '<Hello>Children</Hello>'
@@ -69,25 +69,37 @@ ruleTester.run('no-danger-with-children', rule, {
       code: '<Hello dangerouslySetInnerHTML={{ __html: "HTML" }} />'
     },
     {
-      code: 'Inferno.createElement("div", { dangerouslySetInnerHTML: { __html: "HTML" } });'
+      code: `
+        <Hello dangerouslySetInnerHTML={{ __html: "HTML" }}>
+        </Hello>
+      `
     },
     {
-      code: 'Inferno.createElement("div", {}, "Children");'
+      code: 'createElement("div", { dangerouslySetInnerHTML: { __html: "HTML" } });'
     },
     {
-      code: 'Inferno.createElement("Hello", { dangerouslySetInnerHTML: { __html: "HTML" } });'
+      code: 'createElement("div", {}, "Children");'
     },
     {
-      code: 'Inferno.createElement("Hello", {}, "Children");'
+      code: 'createElement("Hello", { dangerouslySetInnerHTML: { __html: "HTML" } });'
+    },
+    {
+      code: 'createElement("Hello", {}, "Children");'
+    },
+    {
+      code: '<Hello {...undefined}>Children</Hello>'
+    },
+    {
+      code: 'createElement("Hello", undefined, "Children")'
     }
   ],
   invalid: [
     {
-      code: [
-        '<div dangerouslySetInnerHTML={{ __html: "HTML" }}>',
-        '  Children',
-        '</div>'
-      ].join('\n'),
+      code: `
+        <div dangerouslySetInnerHTML={{ __html: "HTML" }}>
+          Children
+        </div>
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
@@ -95,25 +107,25 @@ ruleTester.run('no-danger-with-children', rule, {
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'const props = { dangerouslySetInnerHTML: { __html: "HTML" } };',
-        '<div {...props}>Children</div>'
-      ].join('\n'),
+      code: `
+        const props = { dangerouslySetInnerHTML: { __html: "HTML" } };
+        <div {...props}>Children</div>
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'const props = { children: "Children", dangerouslySetInnerHTML: { __html: "HTML" } };',
-        '<div {...props} />'
-      ].join('\n'),
+      code: `
+        const props = { children: "Children", dangerouslySetInnerHTML: { __html: "HTML" } };
+        <div {...props} />
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        '<Hello dangerouslySetInnerHTML={{ __html: "HTML" }}>',
-        '  Children',
-        '</Hello>'
-      ].join('\n'),
+      code: `
+        <Hello dangerouslySetInnerHTML={{ __html: "HTML" }}>
+          Children
+        </Hello>
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
@@ -121,70 +133,74 @@ ruleTester.run('no-danger-with-children', rule, {
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'Inferno.createVNode(',
-        '  "div",',
-        '  { dangerouslySetInnerHTML: { __html: "HTML" } },',
-        '  "Children"',
-        ');'
-      ].join('\n'),
+      code: '<Hello dangerouslySetInnerHTML={{ __html: "HTML" }}> </Hello>',
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'Inferno.createVNode(',
-        '  "div",',
-        '  {',
-        '    dangerouslySetInnerHTML: { __html: "HTML" },',
-        '    children: "Children",',
-        '  }',
-        ');'
-      ].join('\n'),
+      code: `
+        Inferno.createElement(
+          "div",
+          { dangerouslySetInnerHTML: { __html: "HTML" } },
+          "Children"
+        );
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'Inferno.createVNode(',
-        '  "Hello",',
-        '  { dangerouslySetInnerHTML: { __html: "HTML" } },',
-        '  "Children"',
-        ');'
-      ].join('\n'),
+      code: `
+        Inferno.createElement(
+          "div",
+          {
+            dangerouslySetInnerHTML: { __html: "HTML" },
+            children: "Children",
+          }
+        );
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'Inferno.createVNode(',
-        '  "Hello",',
-        '  {',
-        '    dangerouslySetInnerHTML: { __html: "HTML" },',
-        '    children: "Children",',
-        '  }',
-        ');'
-      ].join('\n'),
+      code: `
+        Inferno.createElement(
+          "Hello",
+          { dangerouslySetInnerHTML: { __html: "HTML" } },
+          "Children"
+        );
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'const props = { dangerouslySetInnerHTML: { __html: "HTML" } };',
-        'Inferno.createVNode("div", props, "Children");'
-      ].join('\n'),
+      code: `
+        Inferno.createElement(
+          "Hello",
+          {
+            dangerouslySetInnerHTML: { __html: "HTML" },
+            children: "Children",
+          }
+        );
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'const props = { children: "Children", dangerouslySetInnerHTML: { __html: "HTML" } };',
-        'Inferno.createVNode("div", props);'
-      ].join('\n'),
+      code: `
+        const props = { dangerouslySetInnerHTML: { __html: "HTML" } };
+        Inferno.createElement("div", props, "Children");
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
-      code: [
-        'const moreProps = { children: "Children" };',
-        'const otherProps = { ...moreProps };',
-        'const props = { ...otherProps, dangerouslySetInnerHTML: { __html: "HTML" } };',
-        'Inferno.createVNode("div", props);'
-      ].join('\n'),
+      code: `
+        const props = { children: "Children", dangerouslySetInnerHTML: { __html: "HTML" } };
+        Inferno.createElement("div", props);
+      `,
+      errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
+    },
+    {
+      code: `
+        const moreProps = { children: "Children" };
+        const otherProps = { ...moreProps };
+        const props = { ...otherProps, dangerouslySetInnerHTML: { __html: "HTML" } };
+        Inferno.createElement("div", props);
+      `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     }
   ]

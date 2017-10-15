@@ -9,10 +9,10 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/jsx-no-bind');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/jsx-no-bind');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -25,7 +25,7 @@ var parserOptions = {
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-no-bind', rule, {
 
   valid: [
@@ -71,49 +71,49 @@ ruleTester.run('jsx-no-bind', rule, {
 
     // Redux connect
     {
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    return <div>Hello</div>;',
-        '  }',
-        '}',
-        'export default connect()(Hello);'
-      ].join('\n'),
+      code: `
+        class Hello extends Component {
+          render() {
+            return <div>Hello</div>;
+          }
+        }
+        export default connect()(Hello);
+      `,
       options: [{allowBind: true}],
       parser: 'babel-eslint'
     },
     // Backbone view with a bind
     {
-      code: [
-        'var DocumentRow = Backbone.View.extend({',
-        '  tagName: "li",',
-        '  render: function() {',
-        '    this.onTap.bind(this);',
-        '  }',
-        '});'
-      ].join('\n'),
+      code: `
+        var DocumentRow = Backbone.View.extend({
+          tagName: "li",
+          render: function() {
+            this.onTap.bind(this);
+          }
+        });
+      `,
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'const foo = {',
-        '  render: function() {',
-        '    this.onTap.bind(this);',
-        '    return true;',
-        '  }',
-        '};'
-      ].join('\n'),
+      code: `
+        const foo = {
+          render: function() {
+            this.onTap.bind(this);
+            return true;
+          }
+        };
+      `,
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'const foo = {',
-        '  render() {',
-        '    this.onTap.bind(this);',
-        '    return true;',
-        '  }',
-        '};'
-      ].join('\n'),
+      code: `
+        const foo = {
+          render() {
+            this.onTap.bind(this);
+            return true;
+          }
+        };
+      `,
       parser: 'babel-eslint'
     }
   ],
@@ -141,61 +141,61 @@ ruleTester.run('jsx-no-bind', rule, {
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() {',
-        '    const click = this.someMethod.bind(this);',
-        '    return <div onClick={click}>Hello {this.state.name}</div>;',
-        '  }',
-        '});'
-      ].join('\n'),
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const click = this.someMethod.bind(this);
+            return <div onClick={click}>Hello {this.state.name}</div>;
+          }
+        });
+      `,
       errors: [{message: 'JSX props should not use .bind()'}],
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  render() {',
-        '    const click = this.someMethod.bind(this);',
-        '    return <div onClick={click}>Hello {this.state.name}</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
+      code: `
+        class Hello23 extends Inferno.Component {
+          render() {
+            const click = this.someMethod.bind(this);
+            return <div onClick={click}>Hello {this.state.name}</div>;
+          }
+        };
+      `,
       errors: [{message: 'JSX props should not use .bind()'}],
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'const foo = {',
-        '  render: function() {',
-        '    const click = this.onTap.bind(this);',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
+      code: `
+        const foo = {
+          render: function() {
+            const click = this.onTap.bind(this);
+            return <div onClick={onClick}>Hello</div>;
+          }
+        };
+      `,
       errors: [{message: 'JSX props should not use .bind()'}],
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'const foo = {',
-        '  render: ({onClick}) => (',
-        '    <div onClick={onClick.bind(this)}>Hello</div>',
-        '  )',
-        '};'
-      ].join('\n'),
+      code: `
+        const foo = {
+          render: ({onClick}) => (
+            <div onClick={onClick.bind(this)}>Hello</div>
+          )
+        };
+      `,
       errors: [{message: 'JSX props should not use .bind()'}],
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'const foo = {',
-        '  render() {',
-        '    const click = this.onTap.bind(this);',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
+      code: `
+        const foo = {
+          render() {
+            const click = this.onTap.bind(this);
+            return <div onClick={onClick}>Hello</div>;
+          }
+        };
+      `,
       errors: [{message: 'JSX props should not use .bind()'}],
       parser: 'babel-eslint'
     },

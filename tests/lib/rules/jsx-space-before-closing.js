@@ -8,10 +8,10 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/jsx-space-before-closing');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/jsx-space-before-closing');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -24,7 +24,7 @@ var parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-space-before-closing', rule, {
   valid: [{
     code: '<App />'
@@ -37,11 +37,11 @@ ruleTester.run('jsx-space-before-closing', rule, {
   }, {
     code: '<App></App>'
   }, {
-    code: [
-      '<App',
-      '  foo={bar}',
-      '/>'
-    ].join('\n')
+    code: `
+      <App
+        foo={bar}
+      />
+    `
   }, {
     code: '<App/>',
     options: ['never']
@@ -58,11 +58,11 @@ ruleTester.run('jsx-space-before-closing', rule, {
     code: '<App></App>',
     options: ['never']
   }, {
-    code: [
-      '<App',
-      '  foo={bar}',
-      '/>'
-    ].join('\n'),
+    code: `
+      <App
+        foo={bar}
+      />
+    `,
     options: ['never']
   }],
 

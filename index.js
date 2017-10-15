@@ -1,65 +1,69 @@
 'use strict';
 
-var has = require('has');
+const has = require('has');
 
-var allRules = {
-  'jsx-uses-inferno': require('./lib/rules/jsx-uses-inferno'),
-  'no-multi-comp': require('./lib/rules/no-multi-comp'),
-  'jsx-wrap-multilines': require('./lib/rules/jsx-wrap-multilines'),
-  'self-closing-comp': require('./lib/rules/self-closing-comp'),
-  'jsx-no-comment-textnodes': require('./lib/rules/jsx-no-comment-textnodes'),
-  'no-array-index-key': require('./lib/rules/no-array-index-key'),
-  'no-danger': require('./lib/rules/no-danger'),
-  'no-set-state': require('./lib/rules/no-set-state'),
-  'no-is-mounted': require('./lib/rules/no-is-mounted'),
-  'no-did-mount-set-state': require('./lib/rules/no-did-mount-set-state'),
-  'no-did-update-set-state': require('./lib/rules/no-did-update-set-state'),
-  'no-render-return-value': require('./lib/rules/no-render-return-value'),
-  'no-unescaped-entities': require('./lib/rules/no-unescaped-entities'),
-  'inferno-in-jsx-scope': require('./lib/rules/inferno-in-jsx-scope'),
-  'no-will-update-set-state': require('./lib/rules/no-will-update-set-state'),
-  'jsx-uses-vars': require('./lib/rules/jsx-uses-vars'),
-  'jsx-handler-names': require('./lib/rules/jsx-handler-names'),
-  'jsx-pascal-case': require('./lib/rules/jsx-pascal-case'),
-  'jsx-no-bind': require('./lib/rules/jsx-no-bind'),
-  'jsx-no-undef': require('./lib/rules/jsx-no-undef'),
-  'no-unknown-property': require('./lib/rules/no-unknown-property'),
-  'jsx-curly-spacing': require('./lib/rules/jsx-curly-spacing'),
-  'jsx-equals-spacing': require('./lib/rules/jsx-equals-spacing'),
-  'jsx-sort-props': require('./lib/rules/jsx-sort-props'),
-  'jsx-boolean-value': require('./lib/rules/jsx-boolean-value'),
-  'sort-comp': require('./lib/rules/sort-comp'),
-  'jsx-no-duplicate-props': require('./lib/rules/jsx-no-duplicate-props'),
-  'jsx-max-props-per-line': require('./lib/rules/jsx-max-props-per-line'),
-  'jsx-no-literals': require('./lib/rules/jsx-no-literals'),
-  'jsx-indent-props': require('./lib/rules/jsx-indent-props'),
-  'jsx-indent': require('./lib/rules/jsx-indent'),
-  'jsx-closing-bracket-location': require('./lib/rules/jsx-closing-bracket-location'),
-  'jsx-closing-tag-location': require('./lib/rules/jsx-closing-tag-location'),
-  'jsx-space-before-closing': require('./lib/rules/jsx-space-before-closing'),
-  'no-direct-mutation-state': require('./lib/rules/no-direct-mutation-state'),
+const allRules = {
   'forbid-component-props': require('./lib/rules/forbid-component-props'),
   'forbid-elements': require('./lib/rules/forbid-elements'),
-  'prefer-es6-class': require('./lib/rules/prefer-es6-class'),
-  'jsx-key': require('./lib/rules/jsx-key'),
-  'no-string-refs': require('./lib/rules/no-string-refs'),
-  'prefer-stateless-function': require('./lib/rules/prefer-stateless-function'),
-  'require-render-return': require('./lib/rules/require-render-return'),
-  'jsx-first-prop-new-line': require('./lib/rules/jsx-first-prop-new-line'),
-  'jsx-no-target-blank': require('./lib/rules/jsx-no-target-blank'),
+  'jsx-boolean-value': require('./lib/rules/jsx-boolean-value'),
+  'jsx-closing-bracket-location': require('./lib/rules/jsx-closing-bracket-location'),
+  'jsx-closing-tag-location': require('./lib/rules/jsx-closing-tag-location'),
+  'jsx-curly-spacing': require('./lib/rules/jsx-curly-spacing'),
+  'jsx-equals-spacing': require('./lib/rules/jsx-equals-spacing'),
   'jsx-filename-extension': require('./lib/rules/jsx-filename-extension'),
-  'require-optimization': require('./lib/rules/require-optimization'),
-  'no-find-dom-node': require('./lib/rules/no-find-dom-node'),
-  'no-danger-with-children': require('./lib/rules/no-danger-with-children'),
-  'style-prop-object': require('./lib/rules/style-prop-object'),
+  'jsx-first-prop-new-line': require('./lib/rules/jsx-first-prop-new-line'),
+  'jsx-handler-names': require('./lib/rules/jsx-handler-names'),
+  'jsx-indent': require('./lib/rules/jsx-indent'),
+  'jsx-indent-props': require('./lib/rules/jsx-indent-props'),
+  'jsx-key': require('./lib/rules/jsx-key'),
+  'jsx-max-props-per-line': require('./lib/rules/jsx-max-props-per-line'),
+  'jsx-no-bind': require('./lib/rules/jsx-no-bind'),
+  'jsx-no-comment-textnodes': require('./lib/rules/jsx-no-comment-textnodes'),
+  'jsx-no-duplicate-props': require('./lib/rules/jsx-no-duplicate-props'),
+  'jsx-no-literals': require('./lib/rules/jsx-no-literals'),
+  'jsx-no-target-blank': require('./lib/rules/jsx-no-target-blank'),
+  'jsx-no-undef': require('./lib/rules/jsx-no-undef'),
+  'jsx-curly-brace-presence': require('./lib/rules/jsx-curly-brace-presence'),
+  'jsx-pascal-case': require('./lib/rules/jsx-pascal-case'),
+  'jsx-sort-props': require('./lib/rules/jsx-sort-props'),
+  'jsx-space-before-closing': require('./lib/rules/jsx-space-before-closing'),
+  'jsx-tag-spacing': require('./lib/rules/jsx-tag-spacing'),
+  'jsx-uses-inferno': require('./lib/rules/jsx-uses-inferno'),
+  'jsx-uses-vars': require('./lib/rules/jsx-uses-vars'),
+  'jsx-wrap-multilines': require('./lib/rules/jsx-wrap-multilines'),
+  'no-array-index-key': require('./lib/rules/no-array-index-key'),
   'no-children-prop': require('./lib/rules/no-children-prop'),
-  'void-dom-elements-no-children': require('./lib/rules/void-dom-elements-no-children'),
-  'jsx-tag-spacing': require('./lib/rules/jsx-tag-spacing')
+  'no-danger': require('./lib/rules/no-danger'),
+  'no-danger-with-children': require('./lib/rules/no-danger-with-children'),
+  'no-did-mount-set-state': require('./lib/rules/no-did-mount-set-state'),
+  'no-did-update-set-state': require('./lib/rules/no-did-update-set-state'),
+  'no-direct-mutation-state': require('./lib/rules/no-direct-mutation-state'),
+  'no-find-dom-node': require('./lib/rules/no-find-dom-node'),
+  'no-is-mounted': require('./lib/rules/no-is-mounted'),
+  'no-multi-comp': require('./lib/rules/no-multi-comp'),
+  'no-set-state': require('./lib/rules/no-set-state'),
+  'no-string-refs': require('./lib/rules/no-string-refs'),
+  'no-redundant-should-component-update': require('./lib/rules/no-redundant-should-component-update'),
+  'no-render-return-value': require('./lib/rules/no-render-return-value'),
+  'no-typos': require('./lib/rules/no-typos'),
+  'no-unescaped-entities': require('./lib/rules/no-unescaped-entities'),
+  'no-unknown-property': require('./lib/rules/no-unknown-property'),
+  'no-unused-state': require('./lib/rules/no-unused-state'),
+  'no-will-update-set-state': require('./lib/rules/no-will-update-set-state'),
+  'prefer-es6-class': require('./lib/rules/prefer-es6-class'),
+  'prefer-stateless-function': require('./lib/rules/prefer-stateless-function'),
+  'inferno-in-jsx-scope': require('./lib/rules/inferno-in-jsx-scope'),
+  'require-optimization': require('./lib/rules/require-optimization'),
+  'require-render-return': require('./lib/rules/require-render-return'),
+  'self-closing-comp': require('./lib/rules/self-closing-comp'),
+  'sort-comp': require('./lib/rules/sort-comp'),
+  'style-prop-object': require('./lib/rules/style-prop-object'),
+  'void-dom-elements-no-children': require('./lib/rules/void-dom-elements-no-children')
 };
 
 function filterRules(rules, predicate) {
-  var result = {};
-  for (var key in rules) {
+  const result = {};
+  for (const key in rules) {
     if (has(rules, key) && predicate(rules[key])) {
       result[key] = rules[key];
     }
@@ -68,8 +72,8 @@ function filterRules(rules, predicate) {
 }
 
 function configureAsError(rules) {
-  var result = {};
-  for (var key in rules) {
+  const result = {};
+  for (const key in rules) {
     if (!has(rules, key)) {
       continue;
     }
@@ -78,14 +82,10 @@ function configureAsError(rules) {
   return result;
 }
 
-var activeRules = filterRules(allRules, function(rule) {
-  return !rule.meta.deprecated;
-});
-var activeRulesConfig = configureAsError(activeRules);
+const activeRules = filterRules(allRules, rule => !rule.meta.deprecated);
+const activeRulesConfig = configureAsError(activeRules);
 
-var deprecatedRules = filterRules(allRules, function(rule) {
-  return rule.meta.deprecated;
-});
+const deprecatedRules = filterRules(allRules, rule => rule.meta.deprecated);
 
 module.exports = {
   deprecatedRules: deprecatedRules,

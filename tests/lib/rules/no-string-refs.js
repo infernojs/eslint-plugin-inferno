@@ -8,10 +8,10 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-string-refs');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/no-string-refs');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -26,74 +26,74 @@ require('babel-eslint');
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('no-refs', rule, {
 
   valid: [{
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  componentDidMount: function() {',
-      '     var component = this.hello;',
-      '  },',
-      '  render: function() {',
-      '    return <div ref={c => this.hello = c}>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
+    code: `
+      var Hello = Inferno.createClass({
+        componentDidMount: function() {
+           var component = this.hello;
+        },
+        render: function() {
+          return <div ref={c => this.hello = c}>Hello {this.props.name}</div>;
+        }
+      });
+    `,
     parser: 'babel-eslint'
   }
   ],
 
   invalid: [{
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  componentDidMount: function() {',
-      '     var component = this.refs.hello;',
-      '  },',
-      '  render: function() {',
-      '    return <div>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
+    code: `
+      var Hello = Inferno.createClass({
+        componentDidMount: function() {
+           var component = this.refs.hello;
+        },
+        render: function() {
+          return <div>Hello {this.props.name}</div>;
+        }
+      });
+    `,
     parser: 'babel-eslint',
     errors: [{
       message: 'Using this.refs is deprecated.'
     }]
   }, {
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  render: function() {',
-      '    return <div ref="hello">Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
+    code: `
+      var Hello = Inferno.createClass({
+        render: function() {
+          return <div ref="hello">Hello {this.props.name}</div>;
+        }
+      });
+    `,
     parser: 'babel-eslint',
     errors: [{
       message: 'Using string literals in ref attributes is deprecated.'
     }]
   }, {
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  render: function() {',
-      '    return <div ref={\'hello\'}>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
+    code: `
+      var Hello = Inferno.createClass({
+        render: function() {
+          return <div ref={'hello'}>Hello {this.props.name}</div>;
+        }
+      });
+    `,
     parser: 'babel-eslint',
     errors: [{
       message: 'Using string literals in ref attributes is deprecated.'
     }]
   }, {
-    code: [
-      'var Hello = Inferno.createClass({',
-      '  componentDidMount: function() {',
-      '     var component = this.refs.hello;',
-      '  },',
-      '  render: function() {',
-      '    return <div ref="hello">Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
+    code: `
+      var Hello = Inferno.createClass({
+        componentDidMount: function() {
+           var component = this.refs.hello;
+        },
+        render: function() {
+          return <div ref="hello">Hello {this.props.name}</div>;
+        }
+      });
+    `,
     parser: 'babel-eslint',
     errors: [{
       message: 'Using this.refs is deprecated.'

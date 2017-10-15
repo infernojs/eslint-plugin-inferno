@@ -8,10 +8,10 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/jsx-no-target-blank');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/jsx-no-target-blank');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -24,13 +24,14 @@ var parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-no-target-blank', rule, {
   valid: [
     {code: '<a href="foobar"></a>'},
     {code: '<a randomTag></a>'},
     {code: '<a href="foobar" target="_blank" rel="noopener noreferrer"></a>'},
     {code: '<a target="_blank" {...spreadProps} rel="noopener noreferrer"></a>'},
+    {code: '<a {...spreadProps} target="_blank" rel="noopener noreferrer" href="http://example.com">s</a>'},
     {code: '<a target="_blank" rel="noopener noreferrer" {...spreadProps}></a>'},
     {code: '<p target="_blank"></p>'},
     {code: '<a href="foobar" target="_BLANK" rel="NOOPENER noreferrer"></a>'},
@@ -65,6 +66,30 @@ ruleTester.run('jsx-no-target-blank', rule, {
     }]
   }, {
     code: '<a target="_blank" href="//example.com"></a>',
+    errors: [{
+      message: 'Using target="_blank" without rel="noopener noreferrer" is a security risk:' +
+      ' see https://mathiasbynens.github.io/rel-noopener'
+    }]
+  }, {
+    code: '<a target="_blank" href="//example.com" rel={true}></a>',
+    errors: [{
+      message: 'Using target="_blank" without rel="noopener noreferrer" is a security risk:' +
+      ' see https://mathiasbynens.github.io/rel-noopener'
+    }]
+  }, {
+    code: '<a target="_blank" href="//example.com" rel={3}></a>',
+    errors: [{
+      message: 'Using target="_blank" without rel="noopener noreferrer" is a security risk:' +
+      ' see https://mathiasbynens.github.io/rel-noopener'
+    }]
+  }, {
+    code: '<a target="_blank" href="//example.com" rel={null}></a>',
+    errors: [{
+      message: 'Using target="_blank" without rel="noopener noreferrer" is a security risk:' +
+      ' see https://mathiasbynens.github.io/rel-noopener'
+    }]
+  }, {
+    code: '<a target="_blank" href="//example.com" rel></a>',
     errors: [{
       message: 'Using target="_blank" without rel="noopener noreferrer" is a security risk:' +
       ' see https://mathiasbynens.github.io/rel-noopener'

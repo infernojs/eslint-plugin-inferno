@@ -9,12 +9,12 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var eslint = require('eslint');
-var ruleNoUnusedVars = require('eslint/lib/rules/no-unused-vars');
-var rulePreferConst = require('eslint/lib/rules/prefer-const');
-var RuleTester = eslint.RuleTester;
+const eslint = require('eslint');
+const ruleNoUnusedVars = require('eslint/lib/rules/no-unused-vars');
+const rulePreferConst = require('eslint/lib/rules/prefer-const');
+const RuleTester = eslint.RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -29,8 +29,8 @@ require('babel-eslint');
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
-var linter = ruleTester.linter || eslint.linter;
+const ruleTester = new RuleTester({parserOptions});
+const linter = ruleTester.linter || eslint.linter;
 linter.defineRule('jsx-uses-vars', require('../../../lib/rules/jsx-uses-vars'));
 ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
   valid: [
@@ -87,7 +87,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
     }, {
       code: `
         /* eslint jsx-uses-vars: 1 */
-        class HelloMessage {}
+        class HelloMessage {};
         <HelloMessage />
       `
     }, {
@@ -98,7 +98,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
             var HelloMessage = <div>Hello</div>;
             return HelloMessage;
           }
-        }
+        };
         <HelloMessage />
       `
     }, {
@@ -209,18 +209,18 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
 ruleTester.run('prefer-const', rulePreferConst, {
   valid: [],
   invalid: [{
-    code: [
-      '/* eslint jsx-uses-vars:1 */',
-      'let App = <div />;',
-      '<App />;'
-    ].join('\n'),
+    code: `
+      /* eslint jsx-uses-vars:1 */
+      let App = <div />;
+      <App />;
+    `,
     errors: [{message: '\'App\' is never reassigned. Use \'const\' instead.'}]
   }, {
-    code: [
-      '/* eslint jsx-uses-vars:1 */',
-      'let filters = \'foo\';',
-      '<div>{filters}</div>;'
-    ].join('\n'),
+    code: `
+      /* eslint jsx-uses-vars:1 */
+      let filters = 'foo';
+      <div>{filters}</div>;
+    `,
     errors: [{message: '\'filters\' is never reassigned. Use \'const\' instead.'}]
   }]
 });

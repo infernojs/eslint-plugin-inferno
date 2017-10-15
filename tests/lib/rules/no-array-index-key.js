@@ -9,10 +9,10 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-array-index-key');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/no-array-index-key');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -25,7 +25,7 @@ var parserOptions = {
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('no-array-index-key', rule, {
   valid: [
     {code: '<Foo key="foo" />;'},
@@ -63,13 +63,13 @@ ruleTester.run('no-array-index-key', rule, {
     },
 
     {
-      code: [
-        'foo.map((item, i) => {',
-        '  return Inferno.cloneElement(someChild, {',
-        '    key: item.id',
-        '  })',
-        '})'
-      ].join('\n')
+      code: `
+        foo.map((item, i) => {
+          return Inferno.cloneElement(someChild, {
+            key: item.id
+          })
+        })
+      `
     },
 
     {
@@ -130,13 +130,13 @@ ruleTester.run('no-array-index-key', rule, {
     },
 
     {
-      code: [
-        'foo.map((item, i) => {',
-        '  return Inferno.cloneElement(someChild, {',
-        '    key: i',
-        '  })',
-        '})'
-      ].join('\n'),
+      code: `
+        foo.map((item, i) => {
+          return Inferno.cloneElement(someChild, {
+            key: i
+          })
+        })
+      `,
       errors: [{message: 'Do not use Array index in keys'}]
     },
 

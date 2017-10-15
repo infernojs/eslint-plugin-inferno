@@ -8,10 +8,10 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/sort-comp');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/sort-comp');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -26,7 +26,7 @@ require('babel-eslint');
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('sort-comp', rule, {
 
   valid: [{
@@ -240,6 +240,76 @@ ruleTester.run('sort-comp', rule, {
         'render'
       ]
     }]
+  }, {
+    // Non-inferno classes should be ignored, even in expressions
+    code: [
+      'return class Hello {',
+      '  render() {',
+      '    return <div>{this.props.text}</div>;',
+      '  }',
+      '  props: { text: string };',
+      '  constructor() {}',
+      '  state: Object = {};',
+      '}'
+    ].join('\n'),
+    parser: 'babel-eslint',
+    parserOptions: parserOptions
+  }, {
+    // Non-inferno classes should be ignored, even in expressions
+    code: [
+      'return class {',
+      '  render() {',
+      '    return <div>{this.props.text}</div>;',
+      '  }',
+      '  props: { text: string };',
+      '  constructor() {}',
+      '  state: Object = {};',
+      '}'
+    ].join('\n'),
+    parser: 'babel-eslint',
+    parserOptions: parserOptions
+  }, {
+    // Getters should be at the top
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  get foo() {}',
+      '  constructor() {}',
+      '  render() {',
+      '    return <div>{this.props.text}</div>;',
+      '  }',
+      '}'
+    ].join('\n'),
+    parser: 'babel-eslint',
+    options: [{
+      order: [
+        'getters',
+        'static-methods',
+        'lifecycle',
+        'everything-else',
+        'render'
+      ]
+    }]
+  }, {
+    // Setters should be at the top
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  set foo(bar) {}',
+      '  constructor() {}',
+      '  render() {',
+      '    return <div>{this.props.text}</div>;',
+      '  }',
+      '}'
+    ].join('\n'),
+    parser: 'babel-eslint',
+    options: [{
+      order: [
+        'setters',
+        'static-methods',
+        'lifecycle',
+        'everything-else',
+        'render'
+      ]
+    }]
   }],
 
   invalid: [{
@@ -274,6 +344,20 @@ ruleTester.run('sort-comp', rule, {
       '  onClick: function() {},',
       '});'
     ].join('\n'),
+    errors: [{message: 'render should be placed after onClick'}]
+  }, {
+    // Must force a custom method to be placed before render, even in function
+    code: [
+      'var Hello = () => {',
+      '  return class Test extends Inferno.Component {',
+      '    render () {',
+      '      return <div>Hello</div>;',
+      '    }',
+      '    onClick () {}',
+      '  }',
+      '};'
+    ].join('\n'),
+    parserOptions: parserOptions,
     errors: [{message: 'render should be placed after onClick'}]
   }, {
     // Must force a custom method to be placed after render if no 'everything-else' group is specified
@@ -384,6 +468,50 @@ ruleTester.run('sort-comp', rule, {
         '/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/',
         'everything-else',
         '/^render.+$/',
+        'render'
+      ]
+    }]
+  }, {
+    // Getters should at the top
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  constructor() {}',
+      '  get foo() {}',
+      '  render() {',
+      '    return <div>{this.props.text}</div>;',
+      '  }',
+      '}'
+    ].join('\n'),
+    parser: 'babel-eslint',
+    errors: [{message: 'constructor should be placed after getter functions'}],
+    options: [{
+      order: [
+        'getters',
+        'static-methods',
+        'lifecycle',
+        'everything-else',
+        'render'
+      ]
+    }]
+  }, {
+    // Setters should at the top
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  constructor() {}',
+      '  set foo(bar) {}',
+      '  render() {',
+      '    return <div>{this.props.text}</div>;',
+      '  }',
+      '}'
+    ].join('\n'),
+    parser: 'babel-eslint',
+    errors: [{message: 'constructor should be placed after setter functions'}],
+    options: [{
+      order: [
+        'setters',
+        'static-methods',
+        'lifecycle',
+        'everything-else',
         'render'
       ]
     }]

@@ -9,10 +9,10 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/void-dom-elements-no-children');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../lib/rules/void-dom-elements-no-children');
+const RuleTester = require('eslint').RuleTester;
 
-var parserOptions = {
+const parserOptions = {
   ecmaVersion: 8,
   sourceType: 'module',
   ecmaFeatures: {
@@ -29,7 +29,7 @@ function errorMessage(elementName) {
 // Tests
 // -----------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('void-dom-elements-no-children', rule, {
   valid: [
     {
@@ -49,39 +49,45 @@ ruleTester.run('void-dom-elements-no-children', rule, {
     },
     {
       code: 'Inferno.createElement("div", { dangerouslySetInnerHTML: { __html: "Foo" } });'
-    }, {
-      code: 'document.createElement("img")'
-    }, {
+    },
+    {
+      code: 'document.createElement("img");'
+    },
+    {
       code: 'Inferno.createElement("img");'
     }, {
-      code: [
-        'const props = {}',
-        'Inferno.createElement("img", props)'
-      ].join('\n')
+      code: 'Inferno.createElement();'
     }, {
-      code: [
-        'import Inferno from "inferno";',
-        'const { createElement } = Inferno;',
-        'createElement("div")'
-      ].join('\n')
+      code: 'document.createElement();'
     }, {
-      code: [
-        'import Inferno from "inferno";',
-        'const { createElement } = Inferno;',
-        'createElement("img")'
-      ].join('\n')
+      code: `
+        const props = {};
+        Inferno.createElement("img", props);
+      `
     }, {
-      code: [
-        'import Inferno, {createElement, PureComponent} from \'inferno\';',
-        'class Button extends PureComponent {',
-        '  handleClick(ev) {',
-        '    ev.preventDefault();',
-        '  }',
-        '  render() {',
-        '    return <div onClick={this.handleClick}>Hello</div>;',
-        '  }',
-        '}'
-      ].join('\n')
+      code: `
+        import Inferno, {createElement} from "inferno-create-element";
+        createElement("div");
+      `
+    }, {
+      code: `
+        import Inferno, {createElement} from "inferno-create-element";
+        createElement("img");
+      `
+    }, {
+      code: `
+        import createElement from "inferno-create-element";
+        import Component from "inferno-component";
+        
+        class Button extends PureComponent {
+          handleClick(ev) {
+            ev.preventDefault();
+          }
+          render() {
+            return <div onClick={this.handleClick}>Hello</div>;
+          }
+        }
+      `
     }
   ],
   invalid: [
@@ -114,29 +120,26 @@ ruleTester.run('void-dom-elements-no-children', rule, {
       errors: [{message: errorMessage('br')}]
     },
     {
-      code: [
-        'import Inferno from "inferno";',
-        'const createElement = Inferno.createElement;',
-        'createElement("img", {}, "Foo");'
-      ].join('\n'),
+      code: `
+        import Inferno, {createElement} from "inferno-create-element";
+        createElement("img", {}, "Foo");
+      `,
       errors: [{message: errorMessage('img')}],
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'import Inferno from "inferno";',
-        'const createElement = Inferno.createElement;',
-        'createElement("img", { children: "Foo" });'
-      ].join('\n'),
+      code: `
+        import Inferno, {createElement} from "inferno-create-element";
+        createElement("img", { children: "Foo" });
+      `,
       errors: [{message: errorMessage('img')}],
       parser: 'babel-eslint'
     },
     {
-      code: [
-        'import Inferno from "inferno";',
-        'const createElement = Inferno.createElement;',
-        'createElement("img", { dangerouslySetInnerHTML: { __html: "Foo" } });'
-      ].join('\n'),
+      code: `
+        import Inferno, {createElement} from "inferno-create-element";
+        createElement("img", { dangerouslySetInnerHTML: { __html: "Foo" } });
+      `,
       errors: [{message: errorMessage('img')}],
       parser: 'babel-eslint'
     }

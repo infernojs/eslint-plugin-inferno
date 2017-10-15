@@ -1,20 +1,18 @@
 /* eslint-env mocha */
 'use strict';
 
-var plugin = require('..');
+const plugin = require('..');
 
-var assert = require('assert');
-var fs = require('fs');
-var path = require('path');
+const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 
-var ruleFiles = fs.readdirSync(path.resolve(__dirname, '../lib/rules/'))
-  .map(function(f) {
-    return path.basename(f, '.js');
-  });
+const ruleFiles = fs.readdirSync(path.resolve(__dirname, '../lib/rules/'))
+  .map(f => path.basename(f, '.js'));
 
-describe('all rule files should be exported by the plugin', function() {
-  ruleFiles.forEach(function(ruleName) {
-    it(`should export ${ruleName}`, function() {
+describe('all rule files should be exported by the plugin', () => {
+  ruleFiles.forEach(ruleName => {
+    it(`should export ${ruleName}`, () => {
       assert.equal(
         plugin.rules[ruleName],
         require(path.join('../lib/rules', ruleName))
@@ -23,11 +21,11 @@ describe('all rule files should be exported by the plugin', function() {
   });
 });
 
-describe('deprecated rules', function() {
-  it('marks all deprecated rules as deprecated', function() {
-    ruleFiles.forEach(function(ruleName) {
-      var inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
-      var isDeprecated = plugin.rules[ruleName].meta.deprecated;
+describe('deprecated rules', () => {
+  it('marks all deprecated rules as deprecated', () => {
+    ruleFiles.forEach(ruleName => {
+      const inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
+      const isDeprecated = plugin.rules[ruleName].meta.deprecated;
       if (inDeprecatedRules) {
         assert(isDeprecated, `${ruleName} metadata should mark it as deprecated`);
       } else {
@@ -37,18 +35,18 @@ describe('deprecated rules', function() {
   });
 });
 
-describe('configurations', function() {
-  it('should export a \'recommended\' configuration', function() {
+describe('configurations', () => {
+  it('should export a \'recommended\' configuration', () => {
     assert(plugin.configs.recommended);
-    Object.keys(plugin.configs.recommended.rules).forEach(function (configName) {
+    Object.keys(plugin.configs.recommended.rules).forEach(configName => {
       assert.equal(configName.indexOf('inferno/'), 0);
-      var ruleName = configName.substring('inferno/'.length);
+      const ruleName = configName.substring('inferno/'.length);
       assert(plugin.rules[ruleName]);
     });
 
-    ruleFiles.forEach(function(ruleName) {
-      var inRecommendedConfig = Boolean(plugin.configs.recommended.rules[`inferno/${ruleName}`]);
-      var isRecommended = plugin.rules[ruleName].meta.docs.recommended;
+    ruleFiles.forEach(ruleName => {
+      const inRecommendedConfig = Boolean(plugin.configs.recommended.rules[`inferno/${ruleName}`]);
+      const isRecommended = plugin.rules[ruleName].meta.docs.recommended;
       if (inRecommendedConfig) {
         assert(isRecommended, `${ruleName} metadata should mark it as recommended`);
       } else {
@@ -56,15 +54,15 @@ describe('configurations', function() {
       }
     });
   });
-  it('should export a \'all\' configuration', function() {
+  it('should export a \'all\' configuration', () => {
     assert(plugin.configs.all);
-    Object.keys(plugin.configs.all.rules).forEach(function(configName) {
+    Object.keys(plugin.configs.all.rules).forEach(configName => {
       assert.equal(configName.indexOf('inferno/'), 0);
       assert.equal(plugin.configs.all.rules[configName], 2);
     });
-    ruleFiles.forEach(function(ruleName) {
-      var inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
-      var inAllConfig = Boolean(plugin.configs.all.rules[`inferno/${ruleName}`]);
+    ruleFiles.forEach(ruleName => {
+      const inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
+      const inAllConfig = Boolean(plugin.configs.all.rules[`inferno/${ruleName}`]);
       assert(inDeprecatedRules ^ inAllConfig);
     });
   });
