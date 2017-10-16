@@ -137,6 +137,22 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent onClick={this.update} foo={this.state.foo} />;
       }
     });`,
+    `class StateInRenderTest extends Inferno.Component {
+      constructor() {
+        this.state = { 'foo': 0 };
+      }
+      render(props, state) {
+        return <SomeComponent foo={state.foo} />;
+      }
+    }`,
+    `class DestructuredStateInRenderTest extends Inferno.Component {
+      constructor() {
+        this.state = { 'foo': 0 };
+      }
+      render(props, { foo }) {
+        return <SomeComponent foo={foo} />;
+      }
+    }`,
     `class NoStateTest extends Inferno.Component {
       render() {
         return <SomeComponent />;
