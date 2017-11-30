@@ -44,10 +44,6 @@ ruleTester.run('no-unknown-property', rule, {
     }
   ],
   invalid: [{
-    code: '<div class="bar"></div>;',
-    output: '<div className="bar"></div>;',
-    errors: [{message: 'Unknown property \'class\' found, use \'className\' instead'}]
-  }, {
     code: '<div accept-charset="bar"></div>;',
     output: '<div acceptCharset="bar"></div>;',
     errors: [{message: 'Unknown property \'accept-charset\' found, use \'acceptCharset\' instead'}]
