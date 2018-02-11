@@ -96,6 +96,10 @@ ruleTester.run('inferno-require-optimization', rule, {
     `,
     parser: 'babel-eslint',
     options: [{allowDecorators: ['renderPure', 'pureRender']}]
+  }, {
+    code: `
+      const obj = { prop: [,,,,,] }
+    `
   }],
 
   invalid: [{

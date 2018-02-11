@@ -174,7 +174,7 @@ ruleTester.run('no-typos', rule, {
       const contextTypes = "CONTEXTTYPES"
       const childContextTypes = "CHILDCONTEXTTYPES"
       const defautProps = "DEFAULTPROPS"
-      
+
       class First extends Inferno.Component {}
       First[propTypes] = {};
       First[contextTypes] = {};
@@ -338,6 +338,29 @@ ruleTester.run('no-typos', rule, {
     parser: 'babel-eslint',
     parserOptions: parserOptions
   }, {
+    // ensure that an absent arg to PropTypes.shape does not crash
+    code: `class Component extends Inferno.Component {};
+     Component.propTypes = {
+       a: PropTypes.shape(),
+     };
+     Component.contextTypes = {
+       a: PropTypes.shape(),
+     };
+    `,
+    parserOptions: parserOptions
+  }, {
+    // ensure that an absent arg to PropTypes.shape does not crash
+    code: `class Component extends Inferno.Component {};
+     Component.propTypes = {
+       a: PropTypes.shape(),
+     };
+     Component.contextTypes = {
+       a: PropTypes.shape(),
+     };
+    `,
+    parser: 'babel-eslint',
+    parserOptions: parserOptions
+  }, {
     code: `
       const fn = (err, res) => {
         const { body: data = {} } = { ...res };
@@ -345,6 +368,27 @@ ruleTester.run('no-typos', rule, {
       };
     `,
     parser: 'babel-eslint'
+  }, {
+    code: `class Component extends Inferno.Component {};
+     Component.propTypes = {
+       b: string.isRequired,
+       c: PropTypes.shape({
+         d: number.isRequired,
+       }).isRequired
+     }
+   `,
+    parserOptions: parserOptions
+  }, {
+    code: `class Component extends Inferno.Component {};
+     Component.propTypes = {
+       b: string.isRequired,
+       c: PropTypes.shape({
+         d: number.isRequired,
+       }).isRequired
+     }
+   `,
+    parser: 'babel-eslint',
+    parserOptions: parserOptions
   }],
 
   invalid: [{
@@ -770,6 +814,37 @@ ruleTester.run('no-typos', rule, {
       message: 'Typo in declared prop type: function'
     }, {
       message: 'Typo in declared prop type: objectof'
+    }]
+  }, {
+    code: `class Component extends Inferno.Component {};
+     Component.propTypes = {
+       a: string.isrequired,
+       b: shape({
+         c: number
+       }).isrequired
+     }
+   `,
+    parserOptions: parserOptions,
+    errors: [{
+      message: 'Typo in declared prop type: isrequired'
+    }, {
+      message: 'Typo in prop type chain qualifier: isrequired'
+    }]
+  }, {
+    code: `class Component extends Inferno.Component {};
+     Component.propTypes = {
+       a: string.isrequired,
+       b: shape({
+         c: number
+       }).isrequired
+     }
+   `,
+    parser: 'babel-eslint',
+    parserOptions: parserOptions,
+    errors: [{
+      message: 'Typo in declared prop type: isrequired'
+    }, {
+      message: 'Typo in prop type chain qualifier: isrequired'
     }]
   }]
 });

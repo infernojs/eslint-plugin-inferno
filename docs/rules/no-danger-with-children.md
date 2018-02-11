@@ -24,7 +24,7 @@ Inferno.createVNode(2, "div", { dangerouslySetInnerHTML: { __html: "HTML" } }, "
 Inferno.createVNode(2, "Hello", { dangerouslySetInnerHTML: { __html: "HTML" } }, "Children");
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 <div dangerouslySetInnerHTML={{ __html: "HTML" }} />

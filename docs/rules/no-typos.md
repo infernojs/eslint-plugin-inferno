@@ -1,4 +1,4 @@
-# Prevents common typos (react/no-typos)
+# Prevents common typos (inferno/no-typos)
 
 Ensure no casing typos were made declaring static class properties and lifecycle methods.
 
@@ -11,7 +11,7 @@ no casing typos:
 
 * defaultProps
 
-and the following react lifecycle methods:
+and the following inferno lifecycle methods:
 
 * componentWillMount
 * componentDidMount
@@ -78,7 +78,7 @@ class MyComponent extends Inferno.Component {
 
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```js
 class MyComponent extends Inferno.Component {

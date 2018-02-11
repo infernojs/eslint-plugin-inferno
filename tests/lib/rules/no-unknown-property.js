@@ -41,7 +41,8 @@ ruleTester.run('no-unknown-property', rule, {
     {code: '<atom-panel class="foo"></atom-panel>;'}, {
       code: '<div class="bar"></div>;',
       options: [{ignore: ['class']}]
-    }
+    },
+    {code: '<script crossOrigin />'}
   ],
   invalid: [{
     code: '<div accept-charset="bar"></div>;',
@@ -63,5 +64,14 @@ ruleTester.run('no-unknown-property', rule, {
     code: '<div onmousedown="bar"></div>;',
     output: '<div onMouseDown="bar"></div>;',
     errors: [{message: 'Unknown property \'onmousedown\' found, use \'onMouseDown\' instead'}]
+  }, {
+    code: '<script crossorigin />',
+    errors: [{message: 'Unknown property \'crossorigin\' found, use \'crossOrigin\' instead'}]
+  }, {
+    code: '<div crossorigin />',
+    errors: [{message: 'Unknown property \'crossorigin\' found, use \'crossOrigin\' instead'}]
+  }, {
+    code: '<div crossOrigin />',
+    errors: [{message: 'Invalid property \'crossOrigin\' found on tag \'div\', but it is only allowed on: script, img, video, link'}]
   }]
 });

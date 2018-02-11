@@ -21,7 +21,7 @@ var Hello = Inferno.createClass({
 });
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 var Hello = Inferno.createClass({

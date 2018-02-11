@@ -6,7 +6,7 @@ Stateless functional components are simpler than class based components and will
 
 This rule will check your class based Inferno components for
 
-* methods/properties other than `displayName`, `propTypes`, `render` and useless constructor (same detection as ESLint [no-useless-constructor rule](http://eslint.org/docs/rules/no-useless-constructor))
+* methods/properties other than `displayName`, `propTypes`, `contextTypes`, `defaultProps`, `render` and useless constructor (same detection as ESLint [no-useless-constructor rule](http://eslint.org/docs/rules/no-useless-constructor))
 * instance property other than `this.props` and `this.context`
 * extension of `Inferno.PureComponent` (if the `ignorePureComponents` flag is true)
 * presence of `ref` attribute in JSX
@@ -25,7 +25,7 @@ var Hello = Inferno.createClass({
 });
 ```
 
-The following pattern is not considered a warning:
+The following pattern is **not** considered a warning:
 
 ```jsx
 const Foo = function(props, context) {
@@ -37,7 +37,6 @@ const Foo = function(props, context) {
 };
 ```
 
-The following pattern is not considered a warning in Inferno <15.0.0:
 
 ```jsx
 class Foo extends Inferno.Component {
@@ -66,7 +65,7 @@ class Foo extends Inferno.Component {
 
 When `true` the rule will ignore Components extending from `Inferno.PureComponent` that use `this.props` or `this.context`.
 
-The following patterns is considered okay and does not cause warnings:
+The following pattern is considered okay and does **not** cause warnings:
 
 ```jsx
 class Foo extends Inferno.PureComponent {

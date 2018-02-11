@@ -1,4 +1,4 @@
-# Enforce or disallow spaces inside of curly braces in JSX attributes and expressions. (react/jsx-curly-spacing)
+# Enforce or disallow spaces inside of curly braces in JSX attributes and expressions. (inferno/jsx-curly-spacing)
 
 While formatting preferences are very personal, a number of style guides require or disallow spaces between curly braces.
 
@@ -33,7 +33,7 @@ When `{"when": "never"}` is set, the following patterns are considered warnings:
 <Hello name={firstname } />;
 ```
 
-The following patterns are not warnings:
+The following patterns are **not** warnings:
 
 ```jsx
 <Hello name={firstname} />;
@@ -57,7 +57,7 @@ When `{"when": "never", "children": true}` is set, the following patterns are co
 <Hello>{ firstname }</Hello>;
 ```
 
-The following patterns are not warnings:
+The following patterns are **not** warnings:
 
 ```jsx
 <Hello name={firstname} />;
@@ -81,7 +81,7 @@ When `{"when": "always"}` is set, the following patterns are considered warnings
 <Hello name={firstname } />;
 ```
 
-The following patterns are not warnings:
+The following patterns are **not** warnings:
 
 ```jsx
 <Hello name={ firstname } />;
@@ -105,7 +105,7 @@ When `{"when": "always", "children": true}` is set, the following patterns are c
 <Hello>{firstname}</Hello>;
 ```
 
-The following patterns are not warnings:
+The following patterns are **not** warnings:
 
 ```jsx
 <Hello name={ firstname } />;
@@ -124,7 +124,7 @@ The following patterns are not warnings:
 By default, braces spanning multiple lines are allowed with either setting. If you want to disallow them you can specify an additional `allowMultiline` property with the value `false`:
 
 ```json
-"react/jsx-curly-spacing": [2, {"when": "never", "allowMultiline": false}]
+"inferno/jsx-curly-spacing": [2, {"when": "never", "allowMultiline": false}]
 ```
 
 When `"never"` is used and `allowMultiline` is `false`, the following patterns are considered warnings:
@@ -138,7 +138,7 @@ When `"never"` is used and `allowMultiline` is `false`, the following patterns a
 } />;
 ```
 
-The following patterns are not warnings:
+The following patterns are **not** warnings:
 
 ```jsx
 <Hello name={firstname} />;
@@ -161,7 +161,7 @@ When `"always"` is used and `allowMultiline` is `false`, the following patterns 
 } />;
 ```
 
-The following patterns are not warnings:
+The following patterns are **not** warnings:
 
 ```jsx
 <Hello name={ firstname } />;
@@ -183,7 +183,7 @@ When `{"when": "never", "attributes": {"allowMultiline": false}, "children": tru
 <Hello>{ firstname }</Hello>;
 ```
 
-The following patterns are not warnings:
+The following patterns are **not** warnings:
 
 ```jsx
 <Hello name={firstname} />;
@@ -198,7 +198,7 @@ The following patterns are not warnings:
 You can specify an additional `spacing` property that is an object with the following possible values:
 
 ```json
-"react/jsx-curly-spacing": [2, {"when": "always", "spacing": {
+"inferno/jsx-curly-spacing": [2, {"when": "always", "spacing": {
   "objectLiterals": "never"
 }}]
 ```
@@ -207,13 +207,13 @@ You can specify an additional `spacing` property that is an object with the foll
 
 All spacing options accept either the string `"always"` or the string `"never"`. Note that the default value for all "spacing" options matches the first "always"/"never" option provided.
 
-When `"always"` is used but `objectLiterals` is `"never"`, the following pattern is not considered a warning:
+When `"always"` is used but `objectLiterals` is `"never"`, the following pattern is **not** considered a warning:
 
 ```jsx
 <App blah={ 3 } foo={{ bar: true, baz: true }} />;
 ```
 
-When `"never"` is used and `objectLiterals` is `"always"`, the following pattern is not considered a warning:
+When `"never"` is used and `objectLiterals` is `"always"`, the following pattern is **not** considered a warning:
 
 ```jsx
 <App blah={3} foo={ {bar: true, baz: true} } />;
@@ -226,31 +226,31 @@ Please note that spacing of the object literal curly braces themselves is contro
 To preserve backward compatibility, two additional options are supported:
 
 ```json
-"react/jsx-curly-spacing": [2, "always"]
+"inferno/jsx-curly-spacing": [2, "always"]
 ```
 
 which is a shorthand for
 
 ```json
-"react/jsx-curly-spacing": [2, {"when": "always"}]
+"inferno/jsx-curly-spacing": [2, {"when": "always"}]
 ```
 
 and
 
 ```json
-"react/jsx-curly-spacing": [2, "never"]
+"inferno/jsx-curly-spacing": [2, "never"]
 ```
 
 which is a shorthand for
 
 ```json
-"react/jsx-curly-spacing": [2, {"when": "never"}]
+"inferno/jsx-curly-spacing": [2, {"when": "never"}]
 ```
 
 When using the shorthand options, only attributes will be checked. To specify other options, use another argument:
 
 ```json
-"react/jsx-curly-spacing": [2, "never", {
+"inferno/jsx-curly-spacing": [2, "never", {
   "allowMultiline": false,
   "spacing": {"objectLiterals": "always"}
 }]

@@ -14,7 +14,7 @@ const inst = Inferno.render(<App />, document.body);
 doSomethingWithInst(inst);
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 Inferno.render(<App ref={doSomethingWithInst} />, document.body);

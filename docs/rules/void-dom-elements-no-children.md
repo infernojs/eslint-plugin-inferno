@@ -18,7 +18,7 @@ Inferno.createElement('br', { children: 'Children' })
 Inferno.createElement('br', { dangerouslySetInnerHTML: { __html: 'HTML' } })
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 <div>Children</div>

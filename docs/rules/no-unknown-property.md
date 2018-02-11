@@ -14,7 +14,7 @@ var Inferno = require('inferno');
 var Hello = <div class="hello">Hello World</div>;
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 var Inferno = require('inferno');

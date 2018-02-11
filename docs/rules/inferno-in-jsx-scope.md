@@ -20,7 +20,7 @@ var Inferno = require('inferno');
 var Hello = <div>Hello {this.props.name}</div>;
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 import Inferno from 'inferno';

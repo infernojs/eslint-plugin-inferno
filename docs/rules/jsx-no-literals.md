@@ -1,4 +1,4 @@
-# Prevent usage of string literals in JSX (react/jsx-no-literals)
+# Prevent usage of string literals in JSX (inferno/jsx-no-literals)
 
 There are a couple of scenarios where you want to avoid string literals in JSX.  Either to enforce consistency and reducing strange behaviour, or for enforcing that literals aren't kept in JSX so they can be translated.
 
@@ -13,7 +13,7 @@ The following patterns are considered warnings:
 var Hello = <div>test</div>;
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 var Hello = <div>{'test'}</div>;
@@ -28,7 +28,7 @@ There is only one option:
 To use, you can specify like the following:
 
 ```json
-"react/jsx-no-literals": [{"noStrings": true}]
+"inferno/jsx-no-literals": [{"noStrings": true}]
 ```
 
 In this configuration, the following are considered warnings:
@@ -41,10 +41,10 @@ var Hello = <div>test</div>;
 var Hello = <div>{'test'}</div>;
 ```
 
-The following are not considered warnings:
+The following are **not** considered warnings:
 
 ```jsx
-// When using something like `react-intl`
+// When using something like `inferno-intl`
 var Hello = <div><Text {...message} /></div>
 ```
 

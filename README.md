@@ -1,7 +1,7 @@
 ESLint-plugin-Inferno
 ===================
 
-Note: This is a fork of the great [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react).
+Note: This is a fork of the great [eslint-plugin-inferno](https://github.com/yannickcr/eslint-plugin-inferno).
 
 Inferno specific linting rules for ESLint
 Rules are mostly same, but propType related rules have been removed.
@@ -22,7 +22,35 @@ $ npm install eslint-plugin-inferno --save-dev
 
 # Configuration
 
-Add `plugins` section and specify ESLint-plugin-Inferno as a plugin.
+Use [our preset](#recommended) to get reasonable defaults:
+
+```json
+  "extends": [
+    "eslint:recommended",
+    "plugin:inferno/recommended"
+  ]
+```
+
+You should also specify settings that will be shared across all the plugin rules.
+
+```json5
+{
+  "settings": {
+    "inferno": {
+      "createClass": "createClass", // Regex for Component Factory to use, // default to "createClass"
+      "pragma": "Inferno",  // Inferno to use, default to "Inferno"
+    },
+    "propWrapperFunctions": [ "forbidExtraProps" ] // The names of any functions used to wrap the
+                                                   // propTypes object, e.g. `forbidExtraProps`.
+                                                   // If this isn't set, any propTypes wrapped in
+                                                   // a function will be skipped.
+  }
+}
+```
+
+If you do not use a preset you will need to specify individual rules and add extra configuration.
+
+Add "inferno" to the plugins section.
 
 ```json
 {
@@ -32,31 +60,9 @@ Add `plugins` section and specify ESLint-plugin-Inferno as a plugin.
 }
 ```
 
-You can also specify some settings that will be shared across all the plugin rules.
+Enable JSX support.
 
-```json5
-{
-  "settings": {
-    "inferno": {
-      "pragma": "Inferno"  // Pragma to use, default to "Inferno"
-    }
-  }
-}
-```
-
-If it is not already the case you must also configure `ESLint` to support JSX.
-
-With ESLint 1.x.x:
-
-```json
-{
-  "ecmaFeatures": {
-    "jsx": true
-  }
-}
-```
-
-With ESLint 2.x.x or 3.x.x:
+With ESLint 2+
 
 ```json
 {
@@ -68,7 +74,7 @@ With ESLint 2.x.x or 3.x.x:
 }
 ```
 
-Finally, enable all of the rules that you would like to use.  Use [our preset](#recommended) to get reasonable defaults quickly, and/or choose your own:
+Enable the rules that you would like to use.
 
 ```json
   "rules": {
@@ -80,16 +86,15 @@ Finally, enable all of the rules that you would like to use.  Use [our preset](#
 # List of rules NOT part of inferno
 These rules have been removed, because they are invalid in Inferno
 
-* [react/boolean-prop-naming](docs/rules/boolean-prop-naming.md): Enforces consistent naming for boolean props
-* [react/default-props-match-prop-types](docs/rules/default-props-match-prop-types.md): Prevent extraneous defaultProps on components
-* [react/display-name](docs/rules/display-name.md): Prevent missing `displayName` in a Inferno component definition
-* [react/forbid-prop-types](docs/rules/forbid-prop-types.md): Forbid certain propTypes
-* [react/forbid-foreign-prop-types](docs/rules/forbid-foreign-prop-types.md): Forbid foreign propTypes
-* [react/no-deprecated](docs/rules/no-deprecated.md): Prevent usage of deprecated methods
-* [react/no-unused-prop-types](docs/rules/no-unused-prop-types.md): Prevent definitions of unused prop types
-* [react/prop-types](docs/rules/prop-types.md): Prevent missing props validation in a Inferno component definition
-* [react/sort-prop-types](docs/rules/sort-prop-types.md): Enforce propTypes declarations alphabetical sorting
-* [react/require-default-props](docs/rules/require-default-props.md): Enforce a defaultProps definition for every prop that is not a required prop
+* [inferno/boolean-prop-naming](docs/rules/boolean-prop-naming.md): Enforces consistent naming for boolean props
+* [inferno/button-has-type](docs/rules/button-has-type.md): Forbid "button" element without an explicit "type" attribute
+* [inferno/destructuring-assignment](docs/rules/destructuring-assignment.md): Rule enforces consistent usage of destructuring assignment in component
+* [inferno/forbid-dom-props](docs/rules/forbid-dom-props.md): Forbid certain props on DOM Nodes
+* [inferno/no-access-state-in-setstate](docs/rules/no-access-state-in-setstate.md): Prevent using this.state inside this.setState
+* [inferno/no-deprecated](docs/rules/no-deprecated.md): Prevent usage of deprecated methods
+* [inferno/no-this-in-sfc](docs/rules/no-this-in-sfc.md): Prevent using `this` in stateless functional components
+* [inferno/no-unused-state](docs/rules/no-unused-state.md): Prevent definitions of unused state properties
+* [inferno/require-default-props](docs/rules/require-default-props.md): Enforce a defaultProps definition for every prop that is not a required prop
 
 # List of supported rules
 
@@ -143,10 +148,10 @@ These rules have been removed, because they are invalid in Inferno
 * [inferno/jsx-no-literals](docs/rules/jsx-no-literals.md): Prevent usage of unwrapped JSX strings
 * [inferno/jsx-no-target-blank](docs/rules/jsx-no-target-blank.md): Prevent usage of unsafe `target='_blank'`
 * [inferno/jsx-no-undef](docs/rules/jsx-no-undef.md): Disallow undeclared variables in JSX
-* [inferno/jsx-curly-brace-presence](docs/rules/jsx-curly-brace-presence.md): Enforce curly braces or disallow unnecessary curly braces in JSX
+* [inferno/jsx-one-expression-per-line](docs/rules/jsx-one-expression-per-line.md): Limit to one expression per line in JSX
 * [inferno/jsx-pascal-case](docs/rules/jsx-pascal-case.md): Enforce PascalCase for user-defined JSX components
 * [inferno/jsx-sort-props](docs/rules/jsx-sort-props.md): Enforce props alphabetical sorting (fixable)
-* [inferno/jsx-space-before-closing](docs/rules/jsx-space-before-closing.md): Validate spacing before closing bracket in JSX (fixable)
+* [inferno/jsx-sort-default-props](docs/rules/jsx-sort-default-props.md): Enforce default props alphabetical sorting
 * [inferno/jsx-tag-spacing](docs/rules/jsx-tag-spacing.md): Validate whitespace in and around the JSX opening and closing brackets (fixable)
 * [inferno/jsx-uses-inferno](docs/rules/jsx-uses-inferno.md): Prevent Inferno to be incorrectly marked as unused
 * [inferno/jsx-uses-vars](docs/rules/jsx-uses-vars.md): Prevent variables used in JSX to be incorrectly marked as unused

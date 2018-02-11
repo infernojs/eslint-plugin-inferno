@@ -1,8 +1,8 @@
-# Enforce component methods order (react/sort-comp)
+# Enforce component methods order (inferno/sort-comp)
 
 When creating Inferno components it is more convenient to always follow the same organisation for method order to help you easily find lifecyle methods, event handlers, etc.
 
-**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/reactjs/react-codemod/blob/master/transforms/sort-comp.js) in [react-codemod](https://www.npmjs.com/package/react-codemod).
+**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/infernojs/inferno-codemod/blob/master/transforms/sort-comp.js) in [inferno-codemod](https://www.npmjs.com/package/inferno-codemod).
 
 ## Rule Details
 
@@ -24,7 +24,7 @@ var Hello = Inferno.createClass({
 });
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 var Hello = Inferno.createClass({
@@ -41,7 +41,7 @@ This rule can take one argument to customize the components organisation.
 
 ```js
 ...
-"react/sort-comp": [<enabled>, { order: <order>, groups: <groups> }]
+"inferno/sort-comp": [<enabled>, { order: <order>, groups: <groups> }]
 ...
 ```
 
@@ -89,16 +89,18 @@ The default configuration is:
 * `lifecycle` is referring to the `lifecycle` group defined in `groups`.
 * `everything-else` is a special group that match all the methods that do not match any of the other groups.
 * `render` is referring to the `render` method.
-* `type-annotations`. This group is not specified by default, but can be used to enforce flow annotations to be at the top.
+* `type-annotations`. This group is not specified by default, but can be used to enforce flow annotations positioning.
 * `getters` This group is not specified by default, but can be used to enforce class getters positioning.
 * `setters` This group is not specified by default, but can be used to enforce class setters positioning.
+* `instance-variables` This group is not specified by default, but can be used to enforce all other instance variables positioning.
+* `instance-methods` This group is not specified by default, but can be used to enforce all other instance methods positioning.
 
 You can override this configuration to match your needs.
 
 For example, if you want to place your event handlers (`onClick`, `onSubmit`, etc.) before `render` but the other methods after it:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'static-methods',
     'lifecycle',
@@ -120,7 +122,7 @@ var Hello = Inferno.createClass({
 });
 ```
 
-With the above configuration, the following patterns are not considered warnings:
+With the above configuration, the following patterns are **not** considered warnings:
 
 ```jsx
 var Hello = Inferno.createClass({
@@ -134,7 +136,7 @@ var Hello = Inferno.createClass({
 If you want to split your `render` method into smaller ones and keep them just before render:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'static-methods',
     'lifecycle',
@@ -162,7 +164,7 @@ var Hello = Inferno.createClass({
 });
 ```
 
-With the above configuration, the following patterns are not considered warnings:
+With the above configuration, the following patterns are **not** considered warnings:
 
 ```jsx
 var Hello = Inferno.createClass({
@@ -177,7 +179,7 @@ var Hello = Inferno.createClass({
 If you want to flow annotations to be at the top:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'type-annotations',
     'static-methods',
@@ -201,7 +203,7 @@ class Hello extends Inferno.Component<any, Props, void> {
 }
 ```
 
-With the above configuration, the following patterns are not considered warnings:
+With the above configuration, the following patterns are **not** considered warnings:
 
 ```jsx
 type Props = {};

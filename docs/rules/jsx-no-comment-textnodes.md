@@ -23,7 +23,7 @@ var Hello = function() {
 }
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 var Hello = function() {

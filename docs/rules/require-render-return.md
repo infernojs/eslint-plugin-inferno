@@ -20,7 +20,7 @@ class Hello extends Inferno.Component {
 }
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 var Hello = Inferno.createClass({

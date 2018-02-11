@@ -19,7 +19,7 @@ The following patterns are considered warnings:
 Inferno.createVNode(2, "div", { children: 'Children' })
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 
 ```jsx
 <div>Children</div>

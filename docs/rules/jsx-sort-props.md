@@ -14,7 +14,7 @@ The following patterns are considered warnings:
 <Hello lastName="Smith" firstName="John" />;
 ```
 
-The following patterns are considered okay and do not cause warnings:
+The following patterns are considered okay and do **not** cause warnings:
 
 ```jsx
 <Hello firstName="John" lastName="Smith" />;
@@ -72,7 +72,7 @@ When `true`, short hand props must be listed after all other props (unless `call
 
 ### `noSortAlphabetically`
 
-When `true`, alphabetical order is not enforced:
+When `true`, alphabetical order is **not** enforced:
 
 ```jsx
 <Hello tel={5555555} name="John" />
@@ -92,7 +92,7 @@ When `reservedFirst` is defined, Inferno reserved props (`children`, `dangerousl
 
 If given as an array, the array's values will override the default list of reserved props. **Note**: the values in the array may only be a **subset** of Inferno reserved props.
 
-With `reservedFirst: [2, ["key"]]`, the following will not warn:
+With `reservedFirst: [2, ["key"]]`, the following will **not** warn:
 
 ```jsx
 <Hello key={'uuid'} name="John" ref="ref" />

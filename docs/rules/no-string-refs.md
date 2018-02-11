@@ -4,7 +4,7 @@ Currently, two ways are supported by Inferno to refer to components. The first o
 
 ## Rule Details
 
-Invalid:
+The following patterns are considered warnings:
 
 ```jsx
 var Hello = Inferno.createClass({
@@ -26,7 +26,7 @@ var Hello = Inferno.createClass({
 });
 ```
 
-Valid:
+The following patterns are **not** considered warnings:
 
 ```jsx
 var Hello = Inferno.createClass({

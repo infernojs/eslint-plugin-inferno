@@ -13,7 +13,7 @@ The following patterns are considered warnings:
 <div onClick={() => console.log('Hello!')}></div>
 ```
 
-The following patterns are not considered warnings:
+The following patterns are **not** considered warnings:
 ```jsx
 <div onClick={this._handleClick}></div>
 ```
@@ -24,13 +24,14 @@ The following patterns are not considered warnings:
 "inferno/jsx-no-bind": [<enabled>, {
   "ignoreRefs": <boolean> || false,
   "allowArrowFunctions": <boolean> || false,
+  "allowFunctions": <boolean> || false,
   "allowBind": <boolean> || false
 }]
 ```
 
 ### `ignoreRefs`
 
-When `true` the following are not considered warnings:
+When `true` the following are **not** considered warnings:
 
 ```jsx
 <div ref={c => this._div = c} />
@@ -39,15 +40,23 @@ When `true` the following are not considered warnings:
 
 ### `allowArrowFunctions`
 
-When `true` the following is not considered a warning:
+When `true` the following is **not** considered a warning:
 
 ```jsx
 <div onClick={() => alert("1337")} />
 ```
 
-### `allowBind`
+### `allowFunctions`
 
 When `true` the following is not considered a warning:
+
+```jsx
+<div onClick={function () { alert("1337") }} />
+```
+
+### `allowBind`
+
+When `true` the following is **not** considered a warning:
 
 ```jsx
 <div onClick={this._handleClick.bind(this)} />
