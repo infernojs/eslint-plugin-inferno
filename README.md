@@ -1,7 +1,7 @@
 ESLint-plugin-Inferno
 ===================
 
-Note: This is a fork of the great [eslint-plugin-inferno](https://github.com/yannickcr/eslint-plugin-inferno).
+Note: This is a fork of the great [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react).
 
 Inferno specific linting rules for ESLint
 Rules are mostly same, but propType related rules have been removed.
