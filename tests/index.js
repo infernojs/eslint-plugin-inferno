@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 'use strict';
 
-const plugin = require('..');
+const plugin = require('./../index.js');
 
 const assert = require('assert');
 const fs = require('fs');
@@ -25,6 +25,10 @@ describe('deprecated rules', () => {
   it('marks all deprecated rules as deprecated', () => {
     ruleFiles.forEach(ruleName => {
       const inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
+      if (!plugin.rules[ruleName]) {
+        // eslint-disable-next-line
+        console.info( 'WTF    ----' +  ruleName);
+      }
       const isDeprecated = plugin.rules[ruleName].meta.deprecated;
       if (inDeprecatedRules) {
         assert(isDeprecated, `${ruleName} metadata should mark it as deprecated`);

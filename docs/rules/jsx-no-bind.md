@@ -119,8 +119,8 @@ This will speed up rendering, as it avoids the need to create new functions (thr
 
 ```jsx
 class Foo extends Inferno.Component {
-  constructor() {
-    super();
+  constructor(...args) {
+    super(...args);
     this._onClick = this._onClick.bind(this);
   }
   render() {

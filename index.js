@@ -62,6 +62,7 @@ const allRules = {
   'prefer-es6-class': require('./lib/rules/prefer-es6-class'),
   'prefer-stateless-function': require('./lib/rules/prefer-stateless-function'),
   'inferno-in-jsx-scope': require('./lib/rules/inferno-in-jsx-scope'),
+  'require-default-props': require('./lib/rules/require-default-props'),
   'require-optimization': require('./lib/rules/require-optimization'),
   'require-render-return': require('./lib/rules/require-render-return'),
   'self-closing-comp': require('./lib/rules/self-closing-comp'),
