@@ -13,10 +13,9 @@ const rule = require('../../../lib/rules/inferno-in-jsx-scope');
 const RuleTester = require('eslint').RuleTester;
 
 const parserOptions = {
-  ecmaVersion: 8,
+  ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    experimentalObjectRestSpread: true,
     jsx: true
   }
 };
@@ -36,7 +35,7 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
   valid: [
     {code: 'var Inferno, App; <App />;'},
     {code: 'var Inferno; <img />;'},
-    {code: 'var Inferno; <x-gif />;'},
+    {code: 'var Inferno; <>fragment</>;', parser: 'babel-eslint'},
     {code: 'var Inferno, App, a=1; <App attr={a} />;'},
     {code: 'var Inferno, App, a=1; function elem() { return <App attr={a} />; }'},
     {code: 'var Inferno, App; <App />;'},
@@ -63,6 +62,10 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
     errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
   }, {
     code: 'var a = <img />;',
+    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
+  }, {
+    code: 'var a = <>fragment</>;',
+    parser: 'babel-eslint',
     errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
   }, {
     code: '/** @jsx Inferno.DOM */ var a = <img />;',

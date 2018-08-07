@@ -11,7 +11,7 @@ const rule = require('../../../lib/rules/no-typos');
 const RuleTester = require('eslint').RuleTester;
 
 const parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 2018,
   ecmaFeatures: {
     jsx: true
   },
@@ -242,15 +242,7 @@ ruleTester.run('no-typos', rule, {
     `,
     parserOptions: parserOptions
   }, {
-    // PropTypes declared on a component that is detected through JSDoc comments and is
-    // declared AFTER the PropTypes assignment does not work.
-    code: `
-      MyComponent.PROPTYPES = {}
-      /** @extends Inferno.Component */
-      class MyComponent extends BaseComponent {}
-    `,
-    parserOptions: parserOptions
-  }, {
+    // https://github.com/yannickcr/eslint-plugin-react/issues/1353
     code: `
       function test(b) {
         return a.bind(b);
@@ -731,12 +723,15 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       class Hello extends Inferno.Component {
+        static GetDerivedStateFromProps()  { }
         ComponentWillMount() { }
         ComponentDidMount() { }
         ComponentWillReceiveProps() { }
         ShouldComponentUpdate() { }
         ComponentWillUpdate() { }
+        GetSnapshotBeforeUpdate() { }
         ComponentDidUpdate() { }
+        ComponentDidCatch() { }
         ComponentWillUnmount() { }
         render() {
           return <div>Hello {this.props.name}</div>;
@@ -765,16 +760,28 @@ ruleTester.run('no-typos', rule, {
     }, {
       message: ERROR_MESSAGE_LIFECYCLE_METHOD,
       type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
     }]
   }, {
     code: `
       class Hello extends Inferno.Component {
+        static Getderivedstatefromprops() { }
         Componentwillmount() { }
         Componentdidmount() { }
         Componentwillreceiveprops() { }
         Shouldcomponentupdate() { }
         Componentwillupdate() { }
+        Getsnapshotbeforeupdate() { }
         Componentdidupdate() { }
+        Componentdidcatch() { }
         Componentwillunmount() { }
         Render() {
           return <div>Hello {this.props.name}</div>;
@@ -806,16 +813,28 @@ ruleTester.run('no-typos', rule, {
     }, {
       message: ERROR_MESSAGE_LIFECYCLE_METHOD,
       type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
     }]
   }, {
     code: `
       class Hello extends Inferno.Component {
+        static getderivedstatefromprops() { }
         componentwillmount() { }
         componentdidmount() { }
         componentwillreceiveprops() { }
         shouldcomponentupdate() { }
         componentwillupdate() { }
+        getsnapshotbeforeupdate() { }
         componentdidupdate() { }
+        componentdidcatch() { }
         componentwillunmount() { }
         render() {
           return <div>Hello {this.props.name}</div>;
@@ -844,525 +863,14 @@ ruleTester.run('no-typos', rule, {
     }, {
       message: ERROR_MESSAGE_LIFECYCLE_METHOD,
       type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
+    }, {
+      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
+      type: 'MethodDefinition'
     }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends Inferno.Component {};
-      Component.propTypes = {
-          a: PropTypes.Number.isRequired
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: Number'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends Inferno.Component {};
-      Component.propTypes = {
-          a: PropTypes.number.isrequired
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends Inferno.Component {};
-      Component.propTypes = {
-          a: PropTypes.Number
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: Number'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends Inferno.Component {};
-      Component.propTypes = {
-        a: PropTypes.shape({
-          b: PropTypes.String,
-          c: PropTypes.number.isRequired,
-        })
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: String'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends Inferno.Component {};
-      Component.propTypes = {
-        a: PropTypes.oneOfType([
-          PropTypes.bools,
-          PropTypes.number,
-        ])
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends Inferno.Component {};
-      Component.propTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import PropTypes from 'prop-types';
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import PropTypes from 'prop-types';
-     class Component extends Inferno.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-    `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-     import PropTypes from 'prop-types';
-     class Component extends Inferno.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-   `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import RealPropTypes from 'prop-types';
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: RealPropTypes.bools,
-        b: RealPropTypes.Array,
-        c: RealPropTypes.function,
-        d: RealPropTypes.objectof,
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import Inferno from 'inferno';
-     class Component extends Inferno.Component {};
-     Component.propTypes = {
-       a: Inferno.PropTypes.string.isrequired,
-       b: Inferno.PropTypes.shape({
-         c: Inferno.PropTypes.number
-       }).isrequired
-     }
-   `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import Inferno from 'inferno';
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: Inferno.PropTypes.bools,
-        b: Inferno.PropTypes.Array,
-        c: Inferno.PropTypes.function,
-        d: Inferno.PropTypes.objectof,
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import { PropTypes } from 'inferno';
-     class Component extends Inferno.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-   `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import { PropTypes } from 'inferno';
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import PropTypes from 'prop-types';
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import PropTypes from 'prop-types';
-     class Component extends Inferno.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-    `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-     import PropTypes from 'prop-types';
-     class Component extends Inferno.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-   `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import RealPropTypes from 'prop-types';
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: RealPropTypes.bools,
-        b: RealPropTypes.Array,
-        c: RealPropTypes.function,
-        d: RealPropTypes.objectof,
-      }
-    `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import Inferno from 'inferno';
-     class Component extends Inferno.Component {};
-     Component.propTypes = {
-       a: Inferno.PropTypes.string.isrequired,
-       b: Inferno.PropTypes.shape({
-         c: Inferno.PropTypes.number
-       }).isrequired
-     }
-   `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import Inferno from 'inferno';
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: Inferno.PropTypes.bools,
-        b: Inferno.PropTypes.Array,
-        c: Inferno.PropTypes.function,
-        d: Inferno.PropTypes.objectof,
-      }
-    `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import { PropTypes } from 'inferno';
-     class Component extends Inferno.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-   `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import { PropTypes } from 'inferno';
-      class Component extends Inferno.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }]
-/*
-// createClass tests below fail, so they're commented out
-// ---------
-  }, {
-    code: `
-      import Inferno from 'inferno';
-      import PropTypes from 'prop-types';
-      const Component = Inferno.createClass({
-        propTypes: {
-          a: PropTypes.string.isrequired,
-          b: PropTypes.shape({
-            c: PropTypes.number
-          }).isrequired
-        }
-      });
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import Inferno from 'inferno';
-      import PropTypes from 'prop-types';
-      const Component = Inferno.createClass({
-        childContextTypes: {
-          a: PropTypes.bools,
-          b: PropTypes.Array,
-          c: PropTypes.function,
-          d: PropTypes.objectof,
-        }
-      });
-    `,
-    parser: 'babel-eslint',
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import Inferno from 'inferno';
-      import PropTypes from 'prop-types';
-      const Component = Inferno.createClass({
-        propTypes: {
-          a: PropTypes.string.isrequired,
-          b: PropTypes.shape({
-            c: PropTypes.number
-          }).isrequired
-        }
-      });
-    `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import Inferno from 'inferno';
-      import PropTypes from 'prop-types';
-      const Component = Inferno.createClass({
-        childContextTypes: {
-          a: PropTypes.bools,
-          b: PropTypes.Array,
-          c: PropTypes.function,
-          d: PropTypes.objectof,
-        }
-      });
-    `,
-    parserOptions: parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }]
-// ---------
-// createClass tests above fail, so they're commented out
-*/
-});
+  }]});

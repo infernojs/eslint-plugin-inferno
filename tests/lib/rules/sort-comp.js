@@ -12,10 +12,9 @@ const rule = require('../../../lib/rules/sort-comp');
 const RuleTester = require('eslint').RuleTester;
 
 const parserOptions = {
-  ecmaVersion: 8,
+  ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    experimentalObjectRestSpread: true,
     jsx: true
   }
 };
@@ -91,6 +90,68 @@ ruleTester.run('sort-comp', rule, {
         'everything-else'
       ]
     }]
+  }, {
+    // Must validate a full React 16.3 createReactClass class
+    code: [
+      'var Hello = createReactClass({',
+      '  displayName : \'\',',
+      '  propTypes: {},',
+      '  contextTypes: {},',
+      '  childContextTypes: {},',
+      '  mixins: [],',
+      '  statics: {},',
+      '  getDefaultProps: function() {},',
+      '  getInitialState: function() {},',
+      '  getChildContext: function() {},',
+      '  componentDidMount: function() {},',
+      '  shouldComponentUpdate: function() {},',
+      '  getSnapshotBeforeUpdate: function() {},',
+      '  componentDidUpdate: function() {},',
+      '  componentDidCatch: function() {},',
+      '  componentWillUnmount: function() {},',
+      '  render: function() {',
+      '    return <div>Hello</div>;',
+      '  }',
+      '});'
+    ].join('\n')
+  }, {
+    // Must validate React 16.3 lifecycle methods with the default parser
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  constructor() {}',
+      '  static getDerivedStateFromProps() {}',
+      '  componentDidMount() {}',
+      '  shouldComponentUpdate() {}',
+      '  getSnapshotBeforeUpdate() {}',
+      '  componentDidUpdate() {}',
+      '  componentDidCatch() {}',
+      '  componentWillUnmount() {}',
+      '  testInstanceMethod() {}',
+      '  render() { return (<div>Hello</div>); }',
+      '}'
+    ].join('\n')
+  }, {
+    // Must validate a full React 16.3 ES6 class
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  static displayName = \'\'',
+      '  static propTypes = {}',
+      '  static defaultProps = {}',
+      '  constructor() {}',
+      '  state = {}',
+      '  static getDerivedStateFromProps = () => {}',
+      '  componentDidMount = () => {}',
+      '  shouldComponentUpdate = () => {}',
+      '  getSnapshotBeforeUpdate = () => {}',
+      '  componentDidUpdate = () => {}',
+      '  componentDidCatch = () => {}',
+      '  componentWillUnmount = () => {}',
+      '  testArrowMethod = () => {}',
+      '  testInstanceMethod() {}',
+      '  render = () => (<div>Hello</div>)',
+      '}'
+    ].join('\n'),
+    parser: 'babel-eslint'
   }, {
     // Must allow us to create a RegExp-based group
     code: [
@@ -433,6 +494,15 @@ ruleTester.run('sort-comp', rule, {
     ].join('\n'),
     parser: 'babel-eslint',
     errors: [{message: 'render should be placed after displayName'}]
+  }, {
+    // Must validate static lifecycle methods
+    code: [
+      'class Hello extends Inferno.Component {',
+      '  static getDerivedStateFromProps() {}',
+      '  constructor() {}',
+      '}'
+    ].join('\n'),
+    errors: [{message: 'getDerivedStateFromProps should be placed after constructor'}]
   }, {
     // Type Annotations should not be at the top by default
     code: [

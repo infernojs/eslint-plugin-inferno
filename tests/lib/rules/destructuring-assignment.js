@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester;
 require('babel-eslint');
 
 const parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
     jsx: true
@@ -126,7 +126,16 @@ ruleTester.run('destructuring-assignment', rule, {
     };`,
     options: ['never'],
     parser: 'babel-eslint'
+  }, {
+    code: `const Foo = class extends Inferno.PureComponent {
+      constructor() {
+        this.state = {};
+        this.state.foo = 'bar';
+      }
+    };`,
+    options: ['always']
   }],
+
   invalid: [{
     code: `const MyComponent = (props) => {
       return (<div id={props.id} />)

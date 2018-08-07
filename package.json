@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.8.0",
+  "version": "7.10.0",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
@@ -24,19 +24,19 @@
   "bugs": "https://github.com/infernojs/eslint-plugin-inferno",
   "dependencies": {
     "doctrine": "^2.1.0",
-    "has": "^1.0.1",
+    "has": "^1.0.3",
     "jsx-ast-utils": "^2.0.1",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.2"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
-    "coveralls": "^3.0.0",
-    "eslint": "^4.19.1",
+    "babel-eslint": "^8.2.6",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.3.0",
     "istanbul": "^0.4.5",
-    "mocha": "^5.1.0"
+    "mocha": "^5.2.0"
   },
   "peerDependencies": {
-    "eslint": "^3.0.0 || ^4.0.0"
+    "eslint": "^5.3.0"
   },
   "engines": {
     "node": ">=4"
