@@ -31,6 +31,7 @@ const allRules = {
   'jsx-no-undef': require('./lib/rules/jsx-no-undef'),
   'jsx-curly-brace-presence': require('./lib/rules/jsx-curly-brace-presence'),
   'jsx-pascal-case': require('./lib/rules/jsx-pascal-case'),
+  'jsx-props-class-name': require('./lib/rules/jsx-props-class-name'),
   'jsx-props-no-multi-spaces': require('./lib/rules/jsx-props-no-multi-spaces'),
   'jsx-sort-default-props': require('./lib/rules/jsx-sort-default-props'),
   'jsx-sort-props': require('./lib/rules/jsx-sort-props'),
