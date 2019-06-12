@@ -14,3 +14,5 @@ New rules:
 - prefer-read-only-props
 - state-in-constructor
 - static-property-placement
+
+- inferno/jsx-props-class-name

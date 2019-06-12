@@ -34,6 +34,7 @@ const allRules = {
   'jsx-curly-brace-presence': require('./lib/rules/jsx-curly-brace-presence'),
   'jsx-pascal-case': require('./lib/rules/jsx-pascal-case'),
   'jsx-fragments': require('./lib/rules/jsx-fragments'),
+  'jsx-props-class-name': require('./lib/rules/jsx-props-class-name'),
   'jsx-props-no-multi-spaces': require('./lib/rules/jsx-props-no-multi-spaces'),
   'jsx-props-no-spreading': require('./lib/rules/jsx-props-no-spreading'),
   'jsx-sort-default-props': require('./lib/rules/jsx-sort-default-props'),

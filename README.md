@@ -93,6 +93,12 @@ Enable the rules that you would like to use.
 
 # List of supported rules
 
+## Inferno specific rules
+
+* [inferno/jsx-props-class-name](docs/rules/jsx-props-class-name.md): Enforce 'class' or 'className' Attributes (fixable)
+
+## Common rules for Inferno and React
+
 * [inferno/button-has-type](docs/rules/button-has-type.md): Forbid "button" element without an explicit "type" attribute
 * [inferno/destructuring-assignment](docs/rules/destructuring-assignment.md): Rule enforces consistent usage of destructuring assignment in component
 * [inferno/forbid-component-props](docs/rules/forbid-component-props.md): Forbid certain props on Components
