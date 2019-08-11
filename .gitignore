@@ -18,6 +18,7 @@ node_modules
 !tests/**/node_modules
 npm-debug.log
 sftp-config.json
+.idea
 
 # Only apps should have lockfiles
 yarn.lock
