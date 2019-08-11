@@ -10,7 +10,8 @@
     "pretest": "npm run lint",
     "test": "npm run unit-test",
     "type-check": "tsc",
-    "unit-test": "istanbul cover --dir reports/coverage node_modules/mocha/bin/_mocha tests/lib/**/*.js tests/util/**/*.js tests/index.js"
+    "unit-test": "istanbul cover --dir reports/coverage node_modules/mocha/bin/_mocha tests/lib/**/*.js tests/util/**/*.js tests/index.js",
+    "debug-test": "node --inspect-brk node_modules/mocha/bin/_mocha tests/lib/**/*.js tests/util/**/*.js tests/index.js"
   },
   "files": [
     "LICENSE",

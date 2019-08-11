@@ -11,7 +11,6 @@ New rules:
 - jsx-curly-newline
 - jsx-fragments
 - jsx-props-no-spreading
-- prefer-read-only-props
 - state-in-constructor
 - static-property-placement
 

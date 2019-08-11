@@ -27,7 +27,7 @@
         "prefer-destructuring": [2, { "array": false, "object": false }, { "enforceForRenamedProperties": false }],
 
         "function-paren-newline": 0,
-        "no-plusplus": 1,
+        "no-plusplus": 0,
         "no-param-reassign": 1,
         "no-mixed-operators": 1,
         "global-require": 1,

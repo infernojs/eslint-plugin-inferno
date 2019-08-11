@@ -126,10 +126,8 @@ Enable the rules that you would like to use.
 * [inferno/no-unused-state](docs/rules/no-unused-state.md): Prevent definitions of unused state properties
 * [inferno/no-will-update-set-state](docs/rules/no-will-update-set-state.md): Prevent usage of `setState` in `componentWillUpdate`
 * [inferno/prefer-es6-class](docs/rules/prefer-es6-class.md): Enforce ES5 or ES6 class for Inferno Components
-* [inferno/prefer-read-only-props](docs/rules/prefer-read-only-props.md): Enforce that props are read-only
 * [inferno/prefer-stateless-function](docs/rules/prefer-stateless-function.md): Enforce stateless Inferno Components to be written as a pure function
 * [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md): Prevent missing `Inferno` when using JSX
-* [inferno/require-default-props](docs/rules/require-default-props.md): Enforce a defaultProps definition for every prop that is not a required prop
 * [inferno/require-optimization](docs/rules/require-optimization.md): Enforce Inferno components to have a `shouldComponentUpdate` method
 * [inferno/require-render-return](docs/rules/require-render-return.md): Enforce ES5 or ES6 class for returning value in render function
 * [inferno/self-closing-comp](docs/rules/self-closing-comp.md): Prevent extra closing tags for components without children (fixable)
@@ -190,6 +188,8 @@ InfernoJS does not have prop-types or UNSAFE_ -lifecycle methods.
 * react/no-unused-prop-types
 * react/prop-types
 * react/sort-prop-types
+* react/require-default-props
+* react/prefer-read-only-props
 
 ## Other useful plugins
 
