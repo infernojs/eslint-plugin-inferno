@@ -1,4 +1,4 @@
-# Enforce state initialization style (react/state-in-constructor)
+# Enforce state initialization style (inferno/state-in-constructor)
 
 This rule will enforce the state initialization style to be either in a constructor or with a class property.
 
@@ -6,7 +6,7 @@ This rule will enforce the state initialization style to be either in a construc
 
 ```js
 ...
-"react/state-in-constructor": [<enabled>, <mode>]
+"inferno/state-in-constructor": [<enabled>, <mode>]
 ...
 ```
 
@@ -17,7 +17,7 @@ Will enforce the state initialization style to be in a constructor. This is the 
 The following patterns are considered warnings:
 
 ```jsx
-class Foo extends React.Component {
+class Foo extends Inferno.Component {
   state = { bar: 0 }
   render() {
     return <div>Foo</div>
@@ -28,7 +28,7 @@ class Foo extends React.Component {
 The following patterns are **not** considered warnings:
 
 ```jsx
-class Foo extends React.Component {
+class Foo extends Inferno.Component {
   constructor(props) {
     super(props)
     this.state = { bar: 0 }
@@ -46,7 +46,7 @@ Will enforce the state initialization style to be with a class property.
 The following patterns are considered warnings:
 
 ```jsx
-class Foo extends React.Component {
+class Foo extends Inferno.Component {
   constructor(props) {
     super(props)
     this.state = { bar: 0 }
@@ -60,7 +60,7 @@ class Foo extends React.Component {
 The following patterns are **not** considered warnings:
 
 ```jsx
-class Foo extends React.Component {
+class Foo extends Inferno.Component {
   state = { bar: 0 }
   render() {
     return <div>Foo</div>

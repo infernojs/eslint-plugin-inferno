@@ -33,7 +33,7 @@ const ruleTester = new RuleTester(ruleTesterConfig);
 ruleTester.run('state-in-constructor', rule, {
   valid: [{
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         render() {
           return <div>Foo</div>
         }
@@ -41,7 +41,7 @@ ruleTester.run('state-in-constructor', rule, {
     `
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         render() {
           return <div>Foo</div>
         }
@@ -50,7 +50,7 @@ ruleTester.run('state-in-constructor', rule, {
     options: ['never']
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.state = { bar: 0 }
@@ -62,7 +62,7 @@ ruleTester.run('state-in-constructor', rule, {
     `
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.state = { bar: 0 }
@@ -75,7 +75,7 @@ ruleTester.run('state-in-constructor', rule, {
     options: ['always']
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.state = { bar: 0 }
@@ -88,7 +88,7 @@ ruleTester.run('state-in-constructor', rule, {
     `
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.baz = { bar: 0 }
@@ -100,7 +100,7 @@ ruleTester.run('state-in-constructor', rule, {
     `
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.baz = { bar: 0 }
@@ -113,7 +113,7 @@ ruleTester.run('state-in-constructor', rule, {
     options: ['never']
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         baz = { bar: 0 }
         render() {
           return <div>Foo</div>
@@ -122,7 +122,7 @@ ruleTester.run('state-in-constructor', rule, {
     `
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         baz = { bar: 0 }
         render() {
           return <div>Foo</div>
@@ -154,7 +154,7 @@ ruleTester.run('state-in-constructor', rule, {
     options: ['never']
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         state = { bar: 0 }
         render() {
           return <div>Foo</div>
@@ -164,7 +164,7 @@ ruleTester.run('state-in-constructor', rule, {
     options: ['never']
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         state = { bar: 0 }
         baz = { bar: 0 }
         render() {
@@ -175,7 +175,7 @@ ruleTester.run('state-in-constructor', rule, {
     options: ['never']
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.baz = { bar: 0 }
@@ -189,7 +189,7 @@ ruleTester.run('state-in-constructor', rule, {
     options: ['never']
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           if (foobar) {
@@ -203,7 +203,7 @@ ruleTester.run('state-in-constructor', rule, {
     `
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           foobar = { bar: 0 }
@@ -215,7 +215,7 @@ ruleTester.run('state-in-constructor', rule, {
     `
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           foobar = { bar: 0 }
@@ -230,7 +230,7 @@ ruleTester.run('state-in-constructor', rule, {
 
   invalid: [{
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.state = { bar: 0 }
@@ -246,7 +246,7 @@ ruleTester.run('state-in-constructor', rule, {
     }]
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.state = { bar: 0 }
@@ -263,7 +263,7 @@ ruleTester.run('state-in-constructor', rule, {
     }]
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         state = { bar: 0 }
         render() {
           return <div>Foo</div>
@@ -275,7 +275,7 @@ ruleTester.run('state-in-constructor', rule, {
     }]
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         state = { bar: 0 }
         baz = { bar: 0 }
         render() {
@@ -288,7 +288,7 @@ ruleTester.run('state-in-constructor', rule, {
     }]
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.baz = { bar: 0 }
@@ -304,7 +304,7 @@ ruleTester.run('state-in-constructor', rule, {
     }]
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.state = { bar: 0 }
@@ -320,7 +320,7 @@ ruleTester.run('state-in-constructor', rule, {
     }]
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           this.state = { bar: 0 }
@@ -337,7 +337,7 @@ ruleTester.run('state-in-constructor', rule, {
     }]
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         constructor(props) {
           super(props)
           if (foobar) {

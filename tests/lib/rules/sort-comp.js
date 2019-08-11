@@ -32,7 +32,7 @@ ruleTester.run('sort-comp', rule, {
   valid: [{
     code: [
       '// Must validate a full class',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  displayName : \'\',',
       '  propTypes: {},',
       '  contextTypes: {},',
@@ -57,7 +57,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must validate a class with missing groups',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    return <div>Hello</div>;',
       '  }',
@@ -66,7 +66,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must put a custom method in \'everything-else\'',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  onClick: function() {},',
       '  render: function() {',
       '    return <button onClick={this.onClick}>Hello</button>;',
@@ -76,7 +76,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must allow us to re-order the groups',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  displayName : \'Hello\',',
       '  render: function() {',
       '    return <button onClick={this.onClick}>Hello</button>;',
@@ -93,8 +93,8 @@ ruleTester.run('sort-comp', rule, {
     }]
   }, {
     code: [
-      '// Must validate a full React 16.3 createReactClass class',
-      'var Hello = createReactClass({',
+      '// Must validate a full Inferno createClass class',
+      'var Hello = createClass({',
       '  displayName : \'\',',
       '  propTypes: {},',
       '  contextTypes: {},',
@@ -104,11 +104,8 @@ ruleTester.run('sort-comp', rule, {
       '  getDefaultProps: function() {},',
       '  getInitialState: function() {},',
       '  getChildContext: function() {},',
-      '  UNSAFE_componentWillMount: function() {},',
       '  componentDidMount: function() {},',
-      '  UNSAFE_componentWillReceiveProps: function() {},',
       '  shouldComponentUpdate: function() {},',
-      '  UNSAFE_componentWillUpdate: function() {},',
       '  getSnapshotBeforeUpdate: function() {},',
       '  componentDidUpdate: function() {},',
       '  componentDidCatch: function() {},',
@@ -120,15 +117,12 @@ ruleTester.run('sort-comp', rule, {
     ].join('\n')
   }, {
     code: [
-      '// Must validate React 16.3 lifecycle methods with the default parser',
-      'class Hello extends React.Component {',
+      '// Must validate Inferno lifecycle methods with the default parser',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  static getDerivedStateFromProps() {}',
-      '  UNSAFE_componentWillMount() {}',
       '  componentDidMount() {}',
-      '  UNSAFE_componentWillReceiveProps() {}',
       '  shouldComponentUpdate() {}',
-      '  UNSAFE_componentWillUpdate() {}',
       '  getSnapshotBeforeUpdate() {}',
       '  componentDidUpdate() {}',
       '  componentDidCatch() {}',
@@ -139,19 +133,16 @@ ruleTester.run('sort-comp', rule, {
     ].join('\n')
   }, {
     code: [
-      '// Must validate a full React 16.3 ES6 class',
-      'class Hello extends React.Component {',
+      '// Must validate a full Inferno ES6 class',
+      'class Hello extends Inferno.Component {',
       '  static displayName = \'\'',
       '  static propTypes = {}',
       '  static defaultProps = {}',
       '  constructor() {}',
       '  state = {}',
       '  static getDerivedStateFromProps = () => {}',
-      '  UNSAFE_componentWillMount = () => {}',
       '  componentDidMount = () => {}',
-      '  UNSAFE_componentWillReceiveProps = () => {}',
       '  shouldComponentUpdate = () => {}',
-      '  UNSAFE_componentWillUpdate = () => {}',
       '  getSnapshotBeforeUpdate = () => {}',
       '  componentDidUpdate = () => {}',
       '  componentDidCatch = () => {}',
@@ -165,7 +156,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must allow us to create a RegExp-based group',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  customHandler() {}',
       '  render() {',
       '    return <div>Hello</div>;',
@@ -184,7 +175,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must allow us to create a named group',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  customHandler() {}',
       '  render() {',
       '    return <div>Hello</div>;',
@@ -208,7 +199,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must allow a method to be in different places if it\'s matches multiple patterns',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',
@@ -225,7 +216,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must allow us to use \'constructor\' as a method name',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  displayName() {}',
       '  render() {',
@@ -260,7 +251,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must ignore spread operator',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  ...proto,',
       '  render: function() {',
       '    return <div>Hello</div>;',
@@ -271,7 +262,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Type Annotations should be first',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  props: { text: string };',
       '  constructor() {}',
       '  render() {',
@@ -292,7 +283,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Properties with Type Annotations should not be at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  props: { text: string };',
       '  constructor() {}',
       '  state: Object = {};',
@@ -313,7 +304,7 @@ ruleTester.run('sort-comp', rule, {
     }]
   }, {
     code: [
-      '// Non-react classes should be ignored, even in expressions',
+      '// Non-inferno classes should be ignored, even in expressions',
       'return class Hello {',
       '  render() {',
       '    return <div>{this.props.text}</div>;',
@@ -327,7 +318,7 @@ ruleTester.run('sort-comp', rule, {
     parserOptions
   }, {
     code: [
-      '// Non-react classes should be ignored, even in expressions',
+      '// Non-inferno classes should be ignored, even in expressions',
       'return class {',
       '  render() {',
       '    return <div>{this.props.text}</div>;',
@@ -342,7 +333,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Getters should be at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  get foo() {}',
       '  constructor() {}',
       '  render() {',
@@ -363,7 +354,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Setters should be at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  set foo(bar) {}',
       '  constructor() {}',
       '  render() {',
@@ -384,7 +375,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Instance methods should be at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  foo = () => {}',
       '  constructor() {}',
       '  classMethod() {}',
@@ -406,7 +397,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Instance variables should be at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  foo = \'bar\'',
       '  constructor() {}',
       '  state = {}',
@@ -428,7 +419,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Methods can be grouped with any matching group (with statics)',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  static onFoo() {}',
       '  static renderFoo() {}',
       '  render() {',
@@ -449,7 +440,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Methods can be grouped with any matching group (with RegExp)',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>{this.props.text}</div>;',
       '  }',
@@ -470,7 +461,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// static lifecycle methods can be grouped (with statics)',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  static getDerivedStateFromProps() {}',
       '  constructor() {}',
       '}'
@@ -478,14 +469,14 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// static lifecycle methods can be grouped (with lifecycle)',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  static getDerivedStateFromProps() {}',
       '}'
     ].join('\n')
   }, {
     code: `
-      class MyComponent extends React.Component {
+      class MyComponent extends Inferno.Component {
         state = {};
         foo;
         static propTypes;
@@ -511,7 +502,7 @@ ruleTester.run('sort-comp', rule, {
   invalid: [{
     code: [
       '// Must force a lifecycle method to be placed before render',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    return <div>Hello</div>;',
       '  },',
@@ -522,9 +513,9 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must run rule when render uses createElement instead of JSX',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
-      '    return React.createElement("div", null, "Hello");',
+      '    return Inferno.createElement("div", null, "Hello");',
       '  },',
       '  displayName : \'Hello\',',
       '});'
@@ -533,7 +524,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must force a custom method to be placed before render',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    return <div>Hello</div>;',
       '  },',
@@ -545,7 +536,7 @@ ruleTester.run('sort-comp', rule, {
     code: [
       '// Must force a custom method to be placed before render, even in function',
       'var Hello = () => {',
-      '  return class Test extends React.Component {',
+      '  return class Test extends Inferno.Component {',
       '    render () {',
       '      return <div>Hello</div>;',
       '    }',
@@ -558,7 +549,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must force a custom method to be placed after render if no \'everything-else\' group is specified',
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  displayName: \'Hello\',',
       '  onClick: function() {},',
       '  render: function() {',
@@ -576,7 +567,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Must validate static properties',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div></div>',
       '  }',
@@ -588,7 +579,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Type Annotations should not be at the top by default',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  props: { text: string };',
       '  constructor() {}',
       '  state: Object = {};',
@@ -602,7 +593,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Type Annotations should be first',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  props: { text: string };',
       '  render() {',
@@ -624,7 +615,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Properties with Type Annotations should not be at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  props: { text: string };',
       '  state: Object = {};',
       '  constructor() {}',
@@ -647,7 +638,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// componentDidMountOk should be placed after getA',
-      'export default class View extends React.Component {',
+      'export default class View extends Inferno.Component {',
       '  componentDidMountOk() {}',
       '  getB() {}',
       '  componentWillMount() {}',
@@ -671,7 +662,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Getters should at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  get foo() {}',
       '  render() {',
@@ -693,7 +684,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Setters should at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  set foo(bar) {}',
       '  render() {',
@@ -715,7 +706,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Instance methods should not be at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  static bar = () => {}',
       '  classMethod() {}',
@@ -738,7 +729,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Instance variables should not be at the top',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {}',
       '  state = {}',
       '  static bar = {}',
@@ -761,7 +752,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Should not confuse method names with group names',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  setters() {}',
       '  constructor() {}',
       '  render() {}',
@@ -778,7 +769,7 @@ ruleTester.run('sort-comp', rule, {
   }, {
     code: [
       '// Explicitly named methods should appear in the correct order',
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {}',
       '  foo() {}',
       '}'

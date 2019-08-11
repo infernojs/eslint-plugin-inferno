@@ -1,6 +1,6 @@
-# Prevent usage of dangerous JSX properties (react/no-danger)
+# Prevent usage of dangerous JSX properties (inferno/no-danger)
 
-Dangerous properties in React are those whose behavior is known to be a common source of application vulnerabilities. The properties names clearly indicate they are dangerous and should be avoided unless great care is taken.
+Dangerous properties in Inferno are those whose behavior is known to be a common source of application vulnerabilities. The properties names clearly indicate they are dangerous and should be avoided unless great care is taken.
 
 See https://facebook.github.io/react/tips/dangerously-set-inner-html.html
 
@@ -9,7 +9,7 @@ See https://facebook.github.io/react/tips/dangerously-set-inner-html.html
 The following patterns are considered warnings:
 
 ```jsx
-var React = require('react');
+var Inferno = require('inferno');
 
 var Hello = <div dangerouslySetInnerHTML={{ __html: "Hello World" }}></div>;
 ```
@@ -17,7 +17,7 @@ var Hello = <div dangerouslySetInnerHTML={{ __html: "Hello World" }}></div>;
 The following patterns are **not** considered warnings:
 
 ```jsx
-var React = require('react');
+var Inferno = require('inferno');
 
 var Hello = <div>Hello World</div>;
 ```

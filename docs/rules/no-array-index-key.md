@@ -1,8 +1,8 @@
-# Prevent usage of Array index in keys (react/no-array-index-key)
+# Prevent usage of Array index in keys (inferno/no-array-index-key)
 
 Warn if an element uses an Array index in its `key`.
 
-The `key` is used by React to [identify which items have changed, are added, or are removed and should be stable](https://facebook.github.io/react/docs/lists-and-keys.html#keys).
+The `key` is used by Inferno to identify which items have changed, are added, or are removed and should be stable.
 
 It's a bad idea to use the array index since it doesn't uniquely identify your elements. In cases where the array is sorted or an element is added to the beginning of the array, the index will be changed even though the element representing that index may be the same. This results in unnecessary renders.
 
@@ -16,7 +16,7 @@ things.map((thing, index) => (
 ));
 
 things.map((thing, index) => (
-  React.cloneElement(thing, { key: index })
+  Inferno.cloneElement(thing, { key: index })
 ));
 
 things.forEach((thing, index) => {
@@ -51,12 +51,12 @@ things.reduceRight((collection, thing, index) => (
   collection.concat(<Hello key={index} />)
 ), []);
 
-React.Children.map(this.props.children, (child, index) => (
-  React.cloneElement(child, { key: index })
+Inferno.Children.map(this.props.children, (child, index) => (
+  Inferno.cloneElement(child, { key: index })
 ))
 
 Children.forEach(this.props.children, (child, index) => (
-  React.cloneElement(child, { key: index })
+  Inferno.cloneElement(child, { key: index })
 ))
 ```
 
@@ -68,7 +68,7 @@ things.map((thing) => (
 ));
 
 things.map((thing) => (
-  React.cloneElement(thing, { key: thing.id })
+  Inferno.cloneElement(thing, { key: thing.id })
 ));
 
 things.forEach((thing) => {

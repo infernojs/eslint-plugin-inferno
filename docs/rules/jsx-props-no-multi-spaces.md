@@ -1,4 +1,4 @@
-# Disallow multiple spaces between inline JSX props (react/jsx-props-no-multi-spaces)
+# Disallow multiple spaces between inline JSX props (inferno/jsx-props-no-multi-spaces)
 
 Enforces that there is exactly one space between all attributes and after tag name and the first attribute in the same line.
 

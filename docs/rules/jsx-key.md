@@ -1,4 +1,4 @@
-# Detect missing `key` prop (react/jsx-key)
+# Detect missing `key` prop (inferno/jsx-key)
 
 Warn if an element that likely requires a `key` prop--namely, one present in an
 array literal or an arrow function expression.
@@ -31,7 +31,7 @@ data.map((x, i) => <Hello key={i}>{x}</Hello>);
 
 ```js
 ...
-"react/jsx-key": [<enabled>, { "checkFragmentShorthand": <boolean> }]
+"inferno/jsx-key": [<enabled>, { "checkFragmentShorthand": <boolean> }]
 ...
 ```
 
@@ -54,5 +54,3 @@ If you are not using JSX then you can disable this rule.
 Also, if you have some prevalent situation where you use arrow functions to
 return JSX that will not be held in an iterable, you may want to disable this
 rule.
-
-[short_syntax]: https://reactjs.org/docs/fragments.html#short-syntax

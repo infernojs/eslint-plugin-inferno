@@ -1,4 +1,4 @@
-# Prevent usage of setState in componentDidMount (react/no-did-mount-set-state)
+# Prevent usage of setState in componentDidMount (inferno/no-did-mount-set-state)
 
 Updating the state after a component mount will trigger a second `render()` call and can lead to property/layout thrashing.
 
@@ -9,7 +9,7 @@ This rule is aimed to forbid the use of `this.setState` in `componentDidMount` o
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidMount: function() {
     this.setState({
       name: this.props.name.toUpperCase()
@@ -24,7 +24,7 @@ var Hello = createReactClass({
 The following patterns are **not** considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidMount: function() {
     this.onMount(function callback(newName) {
       this.setState({
@@ -39,7 +39,7 @@ var Hello = createReactClass({
 ```
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidMount: function() {
     this.props.onMount();
   },
@@ -53,7 +53,7 @@ var Hello = createReactClass({
 
 ```js
 ...
-"react/no-did-mount-set-state": [<enabled>, <mode>]
+"inferno/no-did-mount-set-state": [<enabled>, <mode>]
 ...
 ```
 
@@ -64,7 +64,7 @@ By default this rule forbids any call to `this.setState` in `componentDidMount` 
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidMount: function() {
     this.setState({
       name: this.props.name.toUpperCase()
@@ -77,7 +77,7 @@ var Hello = createReactClass({
 ```
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidMount: function() {
     this.onMount(function callback(newName) {
       this.setState({

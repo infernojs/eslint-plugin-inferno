@@ -42,7 +42,7 @@ ruleTester.run('no-this-in-sfc', rule, {
     }`
   }, {
     code: `
-    class Foo extends React.Component {
+    class Foo extends Inferno.Component {
       render() {
         const { foo } = this.props;
         return <div bar={foo} />;
@@ -50,19 +50,19 @@ ruleTester.run('no-this-in-sfc', rule, {
     }`
   }, {
     code: `
-    const Foo = createReactClass({
+    const Foo = createClass({
       render: function() {
         return <div>{this.props.foo}</div>;
       }
     });`
   }, {
     code: `
-    const Foo = React.createClass({
+    const Foo = Inferno.createClass({
       render: function() {
         return <div>{this.props.foo}</div>;
       }
     });`,
-    settings: {react: {createClass: 'createClass'}}
+    settings: {inferno: {createClass: 'createClass'}}
   }, {
     code: `
     function foo(bar) {

@@ -21,7 +21,7 @@ const parserOptions = {
 };
 
 const JSX_ERROR = 'Do not pass children as props. Instead, nest children between the opening and closing tags.';
-const CREATE_ELEMENT_ERROR = 'Do not pass children as props. Instead, pass them as additional arguments to React.createElement.';
+const CREATE_ELEMENT_ERROR = 'Do not pass children as props. Instead, pass them as additional arguments to Inferno.createElement.';
 
 // -----------------------------------------------------------------------------
 // Tests
@@ -37,109 +37,109 @@ ruleTester.run('no-children-prop', rule, {
       code: '<div></div>;'
     },
     {
-      code: 'React.createElement("div", {});'
+      code: 'Inferno.createElement("div", {});'
     },
     {
-      code: 'React.createElement("div", undefined);'
+      code: 'Inferno.createElement("div", undefined);'
     },
     {
       code: '<div className="class-name"></div>;'
     },
     {
-      code: 'React.createElement("div", {className: "class-name"});'
+      code: 'Inferno.createElement("div", {className: "class-name"});'
     },
     {
       code: '<div>Children</div>;'
     },
     {
-      code: 'React.createElement("div", "Children");'
+      code: 'Inferno.createElement("div", "Children");'
     },
     {
-      code: 'React.createElement("div", {}, "Children");'
+      code: 'Inferno.createElement("div", {}, "Children");'
     },
     {
-      code: 'React.createElement("div", undefined, "Children");'
+      code: 'Inferno.createElement("div", undefined, "Children");'
     },
     {
       code: '<div className="class-name">Children</div>;'
     },
     {
-      code: 'React.createElement("div", {className: "class-name"}, "Children");'
+      code: 'Inferno.createElement("div", {className: "class-name"}, "Children");'
     },
     {
       code: '<div><div /></div>;'
     },
     {
-      code: 'React.createElement("div", React.createElement("div"));'
+      code: 'Inferno.createElement("div", Inferno.createElement("div"));'
     },
     {
-      code: 'React.createElement("div", {}, React.createElement("div"));'
+      code: 'Inferno.createElement("div", {}, Inferno.createElement("div"));'
     },
     {
-      code: 'React.createElement("div", undefined, React.createElement("div"));'
+      code: 'Inferno.createElement("div", undefined, Inferno.createElement("div"));'
     },
     {
       code: '<div><div /><div /></div>;'
     },
     {
-      code: 'React.createElement("div", React.createElement("div"), React.createElement("div"));'
+      code: 'Inferno.createElement("div", Inferno.createElement("div"), Inferno.createElement("div"));'
     },
     {
-      code: 'React.createElement("div", {}, React.createElement("div"), React.createElement("div"));'
+      code: 'Inferno.createElement("div", {}, Inferno.createElement("div"), Inferno.createElement("div"));'
     },
     {
-      code: 'React.createElement("div", undefined, React.createElement("div"), React.createElement("div"));'
+      code: 'Inferno.createElement("div", undefined, Inferno.createElement("div"), Inferno.createElement("div"));'
     },
     {
-      code: 'React.createElement("div", [React.createElement("div"), React.createElement("div")]);'
+      code: 'Inferno.createElement("div", [Inferno.createElement("div"), Inferno.createElement("div")]);'
     },
     {
-      code: 'React.createElement("div", {}, [React.createElement("div"), React.createElement("div")]);'
+      code: 'Inferno.createElement("div", {}, [Inferno.createElement("div"), Inferno.createElement("div")]);'
     },
     {
-      code: 'React.createElement("div", undefined, [React.createElement("div"), React.createElement("div")]);'
+      code: 'Inferno.createElement("div", undefined, [Inferno.createElement("div"), Inferno.createElement("div")]);'
     },
     {
       code: '<MyComponent />'
     },
     {
-      code: 'React.createElement(MyComponent);'
+      code: 'Inferno.createElement(MyComponent);'
     },
     {
-      code: 'React.createElement(MyComponent, {});'
+      code: 'Inferno.createElement(MyComponent, {});'
     },
     {
-      code: 'React.createElement(MyComponent, undefined);'
+      code: 'Inferno.createElement(MyComponent, undefined);'
     },
     {
       code: '<MyComponent>Children</MyComponent>;'
     },
     {
-      code: 'React.createElement(MyComponent, "Children");'
+      code: 'Inferno.createElement(MyComponent, "Children");'
     },
     {
-      code: 'React.createElement(MyComponent, {}, "Children");'
+      code: 'Inferno.createElement(MyComponent, {}, "Children");'
     },
     {
-      code: 'React.createElement(MyComponent, undefined, "Children");'
+      code: 'Inferno.createElement(MyComponent, undefined, "Children");'
     },
     {
       code: '<MyComponent className="class-name"></MyComponent>;'
     },
     {
-      code: 'React.createElement(MyComponent, {className: "class-name"});'
+      code: 'Inferno.createElement(MyComponent, {className: "class-name"});'
     },
     {
       code: '<MyComponent className="class-name">Children</MyComponent>;'
     },
     {
-      code: 'React.createElement(MyComponent, {className: "class-name"}, "Children");'
+      code: 'Inferno.createElement(MyComponent, {className: "class-name"}, "Children");'
     },
     {
       code: '<MyComponent className="class-name" {...props} />;'
     },
     {
-      code: 'React.createElement(MyComponent, {className: "class-name", ...props});'
+      code: 'Inferno.createElement(MyComponent, {className: "class-name", ...props});'
     }
   ],
   invalid: [
@@ -160,19 +160,19 @@ ruleTester.run('no-children-prop', rule, {
       errors: [{message: JSX_ERROR}]
     },
     {
-      code: 'React.createElement("div", {children: "Children"});',
+      code: 'Inferno.createElement("div", {children: "Children"});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
-      code: 'React.createElement("div", {children: "Children"}, "Children");',
+      code: 'Inferno.createElement("div", {children: "Children"}, "Children");',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
-      code: 'React.createElement("div", {children: React.createElement("div")});',
+      code: 'Inferno.createElement("div", {children: Inferno.createElement("div")});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
-      code: 'React.createElement("div", {children: [React.createElement("div"), React.createElement("div")]});',
+      code: 'Inferno.createElement("div", {children: [Inferno.createElement("div"), Inferno.createElement("div")]});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
@@ -180,7 +180,7 @@ ruleTester.run('no-children-prop', rule, {
       errors: [{message: JSX_ERROR}]
     },
     {
-      code: 'React.createElement(MyComponent, {children: "Children"});',
+      code: 'Inferno.createElement(MyComponent, {children: "Children"});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
@@ -188,7 +188,7 @@ ruleTester.run('no-children-prop', rule, {
       errors: [{message: JSX_ERROR}]
     },
     {
-      code: 'React.createElement(MyComponent, {children: "Children", className: "class-name"});',
+      code: 'Inferno.createElement(MyComponent, {children: "Children", className: "class-name"});',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     },
     {
@@ -196,7 +196,7 @@ ruleTester.run('no-children-prop', rule, {
       errors: [{message: JSX_ERROR}]
     },
     {
-      code: 'React.createElement(MyComponent, {...props, children: "Children"})',
+      code: 'Inferno.createElement(MyComponent, {...props, children: "Children"})',
       errors: [{message: CREATE_ELEMENT_ERROR}]
     }
   ]

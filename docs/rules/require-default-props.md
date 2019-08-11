@@ -1,8 +1,8 @@
-# Enforce a defaultProps definition for every prop that is not a required prop (react/require-default-props)
+# Enforce a defaultProps definition for every prop that is not a required prop (inferno/require-default-props)
 
 This rule aims to ensure that any non-required `PropType` declaration of a component has a corresponding `defaultProps` value.
 
-One advantage of `defaultProps` over custom default logic in your code is that `defaultProps` are resolved by React before the `PropTypes` typechecking happens, so typechecking will also apply to your `defaultProps`.
+One advantage of `defaultProps` over custom default logic in your code is that `defaultProps` are resolved by Inferno before the `PropTypes` typechecking happens, so typechecking will also apply to your `defaultProps`.
 The same also holds true for stateless functional components: default function parameters do not behave the same as `defaultProps` and thus using `defaultProps` is still preferred.
 
 To illustrate, consider the following example:
@@ -27,7 +27,7 @@ HelloWorld.defaultProps = {
 
 // Logs:
 // Invalid prop `name` of type `string` supplied to `HelloWorld`, expected `object`.
-ReactDOM.render(<HelloWorld />,  document.getElementById('app'));
+Inferno.render(<HelloWorld />,  document.getElementById('app'));
 ```
 
 Without `defaultProps`:
@@ -46,7 +46,7 @@ HelloWorld.propTypes = {
 
 // Nothing is logged, renders:
 // "Hello,!"
-ReactDOM.render(<HelloWorld />,  document.getElementById('app'));
+Inferno.render(<HelloWorld />,  document.getElementById('app'));
 ```
 
 ## Rule Details
@@ -65,7 +65,7 @@ MyStatelessComponent.propTypes = {
 ```
 
 ```jsx
-var Greeting = createReactClass({
+var Greeting = createClass({
   render: function() {
     return <div>Hello {this.props.foo} {this.props.bar}</div>;
   },
@@ -84,7 +84,7 @@ var Greeting = createReactClass({
 ```
 
 ```jsx
-class Greeting extends React.Component {
+class Greeting extends Inferno.Component {
   render() {
     return (
       <h1>Hello, {this.props.foo} {this.props.bar}</h1>
@@ -116,7 +116,7 @@ function MyStatelessComponent(props: Props) {
 The following patterns are **not** considered warnings:
 
 ```jsx
-class Greeting extends React.Component {
+class Greeting extends Inferno.Component {
   render() {
     return (
       <h1>Hello, {this.props.foo} {this.props.bar}</h1>
@@ -188,7 +188,7 @@ NotAComponent.propTypes = {
 
 ```js
 ...
-"react/require-default-props": [<enabled>, { forbidDefaultForRequired: <boolean> }]
+"inferno/require-default-props": [<enabled>, { forbidDefaultForRequired: <boolean> }]
 ...
 ```
 
@@ -202,7 +202,7 @@ Forbids setting a default for props that are marked as `isRequired`.
 The following patterns are warnings:
 
 ```jsx
-class Greeting extends React.Component {
+class Greeting extends Inferno.Component {
   render() {
     return (
       <h1>Hello, {this.props.foo} {this.props.bar}</h1>
@@ -240,7 +240,7 @@ MyStatelessComponent.defaultProps = {
 The following patterns are **not** warnings:
 
 ```jsx
-class Greeting extends React.Component {
+class Greeting extends Inferno.Component {
   render() {
     return (
       <h1>Hello, {this.props.foo} {this.props.bar}</h1>
@@ -272,6 +272,3 @@ MyStatelessComponent.propTypes = {
 ## When Not To Use It
 
 If you don't care about using `defaultsProps` for your component's props that are not required, you can disable this rule.
-
-# Resources
-- [Official React documentation on defaultProps](https://facebook.github.io/react/docs/typechecking-with-proptypes.html#default-prop-values)

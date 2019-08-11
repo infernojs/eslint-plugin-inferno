@@ -1,4 +1,4 @@
-# Enforce that props are read-only (react/prefer-read-only-props)
+# Enforce that props are read-only (inferno/prefer-read-only-props)
 
 Using Flow, one can define types for props. This rule enforces that prop types are read-only (covariant).
 
@@ -10,7 +10,7 @@ The following patterns are considered warnings:
 type Props = {
   name: string,
 }
-class Hello extends React.Component<Props> {
+class Hello extends Inferno.Component<Props> {
   render () {
     return <div>Hello {this.props.name}</div>;
   }
@@ -31,7 +31,7 @@ The following patterns are **not** considered warnings:
 type Props = {
   +name: string,
 }
-class Hello extends React.Component<Props> {
+class Hello extends Inferno.Component<Props> {
   render () {
     return <div>Hello {this.props.name}</div>;
   }

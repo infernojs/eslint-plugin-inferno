@@ -1,31 +1,24 @@
-# Prevents common typos (react/no-typos)
+# Prevents common typos (inferno/no-typos)
 
 Ensure no casing typos were made declaring static class properties and lifecycle methods.
-Checks that declared `propTypes`, `contextTypes` and `childContextTypes` is supported by [react-props](https://github.com/facebook/prop-types)
 
 ## Rule Details
 
-This rule checks whether the declared static class properties and lifecycle methods related to React components do not contain any typos.
+This rule checks whether the declared static class properties and lifecycle methods related to Inferno components do not contain any typos.
 
 It makes sure that the following class properties have
 no casing typos:
 
-* propTypes
-* contextTypes
-* childContextTypes
 * defaultProps
 
-and the following react lifecycle methods:
+and the following inferno lifecycle methods:
 
 * getDerivedStateFromProps
 * componentWillMount
-* UNSAFE_componentWillMount
 * componentDidMount
 * componentWillReceiveProps
-* UNSAFE_componentWillReceiveProps
 * shouldComponentUpdate
 * componentWillUpdate
-* UNSAFE_componentWillUpdate
 * getSnapshotBeforeUpdate
 * componentDidUpdate
 * componentDidCatch
@@ -36,54 +29,24 @@ and the following react lifecycle methods:
 The following patterns are considered warnings:
 
 ```js
-class MyComponent extends React.Component {
-  static PropTypes = {}
-}
-
-class MyComponent extends React.Component {
-  static proptypes = {}
-}
-
-class MyComponent extends React.Component {
-  static ContextTypes = {}
-}
-
-class MyComponent extends React.Component {
-  static contexttypes = {}
-}
-
-class MyComponent extends React.Component {
-  static ChildContextTypes = {}
-}
-
-class MyComponent extends React.Component {
-  static childcontexttypes = {}
-}
-
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static DefaultProps = {}
 }
 
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static defaultprops = {}
 }
 
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   componentwillMount() {}
 }
 
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   ComponentWillReceiveProps() {}
 }
 
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   componentdidupdate() {}
-}
-
-class MyComponent extends React.Component {
-  static propTypes = {
-    a: PropTypes.typo
-  }
 }
 
 ```
@@ -91,37 +54,19 @@ class MyComponent extends React.Component {
 The following patterns are **not** considered warnings:
 
 ```js
-class MyComponent extends React.Component {
-  static propTypes = {}
-}
-
-class MyComponent extends React.Component {
-  static contextTypes = {}
-}
-
-class MyComponent extends React.Component {
-  static childContextTypes = {}
-}
-
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static defaultProps = {}
 }
 
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   componentWillMount() {}
 }
 
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   componentWillReceiveProps() {}
 }
 
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   componentDidUpdate() {}
-}
-
-class MyComponent extends React.Component {
-  static propTypes = {
-    a: PropTypes.bool.isRequired
-  }
 }
 ```

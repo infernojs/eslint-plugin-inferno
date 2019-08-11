@@ -1,4 +1,4 @@
-# Prevent missing parentheses around multiline JSX (react/jsx-wrap-multilines)
+# Prevent missing parentheses around multiline JSX (inferno/jsx-wrap-multilines)
 
 Wrapping multiline JSX in parentheses can improve readability and/or convenience.
 
@@ -25,7 +25,7 @@ Note: conditions are checked by default in declarations or assignments.
 The following patterns are considered warnings when using `parens` or `parens-new-line`:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return <div>
       <p>Hello {this.props.name}</p>
@@ -37,7 +37,7 @@ var Hello = createReactClass({
 The following patterns are considered warnings when using `parens-new-line`:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return (<div>
       <p>Hello {this.props.name}</p>
@@ -51,7 +51,7 @@ The following patterns are **not** considered warnings:
 ```jsx
 var singleLineJSX = <p>Hello</p>
 
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return (
       <div>

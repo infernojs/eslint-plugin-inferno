@@ -1,6 +1,6 @@
 /**
  * @fileoverview Prevents usage of Function.prototype.bind and arrow functions
- *               in React component definition.
+ *               in Inferno component definition.
  * @author Daniel Lo Nigro <dan.cx>
  */
 
@@ -208,7 +208,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    return (<div>{',
         '      this.props.list.map(this.wrap.bind(this, "span"))',
@@ -219,7 +219,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    const click = this.bar::baz',
         '    return <div onClick={onClick}>Hello</div>;',
@@ -230,7 +230,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    const click = () => true',
         '    return <div onClick={onClick}>Hello</div>;',
@@ -240,7 +240,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const onClick = this.doSomething.bind(this, "no")',
         '    return <div onClick={click}>Hello</div>;',
@@ -251,7 +251,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = async () => {',
         '    return (<div>{',
         '      this.props.list.map(this.wrap.bind(this, "span"))',
@@ -313,7 +313,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             const click = this.someMethod.bind(this);
             return <div onClick={click}>Hello {this.state.name}</div>;
@@ -324,7 +324,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: `
-        class Hello23 extends React.Component {
+        class Hello23 extends Inferno.Component {
           render() {
             const click = this.someMethod.bind(this);
             return <div onClick={click}>Hello {this.state.name}</div>;
@@ -335,7 +335,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv() {',
         '    const click = this.doSomething.bind(this, "no")',
         '    return <div onClick={click}>Hello</div>;',
@@ -346,7 +346,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const click = this.doSomething.bind(this, "no")',
         '    return <div onClick={click}>Hello</div>;',
@@ -358,7 +358,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = async () => {',
         '    const click = this.doSomething.bind(this, "no")',
         '    return <div onClick={click}>Hello</div>;',
@@ -380,7 +380,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '   return <div onClick={this.doSomething.bind(this, "hey")} />',
         '  }',
@@ -390,7 +390,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    const doThing = this.doSomething.bind(this, "hey")',
         '    return <div onClick={doThing} />',
@@ -401,7 +401,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const click = () => true',
         '    const renderStuff = () => {',
@@ -483,7 +483,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const click = () => true',
         '    return <div onClick={click}>Hello</div>;',
@@ -495,7 +495,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = async () => {',
         '    const click = () => true',
         '    return <div onClick={click}>Hello</div>;',
@@ -507,7 +507,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = async () => {',
         '    const click = async () => true',
         '    return <div onClick={click}>Hello</div>;',
@@ -519,7 +519,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '   return <div onClick={() => true} />',
         '  }',
@@ -529,7 +529,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '   return <div onClick={async () => true} />',
         '  }',
@@ -539,7 +539,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    const doThing = () => true',
         '    return <div onClick={doThing} />',
@@ -550,7 +550,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    const doThing = async () => true',
         '    return <div onClick={doThing} />',
@@ -561,7 +561,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const click = ::this.onChange',
         '    const renderStuff = () => {',
@@ -598,7 +598,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const click = function () { return true }',
         '    return <div onClick={click}>Hello</div>;',
@@ -610,7 +610,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const click = function * () { return true }',
         '    return <div onClick={click}>Hello</div>;',
@@ -622,7 +622,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = async () => {',
         '    const click = function () { return true }',
         '    return <div onClick={click}>Hello</div>;',
@@ -634,7 +634,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = async () => {',
         '    const click = async function () { return true }',
         '    return <div onClick={click}>Hello</div>;',
@@ -646,7 +646,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '   return <div onClick={function () { return true }} />',
         '  }',
@@ -656,7 +656,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '   return <div onClick={function * () { return true }} />',
         '  }',
@@ -666,7 +666,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '   return <div onClick={async function () { return true }} />',
         '  }',
@@ -676,7 +676,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    const doThing = function () { return true }',
         '    return <div onClick={doThing} />',
@@ -687,7 +687,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    const doThing = async function () { return true }',
         '    return <div onClick={doThing} />',
@@ -698,7 +698,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'var Hello = React.createClass({',
+        'var Hello = Inferno.createClass({',
         '  render: function() { ',
         '    const doThing = function * () { return true }',
         '    return <div onClick={doThing} />',
@@ -709,7 +709,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const click = ::this.onChange',
         '    const renderStuff = () => {',
@@ -745,7 +745,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv() {',
         '    const click = ::this.onChange',
         '    return <div onClick={click}>Hello</div>;',
@@ -757,7 +757,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv() {',
         '    const click = this.bar::baz',
         '    return <div onClick={click}>Hello</div>;',
@@ -769,7 +769,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = async () => {',
         '    const click = this.bar::baz',
         '    return <div onClick={click}>Hello</div>;',
@@ -781,7 +781,7 @@ ruleTester.run('jsx-no-bind', rule, {
     },
     {
       code: [
-        'class Hello23 extends React.Component {',
+        'class Hello23 extends Inferno.Component {',
         '  renderDiv = () => {',
         '    const click = true',
         '    const renderStuff = () => {',

@@ -1,8 +1,8 @@
-# Enforce consistent usage of destructuring assignment of props, state, and context (react/destructuring-assignment)
+# Enforce consistent usage of destructuring assignment of props, state, and context (inferno/destructuring-assignment)
 
 Rule can be set to either of `always` or `never`;
 ```js
-"react/destructuring-assignment": [<enabled>, 'always']
+"inferno/destructuring-assignment": [<enabled>, 'always']
 ```
 
 ## Rule Details
@@ -16,7 +16,7 @@ const MyComponent = (props) => {
 ```
 
 ```js
-const Foo = class extends React.PureComponent {
+const Foo = class extends Inferno.PureComponent {
   render() {
     return <div>{this.context.foo}</div>;
   }
@@ -39,7 +39,7 @@ const MyComponent = (props, context) => {
 ```
 
 ```js
-const Foo = class extends React.PureComponent {
+const Foo = class extends Inferno.PureComponent {
   render() {
     const { title } = this.context;
     return <div>{title}</div>;
@@ -63,7 +63,7 @@ const MyComponent = (props) => {
 ```
 
 ```js
-const Foo = class extends React.PureComponent {
+const Foo = class extends Inferno.PureComponent {
   render() {
     const { title } = this.state;
     return <div>{title}</div>;
@@ -80,7 +80,7 @@ const MyComponent = (props) => {
 ```
 
 ```js
-const Foo = class extends React.PureComponent {
+const Foo = class extends Inferno.PureComponent {
   render() {
     return <div>{this.state.title}</div>;
   }
@@ -91,7 +91,7 @@ const Foo = class extends React.PureComponent {
 
 ```js
 ...
-"react/destructuring-assignment": [<enabled>, "always", { "ignoreClassFields": <boolean> }]
+"inferno/destructuring-assignment": [<enabled>, "always", { "ignoreClassFields": <boolean> }]
 ...
 ```
 
@@ -102,7 +102,7 @@ When `true` the rule will ignore class field declarations.
 The following patterns are then considered okay and do not cause warnings:
 
 ```jsx
-class Foo extends React.PureComponent {
+class Foo extends Inferno.PureComponent {
   bar = this.props.bar
 }
 ```

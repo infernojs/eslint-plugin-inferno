@@ -1,16 +1,16 @@
-# Forbid certain elements (react/forbid-elements)
+# Forbid certain elements (inferno/forbid-elements)
 
 You may want to forbid usage of certain elements in favor of others, (e.g. forbid all `<div />` and use `<Box />` instead). This rule allows you to configure a list of forbidden elements and to specify their desired replacements.
 
 ## Rule Details
 
-This rule checks all JSX elements and `React.createElement` calls and verifies that no forbidden elements are used. This rule is off by default. If on, no elements are forbidden by default.
+This rule checks all JSX elements and `Inferno.createElement` calls and verifies that no forbidden elements are used. This rule is off by default. If on, no elements are forbidden by default.
 
 ## Rule Options
 
 ```js
 ...
-"react/forbid-elements": [<enabled>, { "forbid": [<string|object>] }]
+"inferno/forbid-elements": [<enabled>, { "forbid": [<string|object>] }]
 ...
 ```
 
@@ -38,19 +38,19 @@ The following patterns are considered warnings:
 ```jsx
 // [1, { "forbid": ["button"] }]
 <button />
-React.createElement('button');
+Inferno.createElement('button');
 
 // [1, { "forbid": ["Modal"] }]
 <Modal />
-React.createElement(Modal);
+Inferno.createElement(Modal);
 
 // [1, { "forbid": ["Namespaced.Element"] }]
 <Namespaced.Element />
-React.createElement(Namespaced.Element);
+Inferno.createElement(Namespaced.Element);
 
 // [1, { "forbid": [{ "element": "button", "message": "use <Button> instead" }, "input"] }]
 <div><button /><input /></div>
-React.createElement('div', {}, React.createElement('button', {}, React.createElement('input')));
+Inferno.createElement('div', {}, Inferno.createElement('button', {}, Inferno.createElement('input')));
 ```
 
 ## When not to use

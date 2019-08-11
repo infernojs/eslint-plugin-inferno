@@ -31,7 +31,7 @@ ruleTester.run('no-did-update-set-state', rule, {
 
   valid: [{
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         render: function() {
           return <div>Hello {this.props.name}</div>;
         }
@@ -39,13 +39,13 @@ ruleTester.run('no-did-update-set-state', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {}
       });
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           someNonMemberFunction(arg);
           this.someHandler = this.setState;
@@ -54,7 +54,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           someClass.onSomeEvent(function(data) {
             this.setState({
@@ -66,7 +66,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           function handleEvent(data) {
             this.setState({
@@ -82,7 +82,7 @@ ruleTester.run('no-did-update-set-state', rule, {
 
   invalid: [{
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           this.setState({
             data: data
@@ -95,7 +95,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentDidUpdate() {
           this.setState({
             data: data
@@ -109,7 +109,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentDidUpdate = () => {
           this.setState({
             data: data
@@ -123,7 +123,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           this.setState({
             data: data
@@ -137,7 +137,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentDidUpdate() {
           this.setState({
             data: data
@@ -152,7 +152,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           someClass.onSomeEvent(function(data) {
             this.setState({
@@ -168,7 +168,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentDidUpdate() {
           someClass.onSomeEvent(function(data) {
             this.setState({
@@ -185,7 +185,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           if (true) {
             this.setState({
@@ -200,7 +200,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentDidUpdate() {
           if (true) {
             this.setState({
@@ -216,7 +216,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           someClass.onSomeEvent((data) => this.setState({data: data}));
         }
@@ -229,7 +229,7 @@ ruleTester.run('no-did-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentDidUpdate() {
           someClass.onSomeEvent((data) => this.setState({data: data}));
         }

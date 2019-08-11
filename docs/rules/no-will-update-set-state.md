@@ -1,4 +1,4 @@
-# Prevent usage of setState in componentWillUpdate (react/no-will-update-set-state)
+# Prevent usage of setState in componentWillUpdate (inferno/no-will-update-set-state)
 
 Updating the state during the componentWillUpdate step can lead to indeterminate component state and is not allowed.
 
@@ -7,7 +7,7 @@ Updating the state during the componentWillUpdate step can lead to indeterminate
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentWillUpdate: function() {
      this.setState({
         name: this.props.name.toUpperCase()
@@ -22,7 +22,7 @@ var Hello = createReactClass({
 The following patterns are **not** considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentWillUpdate: function() {
     this.props.prepareHandler();
   },
@@ -33,7 +33,7 @@ var Hello = createReactClass({
 ```
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentWillUpdate: function() {
     this.prepareHandler(function callback(newName) {
       this.setState({
@@ -51,7 +51,7 @@ var Hello = createReactClass({
 
 ```js
 ...
-"react/no-will-update-set-state": [<enabled>, <mode>]
+"inferno/no-will-update-set-state": [<enabled>, <mode>]
 ...
 ```
 
@@ -62,7 +62,7 @@ By default this rule forbids any call to `this.setState` in `componentWillUpdate
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentWillUpdate: function() {
      this.setState({
         name: this.props.name.toUpperCase()
@@ -75,7 +75,7 @@ var Hello = createReactClass({
 ```
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentWillUpdate: function() {
     this.prepareHandler(function callback(newName) {
       this.setState({

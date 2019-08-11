@@ -1,4 +1,4 @@
-# Forbid certain props on DOM Nodes (react/forbid-dom-props)
+# Forbid certain props on DOM Nodes (inferno/forbid-dom-props)
 
 This rule prevents passing of props to elements. This rule only applies to DOM Nodes (e.g. `<div />`) and not Components (e.g. `<Component />`).
 The list of forbidden props can be customized with the `forbid` option.
@@ -36,7 +36,7 @@ The following patterns are **not** considered warnings:
 
 ```js
 ...
-"react/forbid-dom-props": [<enabled>, { "forbid": [<string>] }]
+"inferno/forbid-dom-props": [<enabled>, { "forbid": [<string>] }]
 ...
 ```
 

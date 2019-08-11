@@ -1,6 +1,6 @@
-# Enforce component methods order (react/sort-comp)
+# Enforce component methods order (inferno/sort-comp)
 
-When creating React components it is more convenient to always follow the same organisation for method order to help you easily find lifecycle methods, event handlers, etc.
+When creating Inferno components it is more convenient to always follow the same organisation for method order to help you easily find lifecycle methods, event handlers, etc.
 
 **Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/reactjs/react-codemod/blob/master/transforms/sort-comp.js) in [react-codemod](https://www.npmjs.com/package/react-codemod).
 
@@ -9,14 +9,14 @@ When creating React components it is more convenient to always follow the same o
 The default configuration ensures that the following order must be followed:
 
   1. static methods and properties
-  2. lifecycle methods: `displayName`, `propTypes`, `contextTypes`, `childContextTypes`, `mixins`, `statics`, `defaultProps`, `constructor`, `getDefaultProps`, `state`, `getInitialState`, `getChildContext`, `getDerivedStateFromProps`, `componentWillMount`, `UNSAFE_componentWillMount`, `componentDidMount`, `componentWillReceiveProps`, `UNSAFE_componentWillReceiveProps`, `shouldComponentUpdate`, `componentWillUpdate`, `UNSAFE_componentWillUpdate`, `getSnapshotBeforeUpdate`, `componentDidUpdate`, `componentDidCatch`, `componentWillUnmount` (in this order).
+  2. lifecycle methods: `displayName`, `propTypes`, `contextTypes`, `childContextTypes`, `mixins`, `statics`, `defaultProps`, `constructor`, `getDefaultProps`, `state`, `getInitialState`, `getChildContext`, `getDerivedStateFromProps`, `componentWillMount`, `componentDidMount`, `componentWillReceiveProps`, `UNSAFE_componentWillReceiveProps`, `shouldComponentUpdate`, `componentWillUpdate`, `UNSAFE_componentWillUpdate`, `getSnapshotBeforeUpdate`, `componentDidUpdate`, `componentDidCatch`, `componentWillUnmount` (in this order).
   3. custom methods
   4. `render` method
 
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return <div>Hello</div>;
   },
@@ -27,7 +27,7 @@ var Hello = createReactClass({
 The following patterns are **not** considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   displayName : 'Hello',
   render: function() {
     return <div>Hello</div>;
@@ -41,7 +41,7 @@ This rule can take one argument to customize the components organisation.
 
 ```js
 ...
-"react/sort-comp": [<enabled>, { order: <order>, groups: <groups> }]
+"inferno/sort-comp": [<enabled>, { order: <order>, groups: <groups> }]
 ...
 ```
 
@@ -75,13 +75,10 @@ The default configuration is:
       'getChildContext',
       'getDerivedStateFromProps',
       'componentWillMount',
-      'UNSAFE_componentWillMount',
       'componentDidMount',
       'componentWillReceiveProps',
-      'UNSAFE_componentWillReceiveProps',
       'shouldComponentUpdate',
       'componentWillUpdate',
-      'UNSAFE_componentWillUpdate',
       'getSnapshotBeforeUpdate',
       'componentDidUpdate',
       'componentDidCatch',
@@ -106,7 +103,7 @@ You can override this configuration to match your needs.
 For example, if you want to place your event handlers (`onClick`, `onSubmit`, etc.) before `render` but the other methods after it:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'static-methods',
     'lifecycle',
@@ -120,7 +117,7 @@ For example, if you want to place your event handlers (`onClick`, `onSubmit`, et
 With the above configuration, the following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return <div>Hello</div>;
   },
@@ -131,7 +128,7 @@ var Hello = createReactClass({
 With the above configuration, the following patterns are **not** considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   onClick: function() {},
   render: function() {
     return <div>Hello</div>;
@@ -142,7 +139,7 @@ var Hello = createReactClass({
 If you want to split your `render` method into smaller ones and keep them just before render:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'static-methods',
     'lifecycle',
@@ -161,7 +158,7 @@ If you want to split your `render` method into smaller ones and keep them just b
 With the above configuration, the following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   renderButton: function() {},
   onClick: function() {},
   render: function() {
@@ -173,7 +170,7 @@ var Hello = createReactClass({
 With the above configuration, the following patterns are **not** considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   onClick: function() {},
   renderButton: function() {},
   render: function() {
@@ -185,7 +182,7 @@ var Hello = createReactClass({
 If you want to flow annotations to be at the top:
 
 ```js
-"react/sort-comp": [1, {
+"inferno/sort-comp": [1, {
   order: [
     'type-annotations',
     'static-methods',
@@ -199,7 +196,7 @@ If you want to flow annotations to be at the top:
 With the above configuration, the following patterns are considered warnings:
 
 ```jsx
-class Hello extends React.Component<any, Props, void> {
+class Hello extends Inferno.Component<any, Props, void> {
   onClick() { this._someElem = true; }
   props: Props;
   _someElem: bool;
@@ -213,7 +210,7 @@ With the above configuration, the following patterns are **not** considered warn
 
 ```jsx
 type Props = {};
-class Hello extends React.Component<any, Props, void> {
+class Hello extends Inferno.Component<any, Props, void> {
   props: Props;
   _someElem: bool;
   onClick() { this._someElem = true; }

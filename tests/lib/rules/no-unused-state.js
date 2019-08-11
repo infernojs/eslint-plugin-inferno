@@ -29,17 +29,17 @@ eslintTester.run('no-unused-state', rule, {
     `function StatelessFnUnaffectedTest(props) {
        return <SomeComponent foo={props.foo} />;
     };`,
-    `var NoStateTest = createReactClass({
+    `var NoStateTest = createClass({
       render: function() {
         return <SomeComponent />;
       }
     });`,
-    `var NoStateMethodTest = createReactClass({
+    `var NoStateMethodTest = createClass({
       render() {
         return <SomeComponent />;
       }
     });`,
-    `var GetInitialStateTest = createReactClass({
+    `var GetInitialStateTest = createClass({
       getInitialState: function() {
         return { foo: 0 };
       },
@@ -47,7 +47,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state.foo} />;
       }
     });`,
-    `var ComputedKeyFromVariableTest = createReactClass({
+    `var ComputedKeyFromVariableTest = createClass({
       getInitialState: function() {
         return { [foo]: 0 };
       },
@@ -55,7 +55,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent />;
       }
     });`,
-    `var ComputedKeyFromBooleanLiteralTest = createReactClass({
+    `var ComputedKeyFromBooleanLiteralTest = createClass({
       getInitialState: function() {
         return { [true]: 0 };
       },
@@ -63,7 +63,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state[true]} />;
       }
     });`,
-    `var ComputedKeyFromNumberLiteralTest = createReactClass({
+    `var ComputedKeyFromNumberLiteralTest = createClass({
       getInitialState: function() {
         return { [123]: 0 };
       },
@@ -71,7 +71,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state[123]} />;
       }
     });`,
-    `var ComputedKeyFromExpressionTest = createReactClass({
+    `var ComputedKeyFromExpressionTest = createClass({
       getInitialState: function() {
         return { [foo + bar]: 0 };
       },
@@ -79,7 +79,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent />;
       }
     });`,
-    `var ComputedKeyFromBinaryExpressionTest = createReactClass({
+    `var ComputedKeyFromBinaryExpressionTest = createClass({
       getInitialState: function() {
         return { ['foo' + 'bar' * 8]: 0 };
       },
@@ -87,7 +87,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent />;
       }
     });`,
-    `var ComputedKeyFromStringLiteralTest = createReactClass({
+    `var ComputedKeyFromStringLiteralTest = createClass({
       getInitialState: function() {
         return { ['foo']: 0 };
       },
@@ -95,7 +95,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state.foo} />;
       }
     });`,
-    `var ComputedKeyFromTemplateLiteralTest = createReactClass({
+    `var ComputedKeyFromTemplateLiteralTest = createClass({
       getInitialState: function() {
         return { [\`foo\${bar}\`]: 0 };
       },
@@ -103,7 +103,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent />;
       }
     });`,
-    `var ComputedKeyFromTemplateLiteralTest = createReactClass({
+    `var ComputedKeyFromTemplateLiteralTest = createClass({
       getInitialState: function() {
         return { [\`foo\`]: 0 };
       },
@@ -111,7 +111,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state['foo']} />;
       }
     });`,
-    `var GetInitialStateMethodTest = createReactClass({
+    `var GetInitialStateMethodTest = createClass({
       getInitialState() {
         return { foo: 0 };
       },
@@ -119,7 +119,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state.foo} />;
       }
     });`,
-    `var SetStateTest = createReactClass({
+    `var SetStateTest = createClass({
       onFooChange(newFoo) {
         this.setState({ foo: newFoo });
       },
@@ -127,7 +127,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state.foo} />;
       }
     });`,
-    `var MultipleSetState = createReactClass({
+    `var MultipleSetState = createClass({
       getInitialState() {
         return { foo: 0 };
       },
@@ -138,12 +138,12 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent onClick={this.update} foo={this.state.foo} />;
       }
     });`,
-    `class NoStateTest extends React.Component {
+    `class NoStateTest extends Inferno.Component {
       render() {
         return <SomeComponent />;
       }
     }`,
-    `class CtorStateTest extends React.Component {
+    `class CtorStateTest extends Inferno.Component {
       constructor() {
         this.state = { foo: 0 };
       }
@@ -151,7 +151,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state.foo} />;
       }
     }`,
-    `class ComputedKeyFromVariableTest extends React.Component {
+    `class ComputedKeyFromVariableTest extends Inferno.Component {
       constructor() {
         this.state = { [foo]: 0 };
       }
@@ -159,7 +159,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent />;
       }
     }`,
-    `class ComputedKeyFromBooleanLiteralTest extends React.Component {
+    `class ComputedKeyFromBooleanLiteralTest extends Inferno.Component {
       constructor() {
         this.state = { [false]: 0 };
       }
@@ -167,7 +167,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state['false']} />;
       }
     }`,
-    `class ComputedKeyFromNumberLiteralTest extends React.Component {
+    `class ComputedKeyFromNumberLiteralTest extends Inferno.Component {
       constructor() {
         this.state = { [345]: 0 };
       }
@@ -175,7 +175,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state[345]} />;
       }
     }`,
-    `class ComputedKeyFromExpressionTest extends React.Component {
+    `class ComputedKeyFromExpressionTest extends Inferno.Component {
       constructor() {
         this.state = { [foo + bar]: 0 };
       }
@@ -183,7 +183,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent />;
       }
     }`,
-    `class ComputedKeyFromBinaryExpressionTest extends React.Component {
+    `class ComputedKeyFromBinaryExpressionTest extends Inferno.Component {
       constructor() {
         this.state = { [1 + 2 * 8]: 0 };
       }
@@ -191,7 +191,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent />;
       }
     }`,
-    `class ComputedKeyFromStringLiteralTest extends React.Component {
+    `class ComputedKeyFromStringLiteralTest extends Inferno.Component {
       constructor() {
         this.state = { ['foo']: 0 };
       }
@@ -199,7 +199,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state.foo} />;
       }
     }`,
-    `class ComputedKeyFromTemplateLiteralTest extends React.Component {
+    `class ComputedKeyFromTemplateLiteralTest extends Inferno.Component {
       constructor() {
         this.state = { [\`foo\${bar}\`]: 0 };
       }
@@ -207,7 +207,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent />;
       }
     }`,
-    `class ComputedKeyFromTemplateLiteralTest extends React.Component {
+    `class ComputedKeyFromTemplateLiteralTest extends Inferno.Component {
       constructor() {
         this.state = { [\`foo\`]: 0 };
       }
@@ -215,7 +215,7 @@ eslintTester.run('no-unused-state', rule, {
         return <SomeComponent foo={this.state.foo} />;
       }
     }`,
-    `class SetStateTest extends React.Component {
+    `class SetStateTest extends Inferno.Component {
         onFooChange(newFoo) {
           this.setState({ foo: newFoo });
         }
@@ -224,7 +224,7 @@ eslintTester.run('no-unused-state', rule, {
         }
       }`,
     {
-      code: `class ClassPropertyStateTest extends React.Component {
+      code: `class ClassPropertyStateTest extends Inferno.Component {
           state = { foo: 0 };
           render() {
             return <SomeComponent foo={this.state.foo} />;
@@ -232,7 +232,7 @@ eslintTester.run('no-unused-state', rule, {
         }`,
       parser: parsers.BABEL_ESLINT
     },
-    `class VariableDeclarationTest extends React.Component {
+    `class VariableDeclarationTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -241,7 +241,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={foo} />;
         }
       }`,
-    `class DestructuringTest extends React.Component {
+    `class DestructuringTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -250,7 +250,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={myFoo} />;
         }
       }`,
-    `class ShorthandDestructuringTest extends React.Component {
+    `class ShorthandDestructuringTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -259,7 +259,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={foo} />;
         }
       }`,
-    `class AliasDeclarationTest extends React.Component {
+    `class AliasDeclarationTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -268,7 +268,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={state.foo} />;
         }
       }`,
-    `class AliasAssignmentTest extends React.Component {
+    `class AliasAssignmentTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -278,7 +278,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={state.foo} />;
         }
       }`,
-    `class DestructuringAliasTest extends React.Component {
+    `class DestructuringAliasTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -287,7 +287,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={myState.foo} />;
         }
       }`,
-    `class ShorthandDestructuringAliasTest extends React.Component {
+    `class ShorthandDestructuringAliasTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -296,7 +296,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={state.foo} />;
         }
       }`,
-    `class RestPropertyTest extends React.Component {
+    `class RestPropertyTest extends Inferno.Component {
         constructor() {
           this.state = {
             foo: 0,
@@ -309,7 +309,7 @@ eslintTester.run('no-unused-state', rule, {
         }
       }`,
     {
-      code: `class DeepDestructuringTest extends React.Component {
+      code: `class DeepDestructuringTest extends Inferno.Component {
         state = { foo: 0, bar: 0 };
         render() {
           const {state: {foo, ...others}} = this;
@@ -320,7 +320,7 @@ eslintTester.run('no-unused-state', rule, {
     },
     // A cleverer analysis might recognize that the following should be errors,
     // but they're out of scope for this lint rule.
-    `class MethodArgFalseNegativeTest extends React.Component {
+    `class MethodArgFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -330,7 +330,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent />;
         }
       }`,
-    `class AssignedToObjectFalseNegativeTest extends React.Component {
+    `class AssignedToObjectFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -339,7 +339,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent bar={obj.bar} />;
         }
       }`,
-    `class ComputedAccessFalseNegativeTest extends React.Component {
+    `class ComputedAccessFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0, bar: 1 };
         }
@@ -348,7 +348,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent bar={this.state[bar]} />;
         }
       }`,
-    `class JsxSpreadFalseNegativeTest extends React.Component {
+    `class JsxSpreadFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -356,7 +356,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent {...this.state} />;
         }
       }`,
-    `class AliasedJsxSpreadFalseNegativeTest extends React.Component {
+    `class AliasedJsxSpreadFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -365,7 +365,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent {...state} />;
         }
       }`,
-    `class ObjectSpreadFalseNegativeTest extends React.Component {
+    `class ObjectSpreadFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -374,7 +374,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={attrs.foo} />;
         }
       }`,
-    `class ShadowingFalseNegativeTest extends React.Component {
+    `class ShadowingFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -388,7 +388,7 @@ eslintTester.run('no-unused-state', rule, {
           return <SomeComponent foo={foo} />;
         }
       }`,
-    `class NonRenderClassMethodFalseNegativeTest extends React.Component {
+    `class NonRenderClassMethodFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0, bar: 0 };
         }
@@ -405,7 +405,7 @@ eslintTester.run('no-unused-state', rule, {
         }
       }`,
     {
-      code: `class TypeCastExpressionSpreadFalseNegativeTest extends React.Component {
+      code: `class TypeCastExpressionSpreadFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -416,7 +416,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class ArrowFunctionClassMethodDestructuringFalseNegativeTest extends React.Component {
+      code: `class ArrowFunctionClassMethodDestructuringFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -434,7 +434,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class ArrowFunctionClassMethodWithClassPropertyTransformFalseNegativeTest extends React.Component {
+      code: `class ArrowFunctionClassMethodWithClassPropertyTransformFalseNegativeTest extends Inferno.Component {
         state = { foo: 0 };
 
         doSomething = () => {
@@ -450,7 +450,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class ArrowFunctionClassMethodDeepDestructuringFalseNegativeTest extends React.Component {
+      code: `class ArrowFunctionClassMethodDeepDestructuringFalseNegativeTest extends Inferno.Component {
         state = { foo: { bar: 0 } };
 
         doSomething = () => {
@@ -466,7 +466,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class ArrowFunctionClassMethodDestructuringAssignmentFalseNegativeTest extends React.Component {
+      code: `class ArrowFunctionClassMethodDestructuringAssignmentFalseNegativeTest extends Inferno.Component {
         state = { foo: 0 };
 
         doSomething = () => {
@@ -482,7 +482,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class ThisStateAsAnObject extends React.Component {
+      code: `class ThisStateAsAnObject extends Inferno.Component {
         state = {
           active: true
         };
@@ -640,7 +640,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     }, {
       code: `
-      var Foo = createReactClass({
+      var Foo = createClass({
         getInitialState: function() {
           return { initial: 'foo' };
         },
@@ -657,7 +657,7 @@ eslintTester.run('no-unused-state', rule, {
       `
     }, {
       code: `
-      var Foo = createReactClass({
+      var Foo = createClass({
         getInitialState: function() {
           return { initial: 'foo' };
         },
@@ -747,7 +747,7 @@ eslintTester.run('no-unused-state', rule, {
 
   invalid: [
     {
-      code: `var UnusedGetInitialStateTest = createReactClass({
+      code: `var UnusedGetInitialStateTest = createClass({
           getInitialState: function() {
             return { foo: 0 };
           },
@@ -758,7 +758,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `var UnusedComputedStringLiteralKeyStateTest = createReactClass({
+      code: `var UnusedComputedStringLiteralKeyStateTest = createClass({
           getInitialState: function() {
             return { ['foo']: 0 };
           },
@@ -769,7 +769,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `var UnusedComputedTemplateLiteralKeyStateTest = createReactClass({
+      code: `var UnusedComputedTemplateLiteralKeyStateTest = createClass({
           getInitialState: function() {
             return { [\`foo\`]: 0 };
           },
@@ -780,7 +780,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `var UnusedComputedNumberLiteralKeyStateTest = createReactClass({
+      code: `var UnusedComputedNumberLiteralKeyStateTest = createClass({
           getInitialState: function() {
             return { [123]: 0 };
           },
@@ -791,7 +791,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['123'])
     },
     {
-      code: `var UnusedComputedBooleanLiteralKeyStateTest = createReactClass({
+      code: `var UnusedComputedBooleanLiteralKeyStateTest = createClass({
           getInitialState: function() {
             return { [true]: 0 };
           },
@@ -802,7 +802,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['true'])
     },
     {
-      code: `var UnusedGetInitialStateMethodTest = createReactClass({
+      code: `var UnusedGetInitialStateMethodTest = createClass({
           getInitialState() {
             return { foo: 0 };
           },
@@ -813,7 +813,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `var UnusedSetStateTest = createReactClass({
+      code: `var UnusedSetStateTest = createClass({
           onFooChange(newFoo) {
             this.setState({ foo: newFoo });
           },
@@ -824,7 +824,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `class UnusedCtorStateTest extends React.Component {
+      code: `class UnusedCtorStateTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
@@ -835,7 +835,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `class UnusedSetStateTest extends React.Component {
+      code: `class UnusedSetStateTest extends Inferno.Component {
           onFooChange(newFoo) {
             this.setState({ foo: newFoo });
           }
@@ -846,7 +846,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `class UnusedClassPropertyStateTest extends React.Component {
+      code: `class UnusedClassPropertyStateTest extends Inferno.Component {
           state = { foo: 0 };
           render() {
             return <SomeComponent />;
@@ -856,7 +856,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class UnusedComputedStringLiteralKeyStateTest extends React.Component {
+      code: `class UnusedComputedStringLiteralKeyStateTest extends Inferno.Component {
           state = { ['foo']: 0 };
           render() {
             return <SomeComponent />;
@@ -866,7 +866,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class UnusedComputedTemplateLiteralKeyStateTest extends React.Component {
+      code: `class UnusedComputedTemplateLiteralKeyStateTest extends Inferno.Component {
           state = { [\`foo\`]: 0 };
           render() {
             return <SomeComponent />;
@@ -876,7 +876,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class UnusedComputedTemplateLiteralKeyStateTest extends React.Component {
+      code: `class UnusedComputedTemplateLiteralKeyStateTest extends Inferno.Component {
           state = { [\`foo \\n bar\`]: 0 };
           render() {
             return <SomeComponent />;
@@ -886,7 +886,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class UnusedComputedBooleanLiteralKeyStateTest extends React.Component {
+      code: `class UnusedComputedBooleanLiteralKeyStateTest extends Inferno.Component {
           state = { [true]: 0 };
           render() {
             return <SomeComponent />;
@@ -896,7 +896,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class UnusedComputedNumberLiteralKeyStateTest extends React.Component {
+      code: `class UnusedComputedNumberLiteralKeyStateTest extends Inferno.Component {
           state = { [123]: 0 };
           render() {
             return <SomeComponent />;
@@ -906,7 +906,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class UnusedComputedFloatLiteralKeyStateTest extends React.Component {
+      code: `class UnusedComputedFloatLiteralKeyStateTest extends Inferno.Component {
           state = { [123.12]: 0 };
           render() {
             return <SomeComponent />;
@@ -916,7 +916,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class UnusedStateWhenPropsAreSpreadTest extends React.Component {
+      code: `class UnusedStateWhenPropsAreSpreadTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
@@ -927,7 +927,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `class AliasOutOfScopeTest extends React.Component {
+      code: `class AliasOutOfScopeTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
@@ -942,7 +942,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `class MultipleErrorsTest extends React.Component {
+      code: `class MultipleErrorsTest extends Inferno.Component {
           constructor() {
             this.state = {
               foo: 0,
@@ -959,7 +959,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo', 'bar'])
     },
     {
-      code: `class MultipleErrorsForSameKeyTest extends React.Component {
+      code: `class MultipleErrorsForSameKeyTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
@@ -973,7 +973,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo', 'foo'])
     },
     {
-      code: `class UnusedRestPropertyFieldTest extends React.Component {
+      code: `class UnusedRestPropertyFieldTest extends Inferno.Component {
           constructor() {
             this.state = {
               foo: 0,
@@ -988,7 +988,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['foo'])
     },
     {
-      code: `class UnusedStateArrowFunctionMethodTest extends React.Component {
+      code: `class UnusedStateArrowFunctionMethodTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
@@ -1003,7 +1003,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class TypeCastExpressionTest extends React.Component {
+      code: `class TypeCastExpressionTest extends Inferno.Component {
           constructor() {
             this.state = {
               foo: 0,
@@ -1024,7 +1024,7 @@ eslintTester.run('no-unused-state', rule, {
       parser: parsers.BABEL_ESLINT
     },
     {
-      code: `class UnusedDeepDestructuringTest extends React.Component {
+      code: `class UnusedDeepDestructuringTest extends Inferno.Component {
           state = { foo: 0, bar: 0 };
           render() {
             const {state: {foo}} = this;

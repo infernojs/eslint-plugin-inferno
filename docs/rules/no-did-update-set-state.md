@@ -1,4 +1,4 @@
-# Prevent usage of setState in componentDidUpdate (react/no-did-update-set-state)
+# Prevent usage of setState in componentDidUpdate (inferno/no-did-update-set-state)
 
 Updating the state after a component update will trigger a second `render()` call and can lead to property/layout thrashing.
 
@@ -7,7 +7,7 @@ Updating the state after a component update will trigger a second `render()` cal
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidUpdate: function() {
      this.setState({
         name: this.props.name.toUpperCase()
@@ -22,7 +22,7 @@ var Hello = createReactClass({
 The following patterns are **not** considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidUpdate: function() {
     this.props.onUpdate();
   },
@@ -33,7 +33,7 @@ var Hello = createReactClass({
 ```
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidUpdate: function() {
     this.onUpdate(function callback(newName) {
       this.setState({
@@ -51,7 +51,7 @@ var Hello = createReactClass({
 
 ```js
 ...
-"react/no-did-update-set-state": [<enabled>, <mode>]
+"inferno/no-did-update-set-state": [<enabled>, <mode>]
 ...
 ```
 
@@ -62,7 +62,7 @@ By default this rule forbids any call to `this.setState` in `componentDidUpdate`
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidUpdate: function() {
      this.setState({
         name: this.props.name.toUpperCase()
@@ -75,7 +75,7 @@ var Hello = createReactClass({
 ```
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   componentDidUpdate: function() {
     this.onUpdate(function callback(newName) {
       this.setState({

@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-This is the list of versions of `eslint-plugin-react` which are currently being supported with security updates.
+This is the list of versions of `eslint-plugin-inferno` which are currently being supported with security updates.
 
 | Version  | Supported          |
 | -------- | ------------------ |

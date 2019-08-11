@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines where React component static properties should be positioned.
+ * @fileoverview Defines where Inferno component static properties should be positioned.
  * @author Daniel Mason
  */
 
@@ -29,11 +29,6 @@ const ruleTesterConfig = {
     ecmaFeatures: {
       jsx: true
     }
-  },
-  settings: {
-    react: {
-      version: '15'
-    }
   }
 };
 
@@ -45,12 +40,12 @@ const ruleTester = new RuleTester(ruleTesterConfig);
 ruleTester.run('static-property-placement', rule, {
   valid: [
     // ------------------------------------------------------------------------------
-    // Ignore creatClass/createReactClass and Static Functional Components
+    // Ignore creatClass/createClass and Static Functional Components
     // ------------------------------------------------------------------------------
     {
-      // Do not error on createReactClass pragma
+      // Do not error on createClass pragma
       code: [`
-        var MyComponent = createReactClass({
+        var MyComponent = createClass({
           childContextTypes: {
             something: PropTypes.bool
           },
@@ -79,7 +74,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error on createClass pragma
       code: [`
-        var MyComponent = React.createClass({
+        var MyComponent = Inferno.createClass({
           childContextTypes: {
             something: PropTypes.bool
           },
@@ -187,7 +182,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if no properties defined
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -197,7 +192,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if unchecked properties defined
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static randomlyNamed = {
             name: 'random'
           }
@@ -207,7 +202,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if unchecked static properties defined and assignment rule enabled
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static randomlyNamed = {
             name: 'random'
           }
@@ -218,7 +213,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if unchecked assignment properties defined and assignment rule enabled
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -233,7 +228,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if unchecked assignment properties defined and static rule enabled
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -250,7 +245,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if childContextTypes correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
@@ -260,7 +255,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if childContextTypes correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
@@ -274,7 +269,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if childContextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
               something: PropTypes.bool
@@ -287,7 +282,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
               something: PropTypes.bool
@@ -303,7 +298,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if childContextTypes correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -318,7 +313,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if childContextTypes correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -336,7 +331,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static contextTypes = {
             something: PropTypes.bool
           };
@@ -346,7 +341,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static contextTypes = {
             something: PropTypes.bool
           };
@@ -360,7 +355,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get contextTypes() {
             return {
               something: PropTypes.bool
@@ -373,7 +368,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get contextTypes() {
             return {
               something: PropTypes.bool
@@ -389,7 +384,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -404,7 +399,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -422,7 +417,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextType correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static contextType = MyContext;
         }
       `].join('\n')
@@ -430,7 +425,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextType correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static contextType = MyContext;
         }
       `].join('\n'),
@@ -442,7 +437,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextType correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get contextType() {
              return MyContext;
           }
@@ -453,7 +448,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextType correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get contextType() {
              return MyContext;
           }
@@ -467,7 +462,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextType correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -480,7 +475,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextType correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -496,7 +491,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if displayName correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static displayName = "Hello";
         }
       `].join('\n')
@@ -504,7 +499,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if displayName correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static displayName = "Hello";
         }
       `].join('\n'),
@@ -516,7 +511,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if displayName correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get displayName() {
             return "Hello";
           }
@@ -527,7 +522,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get displayName() {
             return "Hello";
           }
@@ -541,7 +536,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if displayName correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -554,7 +549,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if displayName correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -570,7 +565,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if defaultProps correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static defaultProps = {
             something: 'Bob'
           };
@@ -580,7 +575,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if defaultProps correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static defaultProps = {
             something: 'Bob'
           };
@@ -594,7 +589,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if defaultProps correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get defaultProps() {
             return {
               something: 'Bob'
@@ -607,7 +602,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get defaultProps() {
             return {
               something: 'Bob'
@@ -623,7 +618,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if defaultProps correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -638,7 +633,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if defaultProps correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -656,7 +651,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if propTypes correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static propTypes = {
             something: PropTypes.bool
           };
@@ -666,7 +661,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if propTypes correctly defined - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static propTypes = {
             something: PropTypes.bool
           };
@@ -680,7 +675,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if propTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get propTypes() {
             return {
               something: PropTypes.bool
@@ -693,7 +688,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get propTypes() {
             return {
               something: PropTypes.bool
@@ -709,7 +704,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if propTypes correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -724,7 +719,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if propTypes correctly defined - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -742,7 +737,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if multiple properties and match config - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
@@ -768,7 +763,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if multiple properties and match config - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
@@ -805,7 +800,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if childContextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
               something: PropTypes.bool
@@ -844,7 +839,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if contextTypes correctly defined - static getter
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
               something: PropTypes.bool
@@ -893,7 +888,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if multiple properties and match config - assignment
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -922,7 +917,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if multiple properties and match config - static field
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -960,7 +955,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if mixed property positions and match config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
           }
@@ -991,7 +986,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if mixed property positions and match config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
           }
@@ -1025,7 +1020,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // SFC ignored and component is valid
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
           }
@@ -1051,7 +1046,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Multiple components validated
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
           }
@@ -1063,7 +1058,7 @@ ruleTester.run('static-property-placement', rule, {
           static displayName = "Hello";
         }
 
-        class OtherComponent extends React.Component {
+        class OtherComponent extends Inferno.Component {
           static defaultProps = {
             name: 'Bob'
           }
@@ -1080,7 +1075,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if property assignment is inside a class function
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static displayName = "Hello";
 
           myMethod() {
@@ -1093,7 +1088,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Do not error if display name value changed
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static displayName = "Hello";
 
           myMethod() {
@@ -1112,7 +1107,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -1150,7 +1145,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -1199,7 +1194,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
               something: PropTypes.bool
@@ -1245,7 +1240,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
               something: PropTypes.bool
@@ -1302,7 +1297,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
@@ -1337,7 +1332,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
@@ -1382,7 +1377,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
               something: PropTypes.bool
@@ -1429,7 +1424,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
               something: PropTypes.bool
@@ -1486,7 +1481,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
@@ -1521,7 +1516,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
@@ -1566,7 +1561,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -1605,7 +1600,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if multiple properties are incorrectly positioned according to config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
@@ -1654,7 +1649,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if mixed property positions but dont match config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
           }
@@ -1695,7 +1690,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Error if mixed property positions but dont match config
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
           }
@@ -1740,7 +1735,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // SFC ignored and component is invalid
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
           }
@@ -1780,7 +1775,7 @@ ruleTester.run('static-property-placement', rule, {
     {
       // Multiple components validated
       code: [`
-        class MyComponent extends React.Component {
+        class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
           }
@@ -1794,7 +1789,7 @@ ruleTester.run('static-property-placement', rule, {
           static displayName = "Hello";
         }
 
-        class OtherComponent extends React.Component {
+        class OtherComponent extends Inferno.Component {
           static contextTypes = {
             name: PropTypes.string.isRequired
           }

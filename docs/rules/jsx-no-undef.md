@@ -1,4 +1,4 @@
-# Disallow undeclared variables in JSX (react/jsx-no-undef)
+# Disallow undeclared variables in JSX (inferno/jsx-no-undef)
 
 This rule helps locate potential ReferenceErrors resulting from misspellings or missing components.
 
@@ -12,7 +12,7 @@ The following patterns are considered warnings:
 
 ```jsx
 // will ignore Text in the global scope and warn
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   render: function() {
     return <Text>Hello</Text>;
   }
@@ -33,7 +33,7 @@ var Hello = require('./Hello');
 
 ```js
 ...
-"react/jsx-no-undef": [<enabled>, { "allowGlobals": <boolean> }]
+"inferno/jsx-no-undef": [<enabled>, { "allowGlobals": <boolean> }]
 ...
 ```
 
@@ -45,7 +45,7 @@ The following patterns are considered okay and do **not** cause warnings:
 
 ```jsx
 var Text = require('./Text');
-var Hello = React.createClass({
+var Hello = Inferno.createClass({
   render: function() {
     return <Text>Hello</Text>;
   }

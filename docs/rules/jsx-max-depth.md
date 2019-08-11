@@ -1,4 +1,4 @@
-# Validate JSX maximum depth (react/jsx-max-depth)
+# Validate JSX maximum depth (inferno/jsx-max-depth)
 
 This option validates a specific depth for JSX.
 
@@ -23,7 +23,7 @@ It takes an option as the second parameter which can be a positive number for de
 
 ```js
 ...
-"react/jsx-max-depth": [<enabled>, { "max": <number> }]
+"inferno/jsx-max-depth": [<enabled>, { "max": <number> }]
 ...
 ```
 

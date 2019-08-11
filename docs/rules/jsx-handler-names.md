@@ -1,4 +1,4 @@
-# Enforce event handler naming conventions in JSX (react/jsx-handler-names)
+# Enforce event handler naming conventions in JSX (inferno/jsx-handler-names)
 
 Ensures that any component or prop methods used to handle events are correctly prefixed.
 
@@ -28,7 +28,7 @@ The following patterns are **not** considered warnings:
 
 ```js
 ...
-"react/jsx-handler-names": [<enabled>, {
+"inferno/jsx-handler-names": [<enabled>, {
   "eventHandlerPrefix": <eventHandlerPrefix>,
   "eventHandlerPropPrefix": <eventHandlerPropPrefix>
 }]

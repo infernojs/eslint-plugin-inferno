@@ -1,4 +1,4 @@
-# Prevent usage of unknown DOM property (react/no-unknown-property)
+# Prevent usage of unknown DOM property (inferno/no-unknown-property)
 
 In JSX all DOM properties and attributes should be camelCased to be consistent with standard JavaScript style. This can be a possible source of error if you are used to writing plain HTML.
 
@@ -9,7 +9,7 @@ In JSX all DOM properties and attributes should be camelCased to be consistent w
 The following patterns are considered warnings:
 
 ```jsx
-var React = require('react');
+var Inferno = require('inferno');
 
 var Hello = <div class="hello">Hello World</div>;
 ```
@@ -17,7 +17,7 @@ var Hello = <div class="hello">Hello World</div>;
 The following patterns are **not** considered warnings:
 
 ```jsx
-var React = require('react');
+var Inferno = require('inferno');
 
 var Hello = <div className="hello">Hello World</div>;
 ```
@@ -26,7 +26,7 @@ var Hello = <div className="hello">Hello World</div>;
 
 ```js
 ...
-"react/no-unknown-property": [<enabled>, { ignore: <ignore> }]
+"inferno/no-unknown-property": [<enabled>, { ignore: <ignore> }]
 ...
 ```
 

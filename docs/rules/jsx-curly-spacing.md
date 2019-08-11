@@ -1,4 +1,4 @@
-# Enforce or disallow spaces inside of curly braces in JSX attributes and expressions. (react/jsx-curly-spacing)
+# Enforce or disallow spaces inside of curly braces in JSX attributes and expressions. (inferno/jsx-curly-spacing)
 
 While formatting preferences are very personal, a number of style guides require or disallow spaces between curly braces.
 
@@ -124,7 +124,7 @@ The following patterns are **not** warnings:
 By default, braces spanning multiple lines are allowed with either setting. If you want to disallow them you can specify an additional `allowMultiline` property with the value `false`:
 
 ```json
-"react/jsx-curly-spacing": [2, {"when": "never", "allowMultiline": false}]
+"inferno/jsx-curly-spacing": [2, {"when": "never", "allowMultiline": false}]
 ```
 
 When `"never"` is used and `allowMultiline` is `false`, the following patterns are considered warnings:
@@ -198,7 +198,7 @@ The following patterns are **not** warnings:
 You can specify an additional `spacing` property that is an object with the following possible values:
 
 ```json
-"react/jsx-curly-spacing": [2, {"when": "always", "spacing": {
+"inferno/jsx-curly-spacing": [2, {"when": "always", "spacing": {
   "objectLiterals": "never"
 }}]
 ```
@@ -226,31 +226,31 @@ Please note that spacing of the object literal curly braces themselves is contro
 To preserve backward compatibility, two additional options are supported:
 
 ```json
-"react/jsx-curly-spacing": [2, "always"]
+"inferno/jsx-curly-spacing": [2, "always"]
 ```
 
 which is a shorthand for
 
 ```json
-"react/jsx-curly-spacing": [2, {"when": "always"}]
+"inferno/jsx-curly-spacing": [2, {"when": "always"}]
 ```
 
 and
 
 ```json
-"react/jsx-curly-spacing": [2, "never"]
+"inferno/jsx-curly-spacing": [2, "never"]
 ```
 
 which is a shorthand for
 
 ```json
-"react/jsx-curly-spacing": [2, {"when": "never"}]
+"inferno/jsx-curly-spacing": [2, {"when": "never"}]
 ```
 
 When using the shorthand options, only attributes will be checked. To specify other options, use another argument:
 
 ```json
-"react/jsx-curly-spacing": [2, "never", {
+"inferno/jsx-curly-spacing": [2, "never", {
   "allowMultiline": false,
   "spacing": {"objectLiterals": "always"}
 }]

@@ -33,7 +33,7 @@ ruleTester.run('no-find-dom-node', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         render: function() {
           return <div>Hello</div>;
         }
@@ -41,10 +41,10 @@ ruleTester.run('no-find-dom-node', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidMount: function() {
           someNonMemberFunction(arg);
-          this.someFunc = React.findDOMNode;
+          this.someFunc = Inferno.findDOMNode;
         },
         render: function() {
           return <div>Hello</div>;
@@ -53,9 +53,9 @@ ruleTester.run('no-find-dom-node', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidMount: function() {
-          React.someFunc(this);
+          Inferno.someFunc(this);
         },
         render: function() {
           return <div>Hello</div>;
@@ -66,9 +66,9 @@ ruleTester.run('no-find-dom-node', rule, {
 
   invalid: [{
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidMount: function() {
-          React.findDOMNode(this).scrollIntoView();
+          Inferno.findDOMNode(this).scrollIntoView();
         },
         render: function() {
           return <div>Hello</div>;
@@ -80,9 +80,9 @@ ruleTester.run('no-find-dom-node', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidMount: function() {
-          ReactDOM.findDOMNode(this).scrollIntoView();
+          Inferno.findDOMNode(this).scrollIntoView();
         },
         render: function() {
           return <div>Hello</div>;

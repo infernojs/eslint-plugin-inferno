@@ -1,4 +1,4 @@
-# Prevent multiple component definition per file (react/no-multi-comp)
+# Prevent multiple component definition per file (inferno/no-multi-comp)
 
 Declaring only one component per file improves readability and reusability of components.
 
@@ -7,13 +7,13 @@ Declaring only one component per file improves readability and reusability of co
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return <div>Hello {this.props.name}</div>;
   }
 });
 
-var HelloJohn = createReactClass({
+var HelloJohn = createClass({
   render: function() {
     return <Hello name="John" />;
   }
@@ -25,7 +25,7 @@ The following patterns are **not** considered warnings:
 ```jsx
 var Hello = require('./components/Hello');
 
-var HelloJohn = createReactClass({
+var HelloJohn = createClass({
   render: function() {
     return <Hello name="John" />;
   }
@@ -36,7 +36,7 @@ var HelloJohn = createReactClass({
 
 ```js
 ...
-"react/no-multi-comp": [<enabled>, { "ignoreStateless": <boolean> }]
+"inferno/no-multi-comp": [<enabled>, { "ignoreStateless": <boolean> }]
 ...
 ```
 
@@ -59,7 +59,7 @@ function HelloAgain(props) {
 function Hello(props) {
   return <div>Hello {props.name}</div>;
 }
-class HelloJohn extends React.Component {
+class HelloJohn extends Inferno.Component {
   render() {
     return <Hello name="John" />;
   }

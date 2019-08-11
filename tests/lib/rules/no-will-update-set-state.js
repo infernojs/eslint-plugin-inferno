@@ -31,7 +31,7 @@ ruleTester.run('no-will-update-set-state', rule, {
 
   valid: [{
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         render: function() {
           return <div>Hello {this.props.name}</div>;
         }
@@ -39,13 +39,13 @@ ruleTester.run('no-will-update-set-state', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {}
       });
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {
           someNonMemberFunction(arg);
           this.someHandler = this.setState;
@@ -54,7 +54,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {
           someClass.onSomeEvent(function(data) {
             this.setState({
@@ -66,7 +66,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {
           function handleEvent(data) {
             this.setState({
@@ -78,22 +78,11 @@ ruleTester.run('no-will-update-set-state', rule, {
       });
     `,
     parser: parsers.BABEL_ESLINT
-  }, {
-    code: `
-      class Hello extends React.Component {
-        UNSAFE_componentWillUpdate() {
-          this.setState({
-            data: data
-          });
-        }
-      }
-    `,
-    settings: {react: {version: '16.2.0'}}
   }],
 
   invalid: [{
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {
           this.setState({
             data: data
@@ -106,7 +95,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentWillUpdate() {
           this.setState({
             data: data
@@ -120,7 +109,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {
           this.setState({
             data: data
@@ -134,7 +123,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentWillUpdate() {
           this.setState({
             data: data
@@ -149,7 +138,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {
           someClass.onSomeEvent(function(data) {
             this.setState({
@@ -165,7 +154,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentWillUpdate() {
           someClass.onSomeEvent(function(data) {
             this.setState({
@@ -182,7 +171,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {
           if (true) {
             this.setState({
@@ -197,7 +186,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentWillUpdate() {
           if (true) {
             this.setState({
@@ -213,7 +202,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentWillUpdate: function() {
           someClass.onSomeEvent((data) => this.setState({data: data}));
         }
@@ -226,7 +215,7 @@ ruleTester.run('no-will-update-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentWillUpdate() {
           someClass.onSomeEvent((data) => this.setState({data: data}));
         }
@@ -236,34 +225,6 @@ ruleTester.run('no-will-update-set-state', rule, {
     options: ['disallow-in-func'],
     errors: [{
       message: 'Do not use setState in componentWillUpdate'
-    }]
-  }, {
-    code: `
-      class Hello extends React.Component {
-        UNSAFE_componentWillUpdate() {
-          this.setState({
-            data: data
-          });
-        }
-      }
-    `,
-    settings: {react: {version: '16.3.0'}},
-    errors: [{
-      message: 'Do not use setState in UNSAFE_componentWillUpdate'
-    }]
-  }, {
-    code: `
-      var Hello = createReactClass({
-        UNSAFE_componentWillUpdate: function() {
-          this.setState({
-            data: data
-          });
-        }
-      });
-    `,
-    settings: {react: {version: '16.3.0'}},
-    errors: [{
-      message: 'Do not use setState in UNSAFE_componentWillUpdate'
     }]
   }]
 });

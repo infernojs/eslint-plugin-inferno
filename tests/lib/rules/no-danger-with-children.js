@@ -75,22 +75,22 @@ ruleTester.run('no-danger-with-children', rule, {
       `
     },
     {
-      code: 'React.createElement("div", { dangerouslySetInnerHTML: { __html: "HTML" } });'
+      code: 'Inferno.createElement("div", { dangerouslySetInnerHTML: { __html: "HTML" } });'
     },
     {
-      code: 'React.createElement("div", {}, "Children");'
+      code: 'Inferno.createElement("div", {}, "Children");'
     },
     {
-      code: 'React.createElement("Hello", { dangerouslySetInnerHTML: { __html: "HTML" } });'
+      code: 'Inferno.createElement("Hello", { dangerouslySetInnerHTML: { __html: "HTML" } });'
     },
     {
-      code: 'React.createElement("Hello", {}, "Children");'
+      code: 'Inferno.createElement("Hello", {}, "Children");'
     },
     {
       code: '<Hello {...undefined}>Children</Hello>'
     },
     {
-      code: 'React.createElement("Hello", undefined, "Children")'
+      code: 'Inferno.createElement("Hello", undefined, "Children")'
     },
     {
       code: `
@@ -144,7 +144,7 @@ ruleTester.run('no-danger-with-children', rule, {
     },
     {
       code: `
-        React.createElement(
+        Inferno.createElement(
           "div",
           { dangerouslySetInnerHTML: { __html: "HTML" } },
           "Children"
@@ -154,7 +154,7 @@ ruleTester.run('no-danger-with-children', rule, {
     },
     {
       code: `
-        React.createElement(
+        Inferno.createElement(
           "div",
           {
             dangerouslySetInnerHTML: { __html: "HTML" },
@@ -166,7 +166,7 @@ ruleTester.run('no-danger-with-children', rule, {
     },
     {
       code: `
-        React.createElement(
+        Inferno.createElement(
           "Hello",
           { dangerouslySetInnerHTML: { __html: "HTML" } },
           "Children"
@@ -176,7 +176,7 @@ ruleTester.run('no-danger-with-children', rule, {
     },
     {
       code: `
-        React.createElement(
+        Inferno.createElement(
           "Hello",
           {
             dangerouslySetInnerHTML: { __html: "HTML" },
@@ -189,14 +189,14 @@ ruleTester.run('no-danger-with-children', rule, {
     {
       code: `
         const props = { dangerouslySetInnerHTML: { __html: "HTML" } };
-        React.createElement("div", props, "Children");
+        Inferno.createElement("div", props, "Children");
       `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
     {
       code: `
         const props = { children: "Children", dangerouslySetInnerHTML: { __html: "HTML" } };
-        React.createElement("div", props);
+        Inferno.createElement("div", props);
       `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     },
@@ -205,7 +205,7 @@ ruleTester.run('no-danger-with-children', rule, {
         const moreProps = { children: "Children" };
         const otherProps = { ...moreProps };
         const props = { ...otherProps, dangerouslySetInnerHTML: { __html: "HTML" } };
-        React.createElement("div", props);
+        Inferno.createElement("div", props);
       `,
       errors: [{message: 'Only set one of `children` or `props.dangerouslySetInnerHTML`'}]
     }

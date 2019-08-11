@@ -40,7 +40,7 @@ const OPTIONS_ALL_NEW_LINES = {
 };
 
 const RETURN_SINGLE_LINE = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return <p>Hello {this.props.name}</p>;
     }
@@ -48,7 +48,7 @@ const RETURN_SINGLE_LINE = `
 `;
 
 const RETURN_PAREN = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return (<div>
         <p>Hello {this.props.name}</p>
@@ -58,7 +58,7 @@ const RETURN_PAREN = `
 `;
 
 const RETURN_PAREN_FRAGMENT = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return (<>
         <p>Hello {this.props.name}</p>
@@ -68,7 +68,7 @@ const RETURN_PAREN_FRAGMENT = `
 `;
 
 const RETURN_NO_PAREN = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return <div>
         <p>Hello {this.props.name}</p>
@@ -78,7 +78,7 @@ const RETURN_NO_PAREN = `
 `;
 
 const RETURN_NO_PAREN_FRAGMENT = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return <>
         <p>Hello {this.props.name}</p>
@@ -88,7 +88,7 @@ const RETURN_NO_PAREN_FRAGMENT = `
 `;
 
 const RETURN_PAREN_NEW_LINE = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return (
         <div>
@@ -100,7 +100,7 @@ const RETURN_PAREN_NEW_LINE = `
 `;
 
 const RETURN_PAREN_NEW_LINE_OPENING = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return (
 
@@ -112,7 +112,7 @@ const RETURN_PAREN_NEW_LINE_OPENING = `
 `;
 
 const RETURN_PAREN_NEW_LINE_OPENING_FIXED = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return (
 
@@ -125,7 +125,7 @@ const RETURN_PAREN_NEW_LINE_OPENING_FIXED = `
 `;
 
 const RETURN_PAREN_NEW_LINE_CLOSING = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return (<div>
         <p>Hello {this.props.name}</p>
@@ -137,7 +137,7 @@ const RETURN_PAREN_NEW_LINE_CLOSING = `
 `;
 
 const RETURN_PAREN_NEW_LINE_CLOSING_FIXED = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return (
 <div>
@@ -150,7 +150,7 @@ const RETURN_PAREN_NEW_LINE_CLOSING_FIXED = `
 `;
 
 const RETURN_PAREN_NEW_LINE_FRAGMENT = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return (
         <>
@@ -162,7 +162,7 @@ const RETURN_PAREN_NEW_LINE_FRAGMENT = `
 `;
 
 const RETURN_SINGLE_LINE_FRAGMENT = `
-  var Hello = createReactClass({
+  var Hello = createClass({
     render: function() {
       return <>Hello {this.props.name}</>;
     }

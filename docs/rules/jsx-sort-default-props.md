@@ -1,4 +1,4 @@
-# Enforce defaultProps declarations alphabetical sorting (react/jsx-sort-default-props)
+# Enforce defaultProps declarations alphabetical sorting (inferno/jsx-sort-default-props)
 
 Some developers prefer to sort `defaultProps` declarations alphabetically to be able to find necessary declarations easier at a later time. Others feel that it adds complexity and becomes a burden to maintain.
 
@@ -9,7 +9,7 @@ This rule checks all components and verifies that all `defaultProps` declaration
 The following patterns are considered warnings:
 
 ```jsx
-var Component = createReactClass({
+var Component = createClass({
 ...
   getDefaultProps: function() {
     return {
@@ -21,7 +21,7 @@ var Component = createReactClass({
 ...
 });
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   ...
 }
 Component.defaultProps = {
@@ -30,7 +30,7 @@ Component.defaultProps = {
   b: "b"
 };
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   static defaultProps = {
     z: "z",
     y: "y",
@@ -89,7 +89,7 @@ export default class ClassWithSpreadInPropTypes extends BaseClass {
 The following patterns are considered okay and do **not** cause warnings:
 
 ```jsx
-var Component = createReactClass({
+var Component = createClass({
 ...
   getDefaultProps: function() {
     return {
@@ -101,7 +101,7 @@ var Component = createReactClass({
 ...
 });
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   ...
 }
 Component.defaultProps = {
@@ -110,7 +110,7 @@ Component.defaultProps = {
   c: "c"
 };
 
-class Component extends React.Component {
+class Component extends Inferno.Component {
   static defaultProps = {
     a: PropTypes.any,
     b: PropTypes.any,
@@ -170,7 +170,7 @@ export default class ClassWithSpreadInPropTypes extends BaseClass {
 
 ```js
 ...
-"react/jsx-sort-default-props": [<enabled>, {
+"inferno/jsx-sort-default-props": [<enabled>, {
   "ignoreCase": <boolean>,
 }]
 ...

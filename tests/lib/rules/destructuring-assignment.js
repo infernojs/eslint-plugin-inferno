@@ -21,7 +21,7 @@ const parserOptions = {
 const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('destructuring-assignment', rule, {
   valid: [{
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         const { foo } = this.props;
         return <div>{foo}</div>;
@@ -74,14 +74,14 @@ ruleTester.run('destructuring-assignment', rule, {
     );`,
     options: ['always']
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         return <div>{this.props.foo}</div>;
       }
     };`,
     options: ['never']
   }, {
-    code: `class Foo extends React.Component {
+    code: `class Foo extends Inferno.Component {
       doStuff() {}
       render() {
         return <div>{this.props.foo}</div>;
@@ -89,14 +89,14 @@ ruleTester.run('destructuring-assignment', rule, {
     }`,
     options: ['never']
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         const { foo } = this.props;
         return <div>{foo}</div>;
       }
     };`
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         const { foo } = this.props;
         return <div>{foo}</div>;
@@ -105,14 +105,14 @@ ruleTester.run('destructuring-assignment', rule, {
     options: ['always'],
     parser: parsers.BABEL_ESLINT
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         const { foo } = this.props;
         return <div>{foo}</div>;
       }
     };`
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         const { foo } = this.props;
         return <div>{foo}</div>;
@@ -128,7 +128,7 @@ ruleTester.run('destructuring-assignment', rule, {
     options: ['never'],
     parser: parsers.BABEL_ESLINT
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       constructor() {
         this.state = {};
         this.state.foo = 'bar';
@@ -168,7 +168,7 @@ ruleTester.run('destructuring-assignment', rule, {
     `
   }, {
     code: `
-      class Foo extends React.Component {
+      class Foo extends Inferno.Component {
         bar = this.props.bar
       }
     `,
@@ -176,7 +176,7 @@ ruleTester.run('destructuring-assignment', rule, {
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
-      'class Input extends React.Component {',
+      'class Input extends Inferno.Component {',
       '  id = `${this.props.name}`;',
       '  render() {',
       '    return <div />;',
@@ -211,7 +211,7 @@ ruleTester.run('destructuring-assignment', rule, {
       {message: 'Must never use destructuring context assignment in SFC argument'}
     ]
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         return <div>{this.props.foo}</div>;
       }
@@ -220,7 +220,7 @@ ruleTester.run('destructuring-assignment', rule, {
       {message: 'Must use destructuring props assignment'}
     ]
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         return <div>{this.state.foo}</div>;
       }
@@ -229,7 +229,7 @@ ruleTester.run('destructuring-assignment', rule, {
       {message: 'Must use destructuring state assignment'}
     ]
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         return <div>{this.context.foo}</div>;
       }
@@ -238,7 +238,7 @@ ruleTester.run('destructuring-assignment', rule, {
       {message: 'Must use destructuring context assignment'}
     ]
   }, {
-    code: `class Foo extends React.Component {
+    code: `class Foo extends Inferno.Component {
       render() { return this.foo(); }
       foo() {
         return this.props.children;
@@ -248,7 +248,7 @@ ruleTester.run('destructuring-assignment', rule, {
       {message: 'Must use destructuring props assignment'}
     ]
   }, {
-    code: `var Hello = React.createClass({
+    code: `var Hello = Inferno.createClass({
       render: function() {
         return <Text>{this.props.foo}</Text>;
       }
@@ -257,7 +257,7 @@ ruleTester.run('destructuring-assignment', rule, {
       {message: 'Must use destructuring props assignment'}
     ]
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         const foo = this.props.foo;
         return <div>{foo}</div>;
@@ -267,7 +267,7 @@ ruleTester.run('destructuring-assignment', rule, {
       {message: 'Must use destructuring props assignment'}
     ]
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         const { foo } = this.props;
         return <div>{foo}</div>;
@@ -289,7 +289,7 @@ ruleTester.run('destructuring-assignment', rule, {
       {message: 'Must never use destructuring props assignment'}
     ]
   }, {
-    code: `const Foo = class extends React.PureComponent {
+    code: `const Foo = class extends Inferno.PureComponent {
       render() {
         const { foo } = this.state;
         return <div>{foo}</div>;

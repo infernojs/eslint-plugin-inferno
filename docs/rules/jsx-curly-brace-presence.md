@@ -1,8 +1,8 @@
-# Enforce curly braces or disallow unnecessary curly braces in JSX props and/or children. (react/jsx-curly-brace-presence)
+# Enforce curly braces or disallow unnecessary curly braces in JSX props and/or children. (inferno/jsx-curly-brace-presence)
 
 This rule allows you to enforce curly braces or disallow unnecessary curly braces in JSX props and/or children.
 
-For situations where JSX expressions are unnecessary, please refer to [the React doc](https://facebook.github.io/react/docs/jsx-in-depth.html) and [this page about JSX gotchas](https://github.com/facebook/react/blob/v15.4.0-rc.3/docs/docs/02.3-jsx-gotchas.md#html-entities).
+For situations where JSX expressions are unnecessary, please refer to [the Inferno doc](https://facebook.github.io/react/docs/jsx-in-depth.html) and [this page about JSX gotchas](https://github.com/facebook/react/blob/v15.4.0-rc.3/docs/docs/02.3-jsx-gotchas.md#html-entities).
 
 **Fixable:** This rule is automatically fixable using the `--fix` flag on the command line
 
@@ -16,7 +16,7 @@ You can pass in options to enforce the presence of curly braces on JSX props or 
 
 ```js
 ...
-"react/jsx-curly-brace-presence": [<enabled>, { "props": <string>, "children": <string> }]
+"inferno/jsx-curly-brace-presence": [<enabled>, { "props": <string>, "children": <string> }]
 ...
 ```
 
@@ -24,7 +24,7 @@ or alternatively
 
 ```js
 ...
-"react/jsx-curly-brace-presence": [<enabled>, <string>]
+"inferno/jsx-curly-brace-presence": [<enabled>, <string>]
 ...
 ```
 

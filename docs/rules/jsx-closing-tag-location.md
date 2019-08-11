@@ -1,4 +1,4 @@
-# Validate closing tag location in JSX (react/jsx-closing-tag-location)
+# Validate closing tag location in JSX (inferno/jsx-closing-tag-location)
 
 Enforce the closing tag location for multiline JSX elements.
 

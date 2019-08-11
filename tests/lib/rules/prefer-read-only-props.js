@@ -37,7 +37,7 @@ ruleTester.run('prefer-read-only-props', rule, {
           +name: string,
         }
 
-        class Hello extends React.Component<Props> {
+        class Hello extends Inferno.Component<Props> {
           render () {
             return <div>Hello {this.props.name}</div>;
           }
@@ -48,7 +48,7 @@ ruleTester.run('prefer-read-only-props', rule, {
     {
       // Class component with typed props property
       code: `
-        class Hello extends React.Component {
+        class Hello extends Inferno.Component {
           props: {
             +name: string,
           }
@@ -112,7 +112,7 @@ ruleTester.run('prefer-read-only-props', rule, {
     {
       // No error, because there is no Props flow type
       code: `
-        class Hello extends React.Component {
+        class Hello extends Inferno.Component {
           render () {
             return <div>Hello {this.props.name}</div>;
           }
@@ -122,7 +122,7 @@ ruleTester.run('prefer-read-only-props', rule, {
     {
       // No error, because PropTypes do not support variance
       code: `
-        class Hello extends React.Component {
+        class Hello extends Inferno.Component {
           render () {
             return <div>Hello {this.props.name}</div>;
           }
@@ -142,7 +142,7 @@ ruleTester.run('prefer-read-only-props', rule, {
           name: string,
         }
 
-        class Hello extends React.Component<Props> {
+        class Hello extends Inferno.Component<Props> {
           render () {
             return <div>Hello {this.props.name}</div>;
           }
@@ -160,7 +160,7 @@ ruleTester.run('prefer-read-only-props', rule, {
          -name: string,
         }
 
-        class Hello extends React.Component<Props> {
+        class Hello extends Inferno.Component<Props> {
           render () {
             return <div>Hello {this.props.name}</div>;
           }
@@ -173,7 +173,7 @@ ruleTester.run('prefer-read-only-props', rule, {
     },
     {
       code: `
-        class Hello extends React.Component {
+        class Hello extends Inferno.Component {
           props: {
             name: string,
           }

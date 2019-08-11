@@ -1,4 +1,4 @@
-# Enforce linebreaks in curly braces in JSX attributes and expressions. (react/jsx-curly-newline)
+# Enforce linebreaks in curly braces in JSX attributes and expressions. (inferno/jsx-curly-newline)
 
 Many style guides require or disallow newlines inside of jsx curly expressions.
 

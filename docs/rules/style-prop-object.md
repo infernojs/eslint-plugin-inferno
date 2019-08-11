@@ -1,4 +1,4 @@
-# Enforce style prop value being an object (react/style-prop-object)
+# Enforce style prop value being an object (inferno/style-prop-object)
 
 Require that the value of the prop `style` be an object or a variable that is
 an object.
@@ -19,14 +19,14 @@ const styles = true;
 ```
 
 ```js
-React.createElement("div", { style: "color: 'red'" });
+Inferno.createElement("div", { style: "color: 'red'" });
 
-React.createElement("div", { style: true });
+Inferno.createElement("div", { style: true });
 
-React.createElement("Hello", { style: true });
+Inferno.createElement("Hello", { style: true });
 
 const styles = true;
-React.createElement("div", { style: styles });
+Inferno.createElement("div", { style: styles });
 ```
 
 
@@ -42,10 +42,10 @@ const styles = { color: "red" };
 ```
 
 ```js
-React.createElement("div", { style: { color: 'red' }});
+Inferno.createElement("div", { style: { color: 'red' }});
 
-React.createElement("Hello", { style: { color: 'red' }});
+Inferno.createElement("Hello", { style: { color: 'red' }});
 
 const styles = { height: '100px' };
-React.createElement("div", { style: styles });
+Inferno.createElement("div", { style: styles });
 ```

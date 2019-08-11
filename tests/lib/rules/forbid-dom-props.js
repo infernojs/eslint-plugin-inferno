@@ -30,7 +30,7 @@ ruleTester.run('forbid-element-props', rule, {
 
   valid: [{
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  render: function() {',
       '    return <Foo id="foo" />;',
       '  }',
@@ -39,7 +39,7 @@ ruleTester.run('forbid-element-props', rule, {
     options: [{forbid: ['id']}]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <Foo id="bar" style={{color: "red"}} />;',
@@ -49,7 +49,7 @@ ruleTester.run('forbid-element-props', rule, {
     options: [{forbid: ['style', 'id']}]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <this.Foo bar="baz" />;',
@@ -59,7 +59,7 @@ ruleTester.run('forbid-element-props', rule, {
     options: [{forbid: ['id']}]
   }, {
     code: [
-      'class First extends createReactClass {',
+      'class First extends createClass {',
       '  render() {',
       '    return <this.foo id="bar" />;',
       '  }',
@@ -84,7 +84,7 @@ ruleTester.run('forbid-element-props', rule, {
 
   invalid: [{
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <div id="bar" />;',
@@ -100,7 +100,7 @@ ruleTester.run('forbid-element-props', rule, {
     }]
   }, {
     code: [
-      'class First extends createReactClass {',
+      'class First extends createClass {',
       '  render() {',
       '    return <div id="bar" />;',
       '  }',

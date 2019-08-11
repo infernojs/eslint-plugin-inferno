@@ -1,26 +1,26 @@
-# Enforce React components to have a shouldComponentUpdate method (react/require-optimization)
+# Enforce Inferno components to have a shouldComponentUpdate method (inferno/require-optimization)
 
-This rule prevents you from creating React components without declaring a `shouldComponentUpdate` method.
+This rule prevents you from creating Inferno components without declaring a `shouldComponentUpdate` method.
 
 ## Rule Details
 
 The following patterns are considered warnings:
 
 ```js
-class YourComponent extends React.Component {
+class YourComponent extends Inferno.Component {
 
 }
 ```
 
 ```js
-createReactClass({
+createClass({
 });
 ```
 
 The following patterns are **not** considered warnings:
 
 ```js
-class YourComponent extends React.Component {
+class YourComponent extends Inferno.Component {
 	shouldComponentUpdate () {
 		return false;
 	}
@@ -28,7 +28,7 @@ class YourComponent extends React.Component {
 ```
 
 ```js
-createReactClass({
+createClass({
 	shouldComponentUpdate: function () {
 		return false;
 	}
@@ -36,14 +36,14 @@ createReactClass({
 ```
 
 ```js
-createReactClass({
+createClass({
 	mixins: [PureRenderMixin]
 });
 ```
 
 ```js
-@reactMixin.decorate(PureRenderMixin)
-createReactClass({
+@infernoMixin.decorate(PureRenderMixin)
+createClass({
 
 });
 ```
@@ -52,7 +52,7 @@ createReactClass({
 
 ```js
 ...
-"react/require-optimization": [<enabled>, { allowDecorators: [<allowDecorator>] }]
+"inferno/require-optimization": [<enabled>, { allowDecorators: [<allowDecorator>] }]
 ...
 ```
 
@@ -69,13 +69,13 @@ The following patterns are **not** warnings:
 ```js
 // ['pureRender']
 @pureRender
-class Hello extends React.Component {}
+class Hello extends Inferno.Component {}
 ```
 
 ### Example
 
 ```js
 ...
-"react/require-optimization": [2, {allowDecorators: ['customDecorators']}]
+"inferno/require-optimization": [2, {allowDecorators: ['customDecorators']}]
 ...
 ```

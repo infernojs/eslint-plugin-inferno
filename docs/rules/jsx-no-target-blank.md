@@ -1,4 +1,4 @@
-# Prevent usage of unsafe `target='_blank'` (react/jsx-no-target-blank)
+# Prevent usage of unsafe `target='_blank'` (inferno/jsx-no-target-blank)
 
 When creating a JSX element that has an `a` tag, it is often desired to have
 the link open in a new tab using the `target='_blank'` attribute. Using this
@@ -14,7 +14,7 @@ This rule aims to prevent user generated links from creating security vulnerabil
 ## Rule Options
 ```json
 ...
-"react/jsx-no-target-blank": [<enabled>, { "enforceDynamicLinks": <enforce> }]
+"inferno/jsx-no-target-blank": [<enabled>, { "enforceDynamicLinks": <enforce> }]
 ...
 ```
 
@@ -56,7 +56,7 @@ var Hello = <a target='_blank' href={dynamicLink}></a>
 
 ### Custom link components
 
-This rule supports the ability to use custom components for links, such as `<Link />` which is popular in libraries like `react-router`, `next.js` and `gatsby`. To enable this, define your custom link components in the global [shared settings](https://github.com/yannickcr/eslint-plugin-react/blob/master/README.md#configuration) under the `linkComponents` configuration area. Once configured, this rule will check those components as if they were `<a />` elements.
+This rule supports the ability to use custom components for links, such as `<Link />` which is popular in libraries like `inferno-router`, `next.js` and `gatsby`. To enable this, define your custom link components in the global [shared settings](https://github.com/infernojs/eslint-plugin-inferno/blob/master/README.md#configuration) under the `linkComponents` configuration area. Once configured, this rule will check those components as if they were `<a />` elements.
 
 The following patterns are considered errors:
 

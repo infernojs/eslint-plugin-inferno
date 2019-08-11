@@ -58,13 +58,13 @@ ruleTester.run('no-array-index-key', rule, {
     },
 
     {
-      code: 'foo.map((baz, i) => React.cloneElement(someChild, { ...someChild.props }))'
+      code: 'foo.map((baz, i) => Inferno.cloneElement(someChild, { ...someChild.props }))'
     },
 
     {
       code: `
         foo.map((item, i) => {
-          return React.cloneElement(someChild, {
+          return Inferno.cloneElement(someChild, {
             key: item.id
           })
         })
@@ -93,8 +93,8 @@ ruleTester.run('no-array-index-key', rule, {
 
     {
       code: `
-      React.Children.map(this.props.children, (child, index, arr) => {
-        return React.cloneElement(child, { key: child.id });
+      Inferno.Children.map(this.props.children, (child, index, arr) => {
+        return Inferno.cloneElement(child, { key: child.id });
       })
       `
     },
@@ -102,7 +102,7 @@ ruleTester.run('no-array-index-key', rule, {
     {
       code: `
       Children.forEach(this.props.children, (child, index, arr) => {
-        return React.cloneElement(child, { key: child.id });
+        return Inferno.cloneElement(child, { key: child.id });
       })
       `
     }
@@ -140,14 +140,14 @@ ruleTester.run('no-array-index-key', rule, {
     },
 
     {
-      code: 'foo.map((baz, i) => React.cloneElement(someChild, { ...someChild.props, key: i }))',
+      code: 'foo.map((baz, i) => Inferno.cloneElement(someChild, { ...someChild.props, key: i }))',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
       code: `
         foo.map((item, i) => {
-          return React.cloneElement(someChild, {
+          return Inferno.cloneElement(someChild, {
             key: i
           })
         })
@@ -196,59 +196,59 @@ ruleTester.run('no-array-index-key', rule, {
     },
 
     {
-      code: 'foo.map((bar, i) => React.createElement(\'Foo\', { key: i }))',
+      code: 'foo.map((bar, i) => Inferno.createElement(\'Foo\', { key: i }))',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.map((bar, i) => React.createElement(\'Foo\', { key: `foo-${i}` }))',
+      code: 'foo.map((bar, i) => Inferno.createElement(\'Foo\', { key: `foo-${i}` }))',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.map((bar, i) => React.createElement(\'Foo\', { key: \'foo-\' + i }))',
+      code: 'foo.map((bar, i) => Inferno.createElement(\'Foo\', { key: \'foo-\' + i }))',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.map((bar, i) => React.createElement(\'Foo\', { key: \'foo-\' + i + \'-bar\' }))',
+      code: 'foo.map((bar, i) => Inferno.createElement(\'Foo\', { key: \'foo-\' + i + \'-bar\' }))',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.forEach((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.forEach((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.filter((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.filter((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.some((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.some((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.every((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.every((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.find((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.find((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
-      code: 'foo.findIndex((bar, i) => { baz.push(React.createElement(\'Foo\', { key: i })); })',
+      code: 'foo.findIndex((bar, i) => { baz.push(Inferno.createElement(\'Foo\', { key: i })); })',
       errors: [{message: 'Do not use Array index in keys'}]
     },
 
     {
       code: `
       Children.map(this.props.children, (child, index) => {
-        return React.cloneElement(child, { key: index });
+        return Inferno.cloneElement(child, { key: index });
       })
       `,
       errors: [{message: 'Do not use Array index in keys'}]
@@ -256,8 +256,8 @@ ruleTester.run('no-array-index-key', rule, {
 
     {
       code: `
-      React.Children.map(this.props.children, (child, index) => {
-        return React.cloneElement(child, { key: index });
+      Inferno.Children.map(this.props.children, (child, index) => {
+        return Inferno.cloneElement(child, { key: index });
       })
       `,
       errors: [{message: 'Do not use Array index in keys'}]
@@ -266,7 +266,7 @@ ruleTester.run('no-array-index-key', rule, {
     {
       code: `
       Children.forEach(this.props.children, (child, index) => {
-        return React.cloneElement(child, { key: index });
+        return Inferno.cloneElement(child, { key: index });
       })
       `,
       errors: [{message: 'Do not use Array index in keys'}]
@@ -274,8 +274,8 @@ ruleTester.run('no-array-index-key', rule, {
 
     {
       code: `
-      React.Children.forEach(this.props.children, (child, index) => {
-        return React.cloneElement(child, { key: index });
+      Inferno.Children.forEach(this.props.children, (child, index) => {
+        return Inferno.cloneElement(child, { key: index });
       })
       `,
       errors: [{message: 'Do not use Array index in keys'}]

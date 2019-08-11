@@ -10,7 +10,7 @@
       "ecmaFeatures": {
         "jsx": true
       },
-      "sourceType": "script",
+      "sourceType": "script"
     },
     "rules": {
         "comma-dangle": [2, "never"],
@@ -19,7 +19,7 @@
         "max-len": [2, 120, {
           "ignoreStrings": true,
           "ignoreTemplateLiterals": true,
-          "ignoreComments": true,
+          "ignoreComments": true
         }],
         "operator-linebreak": [2, "after"],
         "consistent-return": 0,
@@ -33,13 +33,16 @@
         "global-require": 1,
         "no-restricted-syntax": 1,
         "valid-jsdoc": 1,
+        "strict": 0,
+        "prefer-object-spread": 0,
+        "arrow-parens": 0
     },
     "overrides": [
       {
         "files": "tests/**",
         "rules": {
-          "no-template-curly-in-string": 1,
-        },
-      },
-    ],
+          "no-template-curly-in-string": 1
+        }
+      }
+    ]
 }

@@ -29,7 +29,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
 
   valid: [{
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    return <div>Hello {this.props.name}</div>;',
       '  }',
@@ -37,7 +37,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     ].join('\n')
   }, {
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    var obj = {state: {}};',
       '    obj.state.name = "foo";',
@@ -61,7 +61,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     ].join('\n')
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {',
       '    this.state.foo = "bar"',
       '  }',
@@ -69,7 +69,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     ].join('\n')
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {',
       '    this.state.foo = 1;',
       '  }',
@@ -93,7 +93,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
 
   invalid: [{
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    this.state.foo = "bar"',
       '    return <div>Hello {this.props.name}</div>;',
@@ -105,7 +105,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    this.state.foo++;',
       '    return <div>Hello {this.props.name}</div>;',
@@ -117,7 +117,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    this.state.person.name= "bar"',
       '    return <div>Hello {this.props.name}</div>;',
@@ -129,7 +129,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    this.state.person.name.first = "bar"',
       '    return <div>Hello</div>;',
@@ -141,7 +141,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    this.state.person.name.first = "bar"',
       '    this.state.person.name.last = "baz"',
@@ -160,7 +160,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor() {',
       '    someFn()',
       '  }',
@@ -174,7 +174,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  constructor(props) {',
       '    super(props)',
       '    doSomethingAsync(() => {',
@@ -188,7 +188,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  componentWillMount() {',
       '    this.state.foo = "bar"',
       '  }',
@@ -199,7 +199,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  componentDidMount() {',
       '    this.state.foo = "bar"',
       '  }',
@@ -210,7 +210,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  componentWillReceiveProps() {',
       '    this.state.foo = "bar"',
       '  }',
@@ -221,7 +221,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  shouldComponentUpdate() {',
       '    this.state.foo = "bar"',
       '  }',
@@ -232,7 +232,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  componentWillUpdate() {',
       '    this.state.foo = "bar"',
       '  }',
@@ -243,7 +243,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  componentDidUpdate() {',
       '    this.state.foo = "bar"',
       '  }',
@@ -254,7 +254,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  componentWillUnmount() {',
       '    this.state.foo = "bar"',
       '  }',
@@ -268,7 +268,7 @@ ruleTester.run('no-direct-mutation-state', rule, {
    * Would be nice to prevent this too
   , {
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    var that = this;',
       '    that.state.person.name.first = "bar"',

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Prevent using unwrapped literals in a React component definition
+ * @fileoverview Prevent using unwrapped literals in a Inferno component definition
  * @author Caleb morris
  * @author David Buchan-Swanson
  */
@@ -86,7 +86,7 @@ ruleTester.run('jsx-no-literals', rule, {
       parser: parsers.BABEL_ESLINT
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           foo: (<div>{'hello'}</div>),
           render() {
             return this.foo;
@@ -247,7 +247,7 @@ ruleTester.run('jsx-no-literals', rule, {
       errors: [{message: jsxMessage('test')}]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           foo: (<div>hello</div>),
           render() {
             return this.foo;

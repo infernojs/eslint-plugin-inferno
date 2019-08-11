@@ -1,4 +1,4 @@
-# No `.bind()` or Arrow Functions in JSX Props (react/jsx-no-bind)
+# No `.bind()` or Arrow Functions in JSX Props (inferno/jsx-no-bind)
 
 A `bind` call or [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) in a JSX prop will create a brand new function on every single render. This is bad for performance, as it may cause unnecessary re-renders if a brand new function is passed as a prop to a component that uses reference equality check on the prop to determine if it should update.
 
@@ -21,7 +21,7 @@ The following patterns are **not** considered warnings:
 ## Rule Options
 
 ```js
-"react/jsx-no-bind": [<enabled>, {
+"inferno/jsx-no-bind": [<enabled>, {
   "ignoreDOMComponents": <boolean> || false,
   "ignoreRefs": <boolean> || false,
   "allowArrowFunctions": <boolean> || false,
@@ -80,7 +80,7 @@ When `true` the following is **not** considered a warning:
 A common use case of `bind` in render is when rendering a list, to have a separate callback per list item:
 
 ```jsx
-var List = createReactClass({
+var List = createClass({
   render() {
     return (
       <ul>
@@ -98,7 +98,7 @@ var List = createReactClass({
 Rather than doing it this way, pull the repeated section into its own component:
 
 ```jsx
-var List = createReactClass({
+var List = createClass({
   render() {
     return (
       <ul>
@@ -110,7 +110,7 @@ var List = createReactClass({
   }
 });
 
-var ListItem = createReactClass({
+var ListItem = createClass({
   render() {
     return (
       <li onClick={this._onClick}>
@@ -128,10 +128,10 @@ This will speed up rendering, as it avoids the need to create new functions (thr
 
 ### ES6 Classes
 
-Unfortunately [React ES6 classes](https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#es6-classes) do not autobind their methods like components created with the older `createReactClass` syntax. There are several approaches to binding methods for ES6 classes. A basic approach is to just manually bind the methods in the constructor:
+Inferno ES6 classes do not autobind their methods like components created with the older `createClass` syntax. There are several approaches to binding methods for ES6 classes. A basic approach is to just manually bind the methods in the constructor:
 
 ```jsx
-class Foo extends React.Component {
+class Foo extends Inferno.Component {
   constructor(...args) {
     super(...args);
     this._onClick = this._onClick.bind(this);

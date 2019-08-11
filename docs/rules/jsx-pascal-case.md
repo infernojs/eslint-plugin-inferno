@@ -1,8 +1,8 @@
-# Enforce PascalCase for user-defined JSX components (react/jsx-pascal-case)
+# Enforce PascalCase for user-defined JSX components (inferno/jsx-pascal-case)
 
 Enforces coding style that user-defined JSX components are defined and referenced in PascalCase.
 
-Note that since React's JSX uses the upper vs. lower case convention to distinguish between local component classes and HTML tags this rule will not warn on components that start with a lower case letter.
+Note that since Inferno's JSX uses the upper vs. lower case convention to distinguish between local component classes and HTML tags this rule will not warn on components that start with a lower case letter.
 
 ## Rule Details
 
@@ -40,7 +40,7 @@ The following patterns are **not** considered warnings:
 
 ```js
 ...
-"react/jsx-pascal-case": [<enabled>, { allowAllCaps: <allowAllCaps>, ignore: <ignore> }]
+"inferno/jsx-pascal-case": [<enabled>, { allowAllCaps: <allowAllCaps>, ignore: <ignore> }]
 ...
 ```
 

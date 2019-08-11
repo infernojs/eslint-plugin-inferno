@@ -31,7 +31,7 @@ ruleTester.run('forbid-component-props', rule, {
 
   valid: [{
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  render: function() {',
       '    return <div className="foo" />;',
       '  }',
@@ -39,7 +39,7 @@ ruleTester.run('forbid-component-props', rule, {
     ].join('\n')
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  render: function() {',
       '    return <div style={{color: "red"}} />;',
       '  }',
@@ -48,7 +48,7 @@ ruleTester.run('forbid-component-props', rule, {
     options: [{forbid: ['style']}]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <Foo bar="baz" />;',
@@ -57,7 +57,7 @@ ruleTester.run('forbid-component-props', rule, {
     ].join('\n')
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <Foo className="bar" />;',
@@ -67,7 +67,7 @@ ruleTester.run('forbid-component-props', rule, {
     options: [{forbid: ['style']}]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <Foo className="bar" />;',
@@ -77,7 +77,7 @@ ruleTester.run('forbid-component-props', rule, {
     options: [{forbid: ['style', 'foo']}]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <this.Foo bar="baz" />;',
@@ -86,7 +86,7 @@ ruleTester.run('forbid-component-props', rule, {
     ].join('\n')
   }, {
     code: [
-      'class First extends createReactClass {',
+      'class First extends createClass {',
       '  render() {',
       '    return <this.foo className="bar" />;',
       '  }',
@@ -100,15 +100,15 @@ ruleTester.run('forbid-component-props', rule, {
       ');'
     ].join('\n')
   }, {
-    code: 'const item = (<ReactModal className="foo" />);',
+    code: 'const item = (<InfernoModal className="foo" />);',
     options: [{
-      forbid: [{propName: 'className', allowedFor: ['ReactModal']}]
+      forbid: [{propName: 'className', allowedFor: ['InfernoModal']}]
     }]
   }],
 
   invalid: [{
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <Foo className="bar" />;',
@@ -123,7 +123,7 @@ ruleTester.run('forbid-component-props', rule, {
     }]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <Foo style={{color: "red"}} />;',
@@ -138,7 +138,7 @@ ruleTester.run('forbid-component-props', rule, {
     }]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <Foo className="bar" />;',
@@ -154,7 +154,7 @@ ruleTester.run('forbid-component-props', rule, {
     }]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: externalPropTypes,',
       '  render: function() {',
       '    return <Foo style={{color: "red"}} />;',
@@ -171,7 +171,7 @@ ruleTester.run('forbid-component-props', rule, {
   }, {
     code: 'const item = (<Foo className="foo" />);',
     options: [{
-      forbid: [{propName: 'className', allowedFor: ['ReactModal']}]
+      forbid: [{propName: 'className', allowedFor: ['InfernoModal']}]
     }],
     errors: [{
       message: CLASSNAME_ERROR_MESSAGE,
@@ -180,14 +180,14 @@ ruleTester.run('forbid-component-props', rule, {
       type: 'JSXAttribute'
     }]
   }, {
-    code: 'const item = (<this.ReactModal className="foo" />);',
+    code: 'const item = (<this.InfernoModal className="foo" />);',
     options: [{
-      forbid: [{propName: 'className', allowedFor: ['ReactModal']}]
+      forbid: [{propName: 'className', allowedFor: ['InfernoModal']}]
     }],
     errors: [{
       message: CLASSNAME_ERROR_MESSAGE,
       line: 1,
-      column: 32,
+      column: 34,
       type: 'JSXAttribute'
     }]
   }]

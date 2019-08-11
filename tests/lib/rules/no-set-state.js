@@ -37,7 +37,7 @@ ruleTester.run('no-set-state', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         render: function() {
           return <div>Hello {this.props.name}</div>;
         }
@@ -45,7 +45,7 @@ ruleTester.run('no-set-state', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           someNonMemberFunction(arg);
           this.someHandler = this.setState;
@@ -59,7 +59,7 @@ ruleTester.run('no-set-state', rule, {
 
   invalid: [{
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           this.setState({
             name: this.props.name.toUpperCase()
@@ -75,7 +75,7 @@ ruleTester.run('no-set-state', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         someMethod: function() {
           this.setState({
             name: this.props.name.toUpperCase()
@@ -91,7 +91,7 @@ ruleTester.run('no-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         someMethod() {
           this.setState({
             name: this.props.name.toUpperCase()
@@ -107,7 +107,7 @@ ruleTester.run('no-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         someMethod = () => {
           this.setState({
             name: this.props.name.toUpperCase()
@@ -124,7 +124,7 @@ ruleTester.run('no-set-state', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         render() {
           return <div onMouseEnter={() => this.setState({dropdownIndex: index})} />;
         }

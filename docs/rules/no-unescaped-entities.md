@@ -1,4 +1,4 @@
-# Prevent invalid characters from appearing in markup (react/no-unescaped-entities)
+# Prevent invalid characters from appearing in markup (inferno/no-unescaped-entities)
 
 This rule prevents characters that you may have meant as JSX escape characters
 from being accidentally injected as a text node in JSX statements.
@@ -73,7 +73,7 @@ The following patterns are **not** considered warnings:
 
 ```js
 ...
-"react/no-unescaped-entities": [<enabled>, { "forbid": Array<string> }]
+"inferno/no-unescaped-entities": [<enabled>, { "forbid": Array<string> }]
 ...
 ```
 
@@ -82,9 +82,9 @@ The following patterns are **not** considered warnings:
 Overwrite the default forbidden entities array `['>', '"', '\'', '}']` with your own:
 
 ```js
-"react/no-unescaped-entities": ["error", {"forbid": [">", "}"]}],
+"inferno/no-unescaped-entities": ["error", {"forbid": [">", "}"]}],
 // or
-"react/no-unescaped-entities": ["error", {"forbid": [{
+"inferno/no-unescaped-entities": ["error", {"forbid": [{
   char: ">",
   alternatives: ['&gt;']
 }, {

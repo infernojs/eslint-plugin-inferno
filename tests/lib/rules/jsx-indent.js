@@ -692,7 +692,7 @@ ruleTester.run('jsx-indent', rule, {
     options: [2]
   }, {
     code: `
-      class Test extends React.Component {
+      class Test extends Inferno.Component {
         render() {
           return (
             <div>
@@ -706,7 +706,7 @@ ruleTester.run('jsx-indent', rule, {
     options: [2]
   }, {
     code: `
-      class Test extends React.Component {
+      class Test extends Inferno.Component {
         render() {
           return (
             <>

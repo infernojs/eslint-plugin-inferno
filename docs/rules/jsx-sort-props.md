@@ -1,4 +1,4 @@
-# Enforce props alphabetical sorting (react/jsx-sort-props)
+# Enforce props alphabetical sorting (inferno/jsx-sort-props)
 
 Some developers prefer to sort props names alphabetically to be able to find necessary props easier at the later time. Others feel that it adds complexity and becomes burden to maintain.
 
@@ -25,7 +25,7 @@ The following patterns are considered okay and do **not** cause warnings:
 
 ```js
 ...
-"react/jsx-sort-props": [<enabled>, {
+"inferno/jsx-sort-props": [<enabled>, {
   "callbacksLast": <boolean>,
   "shorthandFirst": <boolean>,
   "shorthandLast": <boolean>,
@@ -82,15 +82,15 @@ When `true`, alphabetical order is **not** enforced:
 
 This can be a boolean or an array option.
 
-When `reservedFirst` is defined, React reserved props (`children`, `dangerouslySetInnerHTML` - **only for DOM components**, `key`, and `ref`) must be listed before all other props, but still respecting the alphabetical order:
+When `reservedFirst` is defined, Inferno reserved props (`children`, `dangerouslySetInnerHTML` - **only for DOM components**, `key`, and `ref`) must be listed before all other props, but still respecting the alphabetical order:
 
 ```jsx
 <Hello key={0} ref="John" name="John">
-  <div dangerouslySetInnerHTML={{__html: 'ESLint Plugin React!'}} ref="dangerDiv" />
+  <div dangerouslySetInnerHTML={{__html: 'ESLint Plugin Inferno!'}} ref="dangerDiv" />
 </Hello>
 ```
 
-If given as an array, the array's values will override the default list of reserved props. **Note**: the values in the array may only be a **subset** of React reserved props.
+If given as an array, the array's values will override the default list of reserved props. **Note**: the values in the array may only be a **subset** of Inferno reserved props.
 
 With `reservedFirst: ["key"]`, the following will **not** warn:
 

@@ -1,4 +1,4 @@
-# Contributing to ESLint-plugin-React
+# Contributing to ESLint-plugin-Inferno
 
 ## ESLint Rules
 

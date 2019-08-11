@@ -1,4 +1,4 @@
-# Enforce or disallow spaces around equal signs in JSX attributes. (react/jsx-equals-spacing)
+# Enforce or disallow spaces around equal signs in JSX attributes. (inferno/jsx-equals-spacing)
 
 Some style guides require or disallow spaces around equal signs.
 
@@ -18,7 +18,7 @@ There are two options for the rule:
 Depending on your coding conventions, you can choose either option by specifying it in your configuration:
 
 ```json
-"react/jsx-equals-spacing": [2, "always"]
+"inferno/jsx-equals-spacing": [2, "always"]
 ```
 
 #### never

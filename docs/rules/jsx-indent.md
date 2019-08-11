@@ -1,4 +1,4 @@
-# Validate JSX indentation (react/jsx-indent)
+# Validate JSX indentation (inferno/jsx-indent)
 
 This option validates a specific indentation style for JSX.
 
@@ -35,7 +35,7 @@ To enable checking the indentation of attributes or add indentation to logical e
 
 ```js
 ...
-"react/jsx-indent": [<enabled>, 'tab'|<number>, {checkAttributes: <boolean>, indentLogicalExpressions: <boolean>}]
+"inferno/jsx-indent": [<enabled>, 'tab'|<number>, {checkAttributes: <boolean>, indentLogicalExpressions: <boolean>}]
 ...
 ```
 

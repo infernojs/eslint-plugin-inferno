@@ -43,7 +43,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Extends from PureComponent and uses props
       code: `
-        class Foo extends React.PureComponent {
+        class Foo extends Inferno.PureComponent {
           render() {
             return <div>{this.props.foo}</div>;
           }
@@ -55,7 +55,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Extends from PureComponent and uses context
       code: `
-        class Foo extends React.PureComponent {
+        class Foo extends Inferno.PureComponent {
           render() {
             return <div>{this.context.foo}</div>;
           }
@@ -67,7 +67,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Extends from PureComponent in an expression context.
       code: `
-        const Foo = class extends React.PureComponent {
+        const Foo = class extends Inferno.PureComponent {
           render() {
             return <div>{this.props.foo}</div>;
           }
@@ -80,7 +80,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Has a lifecyle method
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           shouldComponentUpdate() {
             return false;
           }
@@ -92,7 +92,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Has a state
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           changeState() {
             this.setState({foo: "clicked"});
           }
@@ -104,7 +104,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Use refs
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           doStuff() {
             this.refs.foo.style.backgroundColor = "red";
           }
@@ -116,7 +116,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Has an additional method
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           doStuff() {}
           render() {
             return <div>{this.props.foo}</div>;
@@ -126,7 +126,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Has an empty (no super) constructor
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           constructor() {}
           render() {
             return <div>{this.props.foo}</div>;
@@ -136,7 +136,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Has a constructor
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           constructor() {
             doSpecialStuffs();
           }
@@ -148,7 +148,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Has a constructor (2)
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           constructor() {
             foo;
           }
@@ -160,7 +160,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Use this.bar
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this.bar}</div>;
           }
@@ -170,7 +170,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Use this.bar (destructuring)
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             let {props:{foo}, bar} = this;
             return <div>{foo}</div>;
@@ -181,7 +181,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Use this[bar]
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this[bar]}</div>;
           }
@@ -191,7 +191,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Use this['bar']
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this['bar']}</div>;
           }
@@ -199,59 +199,9 @@ ruleTester.run('prefer-stateless-function', rule, {
       `,
       parser: parsers.BABEL_ESLINT
     }, {
-      // Can return null (ES6, React 0.14.0)
-      code: `
-        class Foo extends React.Component {
-          render() {
-            if (!this.props.foo) {
-              return null;
-            }
-            return <div>{this.props.foo}</div>;
-          }
-        }
-      `,
-      parser: parsers.BABEL_ESLINT,
-      settings: {
-        react: {
-          version: '0.14.0'
-        }
-      }
-    }, {
-      // Can return null (ES5, React 0.14.0)
-      code: `
-        var Foo = createReactClass({
-          render: function() {
-            if (!this.props.foo) {
-              return null;
-            }
-            return <div>{this.props.foo}</div>;
-          }
-        });
-      `,
-      settings: {
-        react: {
-          version: '0.14.0'
-        }
-      }
-    }, {
-      // Can return null (shorthand if in return, React 0.14.0)
-      code: `
-        class Foo extends React.Component {
-          render() {
-            return true ? <div /> : null;
-          }
-        }
-      `,
-      parser: parsers.BABEL_ESLINT,
-      settings: {
-        react: {
-          version: '0.14.0'
-        }
-      }
-    }, {
       code: `
         export default (Component) => (
-          class Test extends React.Component {
+          class Test extends Inferno.Component {
             componentDidMount() {}
             render() {
               return <Component />;
@@ -263,7 +213,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     }, {
       // Has childContextTypes
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this.props.children}</div>;
           }
@@ -277,7 +227,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       // Uses a decorator
       code: `
         @foo
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this.props.foo}</div>;
           }
@@ -288,7 +238,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       // Uses a called decorator
       code: `
         @foo("bar")
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this.props.foo}</div>;
           }
@@ -300,7 +250,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       code: `
         @foo
         @bar()
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this.props.foo}</div>;
           }
@@ -326,7 +276,7 @@ ruleTester.run('prefer-stateless-function', rule, {
     {
       // Only use this.props
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this.props.foo}</div>;
           }
@@ -337,7 +287,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return <div>{this['props'].foo}</div>;
           }
@@ -348,7 +298,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.PureComponent {
+        class Foo extends Inferno.PureComponent {
           render() {
             return <div>foo</div>;
           }
@@ -359,7 +309,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.PureComponent {
+        class Foo extends Inferno.PureComponent {
           render() {
             return <div>{this.props.foo}</div>;
           }
@@ -370,7 +320,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           static get displayName() {
             return 'Foo';
           }
@@ -385,7 +335,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           static displayName = 'Foo';
           render() {
             return <div>{this.props.foo}</div>;
@@ -398,7 +348,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           static get propTypes() {
             return {
               name: PropTypes.string
@@ -415,7 +365,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           static propTypes = {
             name: PropTypes.string
           };
@@ -430,7 +380,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           props: {
             name: string;
           };
@@ -445,7 +395,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           constructor() {
             super();
           }
@@ -460,7 +410,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             let {props:{foo}, context:{bar}} = this;
             return <div>{this.props.foo}</div>;
@@ -472,7 +422,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             if (!this.props.foo) {
               return null;
@@ -487,7 +437,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        var Foo = createReactClass({
+        var Foo = createClass({
           render: function() {
             if (!this.props.foo) {
               return null;
@@ -501,7 +451,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             return true ? <div /> : null;
           }
@@ -512,7 +462,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           static defaultProps = {
             foo: true
           }
@@ -528,7 +478,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           static get defaultProps() {
             return {
               foo: true
@@ -545,7 +495,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             const { foo } = this.props;
             return foo ? <div /> : null;
@@ -560,7 +510,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           static contextTypes = {
             foo: PropTypes.boolean
           }
@@ -576,7 +526,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           static get contextTypes() {
             return {
               foo: PropTypes.boolean
@@ -593,7 +543,7 @@ ruleTester.run('prefer-stateless-function', rule, {
       }]
     }, {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           render() {
             const { foo } = this.context;
             return foo ? <div /> : null;

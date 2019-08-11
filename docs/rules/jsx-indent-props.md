@@ -1,4 +1,4 @@
-# Validate props indentation in JSX (react/jsx-indent-props)
+# Validate props indentation in JSX (inferno/jsx-indent-props)
 
 This option validates a specific indentation style for props.
 
@@ -34,7 +34,7 @@ Note that using the `"first"` option allows very inconsistent indentation unless
 
 ```js
 ...
-"react/jsx-indent-props": [<enabled>, 'tab'|<number>|'first']
+"inferno/jsx-indent-props": [<enabled>, 'tab'|<number>|'first']
 ...
 ```
 

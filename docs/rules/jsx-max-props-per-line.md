@@ -1,4 +1,4 @@
-# Limit maximum of props on a single line in JSX (react/jsx-max-props-per-line)
+# Limit maximum of props on a single line in JSX (inferno/jsx-max-props-per-line)
 
 Limiting the maximum of props on a single line can improve readability.
 
@@ -37,7 +37,7 @@ The following patterns are **not** considered warnings:
 
 ```js
 ...
-"react/jsx-max-props-per-line": [<enabled>, { "maximum": <number>, "when": <string> }]
+"inferno/jsx-max-props-per-line": [<enabled>, { "maximum": <number>, "when": <string> }]
 ...
 ```
 

@@ -1,8 +1,7 @@
 {
-  "name": "eslint-plugin-react",
+  "name": "eslint-plugin-inferno",
   "version": "7.14.3",
-  "author": "Yannick Croissant <yannick.croissant+npm@gmail.com>",
-  "description": "React specific linting rules for ESLint",
+  "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
     "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
@@ -21,35 +20,34 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/yannickcr/eslint-plugin-react"
+    "url": "https://github.com/infernojs/eslint-plugin-inferno"
   },
-  "homepage": "https://github.com/yannickcr/eslint-plugin-react",
-  "bugs": "https://github.com/yannickcr/eslint-plugin-react/issues",
+  "homepage": "https://github.com/infernojs/eslint-plugin-inferno",
+  "bugs": "https://github.com/infernojs/eslint-plugin-inferno/issues",
   "dependencies": {
     "array-includes": "^3.0.3",
-    "doctrine": "^2.1.0",
+    "doctrine": "^3.0.0",
     "has": "^1.0.3",
-    "jsx-ast-utils": "^2.1.0",
+    "jsx-ast-utils": "^2.2.1",
     "object.entries": "^1.1.0",
     "object.fromentries": "^2.0.0",
     "object.values": "^1.1.0",
-    "prop-types": "^15.7.2",
-    "resolve": "^1.10.1"
+    "resolve": "^1.12.0"
   },
   "devDependencies": {
-    "@types/eslint": "^4.16.6",
+    "@types/eslint": "^4.16.8",
     "@types/estree": "0.0.39",
-    "@types/node": "^12.0.0",
-    "babel-eslint": "^8.2.6",
-    "coveralls": "^3.0.2",
+    "@types/node": "^12.7.1",
+    "@typescript-eslint/parser": "^1.13.0",
+    "babel-eslint": "^10.0.2",
+    "coveralls": "^3.0.6",
     "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
-    "sinon": "^7.2.2",
-    "typescript": "^3.2.2",
-    "typescript-eslint-parser": "^20.1.1"
+    "mocha": "^6.2.0",
+    "sinon": "^7.4.1",
+    "typescript": "^3.5.3"
   },
   "peerDependencies": {
     "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0"
@@ -61,7 +59,7 @@
     "eslint",
     "eslint-plugin",
     "eslintplugin",
-    "react"
+    "inferno"
   ],
   "license": "MIT"
 }

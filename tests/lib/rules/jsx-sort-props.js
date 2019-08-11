@@ -50,7 +50,7 @@ const expectedEmptyReservedFirstError = {
   message: 'A customized reserved first list must not be empty'
 };
 const expectedInvalidReservedFirstError = {
-  message: 'A customized reserved first list must only contain a subset of React reserved props. Remove: notReserved'
+  message: 'A customized reserved first list must only contain a subset of Inferno reserved props. Remove: notReserved'
 };
 const callbacksLastArgs = [{
   callbacksLast: true

@@ -43,41 +43,41 @@ ruleTester.run('void-dom-elements-no-children', rule, {
       code: '<div dangerouslySetInnerHTML={{ __html: "Foo" }} />;'
     },
     {
-      code: 'React.createElement("div", {}, "Foo");'
+      code: 'Inferno.createElement("div", {}, "Foo");'
     },
     {
-      code: 'React.createElement("div", { children: "Foo" });'
+      code: 'Inferno.createElement("div", { children: "Foo" });'
     },
     {
-      code: 'React.createElement("div", { dangerouslySetInnerHTML: { __html: "Foo" } });'
+      code: 'Inferno.createElement("div", { dangerouslySetInnerHTML: { __html: "Foo" } });'
     },
     {
       code: 'document.createElement("img");'
     },
     {
-      code: 'React.createElement("img");'
+      code: 'Inferno.createElement("img");'
     }, {
-      code: 'React.createElement();'
+      code: 'Inferno.createElement();'
     }, {
       code: 'document.createElement();'
     }, {
       code: `
         const props = {};
-        React.createElement("img", props);
+        Inferno.createElement("img", props);
       `
     }, {
       code: `
-        import React, {createElement} from "react";
+        import Inferno, {createElement} from "inferno";
         createElement("div");
       `
     }, {
       code: `
-        import React, {createElement} from "react";
+        import Inferno, {createElement} from "inferno";
         createElement("img");
       `
     }, {
       code: `
-        import React, {createElement, PureComponent} from "react";
+        import Inferno, {createElement, PureComponent} from "inferno";
         class Button extends PureComponent {
           handleClick(ev) {
             ev.preventDefault();
@@ -107,20 +107,20 @@ ruleTester.run('void-dom-elements-no-children', rule, {
       errors: [{message: errorMessage('br')}]
     },
     {
-      code: 'React.createElement("br", {}, "Foo");',
+      code: 'Inferno.createElement("br", {}, "Foo");',
       errors: [{message: errorMessage('br')}]
     },
     {
-      code: 'React.createElement("br", { children: "Foo" });',
+      code: 'Inferno.createElement("br", { children: "Foo" });',
       errors: [{message: errorMessage('br')}]
     },
     {
-      code: 'React.createElement("br", { dangerouslySetInnerHTML: { __html: "Foo" } });',
+      code: 'Inferno.createElement("br", { dangerouslySetInnerHTML: { __html: "Foo" } });',
       errors: [{message: errorMessage('br')}]
     },
     {
       code: `
-        import React, {createElement} from "react";
+        import Inferno, {createElement} from "inferno";
         createElement("img", {}, "Foo");
       `,
       errors: [{message: errorMessage('img')}],
@@ -128,7 +128,7 @@ ruleTester.run('void-dom-elements-no-children', rule, {
     },
     {
       code: `
-        import React, {createElement} from "react";
+        import Inferno, {createElement} from "inferno";
         createElement("img", { children: "Foo" });
       `,
       errors: [{message: errorMessage('img')}],
@@ -136,7 +136,7 @@ ruleTester.run('void-dom-elements-no-children', rule, {
     },
     {
       code: `
-        import React, {createElement} from "react";
+        import Inferno, {createElement} from "inferno";
         createElement("img", { dangerouslySetInnerHTML: { __html: "Foo" } });
       `,
       errors: [{message: errorMessage('img')}],

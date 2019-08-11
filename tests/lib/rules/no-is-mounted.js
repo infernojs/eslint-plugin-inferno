@@ -34,7 +34,7 @@ ruleTester.run('no-is-mounted', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         render: function() {
           return <div>Hello</div>;
         }
@@ -42,7 +42,7 @@ ruleTester.run('no-is-mounted', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           someNonMemberFunction(arg);
           this.someFunc = this.isMounted;
@@ -56,7 +56,7 @@ ruleTester.run('no-is-mounted', rule, {
 
   invalid: [{
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         componentDidUpdate: function() {
           if (!this.isMounted()) {
             return;
@@ -72,7 +72,7 @@ ruleTester.run('no-is-mounted', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         someMethod: function() {
           if (!this.isMounted()) {
             return;
@@ -88,7 +88,7 @@ ruleTester.run('no-is-mounted', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         someMethod() {
           if (!this.isMounted()) {
             return;

@@ -23,7 +23,7 @@ const parserOptions = {
 };
 
 const settings = {
-  react: {
+  inferno: {
     pragma: 'Act',
     fragment: 'Frag'
   }

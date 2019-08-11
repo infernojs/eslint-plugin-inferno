@@ -23,16 +23,7 @@ const parserOptions = {
 };
 
 const settings = {
-  react: {
-    version: '16.2',
-    pragma: 'Act',
-    fragment: 'Frag'
-  }
-};
-
-const settingsOld = {
-  react: {
-    version: '16.1',
+  inferno: {
     pragma: 'Act',
     fragment: 'Frag'
   }
@@ -58,7 +49,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings
   }, {
     code: `
-      import Act, { Frag as F } from 'react';
+      import Act, { Frag as F } from 'inferno';
       <F><Foo /></F>;
     `,
     options: ['element'],
@@ -79,7 +70,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings
   }, {
     code: `
-      const { Frag } = require('react');
+      const { Frag } = require('inferno');
       <Frag><Foo /></Frag>;
     `,
     options: ['element'],
@@ -95,28 +86,6 @@ ruleTester.run('jsx-fragments', rule, {
   }],
 
   invalid: [{
-    code: '<><Foo /></>',
-    parser: parsers.BABEL_ESLINT,
-    settings: settingsOld,
-    errors: [{
-      message: 'Fragments are only supported starting from React v16.2. ' +
-        'Please disable the `react/jsx-fragments` rule in ESLint settings or upgrade your version of React.'
-    }]
-  }, {
-    code: '<Act.Frag><Foo /></Act.Frag>',
-    settings: settingsOld,
-    errors: [{
-      message: 'Fragments are only supported starting from React v16.2. ' +
-        'Please disable the `react/jsx-fragments` rule in ESLint settings or upgrade your version of React.'
-    }]
-  }, {
-    code: '<Act.Frag />',
-    settings: settingsOld,
-    errors: [{
-      message: 'Fragments are only supported starting from React v16.2. ' +
-        'Please disable the `react/jsx-fragments` rule in ESLint settings or upgrade your version of React.'
-    }]
-  }, {
     code: '<><Foo /></>',
     parser: parsers.BABEL_ESLINT,
     options: ['element'],
@@ -143,7 +112,7 @@ ruleTester.run('jsx-fragments', rule, {
     output: '<></>'
   }, {
     code: `
-      import Act, { Frag as F } from 'react';
+      import Act, { Frag as F } from 'inferno';
       <F />;
     `,
     options: ['syntax'],
@@ -152,12 +121,12 @@ ruleTester.run('jsx-fragments', rule, {
       message: 'Prefer fragment shorthand over Act.Frag'
     }],
     output: `
-      import Act, { Frag as F } from 'react';
+      import Act, { Frag as F } from 'inferno';
       <></>;
     `
   }, {
     code: `
-      import Act, { Frag as F } from 'react';
+      import Act, { Frag as F } from 'inferno';
       <F><Foo /></F>;
     `,
     options: ['syntax'],
@@ -166,12 +135,12 @@ ruleTester.run('jsx-fragments', rule, {
       message: 'Prefer fragment shorthand over Act.Frag'
     }],
     output: `
-      import Act, { Frag as F } from 'react';
+      import Act, { Frag as F } from 'inferno';
       <><Foo /></>;
     `
   }, {
     code: `
-      import Act, { Frag } from 'react';
+      import Act, { Frag } from 'inferno';
       <Frag><Foo /></Frag>;
     `,
     options: ['syntax'],
@@ -180,7 +149,7 @@ ruleTester.run('jsx-fragments', rule, {
       message: 'Prefer fragment shorthand over Act.Frag'
     }],
     output: `
-      import Act, { Frag } from 'react';
+      import Act, { Frag } from 'inferno';
       <><Foo /></>;
     `
   }, {
@@ -213,7 +182,7 @@ ruleTester.run('jsx-fragments', rule, {
     `
   }, {
     code: `
-      const { Frag } = require('react');
+      const { Frag } = require('inferno');
       <Frag><Foo /></Frag>;
     `,
     options: ['syntax'],
@@ -222,7 +191,7 @@ ruleTester.run('jsx-fragments', rule, {
       message: 'Prefer fragment shorthand over Act.Frag'
     }],
     output: `
-      const { Frag } = require('react');
+      const { Frag } = require('inferno');
       <><Foo /></>;
     `
   }]

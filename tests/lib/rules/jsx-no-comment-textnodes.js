@@ -77,7 +77,7 @@ ruleTester.run('jsx-no-comment-textnodes', rule, {
       parser: parsers.BABEL_ESLINT
     }, {
       code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         foo: (<div>{/* valid */}</div>),
         render() {
           return this.foo;

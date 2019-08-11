@@ -1,5 +1,5 @@
 /**
- * @fileoverview Enforce React components to have a shouldComponentUpdate method
+ * @fileoverview Enforce Inferno components to have a shouldComponentUpdate method
  * @author Evgueni Naverniouk
  */
 
@@ -21,29 +21,29 @@ const parserOptions = {
 const MESSAGE = 'Component is not optimized. Please add a shouldComponentUpdate method.';
 
 const ruleTester = new RuleTester({parserOptions});
-ruleTester.run('react-require-optimization', rule, {
+ruleTester.run('inferno-require-optimization', rule, {
   valid: [{
     code: `
       class A {}
     `
   }, {
     code: `
-      import React from "react";
-      class YourComponent extends React.Component {
+      import Inferno from "inferno";
+      class YourComponent extends Inferno.Component {
         shouldComponentUpdate () {}
       }
     `
   }, {
     code: `
-      import React, {Component} from "react";
+      import Inferno, {Component} from "inferno";
       class YourComponent extends Component {
         shouldComponentUpdate () {}
       }
     `
   }, {
     code: `
-      import React, {Component} from "react";
-      @reactMixin.decorate(PureRenderMixin)
+      import Inferno, {Component} from "inferno";
+      @infernoMixin.decorate(PureRenderMixin)
       class YourComponent extends Component {
         componetnDidMount () {}
         render() {}
@@ -52,21 +52,21 @@ ruleTester.run('react-require-optimization', rule, {
     parser: parsers.BABEL_ESLINT
   }, {
     code: `
-      import React from "react";
-      createReactClass({
+      import Inferno from "inferno";
+      createClass({
         shouldComponentUpdate: function () {}
       })
     `
   }, {
     code: `
-      import React from "react";
-      createReactClass({
+      import Inferno from "inferno";
+      createClass({
         mixins: [PureRenderMixin]
       })
     `
   }, {
     code: `
-      @reactMixin.decorate(PureRenderMixin)
+      @infernoMixin.decorate(PureRenderMixin)
       class DecoratedComponent extends Component {}
     `,
     parser: parsers.BABEL_ESLINT
@@ -102,14 +102,14 @@ ruleTester.run('react-require-optimization', rule, {
     options: [{allowDecorators: ['renderPure', 'pureRender']}]
   }, {
     code: `
-      import React from "react";
-      class YourComponent extends React.PureComponent {}
+      import Inferno from "inferno";
+      class YourComponent extends Inferno.PureComponent {}
     `,
     parser: parsers.BABEL_ESLINT,
     options: [{allowDecorators: ['renderPure', 'pureRender']}]
   }, {
     code: `
-      import React, {PureComponent} from "react";
+      import Inferno, {PureComponent} from "inferno";
       class YourComponent extends PureComponent {}
     `,
     parser: parsers.BABEL_ESLINT,
@@ -122,16 +122,16 @@ ruleTester.run('react-require-optimization', rule, {
 
   invalid: [{
     code: `
-      import React from "react";
-      class YourComponent extends React.Component {}
+      import Inferno from "inferno";
+      class YourComponent extends Inferno.Component {}
     `,
     errors: [{
       message: MESSAGE
     }]
   }, {
     code: `
-      import React from "react";
-      class YourComponent extends React.Component {
+      import Inferno from "inferno";
+      class YourComponent extends Inferno.Component {
         handleClick() {}
         render() {
           return <div onClick={this.handleClick}>123</div>
@@ -144,7 +144,7 @@ ruleTester.run('react-require-optimization', rule, {
     }]
   }, {
     code: `
-      import React, {Component} from "react";
+      import Inferno, {Component} from "inferno";
       class YourComponent extends Component {}
     `,
     errors: [{
@@ -152,16 +152,16 @@ ruleTester.run('react-require-optimization', rule, {
     }]
   }, {
     code: `
-      import React from "react";
-      createReactClass({})
+      import Inferno from "inferno";
+      createClass({})
     `,
     errors: [{
       message: MESSAGE
     }]
   }, {
     code: `
-      import React from "react";
-      createReactClass({
+      import Inferno from "inferno";
+      createClass({
         mixins: [RandomMixin]
       })
     `,
@@ -170,7 +170,7 @@ ruleTester.run('react-require-optimization', rule, {
     }]
   }, {
     code: `
-      @reactMixin.decorate(SomeOtherMixin)
+      @infernoMixin.decorate(SomeOtherMixin)
       class DecoratedComponent extends Component {}
     `,
     errors: [{

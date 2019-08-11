@@ -21,7 +21,7 @@ const parserOptions = {
 };
 
 function errorMessage(node) {
-  return `${node} does not need shouldComponentUpdate when extending React.PureComponent.`;
+  return `${node} does not need shouldComponentUpdate when extending Inferno.PureComponent.`;
 }
 
 // -----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ ruleTester.run('no-redundant-should-component-update', rule, {
   valid: [
     {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           shouldComponentUpdate() {
             return true;
           }
@@ -43,7 +43,7 @@ ruleTester.run('no-redundant-should-component-update', rule, {
     },
     {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           shouldComponentUpdate = () => {
             return true;
           }
@@ -54,7 +54,7 @@ ruleTester.run('no-redundant-should-component-update', rule, {
     },
     {
       code: `
-        class Foo extends React.Component {
+        class Foo extends Inferno.Component {
           shouldComponentUpdate() {
             return true;
           }
@@ -65,7 +65,7 @@ ruleTester.run('no-redundant-should-component-update', rule, {
     {
       code: `
         function Foo() {
-          return class Bar extends React.Component {
+          return class Bar extends Inferno.Component {
             shouldComponentUpdate() {
               return true;
             }
@@ -79,7 +79,7 @@ ruleTester.run('no-redundant-should-component-update', rule, {
   invalid: [
     {
       code: `
-        class Foo extends React.PureComponent {
+        class Foo extends Inferno.PureComponent {
           shouldComponentUpdate() {
             return true;
           }
@@ -101,7 +101,7 @@ ruleTester.run('no-redundant-should-component-update', rule, {
     },
     {
       code: `
-        class Foo extends React.PureComponent {
+        class Foo extends Inferno.PureComponent {
           shouldComponentUpdate = () => {
             return true;
           }
@@ -114,7 +114,7 @@ ruleTester.run('no-redundant-should-component-update', rule, {
     {
       code: `
         function Foo() {
-          return class Bar extends React.PureComponent {
+          return class Bar extends Inferno.PureComponent {
             shouldComponentUpdate() {
               return true;
             }

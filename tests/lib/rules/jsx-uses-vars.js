@@ -40,7 +40,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
         /* eslint jsx-uses-vars: 1 */
         function foo() {
           var App;
-          var bar = React.render(<App/>);
+          var bar = Inferno.render(<App/>);
           return bar;
         };
         foo()
@@ -49,20 +49,20 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
       code: `
         /* eslint jsx-uses-vars: 1 */
         var App;
-        React.render(<App/>);
+        Inferno.render(<App/>);
       `
     }, {
       code: `
         /* eslint jsx-uses-vars: 1 */
         var App;
-        React.render(<App/>);
+        Inferno.render(<App/>);
       `,
       parser: parsers.BABEL_ESLINT
     }, {
       code: `
         /* eslint jsx-uses-vars: 1 */
         var a = 1;
-        React.render(<img src={a} />);
+        Inferno.render(<img src={a} />);
       `
     }, {
       code: `
@@ -107,7 +107,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
         /* eslint jsx-uses-vars: 1 */
         function foo() {
           var App = { Foo: { Bar: {} } };
-          var bar = React.render(<App.Foo.Bar/>);
+          var bar = Inferno.render(<App.Foo.Bar/>);
           return bar;
         };
         foo()
@@ -117,7 +117,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
         /* eslint jsx-uses-vars: 1 */
         function foo() {
           var App = { Foo: { Bar: { Baz: {} } } };
-          var bar = React.render(<App.Foo.Bar.Baz/>);
+          var bar = Inferno.render(<App.Foo.Bar.Baz/>);
           return bar;
         };
         foo()
@@ -133,7 +133,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
         /* eslint jsx-uses-vars: 1 */
         var App;
         var unused;
-        React.render(<App unused=""/>);
+        Inferno.render(<App unused=""/>);
       `,
       errors: [{message: '\'unused\' is defined but never used.'}]
     }, {
@@ -141,7 +141,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
         /* eslint jsx-uses-vars: 1 */
         var App;
         var Hello;
-        React.render(<App:Hello/>);
+        Inferno.render(<App:Hello/>);
       `,
       errors: [{message: '\'Hello\' is defined but never used.'}]
     }, {
@@ -149,7 +149,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
         /* eslint jsx-uses-vars: 1 */
         var Button;
         var Input;
-        React.render(<Button.Input unused=""/>);
+        Inferno.render(<Button.Input unused=""/>);
       `,
       errors: [{message: '\'Input\' is defined but never used.'}]
     }, {

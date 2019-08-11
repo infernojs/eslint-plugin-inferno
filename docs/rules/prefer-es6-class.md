@@ -1,23 +1,23 @@
-# Enforce ES5 or ES6 class for React Components (react/prefer-es6-class)
+# Enforce ES5 or ES6 class for Inferno Components (inferno/prefer-es6-class)
 
-React offers you two way to create traditional components: using the ES5 `create-react-class` module or the new ES6 class system. This rule allow you to enforce one way or another.
+Inferno offers you two way to create traditional components: using the ES5 `create-inferno-class` module or the new ES6 class system. This rule allow you to enforce one way or another.
 
 ## Rule Options
 
 ```js
 ...
-"react/prefer-es6-class": [<enabled>, <mode>]
+"inferno/prefer-es6-class": [<enabled>, <mode>]
 ...
 ```
 
 ### `always` mode
 
-Will enforce ES6 classes for React Components. This is the default mode.
+Will enforce ES6 classes for Inferno Components. This is the default mode.
 
 The following patterns are considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return <div>Hello {this.props.name}</div>;
   }
@@ -27,7 +27,7 @@ var Hello = createReactClass({
 The following patterns are **not** considered warnings:
 
 ```jsx
-class Hello extends React.Component {
+class Hello extends Inferno.Component {
   render() {
     return <div>Hello {this.props.name}</div>;
   }
@@ -36,12 +36,12 @@ class Hello extends React.Component {
 
 ### `never` mode
 
-Will enforce ES5 classes for React Components
+Will enforce ES5 classes for Inferno Components
 
 The following patterns are considered warnings:
 
 ```jsx
-class Hello extends React.Component {
+class Hello extends Inferno.Component {
   render() {
     return <div>Hello {this.props.name}</div>;
   }
@@ -51,7 +51,7 @@ class Hello extends React.Component {
 The following patterns are **not** considered warnings:
 
 ```jsx
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return <div>Hello {this.props.name}</div>;
   }

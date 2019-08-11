@@ -27,7 +27,7 @@ const ruleTester = new RuleTester();
 ruleTester.run('no-access-state-in-setstate', rule, {
   valid: [{
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  onClick: function() {',
       '    this.setState(state => ({value: state.value + 1}))',
       '  }',
@@ -36,7 +36,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     parserOptions
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  multiplyValue: function(obj) {',
       '    return obj.value*2',
       '  },',
@@ -50,7 +50,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
   }, {
     // issue 1559: don't crash
     code: `
-      var SearchForm = createReactClass({
+      var SearchForm = createClass({
         render: function () {
           return (
             <div>
@@ -68,7 +68,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
   }, {
     // issue 1604: allow this.state in callback
     code: `
-      var Hello = React.createClass({
+      var Hello = Inferno.createClass({
         onClick: function() {
           this.setState({}, () => console.log(this.state));
         }
@@ -77,7 +77,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     parserOptions
   }, {
     code: `
-      var Hello = React.createClass({
+      var Hello = Inferno.createClass({
         onClick: function() {
           this.setState({}, () => 1 + 1);
         }
@@ -86,7 +86,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     parserOptions
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  onClick: function() {',
       '    var nextValueNotUsed = this.state.value + 1',
       '    var nextValue = 2',
@@ -106,7 +106,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
 
   invalid: [{
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  onClick: function() {',
       '    this.setState({value: this.state.value + 1})',
       '  }',
@@ -118,7 +118,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     }]
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  onClick: function() {',
       '    this.setState(() => ({value: this.state.value + 1}))',
       '  }',
@@ -130,7 +130,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     }]
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  onClick: function() {',
       '    var nextValue = this.state.value + 1',
       '    this.setState({value: nextValue})',
@@ -143,7 +143,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     }]
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  onClick: function() {',
       '    var {state, ...rest} = this',
       '    this.setState({value: state.value + 1})',
@@ -159,7 +159,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
       'function nextState(state) {',
       '  return {value: state.value + 1}',
       '}',
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  onClick: function() {',
       '    this.setState(nextState(this.state))',
       '  }',
@@ -171,7 +171,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     }]
   }, {
     code: `
-      var Hello = React.createClass({
+      var Hello = Inferno.createClass({
         onClick: function() {
           this.setState(this.state, () => 1 + 1);
         }
@@ -183,7 +183,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     }]
   }, {
     code: `
-      var Hello = React.createClass({
+      var Hello = Inferno.createClass({
         onClick: function() {
           this.setState(this.state, () => console.log(this.state));
         }
@@ -195,7 +195,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     }]
   }, {
     code: [
-      'var Hello = React.createClass({',
+      'var Hello = Inferno.createClass({',
       '  nextState: function() {',
       '    return {value: this.state.value + 1}',
       '  },',

@@ -32,7 +32,7 @@ const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-sort-default-props', rule, {
   valid: [{
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  render: function() {',
       '    return <div />;',
       '  }',
@@ -40,7 +40,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n')
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: {',
       '    A: PropTypes.any,',
       '    Z: PropTypes.string,',
@@ -62,7 +62,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n')
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: {',
       '    a: PropTypes.any,',
       '    A: PropTypes.any,',
@@ -87,7 +87,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     }]
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: {',
       '    a: PropTypes.any,',
       '    z: PropTypes.string',
@@ -102,7 +102,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
       '    return <div />;',
       '  }',
       '});',
-      'var Second = createReactClass({',
+      'var Second = createClass({',
       '  propTypes: {',
       '    AA: PropTypes.any,',
       '    ZZ: PropTypes.string',
@@ -120,7 +120,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n')
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
@@ -138,7 +138,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n')
   }, {
     code: [
-      'class First extends React.Component {',
+      'class First extends Inferno.Component {',
       '  render() {',
       '    return <div />;',
       '  }',
@@ -161,7 +161,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     }]
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
       '    a: PropTypes.any,',
       '    b: PropTypes.any,',
@@ -180,7 +180,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',
@@ -199,7 +199,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
   }, {
     // Invalid code, should not be validated
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  propTypes: {',
       '    a: PropTypes.any,',
       '    c: PropTypes.any,',
@@ -218,7 +218,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
-      'var Hello = createReactClass({',
+      'var Hello = createClass({',
       '  render: function() {',
       '    let { a, ...b } = obj;',
       '    let c = { ...d };',
@@ -228,7 +228,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n')
   }, {
     code: [
-      'var First = createReactClass({',
+      'var First = createClass({',
       '  propTypes: {',
       '    barRequired: PropTypes.func.isRequired,',
       '    onBar: PropTypes.func,',
@@ -352,7 +352,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
 
   invalid: [{
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
       '    a: PropTypes.any,',
       '    b: PropTypes.any,',
@@ -377,7 +377,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     }]
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
       '    a: PropTypes.any,',
       '    b: PropTypes.any,',
@@ -397,7 +397,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     errors: 2
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
       '    a: PropTypes.any,',
       '    b: PropTypes.any',
@@ -423,7 +423,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     }]
   }, {
     code: [
-      'class Component extends React.Component {',
+      'class Component extends Inferno.Component {',
       '  static propTypes = {',
       '    a: PropTypes.any,',
       '    z: PropTypes.any',
@@ -446,7 +446,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',
@@ -469,7 +469,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',
@@ -489,7 +489,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     errors: 2
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',
@@ -512,7 +512,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     }]
   }, {
     code: [
-      'class Hello extends React.Component {',
+      'class Hello extends Inferno.Component {',
       '  render() {',
       '    return <div>Hello</div>;',
       '  }',

@@ -1,6 +1,6 @@
-# Prevent usage of shouldComponentUpdate when extending React.PureComponent (react/no-redundant-should-component-update)
+# Prevent usage of shouldComponentUpdate when extending Inferno.PureComponent (inferno/no-redundant-should-component-update)
 
-Warns if you have `shouldComponentUpdate` defined when defining a component that extends React.PureComponent.
+Warns if you have `shouldComponentUpdate` defined when defining a component that extends Inferno.PureComponent.
 While having `shouldComponentUpdate` will still work, it becomes pointless to extend PureComponent.
 
 ## Rule Details
@@ -8,7 +8,7 @@ While having `shouldComponentUpdate` will still work, it becomes pointless to ex
 The following patterns are considered warnings:
 
 ```jsx
-class Foo extends React.PureComponent {
+class Foo extends Inferno.PureComponent {
   shouldComponentUpdate() {
     // do check
   }
@@ -19,7 +19,7 @@ class Foo extends React.PureComponent {
 }
 
 function Bar() {
-  return class Baz extends React.PureComponent {
+  return class Baz extends Inferno.PureComponent {
     shouldComponentUpdate() {
       // do check
     }
@@ -34,7 +34,7 @@ function Bar() {
 The following patterns are **not** considered warnings:
 
 ```jsx
-class Foo extends React.Component {
+class Foo extends Inferno.Component {
   shouldComponentUpdate() {
     // do check
   }
@@ -45,7 +45,7 @@ class Foo extends React.Component {
 }
 
 function Bar() {
-  return class Baz extends React.Component {
+  return class Baz extends Inferno.Component {
     shouldComponentUpdate() {
       // do check
     }
@@ -56,7 +56,7 @@ function Bar() {
   }
 }
 
-class Qux extends React.PureComponent {
+class Qux extends Inferno.PureComponent {
   render() {
     return <div>Tubular!</div>
   }

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Prefer es6 class instead of createClass for React Component
+ * @fileoverview Prefer es6 class instead of createClass for Inferno Component
  * @author Dan Hamilton
  */
 
@@ -29,7 +29,7 @@ ruleTester.run('prefer-es6-class', rule, {
 
   valid: [{
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         render() {
           return <div>Hello {this.props.name}</div>;
         }
@@ -38,7 +38,7 @@ ruleTester.run('prefer-es6-class', rule, {
     `
   }, {
     code: `
-      export default class Hello extends React.Component {
+      export default class Hello extends Inferno.Component {
         render() {
           return <div>Hello {this.props.name}</div>;
         }
@@ -52,7 +52,7 @@ ruleTester.run('prefer-es6-class', rule, {
     `
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         render: function() {
           return <div>Hello {this.props.name}</div>;
         }
@@ -61,7 +61,7 @@ ruleTester.run('prefer-es6-class', rule, {
     options: ['never']
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         render() {
           return <div>Hello {this.props.name}</div>;
         }
@@ -72,7 +72,7 @@ ruleTester.run('prefer-es6-class', rule, {
 
   invalid: [{
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         displayName: 'Hello',
         render: function() {
           return <div>Hello {this.props.name}</div>;
@@ -84,7 +84,7 @@ ruleTester.run('prefer-es6-class', rule, {
     }]
   }, {
     code: `
-      var Hello = createReactClass({
+      var Hello = createClass({
         render: function() {
           return <div>Hello {this.props.name}</div>;
         }
@@ -96,7 +96,7 @@ ruleTester.run('prefer-es6-class', rule, {
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         render() {
           return <div>Hello {this.props.name}</div>;
         }

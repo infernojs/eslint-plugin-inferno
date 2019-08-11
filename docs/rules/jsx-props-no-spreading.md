@@ -1,6 +1,6 @@
-# Disallow JSX props spreading (react/jsx-props-no-spreading)
+# Disallow JSX props spreading (inferno/jsx-props-no-spreading)
 
-Enforces that there is no spreading for any JSX attribute. This enhances readability of code by being more explicit about what props are received by the component. It is also good for maintainability by avoiding passing unintentional extra props and allowing react to emit warnings when invalid HTML props are passed to HTML elements.
+Enforces that there is no spreading for any JSX attribute. This enhances readability of code by being more explicit about what props are received by the component. It is also good for maintainability by avoiding passing unintentional extra props.
 
 ## Rule Details
 
@@ -26,7 +26,7 @@ const {one_prop, two_prop} = otherProps;
 
 ```js
 ...
-"react/jsx-props-no-spreading": [{
+"inferno/jsx-props-no-spreading": [{
     "html": "ignore" / "enforce",
     "custom": "ignore" / "enforce",
     "exceptions": [<string>]

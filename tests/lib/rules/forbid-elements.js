@@ -45,7 +45,7 @@ ruleTester.run('forbid-elements', rule, {
       options: [{forbid: [{element: 'button'}]}]
     },
     {
-      code: 'React.createElement(button)',
+      code: 'Inferno.createElement(button)',
       options: [{forbid: ['button']}]
     },
     {
@@ -53,31 +53,31 @@ ruleTester.run('forbid-elements', rule, {
       options: [{forbid: ['button']}]
     },
     {
-      code: 'NotReact.createElement("button")',
+      code: 'NotInferno.createElement("button")',
       options: [{forbid: ['button']}]
     },
     {
-      code: 'React.createElement("_thing")',
+      code: 'Inferno.createElement("_thing")',
       options: [{forbid: ['_thing']}]
     },
     {
-      code: 'React.createElement("Modal")',
+      code: 'Inferno.createElement("Modal")',
       options: [{forbid: ['Modal']}]
     },
     {
-      code: 'React.createElement("dotted.component")',
+      code: 'Inferno.createElement("dotted.component")',
       options: [{forbid: ['dotted.component']}]
     },
     {
-      code: 'React.createElement(function() {})',
+      code: 'Inferno.createElement(function() {})',
       options: [{forbid: ['button']}]
     },
     {
-      code: 'React.createElement({})',
+      code: 'Inferno.createElement({})',
       options: [{forbid: ['button']}]
     },
     {
-      code: 'React.createElement(1)',
+      code: 'Inferno.createElement(1)',
       options: [{forbid: ['button']}]
     }
   ],
@@ -156,12 +156,12 @@ ruleTester.run('forbid-elements', rule, {
       errors: [{message: '<button> is forbidden, use <Button2> instead'}]
     },
     {
-      code: 'React.createElement("button", {}, child)',
+      code: 'Inferno.createElement("button", {}, child)',
       options: [{forbid: ['button']}],
       errors: [{message: '<button> is forbidden'}]
     },
     {
-      code: '[React.createElement(Modal), React.createElement("button")]',
+      code: '[Inferno.createElement(Modal), Inferno.createElement("button")]',
       options: [{forbid: ['button', 'Modal']}],
       errors: [
         {message: '<Modal> is forbidden'},
@@ -169,7 +169,7 @@ ruleTester.run('forbid-elements', rule, {
       ]
     },
     {
-      code: 'React.createElement(dotted.Component)',
+      code: 'Inferno.createElement(dotted.Component)',
       options: [{
         forbid: [
           {element: 'dotted.Component', message: 'that ain\'t cool'}
@@ -178,21 +178,21 @@ ruleTester.run('forbid-elements', rule, {
       errors: [{message: '<dotted.Component> is forbidden, that ain\'t cool'}]
     },
     {
-      code: 'React.createElement(dotted.component)',
+      code: 'Inferno.createElement(dotted.component)',
       options: [{forbid: ['dotted.component']}],
       errors: [
         {message: '<dotted.component> is forbidden'}
       ]
     },
     {
-      code: 'React.createElement(_comp)',
+      code: 'Inferno.createElement(_comp)',
       options: [{forbid: ['_comp']}],
       errors: [
         {message: '<_comp> is forbidden'}
       ]
     },
     {
-      code: 'React.createElement("button")',
+      code: 'Inferno.createElement("button")',
       options: [{
         forbid: [
           {element: 'button', message: 'use <Button> instead'}
@@ -201,7 +201,7 @@ ruleTester.run('forbid-elements', rule, {
       errors: [{message: '<button> is forbidden, use <Button> instead'}]
     },
     {
-      code: 'React.createElement("button", {}, React.createElement("input"))',
+      code: 'Inferno.createElement("button", {}, Inferno.createElement("input"))',
       options: [{forbid: [{element: 'button'}, {element: 'input'}]}],
       errors: [
         {message: '<button> is forbidden'},

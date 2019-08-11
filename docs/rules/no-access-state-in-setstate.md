@@ -1,4 +1,4 @@
-# Prevent using this.state within a this.setState (react/no-access-state-in-setstate)
+# Prevent using this.state within a this.setState (inferno/no-access-state-in-setstate)
 
 This rule should prevent usage of `this.state` inside `setState` calls.
 Such usage of `this.state` might result in errors when two state calls are
@@ -28,7 +28,7 @@ function increment() {
 }
 ```
 
-Then react will call the argument with the correct and updated  state,
+Then inferno will call the argument with the correct and updated  state,
 even when things happen in batches. And the example above will be
 something like:
 

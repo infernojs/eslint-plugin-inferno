@@ -26,7 +26,6 @@ const parserOptions = {
 // -----------------------------------------------------------------------------
 
 const ERROR_MESSAGE = 'Typo in static class property declaration';
-const ERROR_MESSAGE_ES5 = 'Typo in property declaration';
 const ERROR_MESSAGE_LIFECYCLE_METHOD = 'Typo in component lifecycle method declaration';
 
 const ruleTester = new RuleTester();
@@ -53,7 +52,7 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      class First extends React.Component {
+      class First extends Inferno.Component {
         static propTypes = {key: "myValue"};
         static contextTypes = {key: "myValue"};
         static childContextTypes = {key: "myValue"};
@@ -64,7 +63,7 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      class First extends React.Component {}
+      class First extends Inferno.Component {}
       First.propTypes = {key: "myValue"};
       First.contextTypes = {key: "myValue"};
       First.childContextTypes = {key: "myValue"};
@@ -156,7 +155,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     // This case is currently not supported
     code: `
-      class First extends React.Component {}
+      class First extends Inferno.Component {}
       First["prop" + "Types"] = {};
       First["context" + "Types"] = {};
       First["childContext" + "Types"] = {};
@@ -166,7 +165,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     // This case is currently not supported
     code: `
-      class First extends React.Component {}
+      class First extends Inferno.Component {}
       First["PROP" + "TYPES"] = {};
       First["CONTEXT" + "TYPES"] = {};
       First["CHILDCONTEXT" + "TYPES"] = {};
@@ -180,7 +179,7 @@ ruleTester.run('no-typos', rule, {
       const childContextTypes = "CHILDCONTEXTTYPES"
       const defautProps = "DEFAULTPROPS"
 
-      class First extends React.Component {}
+      class First extends Inferno.Component {}
       First[propTypes] = {};
       First[contextTypes] = {};
       First[childContextTypes] = {};
@@ -189,7 +188,7 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         componentWillMount() { }
         componentDidMount() { }
         componentWillReceiveProps() { }
@@ -258,7 +257,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         a: PropTypes.number.isRequired
       }
@@ -268,7 +267,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         e: PropTypes.shape({
           ea: PropTypes.string,
@@ -280,7 +279,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         a: PropTypes.string,
         b: PropTypes.string.isRequired,
@@ -295,7 +294,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         a: PropTypes.oneOfType([
           PropTypes.string,
@@ -308,7 +307,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         a: PropTypes.oneOf([
           'hello',
@@ -321,7 +320,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.childContextTypes = {
         a: PropTypes.string,
         b: PropTypes.string.isRequired,
@@ -336,7 +335,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         a: PropTypes.oneOf([
           'hello',
@@ -349,7 +348,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.childContextTypes = {
         a: PropTypes.string,
         b: PropTypes.string.isRequired,
@@ -363,7 +362,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.contextTypes = {
         a: PropTypes.string,
         b: PropTypes.string.isRequired,
@@ -378,7 +377,7 @@ ruleTester.run('no-typos', rule, {
     code: `
       import PropTypes from 'prop-types'
       import * as MyPropTypes from 'lib/my-prop-types'
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         a: PropTypes.string,
         b: MyPropTypes.MYSTRING,
@@ -390,7 +389,7 @@ ruleTester.run('no-typos', rule, {
     code: `
       import PropTypes from "prop-types"
       import * as MyPropTypes from 'lib/my-prop-types'
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         b: PropTypes.string,
         a: MyPropTypes.MYSTRING,
@@ -399,17 +398,17 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import CustomReact from "react"
-      class Component extends React.Component {};
+      import CustomInferno from "inferno"
+      class Component extends Inferno.Component {};
       Component.propTypes = {
-        b: CustomReact.PropTypes.string,
+        b: CustomInferno.PropTypes.string,
       }
    `,
     parserOptions
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.childContextTypes = {
         a: PropTypes.string,
         b: PropTypes.string.isRequired,
@@ -424,7 +423,7 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       import PropTypes from "prop-types";
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.contextTypes = {
         a: PropTypes.string,
         b: PropTypes.string.isRequired,
@@ -440,7 +439,7 @@ ruleTester.run('no-typos', rule, {
     code: `
       import PropTypes from 'prop-types'
       import * as MyPropTypes from 'lib/my-prop-types'
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         a: PropTypes.string,
         b: MyPropTypes.MYSTRING,
@@ -453,7 +452,7 @@ ruleTester.run('no-typos', rule, {
     code: `
       import PropTypes from "prop-types"
       import * as MyPropTypes from 'lib/my-prop-types'
-      class Component extends React.Component {};
+      class Component extends Inferno.Component {};
       Component.propTypes = {
         b: PropTypes.string,
         a: MyPropTypes.MYSTRING,
@@ -463,17 +462,17 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import CustomReact from "react"
-      class Component extends React.Component {};
+      import CustomInferno from "inferno"
+      class Component extends Inferno.Component {};
       Component.propTypes = {
-        b: CustomReact.PropTypes.string,
+        b: CustomInferno.PropTypes.string,
       }
    `,
     parser: parsers.BABEL_ESLINT,
     parserOptions
   }, {
     // ensure that an absent arg to PropTypes.shape does not crash
-    code: `class Component extends React.Component {};
+    code: `class Component extends Inferno.Component {};
      Component.propTypes = {
        a: PropTypes.shape(),
      };
@@ -484,7 +483,7 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     // ensure that an absent arg to PropTypes.shape does not crash
-    code: `class Component extends React.Component {};
+    code: `class Component extends Inferno.Component {};
      Component.propTypes = {
        a: PropTypes.shape(),
      };
@@ -503,7 +502,7 @@ ruleTester.run('no-typos', rule, {
     `,
     parser: parsers.BABEL_ESLINT
   }, {
-    code: `class Component extends React.Component {};
+    code: `class Component extends Inferno.Component {};
      Component.propTypes = {
        b: string.isRequired,
        c: PropTypes.shape({
@@ -513,7 +512,7 @@ ruleTester.run('no-typos', rule, {
    `,
     parserOptions
   }, {
-    code: `class Component extends React.Component {};
+    code: `class Component extends Inferno.Component {};
      Component.propTypes = {
        b: string.isRequired,
        c: PropTypes.shape({
@@ -525,9 +524,9 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import React from 'react';
+      import Inferno from 'inferno';
       import PropTypes from 'prop-types';
-      const Component = React.createReactClass({
+      const Component = Inferno.createClass({
         propTypes: {
           a: PropTypes.string.isRequired,
           b: PropTypes.shape({
@@ -539,9 +538,9 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import React from 'react';
+      import Inferno from 'inferno';
       import PropTypes from 'prop-types';
-      const Component = React.createReactClass({
+      const Component = Inferno.createClass({
         propTypes: {
           a: PropTypes.string.isRequired,
           b: PropTypes.shape({
@@ -554,9 +553,9 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import React from 'react';
+      import Inferno from 'inferno';
       import PropTypes from 'prop-types';
-      const Component = React.createReactClass({
+      const Component = Inferno.createClass({
         childContextTypes: {
           a: PropTypes.bool,
           b: PropTypes.array,
@@ -568,9 +567,9 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import React from 'react';
+      import Inferno from 'inferno';
       import PropTypes from 'prop-types';
-      const Component = React.createReactClass({
+      const Component = Inferno.createClass({
         childContextTypes: {
           a: PropTypes.bool,
           b: PropTypes.array,
@@ -583,8 +582,8 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import React from 'react';
-      const Component = React.createReactClass({
+      import Inferno from 'inferno';
+      const Component = Inferno.createClass({
         propTypes: {},
         childContextTypes: {},
         contextTypes: {},
@@ -603,8 +602,8 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import React from 'react';
-      const Component = React.createReactClass({
+      import Inferno from 'inferno';
+      const Component = Inferno.createClass({
         propTypes: {},
         childContextTypes: {},
         contextTypes: {},
@@ -626,7 +625,7 @@ ruleTester.run('no-typos', rule, {
     code: `
       import { string, element } from "prop-types";
 
-      class Sample extends React.Component {
+      class Sample extends Inferno.Component {
          render() { return null; }
       }
 
@@ -640,145 +639,7 @@ ruleTester.run('no-typos', rule, {
 
   invalid: [{
     code: `
-      class Component extends React.Component {
-        static PropTypes = {};
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {}
-      Component.PropTypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      function MyComponent() { return (<div>{this.props.myProp}</div>) }
-      MyComponent.PropTypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {
-        static proptypes = {};
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {}
-      Component.proptypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      function MyComponent() { return (<div>{this.props.myProp}</div>) }
-      MyComponent.proptypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {
-        static ContextTypes = {};
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {}
-      Component.ContextTypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      function MyComponent() { return (<div>{this.props.myProp}</div>) }
-      MyComponent.ContextTypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {
-        static contexttypes = {};
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {}
-      Component.contexttypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      function MyComponent() { return (<div>{this.props.myProp}</div>) }
-      MyComponent.contexttypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {
-        static ChildContextTypes = {};
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {}
-      Component.ChildContextTypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      function MyComponent() { return (<div>{this.props.myProp}</div>) }
-      MyComponent.ChildContextTypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {
-        static childcontexttypes = {};
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {}
-      Component.childcontexttypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      function MyComponent() { return (<div>{this.props.myProp}</div>) }
-      MyComponent.childcontexttypes = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Component extends React.Component {
+      class Component extends Inferno.Component {
         static DefaultProps = {};
       }
     `,
@@ -787,7 +648,7 @@ ruleTester.run('no-typos', rule, {
     errors: [{message: ERROR_MESSAGE}]
   }, {
     code: `
-      class Component extends React.Component {}
+      class Component extends Inferno.Component {}
       Component.DefaultProps = {}
     `,
     parserOptions,
@@ -801,7 +662,7 @@ ruleTester.run('no-typos', rule, {
     errors: [{message: ERROR_MESSAGE}]
   }, {
     code: `
-      class Component extends React.Component {
+      class Component extends Inferno.Component {
         static defaultprops = {};
       }
     `,
@@ -810,7 +671,7 @@ ruleTester.run('no-typos', rule, {
     errors: [{message: ERROR_MESSAGE}]
   }, {
     code: `
-      class Component extends React.Component {}
+      class Component extends Inferno.Component {}
       Component.defaultprops = {}
     `,
     parserOptions,
@@ -825,30 +686,19 @@ ruleTester.run('no-typos', rule, {
   }, {
     code: `
       Component.defaultprops = {}
-      class Component extends React.Component {}
+      class Component extends Inferno.Component {}
     `,
     parserOptions,
     errors: [{message: ERROR_MESSAGE}]
   }, {
     code: `
-      /** @extends React.Component */
-      class MyComponent extends BaseComponent {}
-      MyComponent.PROPTYPES = {}
-    `,
-    parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
-  }, {
-    code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         static GetDerivedStateFromProps()  { }
         ComponentWillMount() { }
-        UNSAFE_ComponentWillMount() { }
         ComponentDidMount() { }
         ComponentWillReceiveProps() { }
-        UNSAFE_ComponentWillReceiveProps() { }
         ShouldComponentUpdate() { }
         ComponentWillUpdate() { }
-        UNSAFE_ComponentWillUpdate() { }
         GetSnapshotBeforeUpdate() { }
         ComponentDidUpdate() { }
         ComponentDidCatch() { }
@@ -889,28 +739,16 @@ ruleTester.run('no-typos', rule, {
     }, {
       message: ERROR_MESSAGE_LIFECYCLE_METHOD,
       type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         static Getderivedstatefromprops() { }
         Componentwillmount() { }
-        UNSAFE_Componentwillmount() { }
         Componentdidmount() { }
         Componentwillreceiveprops() { }
-        UNSAFE_Componentwillreceiveprops() { }
         Shouldcomponentupdate() { }
         Componentwillupdate() { }
-        UNSAFE_Componentwillupdate() { }
         Getsnapshotbeforeupdate() { }
         Componentdidupdate() { }
         Componentdidcatch() { }
@@ -954,28 +792,16 @@ ruleTester.run('no-typos', rule, {
     }, {
       message: ERROR_MESSAGE_LIFECYCLE_METHOD,
       type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
     }]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         static getderivedstatefromprops() { }
         componentwillmount() { }
-        unsafe_componentwillmount() { }
         componentdidmount() { }
         componentwillreceiveprops() { }
-        unsafe_componentwillreceiveprops() { }
         shouldcomponentupdate() { }
         componentwillupdate() { }
-        unsafe_componentwillupdate() { }
         getsnapshotbeforeupdate() { }
         componentdidupdate() { }
         componentdidcatch() { }
@@ -1016,566 +842,11 @@ ruleTester.run('no-typos', rule, {
     }, {
       message: ERROR_MESSAGE_LIFECYCLE_METHOD,
       type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
-    }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD,
-      type: 'MethodDefinition'
     }]
   }, {
     code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {};
-      Component.propTypes = {
-          a: PropTypes.Number.isRequired
-      }
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: Number'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {};
-      Component.propTypes = {
-          a: PropTypes.number.isrequired
-      }
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {
-        static propTypes = {
-          a: PropTypes.number.isrequired
-        }
-      };
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {
-        static propTypes = {
-          a: PropTypes.Number
-        }
-      };
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: Number'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {};
-      Component.propTypes = {
-          a: PropTypes.Number
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: Number'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {};
-      Component.propTypes = {
-        a: PropTypes.shape({
-          b: PropTypes.String,
-          c: PropTypes.number.isRequired,
-        })
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: String'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {};
-      Component.propTypes = {
-        a: PropTypes.oneOfType([
-          PropTypes.bools,
-          PropTypes.number,
-        ])
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {};
-      Component.propTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import PropTypes from "prop-types";
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import PropTypes from 'prop-types';
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import PropTypes from 'prop-types';
-     class Component extends React.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-     import PropTypes from 'prop-types';
-     class Component extends React.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-   `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import RealPropTypes from 'prop-types';
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: RealPropTypes.bools,
-        b: RealPropTypes.Array,
-        c: RealPropTypes.function,
-        d: RealPropTypes.objectof,
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import React from 'react';
-     class Component extends React.Component {};
-     Component.propTypes = {
-       a: React.PropTypes.string.isrequired,
-       b: React.PropTypes.shape({
-         c: React.PropTypes.number
-       }).isrequired
-     }
-   `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import React from 'react';
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: React.PropTypes.bools,
-        b: React.PropTypes.Array,
-        c: React.PropTypes.function,
-        d: React.PropTypes.objectof,
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import { PropTypes } from 'react';
-     class Component extends React.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-   `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-     import 'react';
-     class Component extends React.Component {};
-   `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: []
-  }, {
-    code: `
-      import { PropTypes } from 'react';
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import PropTypes from 'prop-types';
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import PropTypes from 'prop-types';
-     class Component extends React.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-     import PropTypes from 'prop-types';
-     class Component extends React.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-   `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import RealPropTypes from 'prop-types';
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: RealPropTypes.bools,
-        b: RealPropTypes.Array,
-        c: RealPropTypes.function,
-        d: RealPropTypes.objectof,
-      }
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import React from 'react';
-     class Component extends React.Component {};
-     Component.propTypes = {
-       a: React.PropTypes.string.isrequired,
-       b: React.PropTypes.shape({
-         c: React.PropTypes.number
-       }).isrequired
-     }
-   `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import React from 'react';
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: React.PropTypes.bools,
-        b: React.PropTypes.Array,
-        c: React.PropTypes.function,
-        d: React.PropTypes.objectof,
-      }
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-     import { PropTypes } from 'react';
-     class Component extends React.Component {};
-     Component.propTypes = {
-       a: PropTypes.string.isrequired,
-       b: PropTypes.shape({
-         c: PropTypes.number
-       }).isrequired
-     }
-   `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import { PropTypes } from 'react';
-      class Component extends React.Component {};
-      Component.childContextTypes = {
-        a: PropTypes.bools,
-        b: PropTypes.Array,
-        c: PropTypes.function,
-        d: PropTypes.objectof,
-      }
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import React from 'react';
-      import PropTypes from 'prop-types';
-      const Component = React.createReactClass({
-        propTypes: {
-          a: PropTypes.string.isrequired,
-          b: PropTypes.shape({
-            c: PropTypes.number
-          }).isrequired
-        }
-      });
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import React from 'react';
-      import PropTypes from 'prop-types';
-      const Component = React.createReactClass({
-        childContextTypes: {
-          a: PropTypes.bools,
-          b: PropTypes.Array,
-          c: PropTypes.function,
-          d: PropTypes.objectof,
-        }
-      });
-    `,
-    parser: parsers.BABEL_ESLINT,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import React from 'react';
-      import PropTypes from 'prop-types';
-      const Component = React.createReactClass({
-        propTypes: {
-          a: PropTypes.string.isrequired,
-          b: PropTypes.shape({
-            c: PropTypes.number
-          }).isrequired
-        }
-      });
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }, {
-      message: 'Typo in prop type chain qualifier: isrequired'
-    }]
-  }, {
-    code: `
-      import React from 'react';
-      import PropTypes from 'prop-types';
-      const Component = React.createReactClass({
-        childContextTypes: {
-          a: PropTypes.bools,
-          b: PropTypes.Array,
-          c: PropTypes.function,
-          d: PropTypes.objectof,
-        }
-      });
-    `,
-    parserOptions,
-    errors: [{
-      message: 'Typo in declared prop type: bools'
-    }, {
-      message: 'Typo in declared prop type: Array'
-    }, {
-      message: 'Typo in declared prop type: function'
-    }, {
-      message: 'Typo in declared prop type: objectof'
-    }]
-  }, {
-    code: `
-      import React from 'react';
-      const Component = React.createReactClass({
+      import Inferno from 'inferno';
+      const Component = Inferno.createClass({
         proptypes: {},
         childcontexttypes: {},
         contexttypes: {},
@@ -1593,15 +864,6 @@ ruleTester.run('no-typos', rule, {
     `,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_ES5,
-      type: 'ObjectExpression'
-    }, {
-      message: ERROR_MESSAGE_ES5,
-      type: 'ObjectExpression'
-    }, {
-      message: ERROR_MESSAGE_ES5,
-      type: 'ObjectExpression'
-    }, {
       message: ERROR_MESSAGE_LIFECYCLE_METHOD,
       type: 'Property'
     }, {
@@ -1625,8 +887,8 @@ ruleTester.run('no-typos', rule, {
     }]
   }, {
     code: `
-      import React from 'react';
-      const Component = React.createReactClass({
+      import Inferno from 'inferno';
+      const Component = Inferno.createClass({
         proptypes: {},
         childcontexttypes: {},
         contexttypes: {},
@@ -1645,15 +907,6 @@ ruleTester.run('no-typos', rule, {
     parser: parsers.BABEL_ESLINT,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_ES5,
-      type: 'ObjectExpression'
-    }, {
-      message: ERROR_MESSAGE_ES5,
-      type: 'ObjectExpression'
-    }, {
-      message: ERROR_MESSAGE_ES5,
-      type: 'ObjectExpression'
-    }, {
       message: ERROR_MESSAGE_LIFECYCLE_METHOD,
       type: 'Property'
     }, {
@@ -1682,7 +935,7 @@ ruleTester.run('no-typos', rule, {
       ,{
         code: `
           MyComponent.PROPTYPES = {}
-          \/** @extends React.Component *\/
+          \/** @extends Inferno.Component *\/
           class MyComponent extends BaseComponent {}
         `,
         parserOptions: parserOptions

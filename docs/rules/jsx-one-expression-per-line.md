@@ -1,4 +1,4 @@
-# One JSX Element Per Line (react/jsx-one-expression-per-line)
+# One JSX Element Per Line (inferno/jsx-one-expression-per-line)
 
 This option limits every line in JSX to one expression each.
 
@@ -107,7 +107,7 @@ The following patterns are **not** warnings:
 
 ```js
 ...
-"react/jsx-one-expression-per-line": [<enabled>, { "allow": "none"|"literal"|"single-child" }]
+"inferno/jsx-one-expression-per-line": [<enabled>, { "allow": "none"|"literal"|"single-child" }]
 ...
 ```
 

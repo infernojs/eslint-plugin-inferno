@@ -1,4 +1,4 @@
-# Enforces where React component static properties should be positioned. (react/static-property-placement)
+# Enforces where Inferno component static properties should be positioned. (inferno/static-property-placement)
 
 This rule allows you to enforce where `childContextTypes`, `contextTypes`, `contextType`, `defaultProps`, `displayName`,
 and `propTypes` are declared in an ES6 class.
@@ -15,7 +15,7 @@ The three key options are `static public field`, `static getter`, and `property 
 Examples of **incorrect** code for this rule:
 
 ```js
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static get childContextTypes() { /*...*/ }
   static get contextTypes() { /*...*/ }
   static get contextType() { /*...*/ }
@@ -26,7 +26,7 @@ class MyComponent extends React.Component {
 ```
 
 ```js
-class MyComponent extends React.Component { /*...*/ }
+class MyComponent extends Inferno.Component { /*...*/ }
 MyComponent.childContextTypes = { /*...*/ };
 MyComponent.contextTypes = { /*...*/ };
 MyComponent.contextType = { /*...*/ };
@@ -38,7 +38,7 @@ MyComponent.propTypes = { /*...*/ };
 Examples of **correct** code for this rule:
 
 ```js
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static childContextTypes = { /*...*/ };
   static contextTypes = { /*...*/ };
   static contextType = { /*...*/ };
@@ -53,7 +53,7 @@ class MyComponent extends React.Component {
 Examples of **incorrect** code for this rule:
 
 ```js
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static childContextTypes = { /*...*/ };
   static contextTypes = { /*...*/ };
   static contextType = { /*...*/ };
@@ -64,7 +64,7 @@ class MyComponent extends React.Component {
 ```
 
 ```js
-class MyComponent extends React.Component { /*...*/ }
+class MyComponent extends Inferno.Component { /*...*/ }
 MyComponent.childContextTypes = { /*...*/ };
 MyComponent.contextTypes = { /*...*/ };
 MyComponent.contextType = { /*...*/ };
@@ -76,7 +76,7 @@ MyComponent.propTypes = { /*...*/ };
 Examples of **correct** code for this rule:
 
 ```js
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static get childContextTypes() { /*...*/ }
   static get contextTypes() { /*...*/ }
   static get contextType() { /*...*/ }
@@ -91,7 +91,7 @@ class MyComponent extends React.Component {
 Examples of **incorrect** code for this rule:
 
 ```js
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static childContextTypes = { /*...*/ };
   static contextTypes = { /*...*/ };
   static contextType = { /*...*/ };
@@ -102,7 +102,7 @@ class MyComponent extends React.Component {
 ```
 
 ```js
-class MyComponent extends React.Component {
+class MyComponent extends Inferno.Component {
   static get childContextTypes() { /*...*/ }
   static get contextTypes() { /*...*/ }
   static get contextType() { /*...*/ }
@@ -115,7 +115,7 @@ class MyComponent extends React.Component {
 Examples of **correct** code for this rule:
 
 ```js
-class MyComponent extends React.Component { /*...*/ }
+class MyComponent extends Inferno.Component { /*...*/ }
 MyComponent.childContextTypes = { /*...*/ };
 MyComponent.contextTypes = { /*...*/ };
 MyComponent.contextType = { /*...*/ };
@@ -128,7 +128,7 @@ MyComponent.propTypes = { /*...*/ };
 
 ```
 ...
-"react/static-property-placement": [<enabled>]  // `static public field` enabled
+"inferno/static-property-placement": [<enabled>]  // `static public field` enabled
 ...
 ```
 
@@ -136,7 +136,7 @@ or alternatively:
 
 ```
 ...
-"react/static-property-placement": [<enabled>, <string>]
+"inferno/static-property-placement": [<enabled>, <string>]
 ...
 ```
 
@@ -144,7 +144,7 @@ or alternatively:
 
 ```
 ...
-"react/static-property-placement": [<enabled>, <string>, {
+"inferno/static-property-placement": [<enabled>, <string>, {
   childContextTypes: <string>,
   contextTypes: <string>,
   contextType: <string>,
@@ -165,7 +165,7 @@ The `options` schema defined above allows you to specify different rules for the
 _This is only an example, we do not recommend this as a configuration._
 ```
 ...
-"react/static-property-placement": ["warn", "property assignment", {
+"inferno/static-property-placement": ["warn", "property assignment", {
   childContextTypes: "static getter",
   contextTypes: "static public field",
   contextType: "static public field",
@@ -181,5 +181,5 @@ Based on the above configuration:
 
 ## When Not To Use It
 
-If you have no placement preference for React's static class properties.
+If you have no placement preference for Inferno's static class properties.
 

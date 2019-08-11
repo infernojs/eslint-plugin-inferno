@@ -32,7 +32,7 @@ ruleTester.run('no-unescaped-entities', rule, {
   valid: [
     {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return (
               <div/>
@@ -42,7 +42,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       `
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>Here is some text!</div>;
           }
@@ -50,7 +50,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       `
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>I&rsquo;ve escaped some entities: &gt; &lt; &amp;</div>;
           }
@@ -58,7 +58,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       `
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>first line is ok
             so is second
@@ -68,7 +68,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       `
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>{">" + "<" + "&" + '"'}</div>;
           },
@@ -77,7 +77,7 @@ ruleTester.run('no-unescaped-entities', rule, {
     },
     {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <>Here is some text!</>;
           }
@@ -86,7 +86,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       parser: parsers.BABEL_ESLINT
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <>I&rsquo;ve escaped some entities: &gt; &lt; &amp;</>;
           }
@@ -96,7 +96,7 @@ ruleTester.run('no-unescaped-entities', rule, {
     },
     {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <>{">" + "<" + "&" + '"'}</>;
           },
@@ -109,7 +109,7 @@ ruleTester.run('no-unescaped-entities', rule, {
   invalid: [
     {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>></div>;
           }
@@ -118,7 +118,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       errors: [{message: '`>` can be escaped with `&gt;`.'}]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <>></>;
           }
@@ -128,7 +128,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       errors: [{message: '`>` can be escaped with `&gt;`.'}]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>first line is ok
             so is second
@@ -139,7 +139,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       errors: [{message: '`>` can be escaped with `&gt;`.'}]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <>first line is ok
             so is second
@@ -151,7 +151,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       errors: [{message: '`>` can be escaped with `&gt;`.'}]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>'</div>;
           }
@@ -160,7 +160,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       errors: [{message: '`\'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.'}]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>Multiple errors: '>></div>;
           }
@@ -173,7 +173,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       ]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <div>{"Unbalanced braces"}}</div>;
           }
@@ -182,7 +182,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       errors: [{message: '`}` can be escaped with `&#125;`.'}]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <>{"Unbalanced braces"}}</>;
           }
@@ -192,7 +192,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       errors: [{message: '`}` can be escaped with `&#125;`.'}]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <>foo & bar</>;
           }
@@ -205,7 +205,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       }]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <span>foo & bar</span>;
           }
@@ -217,7 +217,7 @@ ruleTester.run('no-unescaped-entities', rule, {
       }]
     }, {
       code: `
-        var Hello = createReactClass({
+        var Hello = createClass({
           render: function() {
             return <span>foo & bar</span>;
           }
