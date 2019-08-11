@@ -8,7 +8,23 @@ This rule will enforce one or the other to keep consistency in your code.
 
 This rule has a string option:
 * className: (default) enforces the use of 'className' instead of 'class' in JSX attributes.
+```js
+...
+"inferno/jsx-props-class-name": [<enabled>, "className"]
+...
+```
+
 * class: enforces the use of 'class' instead of 'className' in JSX attributes.
+
+```js
+...
+"inferno/jsx-props-class-name": [<enabled>, "class"]
+...
+```
+
+## When not to use it
+
+If you want to allow both `className` and `class` attributes
 
 ### Related rules
 
