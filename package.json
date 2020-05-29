@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.20.0",
+  "version": "7.20.1",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
@@ -52,7 +52,7 @@
     "eslint-plugin-import": "^2.20.2",
     "istanbul": "^0.4.5",
     "markdown-magic": "^1.0.0",
-    "mocha": "^5.2.0",
+    "mocha": "^7.2.0",
     "semver": "^7.3.2",
     "sinon": "^9.0.2",
     "typescript": "^3.9.3"

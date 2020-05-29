@@ -97,7 +97,7 @@ Enable the rules that you would like to use.
 
 * [inferno/jsx-props-class-name](docs/rules/jsx-props-class-name.md): Enforce 'class' or 'className' Attributes (fixable)
 
-## Common rules for Inferno and Inferno
+## Common rules for Inferno and React
 
 ## JSX-specific rules
 
