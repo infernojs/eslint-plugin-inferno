@@ -93,50 +93,11 @@ Enable the rules that you would like to use.
 
 # List of supported rules
 
-<<<<<<< HEAD
 ## Inferno specific rules
 
 * [inferno/jsx-props-class-name](docs/rules/jsx-props-class-name.md): Enforce 'class' or 'className' Attributes (fixable)
 
 ## Common rules for Inferno and Inferno
-
-* [inferno/button-has-type](docs/rules/button-has-type.md): Forbid "button" element without an explicit "type" attribute
-* [inferno/destructuring-assignment](docs/rules/destructuring-assignment.md): Rule enforces consistent usage of destructuring assignment in component
-* [inferno/forbid-component-props](docs/rules/forbid-component-props.md): Forbid certain props on Components
-* [inferno/forbid-dom-props](docs/rules/forbid-dom-props.md): Forbid certain props on DOM Nodes
-* [inferno/forbid-elements](docs/rules/forbid-elements.md): Forbid certain elements
-* [inferno/no-access-state-in-setstate](docs/rules/no-access-state-in-setstate.md): Prevent using this.state inside this.setState
-* [inferno/no-array-index-key](docs/rules/no-array-index-key.md): Prevent using Array index in `key` props
-* [inferno/no-children-prop](docs/rules/no-children-prop.md): Prevent passing children as props
-* [inferno/no-danger](docs/rules/no-danger.md): Prevent usage of dangerous JSX properties
-* [inferno/no-danger-with-children](docs/rules/no-danger-with-children.md): Prevent problem with children and props.dangerouslySetInnerHTML
-* [inferno/no-did-mount-set-state](docs/rules/no-did-mount-set-state.md): Prevent usage of `setState` in `componentDidMount`
-* [inferno/no-did-update-set-state](docs/rules/no-did-update-set-state.md): Prevent usage of `setState` in `componentDidUpdate`
-* [inferno/no-direct-mutation-state](docs/rules/no-direct-mutation-state.md): Prevent direct mutation of `this.state`
-* [inferno/no-find-dom-node](docs/rules/no-find-dom-node.md): Prevent usage of `findDOMNode`
-* [inferno/no-is-mounted](docs/rules/no-is-mounted.md): Prevent usage of `isMounted`
-* [inferno/no-multi-comp](docs/rules/no-multi-comp.md): Prevent multiple component definition per file
-* [inferno/no-redundant-should-component-update](docs/rules/no-redundant-should-component-update.md): Prevent usage of `shouldComponentUpdate` when extending Inferno.PureComponent
-* [inferno/no-render-return-value](docs/rules/no-render-return-value.md): Prevent usage of the return value of `Inferno.render`
-* [inferno/no-set-state](docs/rules/no-set-state.md): Prevent usage of `setState`
-* [inferno/no-typos](docs/rules/no-typos.md): Prevent common casing typos
-* [inferno/no-string-refs](docs/rules/no-string-refs.md): Prevent using string references in `ref` attribute.
-* [inferno/no-this-in-sfc](docs/rules/no-this-in-sfc.md): Prevent using `this` in stateless functional components
-* [inferno/no-unescaped-entities](docs/rules/no-unescaped-entities.md): Prevent invalid characters from appearing in markup
-* [inferno/no-unknown-property](docs/rules/no-unknown-property.md): Prevent usage of unknown DOM property (fixable)
-* [inferno/no-unused-state](docs/rules/no-unused-state.md): Prevent definitions of unused state properties
-* [inferno/no-will-update-set-state](docs/rules/no-will-update-set-state.md): Prevent usage of `setState` in `componentWillUpdate`
-* [inferno/prefer-es6-class](docs/rules/prefer-es6-class.md): Enforce ES5 or ES6 class for Inferno Components
-* [inferno/prefer-stateless-function](docs/rules/prefer-stateless-function.md): Enforce stateless Inferno Components to be written as a pure function
-* [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md): Prevent missing `Inferno` when using JSX
-* [inferno/require-optimization](docs/rules/require-optimization.md): Enforce Inferno components to have a `shouldComponentUpdate` method
-* [inferno/require-render-return](docs/rules/require-render-return.md): Enforce ES5 or ES6 class for returning value in render function
-* [inferno/self-closing-comp](docs/rules/self-closing-comp.md): Prevent extra closing tags for components without children (fixable)
-* [inferno/sort-comp](docs/rules/sort-comp.md): Enforce component methods order (fixable)
-* [inferno/state-in-constructor](docs/rules/state-in-constructor.md): Enforce the state initialization style to be either in a constructor or with a class property
-* [inferno/static-property-placement](docs/rules/static-property-placement.md): Enforces where Inferno component static properties should be positioned.
-* [inferno/style-prop-object](docs/rules/style-prop-object.md): Enforce style prop value being an object
-* [inferno/void-dom-elements-no-children](docs/rules/void-dom-elements-no-children.md): Prevent void DOM elements (e.g. `<img />`, `<br />`) from receiving children
 
 ## JSX-specific rules
 
@@ -192,59 +153,6 @@ InfernoJS does not have prop-types or UNSAFE_ -lifecycle methods.
 * inferno/require-default-props
 * inferno/prefer-read-only-props
 =======
-<!-- AUTO-GENERATED-CONTENT:START (BASIC_RULES) -->
-* [inferno/boolean-prop-naming](docs/rules/boolean-prop-naming.md): Enforces consistent naming for boolean props
-* [inferno/button-has-type](docs/rules/button-has-type.md): Forbid "button" element without an explicit "type" attribute
-* [inferno/default-props-match-prop-types](docs/rules/default-props-match-prop-types.md): Enforce all defaultProps are defined and not "required" in propTypes.
-* [inferno/destructuring-assignment](docs/rules/destructuring-assignment.md): Enforce consistent usage of destructuring assignment of props, state, and context
-* [inferno/display-name](docs/rules/display-name.md): Prevent missing displayName in a Inferno component definition
-* [inferno/forbid-component-props](docs/rules/forbid-component-props.md): Forbid certain props on components
-* [inferno/forbid-dom-props](docs/rules/forbid-dom-props.md): Forbid certain props on DOM Nodes
-* [inferno/forbid-elements](docs/rules/forbid-elements.md): Forbid certain elements
-* [inferno/forbid-foreign-prop-types](docs/rules/forbid-foreign-prop-types.md): Forbid using another component's propTypes
-* [inferno/forbid-prop-types](docs/rules/forbid-prop-types.md): Forbid certain propTypes
-* [inferno/function-component-definition](docs/rules/function-component-definition.md): Standardize the way function component get defined (fixable)
-* [inferno/no-access-state-in-setstate](docs/rules/no-access-state-in-setstate.md): Reports when this.state is accessed within setState
-* [inferno/no-adjacent-inline-elements](docs/rules/no-adjacent-inline-elements.md): Prevent adjacent inline elements not separated by whitespace.
-* [inferno/no-array-index-key](docs/rules/no-array-index-key.md): Prevent usage of Array index in keys
-* [inferno/no-children-prop](docs/rules/no-children-prop.md): Prevent passing of children as props.
-* [inferno/no-danger](docs/rules/no-danger.md): Prevent usage of dangerous JSX props
-* [inferno/no-danger-with-children](docs/rules/no-danger-with-children.md): Report when a DOM element is using both children and dangerouslySetInnerHTML
-* [inferno/no-deprecated](docs/rules/no-deprecated.md): Prevent usage of deprecated methods
-* [inferno/no-did-mount-set-state](docs/rules/no-did-mount-set-state.md): Prevent usage of setState in componentDidMount
-* [inferno/no-did-update-set-state](docs/rules/no-did-update-set-state.md): Prevent usage of setState in componentDidUpdate
-* [inferno/no-direct-mutation-state](docs/rules/no-direct-mutation-state.md): Prevent direct mutation of this.state
-* [inferno/no-find-dom-node](docs/rules/no-find-dom-node.md): Prevent usage of findDOMNode
-* [inferno/no-is-mounted](docs/rules/no-is-mounted.md): Prevent usage of isMounted
-* [inferno/no-multi-comp](docs/rules/no-multi-comp.md): Prevent multiple component definition per file
-* [inferno/no-redundant-should-component-update](docs/rules/no-redundant-should-component-update.md): Flag shouldComponentUpdate when extending PureComponent
-* [inferno/no-render-return-value](docs/rules/no-render-return-value.md): Prevent usage of the return value of Inferno.render
-* [inferno/no-set-state](docs/rules/no-set-state.md): Prevent usage of setState
-* [inferno/no-string-refs](docs/rules/no-string-refs.md): Prevent string definitions for references and prevent referencing this.refs
-* [inferno/no-this-in-sfc](docs/rules/no-this-in-sfc.md): Report "this" being used in stateless components
-* [inferno/no-typos](docs/rules/no-typos.md): Prevent common typos
-* [inferno/no-unescaped-entities](docs/rules/no-unescaped-entities.md): Detect unescaped HTML entities, which might represent malformed tags
-* [inferno/no-unknown-property](docs/rules/no-unknown-property.md): Prevent usage of unknown DOM property (fixable)
-* [inferno/no-unsafe](docs/rules/no-unsafe.md): Prevent usage of unsafe lifecycle methods
-* [inferno/no-unused-prop-types](docs/rules/no-unused-prop-types.md): Prevent definitions of unused prop types
-* [inferno/no-unused-state](docs/rules/no-unused-state.md): Prevent definition of unused state fields
-* [inferno/no-will-update-set-state](docs/rules/no-will-update-set-state.md): Prevent usage of setState in componentWillUpdate
-* [inferno/prefer-es6-class](docs/rules/prefer-es6-class.md): Enforce ES5 or ES6 class for Inferno Components
-* [inferno/prefer-read-only-props](docs/rules/prefer-read-only-props.md): Require read-only props. (fixable)
-* [inferno/prefer-stateless-function](docs/rules/prefer-stateless-function.md): Enforce stateless components to be written as a pure function
-* [inferno/prop-types](docs/rules/prop-types.md): Prevent missing props validation in a Inferno component definition
-* [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md): Prevent missing Inferno when using JSX
-* [inferno/require-default-props](docs/rules/require-default-props.md): Enforce a defaultProps definition for every prop that is not a required prop.
-* [inferno/require-optimization](docs/rules/require-optimization.md): Enforce Inferno components to have a shouldComponentUpdate method
-* [inferno/require-render-return](docs/rules/require-render-return.md): Enforce ES5 or ES6 class for returning value in render function
-* [inferno/self-closing-comp](docs/rules/self-closing-comp.md): Prevent extra closing tags for components without children (fixable)
-* [inferno/sort-comp](docs/rules/sort-comp.md): Enforce component methods order
-* [inferno/sort-prop-types](docs/rules/sort-prop-types.md): Enforce propTypes declarations alphabetical sorting
-* [inferno/state-in-constructor](docs/rules/state-in-constructor.md): State initialization in an ES6 class component should be in a constructor
-* [inferno/static-property-placement](docs/rules/static-property-placement.md): Defines where Inferno component static properties should be positioned.
-* [inferno/style-prop-object](docs/rules/style-prop-object.md): Enforce style prop value is an object
-* [inferno/void-dom-elements-no-children](docs/rules/void-dom-elements-no-children.md): Prevent passing of children to void DOM elements (e.g. `<br />`).
-<!-- AUTO-GENERATED-CONTENT:END -->
 
 ## JSX-specific rules
 
@@ -285,8 +193,6 @@ InfernoJS does not have prop-types or UNSAFE_ -lifecycle methods.
 * [inferno/jsx-uses-inferno](docs/rules/jsx-uses-inferno.md): Prevent Inferno to be marked as unused
 * [inferno/jsx-uses-vars](docs/rules/jsx-uses-vars.md): Prevent variables used in JSX to be marked as unused
 * [inferno/jsx-wrap-multilines](docs/rules/jsx-wrap-multilines.md): Prevent missing parentheses around multilines JSX (fixable)
-<!-- AUTO-GENERATED-CONTENT:END -->
->>>>>>> facebook/master
 
 ## Other useful plugins
 
