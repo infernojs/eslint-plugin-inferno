@@ -9,14 +9,14 @@ const path = require('path');
 const plugin = require('..');
 
 const ruleFiles = fs.readdirSync(path.resolve(__dirname, '../lib/rules/'))
-  .map(f => path.basename(f, '.js'));
+  .map((f) => path.basename(f, '.js'));
 
 describe('all rule files should be exported by the plugin', () => {
   ruleFiles.forEach((ruleName) => {
     it(`should export ${ruleName}`, () => {
       assert.equal(
         plugin.rules[ruleName],
-        require(path.join('../lib/rules', ruleName)) // eslint-disable-line import/no-dynamic-require
+        require(path.join('../lib/rules', ruleName)) // eslint-disable-line global-require, import/no-dynamic-require
       );
     });
   });

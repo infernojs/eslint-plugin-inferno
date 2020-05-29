@@ -41,7 +41,10 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
     {code: 'var Inferno; <x-gif />;'},
     {code: 'var Inferno, App, a=1; <App attr={a} />;'},
     {code: 'var Inferno, App, a=1; function elem() { return <App attr={a} />; }'},
-    {code: 'var Inferno, App; <App />;'},
+    {
+      code: 'var Inferno, App; <App />;',
+      parser: parsers.BABEL_ESLINT
+    },
     {code: '/** @jsx Foo */ var Foo, App; <App />;'},
     {code: '/** @jsx Foo.Bar */ var Foo, App; <App />;'},
     {

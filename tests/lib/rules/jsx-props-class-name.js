@@ -34,11 +34,13 @@ ruleTester.run('jsx-props-class-name', rule, {
   ],
   invalid: [{
     code: '<div className="" />',
+    output: '<div class="" />',
     options: ['class'],
     errors: [{message: 'Invalid attribute \'className\' found, use \'class\' instead'}]
   },
   {
     code: '<div class="" />',
+    output: '<div className="" />',
     options: ['className'],
     errors: [{message: 'Invalid attribute \'class\' found, use \'className\' instead'}]
   }

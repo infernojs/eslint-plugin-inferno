@@ -1,11 +1,10 @@
 # Prevent usage of string literals in JSX (inferno/jsx-no-literals)
 
-There are a couple of scenarios where you want to avoid string literals in JSX.  Either to enforce consistency and reducing strange behaviour, or for enforcing that literals aren't kept in JSX so they can be translated.
+There are a few scenarios where you want to avoid string literals in JSX. You may want to enforce consistency, reduce syntax highlighting issues, or ensure that strings are part of a translation system.
 
 ## Rule Details
 
-In JSX when using a literal string you can wrap it in a JSX container `{'TEXT'}`. This rules by default requires that you wrap all literal strings.
-Prevents any odd artifacts of highlighters if your unwrapped string contains an enclosing character like `'` in contractions and enforces consistency.
+By default this rule requires that you wrap all literal strings in a JSX container `{'TEXT'}`.
 
 The following patterns are considered warnings:
 
@@ -19,16 +18,24 @@ The following patterns are **not** considered warnings:
 var Hello = <div>{'test'}</div>;
 ```
 
-### Options
+```jsx
+var Hello = <div>
+  {'test'}
+</div>;
+```
 
-There is only one option:
+## Rule Options
 
-* `noStrings` - Enforces no string literals used as children, wrapped or unwrapped.
+There are two options:
 
-To use, you can specify like the following:
+* `noStrings` (default: `false`) - Enforces no string literals used as children, wrapped or unwrapped.
+* `allowedStrings` - An array of unique string values that would otherwise warn, but will be ignored.
+* `ignoreProps` (default: `false`) - When `true` the rule ignores literals used in props, wrapped or unwrapped.
+
+To use, you can specify as follows:
 
 ```js
-"inferno/jsx-no-literals": [<enabled>, {"noStrings": true}]
+"inferno/jsx-no-literals": [<enabled>, {"noStrings": true, "allowedStrings": ["allowed"], "ignoreProps": false}]
 ```
 
 In this configuration, the following are considered warnings:
@@ -41,16 +48,74 @@ var Hello = <div>test</div>;
 var Hello = <div>{'test'}</div>;
 ```
 
+```jsx
+var Hello = <div>
+  {'test'}
+</div>;
+```
+
+```jsx
+var Hello = <div class='xx' />;
+```
+
+```jsx
+var Hello = <div class={'xx'} />;
+```
+
+```jsx
+var Hello = <div class={`xx`} />;
+```
+
+
 The following are **not** considered warnings:
 
 ```jsx
-// When using something like `react-intl`
+// When using something like `inferno-intl`
 var Hello = <div><Text {...message} /></div>
 ```
 
 ```jsx
 // When using something similar to Rails translations
 var Hello = <div>{translate('my.translation.key')}</div>
+```
+
+```jsx
+// an allowed string
+var Hello = <div>allowed</div>
+```
+
+```jsx
+// an allowed string surrounded by only whitespace
+var Hello = <div>
+  allowed
+</div>;
+```
+
+```jsx
+// spread props object
+var Hello = <Text {...props} />
+```
+
+```jsx
+// use variable for prop values
+var Hello = <div class={xx} />
+```
+
+```jsx
+// cache
+class Comp1 extends Component {
+  asdf() {}
+
+  render() {
+    return (
+      <div onClick={this.asdf}>
+        {'asdjfl'}
+        test
+        {'foo'}
+      </div>
+    );
+  }
+}
 ```
 
 ## When Not To Use It

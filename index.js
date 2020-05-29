@@ -3,12 +3,14 @@
 const fromEntries = require('object.fromentries');
 const entries = require('object.entries');
 
+/* eslint-disable global-require */
 const allRules = {
   'button-has-type': require('./lib/rules/button-has-type'),
   'destructuring-assignment': require('./lib/rules/destructuring-assignment'),
   'forbid-component-props': require('./lib/rules/forbid-component-props'),
   'forbid-dom-props': require('./lib/rules/forbid-dom-props'),
   'forbid-elements': require('./lib/rules/forbid-elements'),
+  'function-component-definition': require('./lib/rules/function-component-definition'),
   'jsx-boolean-value': require('./lib/rules/jsx-boolean-value'),
   'jsx-child-element-spacing': require('./lib/rules/jsx-child-element-spacing'),
   'jsx-closing-bracket-location': require('./lib/rules/jsx-closing-bracket-location'),
@@ -28,7 +30,9 @@ const allRules = {
   'jsx-no-comment-textnodes': require('./lib/rules/jsx-no-comment-textnodes'),
   'jsx-no-duplicate-props': require('./lib/rules/jsx-no-duplicate-props'),
   'jsx-no-literals': require('./lib/rules/jsx-no-literals'),
+  'jsx-no-script-url': require('./lib/rules/jsx-no-script-url'),
   'jsx-no-target-blank': require('./lib/rules/jsx-no-target-blank'),
+  'jsx-no-useless-fragment': require('./lib/rules/jsx-no-useless-fragment'),
   'jsx-one-expression-per-line': require('./lib/rules/jsx-one-expression-per-line'),
   'jsx-no-undef': require('./lib/rules/jsx-no-undef'),
   'jsx-curly-brace-presence': require('./lib/rules/jsx-curly-brace-presence'),
@@ -45,6 +49,7 @@ const allRules = {
   'jsx-uses-vars': require('./lib/rules/jsx-uses-vars'),
   'jsx-wrap-multilines': require('./lib/rules/jsx-wrap-multilines'),
   'no-access-state-in-setstate': require('./lib/rules/no-access-state-in-setstate'),
+  'no-adjacent-inline-elements': require('./lib/rules/no-adjacent-inline-elements'),
   'no-array-index-key': require('./lib/rules/no-array-index-key'),
   'no-children-prop': require('./lib/rules/no-children-prop'),
   'no-danger': require('./lib/rules/no-danger'),
@@ -77,19 +82,20 @@ const allRules = {
   'style-prop-object': require('./lib/rules/style-prop-object'),
   'void-dom-elements-no-children': require('./lib/rules/void-dom-elements-no-children')
 };
+/* eslint-enable */
 
 function filterRules(rules, predicate) {
-  return fromEntries(entries(rules).filter(entry => predicate(entry[1])));
+  return fromEntries(entries(rules).filter((entry) => predicate(entry[1])));
 }
 
 function configureAsError(rules) {
-  return fromEntries(Object.keys(rules).map(key => [`inferno/${key}`, 2]));
+  return fromEntries(Object.keys(rules).map((key) => [`inferno/${key}`, 2]));
 }
 
-const activeRules = filterRules(allRules, rule => !rule.meta.deprecated);
+const activeRules = filterRules(allRules, (rule) => !rule.meta.deprecated);
 const activeRulesConfig = configureAsError(activeRules);
 
-const deprecatedRules = filterRules(allRules, rule => rule.meta.deprecated);
+const deprecatedRules = filterRules(allRules, (rule) => rule.meta.deprecated);
 
 module.exports = {
   deprecatedRules,

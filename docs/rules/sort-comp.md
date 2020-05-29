@@ -2,7 +2,7 @@
 
 When creating Inferno components it is more convenient to always follow the same organisation for method order to help you easily find lifecycle methods, event handlers, etc.
 
-**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/reactjs/react-codemod/blob/master/transforms/sort-comp.js) in [react-codemod](https://www.npmjs.com/package/react-codemod).
+**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/infernojs/inferno-codemod/blob/master/transforms/sort-comp.js) in [inferno-codemod](https://www.npmjs.com/package/inferno-codemod).
 
 ## Rule Details
 
@@ -87,7 +87,7 @@ The default configuration is:
   }
 }
 ```
-
+* `static-variables` This group is not specified by default, but can be used to enforce class static variable positioning.
 * `static-methods` is a special keyword that refers to static class methods.
 * `lifecycle` refers to the `lifecycle` group defined in `groups`.
 * `everything-else` is a special group that matches all of the methods that do not match any of the other groups.

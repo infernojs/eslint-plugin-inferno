@@ -1,6 +1,7 @@
 sudo: false
 language: node_js
 node_js:
+  - '13'
   - '12'
   - '11'
   - '10'
@@ -14,10 +15,12 @@ before_script:
 script:
   - 'if [ -n "${PRETEST-}" ]; then npm run pretest ; fi'
   - 'if [ -n "${TEST-}" ]; then npm run unit-test ; fi'
+  - 'if [ -n "${README-}" ]; then npm run generate-list-of-rules:check ; fi'
 env:
   global:
     - TEST=true
   matrix:
+    - ESLINT=7
     - ESLINT=6
     - ESLINT=5
     - ESLINT=4
@@ -28,6 +31,8 @@ matrix:
   include:
     - node_js: 'lts/*'
       env: PRETEST=true
+    - node_js: 'lts/*'
+      env: README=true
   exclude:
     - node_js: '4'
       env: ESLINT=5
@@ -35,5 +40,11 @@ matrix:
       env: ESLINT=6
     - node_js: '6'
       env: ESLINT=6
+    - node_js: '4'
+      env: ESLINT=7
+    - node_js: '6'
+      env: ESLINT=7
+    - node_js: '8'
+      env: ESLINT=7
   allow_failures:
     - node_js: '11'

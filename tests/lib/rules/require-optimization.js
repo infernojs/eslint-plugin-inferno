@@ -118,6 +118,23 @@ ruleTester.run('inferno-require-optimization', rule, {
     code: `
       const obj = { prop: [,,,,,] }
     `
+  }, {
+    code: `
+      import Inferno from "inferno";
+      class YourComponent extends Inferno.Component {
+        handleClick = () => {}
+        shouldComponentUpdate(){
+          return true;
+        }
+        render() {
+          return <div onClick={this.handleClick}>123</div>
+        }
+      }
+    `,
+    parser: parsers.BABEL_ESLINT,
+    errors: [{
+      message: MESSAGE
+    }]
   }],
 
   invalid: [{
@@ -133,6 +150,20 @@ ruleTester.run('inferno-require-optimization', rule, {
       import Inferno from "inferno";
       class YourComponent extends Inferno.Component {
         handleClick() {}
+        render() {
+          return <div onClick={this.handleClick}>123</div>
+        }
+      }
+    `,
+    parser: parsers.BABEL_ESLINT,
+    errors: [{
+      message: MESSAGE
+    }]
+  }, {
+    code: `
+      import Inferno from "inferno";
+      class YourComponent extends Inferno.Component {
+        handleClick = () => {}
         render() {
           return <div onClick={this.handleClick}>123</div>
         }

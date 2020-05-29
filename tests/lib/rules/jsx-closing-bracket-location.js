@@ -26,10 +26,10 @@ const MESSAGE_PROPS_ALIGNED = 'The closing bracket must be aligned with the last
 const MESSAGE_TAG_ALIGNED = 'The closing bracket must be aligned with the opening tag';
 const MESSAGE_LINE_ALIGNED = 'The closing bracket must be aligned with the line containing the opening tag';
 
-const messageWithDetails = function (message, expectedColumn, expectedNextLine) {
+function messageWithDetails(message, expectedColumn, expectedNextLine) {
   const details = ` (expected column ${expectedColumn}${expectedNextLine ? ' on the next line)' : ')'}`;
   return message + details;
-};
+}
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -1161,7 +1161,7 @@ ruleTester.run('jsx-closing-bracket-location', rule, {
       ')'
     ].join('\n'),
     options: [{location: 'line-aligned'}],
-    errors: [MESSAGE_AFTER_TAG]
+    errors: MESSAGE_AFTER_TAG
   }, {
     code: [
       '<div className={[',
@@ -1664,7 +1664,7 @@ ruleTester.run('jsx-closing-bracket-location', rule, {
       ')'
     ].join('\n'),
     options: [{location: 'line-aligned'}],
-    errors: [MESSAGE_AFTER_TAG]
+    errors: MESSAGE_AFTER_TAG
   }, {
     code: [
       '<div className={[',

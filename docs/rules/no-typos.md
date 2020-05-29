@@ -49,6 +49,9 @@ class MyComponent extends Inferno.Component {
   componentdidupdate() {}
 }
 
+class MyComponent extends Inferno.Component {
+  getDerivedStateFromProps() {}
+}
 ```
 
 The following patterns are **not** considered warnings:

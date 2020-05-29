@@ -10,6 +10,7 @@ The following patterns are considered errors:
 ```jsx
 var Hello = <button>Hello</button>
 var Hello = <button type="foo">Hello</button>
+var Hello = <button type={foo}>Hello</button>
 
 var Hello = Inferno.createElement('button', {}, 'Hello')
 var Hello = Inferno.createElement('button', {type: 'foo'}, 'Hello')

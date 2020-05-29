@@ -21,15 +21,6 @@ const parserOptions = {
 const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('destructuring-assignment', rule, {
   valid: [{
-    code: `const Foo = class extends Inferno.PureComponent {
-      render() {
-        const { foo } = this.props;
-        return <div>{foo}</div>;
-      }
-    };`,
-    options: ['always'],
-    parser: parsers.BABEL_ESLINT
-  }, {
     code: `const MyComponent = ({ id, className }) => (
       <div id={id} className={className} />
     );`
@@ -102,15 +93,7 @@ ruleTester.run('destructuring-assignment', rule, {
         return <div>{foo}</div>;
       }
     };`,
-    options: ['always'],
-    parser: parsers.BABEL_ESLINT
-  }, {
-    code: `const Foo = class extends Inferno.PureComponent {
-      render() {
-        const { foo } = this.props;
-        return <div>{foo}</div>;
-      }
-    };`
+    options: ['always']
   }, {
     code: `const Foo = class extends Inferno.PureComponent {
       render() {
@@ -120,6 +103,15 @@ ruleTester.run('destructuring-assignment', rule, {
     };`,
     options: ['always'],
     parser: parsers.BABEL_ESLINT
+  }, {
+    code: `const Foo = class extends Inferno.PureComponent {
+      render() {
+        const { foo } = this.props;
+        return <div>{foo}</div>;
+      }
+    };`,
+    options: ['always'],
+    parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: `const MyComponent = (props) => {
       const { h, i } = hi;
@@ -256,6 +248,29 @@ ruleTester.run('destructuring-assignment', rule, {
     errors: [
       {message: 'Must use destructuring props assignment'}
     ]
+  }, {
+    code: `
+      module.exports = {
+        Foo(props) {
+          return <p>{props.a}</p>;
+        }
+      }
+    `,
+    errors: [{message: 'Must use destructuring props assignment'}]
+  }, {
+    code: `
+      export default function Foo(props) {
+        return <p>{props.a}</p>;
+      }
+    `,
+    errors: [{message: 'Must use destructuring props assignment'}]
+  }, {
+    code: `
+      function hof() {
+        return (props) => <p>{props.a}</p>;
+      }
+    `,
+    errors: [{message: 'Must use destructuring props assignment'}]
   }, {
     code: `const Foo = class extends Inferno.PureComponent {
       render() {

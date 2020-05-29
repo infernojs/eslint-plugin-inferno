@@ -116,6 +116,111 @@ ruleTester.run('no-multi-comp', rule, {
     options: [{
       ignoreStateless: true
     }]
+  }, {
+    code: `
+  class StoreListItem extends Inferno.PureComponent {
+    // A bunch of stuff here
+  }
+  export default Inferno.forwardRef((props, ref) => <StoreListItem {...props} forwardRef={ref} />);
+  `,
+    options: [{
+      ignoreStateless: false
+    }]
+  }, {
+    code: `
+  class StoreListItem extends Inferno.PureComponent {
+    // A bunch of stuff here
+  }
+  export default Inferno.forwardRef((props, ref) => {
+    return <StoreListItem {...props} forwardRef={ref} />
+  });
+  `,
+    options: [{
+      ignoreStateless: false
+    }]
+  }, {
+    code: `
+  const HelloComponent = (props) => {
+    return <div></div>;
+  }
+  export default Inferno.forwardRef((props, ref) => <HelloComponent {...props} forwardRef={ref} />);
+  `,
+    options: [{
+      ignoreStateless: false
+    }]
+  }, {
+    code: `
+  class StoreListItem extends Inferno.PureComponent {
+    // A bunch of stuff here
+  }
+  export default Inferno.forwardRef(
+    function myFunction(props, ref) {
+      return <StoreListItem {...props} forwardedRef={ref} />;
+    }
+  );
+  `,
+    options: [{
+      ignoreStateless: false
+    }]
+  }, {
+    code: `
+  class StoreListItem extends Inferno.PureComponent {
+    // A bunch of stuff here
+  }
+  export default Inferno.forwardRef((props, ref) => <StoreListItem {...props} forwardRef={ref} />);
+  `,
+    options: [{
+      ignoreStateless: true
+    }]
+  }, {
+    code: `
+  class StoreListItem extends Inferno.PureComponent {
+    // A bunch of stuff here
+  }
+  export default Inferno.forwardRef((props, ref) => {
+    return <StoreListItem {...props} forwardRef={ref} />
+  });
+  `,
+    options: [{
+      ignoreStateless: true
+    }]
+  }, {
+    code: `
+  const HelloComponent = (props) => {
+    return <div></div>;
+  }
+  export default Inferno.forwardRef((props, ref) => <HelloComponent {...props} forwardRef={ref} />);
+  `,
+    options: [{
+      ignoreStateless: true
+    }]
+  }, {
+    code: `
+  const HelloComponent = (props) => {
+    return <div></div>;
+  }
+  class StoreListItem extends Inferno.PureComponent {
+    // A bunch of stuff here
+  }
+  export default Inferno.forwardRef(
+    function myFunction(props, ref) {
+      return <StoreListItem {...props} forwardedRef={ref} />;
+    }
+  );
+  `,
+    options: [{
+      ignoreStateless: true
+    }]
+  }, {
+    code: `
+  const HelloComponent = (props) => {
+    return <div></div>;
+  }
+  export default Inferno.memo((props, ref) => <HelloComponent {...props} />);
+  `,
+    options: [{
+      ignoreStateless: false
+    }]
   }],
 
   invalid: [{
@@ -206,6 +311,70 @@ ruleTester.run('no-multi-comp', rule, {
     errors: [{
       message: 'Declare only one Inferno component per file',
       line: 6
+    }]
+  },
+  {
+    code: `
+      exports.Foo = function Foo() {
+        return <></>
+      }
+
+      exports.createSomeComponent = function createSomeComponent(opts) {
+        return function Foo() {
+          return <>{opts.a}</>
+        }
+      }
+    `,
+    parser: parsers.BABEL_ESLINT,
+    errors: [{
+      message: 'Declare only one Inferno component per file',
+      line: 7
+    }]
+  },
+  {
+    code: `
+  class StoreListItem extends Inferno.PureComponent {
+    // A bunch of stuff here
+  }
+  export default Inferno.forwardRef((props, ref) => <div><StoreListItem {...props} forwardRef={ref} /></div>);
+  `,
+    options: [{
+      ignoreStateless: false
+    }],
+    parser: parsers.BABEL_ESLINT,
+    errors: [{
+      message: 'Declare only one Inferno component per file',
+      line: 5
+    }]
+  }, {
+    code: `
+  const HelloComponent = (props) => {
+    return <div></div>;
+  }
+  const HelloComponent2 = Inferno.forwardRef((props, ref) => <div></div>);
+  `,
+    options: [{
+      ignoreStateless: false
+    }],
+    parser: parsers.BABEL_ESLINT,
+    errors: [{
+      message: 'Declare only one Inferno component per file',
+      line: 5
+    }]
+  }, {
+    code: `
+  const HelloComponent = (0, (props) => {
+    return <div></div>;
+  });
+  const HelloComponent2 = Inferno.forwardRef((props, ref) => <><HelloComponent></HelloComponent></>);
+  `,
+    options: [{
+      ignoreStateless: false
+    }],
+    parser: parsers.BABEL_ESLINT,
+    errors: [{
+      message: 'Declare only one Inferno component per file',
+      line: 5
     }]
   }]
 });

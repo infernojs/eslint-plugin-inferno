@@ -2,7 +2,7 @@
 
 [`isMounted` is an anti-pattern][anti-pattern], is not available when using ES6 classes, and it is on its way to being officially deprecated.
 
-[anti-pattern]: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+[anti-pattern]: https://facebook.github.io/inferno/blog/2015/12/16/ismounted-antipattern.html
 
 ## Rule Details
 

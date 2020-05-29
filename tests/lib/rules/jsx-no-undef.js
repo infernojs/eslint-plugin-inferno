@@ -35,7 +35,8 @@ ruleTester.run('jsx-no-undef', rule, {
   valid: [{
     code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);'
   }, {
-    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);'
+    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);',
+    parser: parsers.BABEL_ESLINT
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<img />);'
   }, {

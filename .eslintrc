@@ -1,6 +1,7 @@
 {
     "root": true,
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base", "plugin:eslint-plugin/recommended"],
+    "plugins": ["eslint-plugin"],
     "env": {
        "es6": true,
        "node": true
@@ -15,26 +16,23 @@
     "rules": {
         "comma-dangle": [2, "never"],
         "object-curly-spacing": [2, "never"],
+        "object-shorthand": [2, "always"],
         "array-bracket-spacing": [2, "never"],
         "max-len": [2, 120, {
           "ignoreStrings": true,
           "ignoreTemplateLiterals": true,
           "ignoreComments": true
         }],
-        "operator-linebreak": [2, "after"],
         "consistent-return": 0,
 
         "prefer-destructuring": [2, { "array": false, "object": false }, { "enforceForRenamedProperties": false }],
-
+        "prefer-object-spread": 0,
         "function-paren-newline": 0,
         "no-plusplus": 0,
         "no-param-reassign": 1,
         "no-mixed-operators": 1,
-        "global-require": 1,
         "no-restricted-syntax": 1,
-        "valid-jsdoc": 1,
-        "strict": 0,
-        "prefer-object-spread": 0,
+        "strict": [2, "safe"],
         "arrow-parens": 0
     },
     "overrides": [

@@ -1,17 +1,19 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.14.3",
+  "version": "7.20.0",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
-    "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "debug": "node --inspect-brk  node_modules/mocha/bin/_mocha tests/lib/**/*.js tests/util/**/*.js tests/index.js",
     "lint": "eslint ./",
     "postlint": "npm run type-check",
     "pretest": "npm run lint",
     "test": "npm run unit-test",
     "type-check": "tsc",
-    "unit-test": "istanbul cover --dir reports/coverage node_modules/mocha/bin/_mocha tests/lib/**/*.js tests/util/**/*.js tests/index.js",
-    "debug-test": "node --inspect-brk node_modules/mocha/bin/_mocha tests/lib/**/*.js tests/util/**/*.js tests/index.js"
+    "unit-test": "istanbul cover node_modules/mocha/bin/_mocha tests/lib/**/*.js tests/util/**/*.js tests/index.js",
+    "generate-list-of-rules": "md-magic --path README.md",
+    "generate-list-of-rules:check": "npm run generate-list-of-rules && git diff --exit-code README.md"
   },
   "files": [
     "LICENSE",
@@ -26,32 +28,37 @@
   "homepage": "https://github.com/infernojs/eslint-plugin-inferno",
   "bugs": "https://github.com/infernojs/eslint-plugin-inferno/issues",
   "dependencies": {
-    "array-includes": "^3.0.3",
+    "array-includes": "^3.1.1",
     "doctrine": "^3.0.0",
     "has": "^1.0.3",
-    "jsx-ast-utils": "^2.2.1",
-    "object.entries": "^1.1.0",
-    "object.fromentries": "^2.0.0",
-    "object.values": "^1.1.0",
-    "resolve": "^1.12.0"
+    "jsx-ast-utils": "^2.3.0",
+    "object.entries": "^1.1.2",
+    "object.fromentries": "^2.0.2",
+    "object.values": "^1.1.1",
+    "resolve": "^1.17.0",
+    "string.prototype.matchall": "^4.0.2",
+    "xregexp": "^4.3.0"
   },
   "devDependencies": {
-    "@types/eslint": "^4.16.8",
-    "@types/estree": "0.0.39",
-    "@types/node": "^12.7.1",
-    "@typescript-eslint/parser": "^1.13.0",
-    "babel-eslint": "^10.0.2",
-    "coveralls": "^3.0.6",
-    "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
+    "@types/eslint": "^6.8.1",
+    "@types/estree": "0.0.44",
+    "@types/node": "^14.0.5",
+    "@typescript-eslint/parser": "^3.0.2",
+    "babel-eslint": "^10.1.0",
+    "coveralls": "^3.1.0",
+    "eslint": "^3 || ^4 || ^5 || ^6 || ^7",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-eslint-plugin": "^2.2.1",
+    "eslint-plugin-import": "^2.20.2",
     "istanbul": "^0.4.5",
-    "mocha": "^6.2.0",
-    "sinon": "^7.4.1",
-    "typescript": "^3.5.3"
+    "markdown-magic": "^1.0.0",
+    "mocha": "^5.2.0",
+    "semver": "^7.3.2",
+    "sinon": "^9.0.2",
+    "typescript": "^3.9.3"
   },
   "peerDependencies": {
-    "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0"
+    "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0"
   },
   "engines": {
     "node": ">=4"
@@ -62,5 +69,10 @@
     "eslintplugin",
     "inferno"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "greenkeeper": {
+    "ignore": [
+      "semver"
+    ]
+  }
 }

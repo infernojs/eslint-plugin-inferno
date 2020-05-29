@@ -71,7 +71,12 @@ ruleTester.run('no-render-return-value', rule, {
       message: 'Do not depend on the return value from Inferno.render'
     }]
   }, {
-    code: 'var inst = Inferno.render(<div />, document.body);',
+    code: 'this.o = Inferno.render(<div />, document.body);',
+    errors: [{
+      message: 'Do not depend on the return value from Inferno.render'
+    }]
+  }, {
+    code: 'var v; v = Inferno.render(<div />, document.body);',
     errors: [{
       message: 'Do not depend on the return value from Inferno.render'
     }]

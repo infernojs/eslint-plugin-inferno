@@ -12,6 +12,8 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../../lib/rules/jsx-pascal-case');
 
+const parsers = require('../../helpers/parsers');
+
 const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
@@ -27,6 +29,10 @@ const parserOptions = {
 const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-pascal-case', rule, {
   valid: [{
+    // The rule must not warn on components that start with a lowercase
+    // because they are interpreted as HTML elements by Inferno
+    code: '<testcomponent />'
+  }, {
     code: '<testComponent />'
   }, {
     code: '<test_component />'
@@ -43,9 +49,18 @@ ruleTester.run('jsx-pascal-case', rule, {
   }, {
     code: '<TestComponent1 />'
   }, {
-    code: '<T3stComp0nent />'
+    code: '<T3StComp0Nent />'
+  }, {
+    code: '<Éurströmming />'
+  }, {
+    code: '<Año />'
+  }, {
+    code: '<Søknad />'
   }, {
     code: '<T />'
+  }, {
+    code: '<T />',
+    parser: parsers.BABEL_ESLINT
   }, {
     code: '<YMCA />',
     options: [{allowAllCaps: true}]
@@ -55,10 +70,16 @@ ruleTester.run('jsx-pascal-case', rule, {
   }, {
     code: '<Modal.Header />'
   }, {
+    code: '<qualification.T3StComp0Nent />'
+  }, {
     code: '<Modal:Header />'
   }, {
     code: '<IGNORED />',
     options: [{ignore: ['IGNORED']}]
+  }, {
+    code: '<$ />'
+  }, {
+    code: '<_ />'
   }],
 
   invalid: [{
@@ -82,5 +103,8 @@ ruleTester.run('jsx-pascal-case', rule, {
     code: '<__ />',
     options: [{allowAllCaps: true}],
     errors: [{message: 'Imported JSX component __ must be in PascalCase or SCREAMING_SNAKE_CASE'}]
+  }, {
+    code: '<$a />',
+    errors: [{message: 'Imported JSX component $a must be in PascalCase'}]
   }]
 });

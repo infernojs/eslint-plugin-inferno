@@ -21,14 +21,14 @@ const {one_prop, two_prop} = otherProps;
 <img src={src} alt={alt} />
 ```
 
-
 ## Rule Options
 
 ```js
 ...
-"inferno/jsx-props-no-spreading": [{
-    "html": "ignore" / "enforce",
-    "custom": "ignore" / "enforce",
+"inferno/jsx-props-no-spreading": [<enabled>, {
+    "html": "ignore" | "enforce",
+    "custom": "ignore" | "enforce",
+    "explicitSpread": "ignore" | "enforce",
     "exceptions": [<string>]
 }]
 ...
@@ -61,8 +61,19 @@ The following patterns are **not** considered warnings when `custom` is set to `
 ```
 
 The following patterns are still considered warnings:
+
 ```jsx
 <img {...props} />
+```
+
+### explicitSpread
+
+`explicitSpread` set to `ignore` will ignore spread operators that are explicilty listing all object properties within that spread. Default is set to `enforce`.
+
+The following pattern is **not** considered warning when `explicitSpread` is set to `ignore`:
+
+```jsx
+<img {...{ prop1, prop2, prop3 }} />
 ```
 
 ### exceptions
@@ -82,6 +93,7 @@ const {src, alt} = props;
 ```
 
 The following patterns are considered warnings:
+
 ```jsx
 <MyCustomComponent {...props} />
 ```
@@ -100,6 +112,7 @@ const {one_prop, two_prop} = otherProps;
 ```
 
 The following patterns are considered warnings:
+
 ```jsx
 <img {...props} />
 ```

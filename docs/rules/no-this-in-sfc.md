@@ -2,8 +2,7 @@
 
 When using a stateless functional component (SFC), props/context aren't accessed in the same way as a class component or the `create-inferno-class` format. Both props and context are passed as separate arguments to the component instead. Also, as the name suggests, a stateless component does not have state on `this.state`.
 
-Attempting to access properties on `this` can be a potential error if someone is unaware of the differences when writing a SFC or missed when converting a class component to a SFC.
-
+Attempting to access properties on `this` can sometimes be valid, but it's very commonly an error caused by unfamiliarity with the differences between the two styles of components, or a missed reference when converting a class component to an SFC.
 
 ## Rule Details
 
