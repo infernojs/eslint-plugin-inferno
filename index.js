@@ -1,7 +1,6 @@
 'use strict';
 
-const fromEntries = require('object.fromentries');
-const entries = require('object.entries');
+const {fromEntries} = require('./lib/util/fromentries');
 
 /* eslint-disable global-require */
 const allRules = {
@@ -88,7 +87,7 @@ const allRules = {
 /* eslint-enable */
 
 function filterRules(rules, predicate) {
-  return fromEntries(entries(rules).filter((entry) => predicate(entry[1])));
+  return fromEntries(Object.entries(rules).filter((entry) => predicate(entry[1])));
 }
 
 function configureAsError(rules) {

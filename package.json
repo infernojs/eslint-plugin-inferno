@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.23.2",
+  "version": "7.24.0",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
@@ -28,14 +28,10 @@
   "homepage": "https://github.com/infernojs/eslint-plugin-inferno",
   "bugs": "https://github.com/infernojs/eslint-plugin-inferno/issues",
   "dependencies": {
-    "array-includes": "^3.1.3",
     "doctrine": "^3.0.0",
     "has": "^1.0.3",
     "jsx-ast-utils": "^3.2.0",
     "minimatch": "^3.0.4",
-    "object.entries": "^1.1.3",
-    "object.fromentries": "^2.0.4",
-    "object.values": "^1.1.3",
     "resolve": "^2.0.0-next.3",
     "string.prototype.matchall": "^4.0.4"
   },
@@ -46,7 +42,7 @@
     "@typescript-eslint/parser": "^4.22.0",
     "aud": "^1.1.4",
     "babel-eslint": "^8.2.6",
-    "eslint": "^3 || ^4 || ^5 || ^6 || ^7",
+    "eslint": "^6 || ^7",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-eslint-plugin": "^3.0.2",
     "eslint-plugin-import": "^2.22.1",
@@ -59,7 +55,7 @@
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
-    "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0"
+    "eslint": "^6.0.0 || ^7.0.0"
   },
   "engines": {
     "node": ">=10"
