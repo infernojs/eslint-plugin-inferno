@@ -5,7 +5,7 @@ injected as a text node in JSX statements.
 
 ## Rule Details
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 var Hello = createClass({
@@ -27,7 +27,7 @@ var Hello = createClass({
 });
 ```
 
-The following patterns are **not** considered warnings:
+Examples of **correct** code for this rule:
 
 ```jsx
 var Hello = createClass({
@@ -54,8 +54,7 @@ var Hello = createClass({
 
 ## Legitimate uses
 
-It's possible you may want to legitimately output comment start characters (`//` or `/*`)
-in a JSX text node. In which case, you can do the following:
+It's possible you may want to legitimately output comment start characters (`//` or `/*`) in a JSX text node. In which case, you can do the following:
 
 ```jsx
 var Hello = createClass({

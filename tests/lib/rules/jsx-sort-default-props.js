@@ -26,8 +26,6 @@ const parserOptions = {
 // Tests
 // -----------------------------------------------------------------------------
 
-const ERROR_MESSAGE = 'Default prop types declarations should be sorted alphabetically';
-
 const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-sort-default-props', rule, {
   valid: [{
@@ -365,7 +363,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n'),
     parser: parsers.BABEL_ESLINT,
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 10,
       column: 5,
       type: 'Property'
@@ -445,7 +443,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
       ignoreCase: true
     }],
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 8,
       column: 5,
       type: 'Property'
@@ -483,7 +481,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n'),
     parser: parsers.BABEL_ESLINT,
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 8,
       column: 5,
       type: 'Property'
@@ -521,7 +519,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n'),
     parser: parsers.BABEL_ESLINT,
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 12,
       column: 3,
       type: 'Property'
@@ -596,7 +594,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n'),
     parser: parsers.BABEL_ESLINT,
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 12,
       column: 3,
       type: 'Property'
@@ -637,7 +635,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
   //   ].join('\n'),
   //   parser: parsers.BABEL_ESLINT,
   //   errors: [{
-  //     message: ERROR_MESSAGE,
+  //     messageId: 'propsNotSorted',
   //     line: 14,
   //     column: 3,
   //     type: 'Property'
@@ -680,7 +678,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
       ignoreCase: true
     }],
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 12,
       column: 3,
       type: 'Property'
@@ -715,7 +713,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
       'First.defaultProps = defaultProps;'
     ].join('\n'),
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 8,
       column: 3,
       type: 'Property'
@@ -750,7 +748,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n'),
     parser: parsers.BABEL_ESLINT,
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 9,
       column: 5,
       type: 'Property'
@@ -834,7 +832,7 @@ ruleTester.run('jsx-sort-default-props', rule, {
     ].join('\n'),
     parser: parsers.BABEL_ESLINT,
     errors: [{
-      message: ERROR_MESSAGE,
+      messageId: 'propsNotSorted',
       line: 15,
       column: 3,
       type: 'Property'

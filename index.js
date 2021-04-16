@@ -26,8 +26,10 @@ const allRules = {
   'jsx-key': require('./lib/rules/jsx-key'),
   'jsx-max-depth': require('./lib/rules/jsx-max-depth'),
   'jsx-max-props-per-line': require('./lib/rules/jsx-max-props-per-line'),
+  'jsx-newline': require('./lib/rules/jsx-newline'),
   'jsx-no-bind': require('./lib/rules/jsx-no-bind'),
   'jsx-no-comment-textnodes': require('./lib/rules/jsx-no-comment-textnodes'),
+  'jsx-no-constructed-context-values': require('./lib/rules/jsx-no-constructed-context-values'),
   'jsx-no-duplicate-props': require('./lib/rules/jsx-no-duplicate-props'),
   'jsx-no-literals': require('./lib/rules/jsx-no-literals'),
   'jsx-no-script-url': require('./lib/rules/jsx-no-script-url'),
@@ -68,6 +70,7 @@ const allRules = {
   'no-typos': require('./lib/rules/no-typos'),
   'no-unescaped-entities': require('./lib/rules/no-unescaped-entities'),
   'no-unknown-property': require('./lib/rules/no-unknown-property'),
+  'no-unstable-nested-components': require('./lib/rules/no-unstable-nested-components'),
   'no-unused-state': require('./lib/rules/no-unused-state'),
   'no-will-update-set-state': require('./lib/rules/no-will-update-set-state'),
   'prefer-es6-class': require('./lib/rules/prefer-es6-class'),
@@ -139,6 +142,20 @@ module.exports = {
         }
       },
       rules: activeRulesConfig
+    },
+    'jsx-runtime': {
+      plugins: [
+        'react'
+      ],
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      rules: {
+        'react/react-in-jsx-scope': 0,
+        'react/jsx-uses-react': 0
+      }
     }
   }
 };

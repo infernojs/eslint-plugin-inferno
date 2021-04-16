@@ -26,7 +26,7 @@ and the following inferno lifecycle methods:
 * render
 
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```js
 class MyComponent extends Inferno.Component {
@@ -54,7 +54,7 @@ class MyComponent extends Inferno.Component {
 }
 ```
 
-The following patterns are **not** considered warnings:
+Examples of **correct** code for this rule:
 
 ```js
 class MyComponent extends Inferno.Component {

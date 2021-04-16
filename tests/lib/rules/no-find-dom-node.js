@@ -75,9 +75,7 @@ ruleTester.run('no-find-dom-node', rule, {
         }
       });
     `,
-    errors: [{
-      message: 'Do not use findDOMNode'
-    }]
+    errors: [{messageId: 'noFindDOMNode'}]
   }, {
     code: `
       class Hello extends Component {
@@ -89,9 +87,7 @@ ruleTester.run('no-find-dom-node', rule, {
         }
       };
     `,
-    errors: [{
-      message: 'Do not use findDOMNode'
-    }]
+    errors: [{messageId: 'noFindDOMNode'}]
   }, {
     code: `
       class Hello extends Component {
@@ -103,8 +99,6 @@ ruleTester.run('no-find-dom-node', rule, {
         }
       };
     `,
-    errors: [{
-      message: 'Do not use findDOMNode'
-    }]
+    errors: [{messageId: 'noFindDOMNode'}]
   }]
 });

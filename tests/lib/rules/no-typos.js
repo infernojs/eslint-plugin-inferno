@@ -25,13 +25,25 @@ const parserOptions = {
 // Tests
 // -----------------------------------------------------------------------------
 
-const ERROR_MESSAGE = 'Typo in static class property declaration';
-const ERROR_MESSAGE_LIFECYCLE_METHOD = (actual, expected) => `Typo in component lifecycle method declaration: ${actual} should be ${expected}`;
-const ERROR_MESSAGE_STATIC = (method) => `Lifecycle method should be static: ${method}`;
-
 const ruleTester = new RuleTester();
 ruleTester.run('no-typos', rule, {
-  valid: [{
+  valid: [].concat({
+    code: `
+        import createReactClass from 'create-react-class'
+        function hello (extra = {}) {
+          return createReactClass({
+            noteType: 'hello',
+            renderItem () {
+              return null
+            },
+            ...extra
+          })
+        }
+    `,
+    parser: parsers.TYPESCRIPT_ESLINT,
+    parserOptions
+  },
+  {
     code: `
       class First {
         static PropTypes = {key: "myValue"};
@@ -617,9 +629,22 @@ ruleTester.run('no-typos', rule, {
       };
     `,
     parserOptions
-  }],
+  }, {
+    code: `
+      import React from 'react';
 
-  invalid: [{
+      const A = { B: 'C' };
+
+      export default class MyComponent extends React.Component {
+        [A.B] () {
+          return null
+        }
+      }
+    `,
+    parserOptions
+  }),
+
+  invalid: [].concat({
     code: `
       class Component extends Inferno.Component {
         static DefaultProps = {};
@@ -627,21 +652,21 @@ ruleTester.run('no-typos', rule, {
     `,
     parser: parsers.BABEL_ESLINT,
     parserOptions,
-    errors: [{message: ERROR_MESSAGE, type: 'Identifier'}]
+    errors: [{messageId: 'typoStaticClassProp', type: 'Identifier'}]
   }, {
     code: `
       class Component extends Inferno.Component {}
       Component.DefaultProps = {}
     `,
     parserOptions,
-    errors: [{message: ERROR_MESSAGE, type: 'Identifier'}]
+    errors: [{messageId: 'typoStaticClassProp', type: 'Identifier'}]
   }, {
     code: `
       function MyComponent() { return (<div>{this.props.myProp}</div>) }
       MyComponent.DefaultProps = {}
     `,
     parserOptions,
-    errors: [{message: ERROR_MESSAGE, type: 'Identifier'}]
+    errors: [{messageId: 'typoStaticClassProp', type: 'Identifier'}]
   }, {
     code: `
       class Component extends Inferno.Component {
@@ -650,28 +675,28 @@ ruleTester.run('no-typos', rule, {
     `,
     parser: parsers.BABEL_ESLINT,
     parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
+    errors: [{messageId: 'typoStaticClassProp'}]
   }, {
     code: `
       class Component extends Inferno.Component {}
       Component.defaultprops = {}
     `,
     parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
+    errors: [{messageId: 'typoStaticClassProp'}]
   }, {
     code: `
       function MyComponent() { return (<div>{this.props.myProp}</div>) }
       MyComponent.defaultprops = {}
     `,
     parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
+    errors: [{messageId: 'typoStaticClassProp'}]
   }, {
     code: `
       Component.defaultprops = {}
       class Component extends Inferno.Component {}
     `,
     parserOptions,
-    errors: [{message: ERROR_MESSAGE}]
+    errors: [{messageId: 'typoStaticClassProp'}]
   }, {
     code: `
       class Hello extends Inferno.Component {
@@ -691,31 +716,40 @@ ruleTester.run('no-typos', rule, {
     `,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('GetDerivedStateFromProps', 'getDerivedStateFromProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'GetDerivedStateFromProps', expected: 'getDerivedStateFromProps'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillMount', 'componentWillMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillMount', expected: 'componentWillMount'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentDidMount', 'componentDidMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentDidMount', expected: 'componentDidMount'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillReceiveProps', 'componentWillReceiveProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillReceiveProps', expected: 'componentWillReceiveProps'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ShouldComponentUpdate', 'shouldComponentUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ShouldComponentUpdate', expected: 'shouldComponentUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillUpdate', 'componentWillUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillUpdate', expected: 'componentWillUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('GetSnapshotBeforeUpdate', 'getSnapshotBeforeUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'GetSnapshotBeforeUpdate', expected: 'getSnapshotBeforeUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentDidUpdate', 'componentDidUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentDidUpdate', expected: 'componentDidUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillUnmount', 'componentWillUnmount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillUnmount', expected: 'componentWillUnmount'},
       type: 'MethodDefinition'
     }]
   }, {
@@ -737,34 +771,44 @@ ruleTester.run('no-typos', rule, {
     `,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Getderivedstatefromprops', 'getDerivedStateFromProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Getderivedstatefromprops', expected: 'getDerivedStateFromProps'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Componentwillmount', 'componentWillMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Componentwillmount', expected: 'componentWillMount'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Componentdidmount', 'componentDidMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Componentdidmount', expected: 'componentDidMount'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Componentwillreceiveprops', 'componentWillReceiveProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Componentwillreceiveprops', expected: 'componentWillReceiveProps'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Shouldcomponentupdate', 'shouldComponentUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Shouldcomponentupdate', expected: 'shouldComponentUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Componentwillupdate', 'componentWillUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Componentwillupdate', expected: 'componentWillUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Getsnapshotbeforeupdate', 'getSnapshotBeforeUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Getsnapshotbeforeupdate', expected: 'getSnapshotBeforeUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Componentdidupdate', 'componentDidUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Componentdidupdate', expected: 'componentDidUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Componentwillunmount', 'componentWillUnmount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Componentwillunmount', expected: 'componentWillUnmount'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('Render', 'render'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'Render', expected: 'render'},
       type: 'MethodDefinition'
     }]
   }, {
@@ -786,31 +830,40 @@ ruleTester.run('no-typos', rule, {
     `,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('getderivedstatefromprops', 'getDerivedStateFromProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'getderivedstatefromprops', expected: 'getDerivedStateFromProps'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('componentwillmount', 'componentWillMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'componentwillmount', expected: 'componentWillMount'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('componentdidmount', 'componentDidMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'componentdidmount', expected: 'componentDidMount'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('componentwillreceiveprops', 'componentWillReceiveProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'componentwillreceiveprops', expected: 'componentWillReceiveProps'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('shouldcomponentupdate', 'shouldComponentUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'shouldcomponentupdate', expected: 'shouldComponentUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('componentwillupdate', 'componentWillUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'componentwillupdate', expected: 'componentWillUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('getsnapshotbeforeupdate', 'getSnapshotBeforeUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'getsnapshotbeforeupdate', expected: 'getSnapshotBeforeUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('componentdidupdate', 'componentDidUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'componentdidupdate', expected: 'componentDidUpdate'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('componentwillunmount', 'componentWillUnmount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'componentwillunmount', expected: 'componentWillUnmount'},
       type: 'MethodDefinition'
     }]
   }, {
@@ -835,25 +888,32 @@ ruleTester.run('no-typos', rule, {
     parser: parsers.BABEL_ESLINT,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillMount', 'componentWillMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillMount', expected: 'componentWillMount'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentDidMount', 'componentDidMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentDidMount', expected: 'componentDidMount'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillReceiveProps', 'componentWillReceiveProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillReceiveProps', expected: 'componentWillReceiveProps'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ShouldComponentUpdate', 'shouldComponentUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ShouldComponentUpdate', expected: 'shouldComponentUpdate'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillUpdate', 'componentWillUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillUpdate', expected: 'componentWillUpdate'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentDidUpdate', 'componentDidUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentDidUpdate', expected: 'componentDidUpdate'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillUnmount', 'componentWillUnmount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillUnmount', expected: 'componentWillUnmount'},
       type: 'Property'
     }]
   }, {
@@ -865,7 +925,8 @@ ruleTester.run('no-typos', rule, {
     parser: parsers.BABEL_ESLINT,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_STATIC('getDerivedStateFromProps'),
+      messageId: 'staticLifecycleMethod',
+      data: {method: 'getDerivedStateFromProps'},
       type: 'MethodDefinition'
     }]
   }, {
@@ -877,10 +938,12 @@ ruleTester.run('no-typos', rule, {
     parser: parsers.BABEL_ESLINT,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_STATIC('GetDerivedStateFromProps'),
+      messageId: 'staticLifecycleMethod',
+      data: {method: 'GetDerivedStateFromProps'},
       type: 'MethodDefinition'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('GetDerivedStateFromProps', 'getDerivedStateFromProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'GetDerivedStateFromProps', expected: 'getDerivedStateFromProps'},
       type: 'MethodDefinition'
     }]
   }, {
@@ -905,25 +968,32 @@ ruleTester.run('no-typos', rule, {
     parser: parsers.BABEL_ESLINT,
     parserOptions,
     errors: [{
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillMount', 'componentWillMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillMount', expected: 'componentWillMount'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentDidMount', 'componentDidMount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentDidMount', expected: 'componentDidMount'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillReceiveProps', 'componentWillReceiveProps'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillReceiveProps', expected: 'componentWillReceiveProps'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ShouldComponentUpdate', 'shouldComponentUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ShouldComponentUpdate', expected: 'shouldComponentUpdate'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillUpdate', 'componentWillUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillUpdate', expected: 'componentWillUpdate'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentDidUpdate', 'componentDidUpdate'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentDidUpdate', expected: 'componentDidUpdate'},
       type: 'Property'
     }, {
-      message: ERROR_MESSAGE_LIFECYCLE_METHOD('ComponentWillUnmount', 'componentWillUnmount'),
+      messageId: 'typoLifecycleMethod',
+      data: {actual: 'ComponentWillUnmount', expected: 'componentWillUnmount'},
       type: 'Property'
     }]
     /*
@@ -939,5 +1009,23 @@ ruleTester.run('no-typos', rule, {
         parserOptions: parserOptions
       },
     */
-  }]
+  }, parsers.TS([{
+    code: `
+      import 'prop-types'
+    `,
+    parser: parsers.TYPESCRIPT_ESLINT,
+    parserOptions,
+    errors: [{
+      messageId: 'noPropTypesBinding'
+    }]
+  }, {
+    code: `
+      import 'prop-types'
+    `,
+    parser: parsers['@TYPESCRIPT_ESLINT'],
+    parserOptions,
+    errors: [{
+      messageId: 'noPropTypesBinding'
+    }]
+  }]))
 });

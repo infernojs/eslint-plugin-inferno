@@ -40,6 +40,7 @@ You should also specify settings that will be shared across all the plugin rules
     "inferno": {
       "createClass": "createClass", // Regex for Component Factory to use,  default to "createClass"
       "pragma": "Inferno"  // Pragma to use, default to "Inferno"
+      "fragment": "Fragment",  // Fragment to use (may be a property of <pragma>), default to "Fragment"
     },
     "propWrapperFunctions": [
         // The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
@@ -96,8 +97,8 @@ Enable the rules that you would like to use.
 ## Inferno specific rules
 
 * [inferno/jsx-props-class-name](docs/rules/jsx-props-class-name.md): Enforce 'class' or 'className' Attributes (fixable)
-
 ## Common rules for Inferno and React
+
 
 ## JSX-specific rules
 
@@ -140,18 +141,19 @@ Enable the rules that you would like to use.
 These rules have been removed because they don't make sense in context of InfernoJS.
 InfernoJS does not have prop-types or UNSAFE_ -lifecycle methods.
 
-* inferno/boolean-prop-naming
-* inferno/default-props-match-prop-types
-* inferno/display-name
-* inferno/forbid-foreign-prop-types
-* inferno/forbid-prop-types
-* inferno/no-deprecated
-* inferno/no-unsafe
-* inferno/no-unused-prop-types
-* inferno/prop-types
-* inferno/sort-prop-types
-* inferno/require-default-props
-* inferno/prefer-read-only-props
+* react/boolean-prop-naming
+* react/default-props-match-prop-types
+* react/display-name
+* react/forbid-foreign-prop-types
+* react/forbid-prop-types
+* react/no-deprecated
+* react/no-unsafe
+* react/no-unused-prop-types
+* react/prop-types
+* react/sort-prop-types
+* react/require-default-props
+* react/prefer-read-only-props
+* react/style-prop-object
 
 ## Other useful plugins
 
@@ -173,28 +175,6 @@ To enable this configuration use the `extends` property in your `.eslintrc` conf
 ```
 
 See [ESLint documentation](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) for more information about extending configuration files.
-
-The rules enabled in this configuration are:
-
-* [inferno/jsx-key](docs/rules/jsx-key.md)
-* [inferno/jsx-no-comment-textnodes](docs/rules/jsx-no-comment-textnodes.md)
-* [inferno/jsx-no-duplicate-props](docs/rules/jsx-no-duplicate-props.md)
-* [inferno/jsx-no-target-blank](docs/rules/jsx-no-target-blank.md)
-* [inferno/jsx-no-undef](docs/rules/jsx-no-undef.md)
-* [inferno/jsx-uses-inferno](docs/rules/jsx-uses-inferno.md)
-* [inferno/jsx-uses-vars](docs/rules/jsx-uses-vars.md)
-* [inferno/no-children-prop](docs/rules/no-children-prop.md)
-* [inferno/no-danger-with-children](docs/rules/no-danger-with-children.md)
-* [inferno/no-direct-mutation-state](docs/rules/no-direct-mutation-state.md)
-* [inferno/no-find-dom-node](docs/rules/no-find-dom-node.md)
-* [inferno/no-is-mounted](docs/rules/no-is-mounted.md)
-* [inferno/no-render-return-value](docs/rules/no-render-return-value.md)
-* [inferno/no-string-refs](docs/rules/no-string-refs.md)
-* [inferno/no-unescaped-entities](docs/rules/no-unescaped-entities.md)
-* [inferno/no-unknown-property](docs/rules/no-unknown-property.md)
-* [inferno/prop-types](docs/rules/prop-types.md)
-* [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md)
-* [inferno/require-render-return](docs/rules/require-render-return.md)
 
 ## All
 

@@ -67,9 +67,7 @@ ruleTester.run('no-is-mounted', rule, {
         }
       });
     `,
-    errors: [{
-      message: 'Do not use isMounted'
-    }]
+    errors: [{messageId: 'noIsMounted'}]
   }, {
     code: `
       var Hello = createClass({
@@ -83,9 +81,7 @@ ruleTester.run('no-is-mounted', rule, {
         }
       });
     `,
-    errors: [{
-      message: 'Do not use isMounted'
-    }]
+    errors: [{messageId: 'noIsMounted'}]
   }, {
     code: `
       class Hello extends Inferno.Component {
@@ -99,8 +95,6 @@ ruleTester.run('no-is-mounted', rule, {
         }
       };
     `,
-    errors: [{
-      message: 'Do not use isMounted'
-    }]
+    errors: [{messageId: 'noIsMounted'}]
   }]
 });

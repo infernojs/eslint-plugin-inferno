@@ -64,26 +64,47 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
   ],
   invalid: [{
     code: 'var App, a = <App />;',
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
+    errors: [{
+      messageId: 'notInScope',
+      data: {name: 'React'}
+    }]
   }, {
     code: 'var a = <App />;',
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
+    errors: [{
+      messageId: 'notInScope',
+      data: {name: 'React'}
+    }]
   }, {
     code: 'var a = <img />;',
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
+    errors: [{
+      messageId: 'notInScope',
+      data: {name: 'React'}
+    }]
   }, {
     code: 'var a = <>fragment</>;',
     parser: parsers.BABEL_ESLINT,
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
+    errors: [{
+      messageId: 'notInScope',
+      data: {name: 'React'}
+    }]
   }, {
     code: '/** @jsx Inferno.DOM */ var a = <img />;',
-    errors: [{message: '\'Inferno\' must be in scope when using JSX'}]
+    errors: [{
+      messageId: 'notInScope',
+      data: {name: 'React'}
+    }]
   }, {
     code: '/** @jsx Foo.bar */ var Inferno, a = <img />;',
-    errors: [{message: '\'Foo\' must be in scope when using JSX'}]
+    errors: [{
+      messageId: 'notInScope',
+      data: {name: 'Foo'}
+    }]
   }, {
     code: 'var Inferno, a = <img />;',
-    errors: [{message: '\'Foo\' must be in scope when using JSX'}],
+    errors: [{
+      messageId: 'notInScope',
+      data: {name: 'Foo'}
+    }],
     settings
   }]
 });

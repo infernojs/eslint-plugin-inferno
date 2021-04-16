@@ -25,9 +25,6 @@ const parserOptions = {
 // ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({parserOptions});
-const message = 'A future version of Inferno will block javascript: URLs as a security precaution. '
-  + 'Use event handlers instead if you can. If you need to generate unsafe HTML, try using dangerouslySetInnerHTML instead.';
-const defaultErrors = [{message}];
 
 ruleTester.run('jsx-no-script-url', rule, {
   valid: [
@@ -37,24 +34,25 @@ ruleTester.run('jsx-no-script-url', rule, {
     {code: '<a href=""></a>'},
     {code: '<a name="foo"></a>'},
     {code: '<a href={"javascript:"}></a>'},
-    {code: '<Foo href="javascript:"></Foo>'}
+    {code: '<Foo href="javascript:"></Foo>'},
+    {code: '<a href />'}
   ],
   invalid: [{
     code: '<a href="javascript:"></a>',
-    errors: defaultErrors
+    errors: [{messageId: 'noScriptURL'}]
   }, {
     code: '<a href="javascript:void(0)"></a>',
-    errors: defaultErrors
+    errors: [{messageId: 'noScriptURL'}]
   }, {
     code: '<a href="j\n\n\na\rv\tascript:"></a>',
-    errors: defaultErrors
+    errors: [{messageId: 'noScriptURL'}]
   }, {
     code: '<Foo to="javascript:"></Foo>',
-    errors: defaultErrors,
+    errors: [{messageId: 'noScriptURL'}],
     options: [[{name: 'Foo', props: ['to', 'href']}]]
   }, {
     code: '<Foo href="javascript:"></Foo>',
-    errors: defaultErrors,
+    errors: [{messageId: 'noScriptURL'}],
     options: [[{name: 'Foo', props: ['to', 'href']}]]
   }, {
     code: `
@@ -63,7 +61,7 @@ ruleTester.run('jsx-no-script-url', rule, {
         <Bar link="javascript:"></Bar>
       </div>
     `,
-    errors: [{message}, {message}],
+    errors: [{messageId: 'noScriptURL'}, {messageId: 'noScriptURL'}],
     options: [[{name: 'Foo', props: ['to', 'href']}, {name: 'Bar', props: ['link']}]]
   }]
 });

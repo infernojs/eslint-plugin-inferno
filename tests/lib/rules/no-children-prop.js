@@ -20,9 +20,6 @@ const parserOptions = {
   }
 };
 
-const JSX_ERROR = 'Do not pass children as props. Instead, nest children between the opening and closing tags.';
-const CREATE_ELEMENT_ERROR = 'Do not pass children as props. Instead, pass them as additional arguments to Inferno.createElement.';
-
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
@@ -145,59 +142,59 @@ ruleTester.run('no-children-prop', rule, {
   invalid: [
     {
       code: '<div children="Children" />;',
-      errors: [{message: JSX_ERROR}]
+      errors: [{messageId: 'nestChildren'}]
     },
     {
       code: '<div children={<div />} />;',
-      errors: [{message: JSX_ERROR}]
+      errors: [{messageId: 'nestChildren'}]
     },
     {
       code: '<div children={[<div />, <div />]} />;',
-      errors: [{message: JSX_ERROR}]
+      errors: [{messageId: 'nestChildren'}]
     },
     {
       code: '<div children="Children">Children</div>;',
-      errors: [{message: JSX_ERROR}]
+      errors: [{messageId: 'nestChildren'}]
     },
     {
       code: 'Inferno.createElement("div", {children: "Children"});',
-      errors: [{message: CREATE_ELEMENT_ERROR}]
+      errors: [{messageId: 'passChildrenAsArgs'}]
     },
     {
       code: 'Inferno.createElement("div", {children: "Children"}, "Children");',
-      errors: [{message: CREATE_ELEMENT_ERROR}]
+      errors: [{messageId: 'passChildrenAsArgs'}]
     },
     {
       code: 'Inferno.createElement("div", {children: Inferno.createElement("div")});',
-      errors: [{message: CREATE_ELEMENT_ERROR}]
+      errors: [{messageId: 'passChildrenAsArgs'}]
     },
     {
       code: 'Inferno.createElement("div", {children: [Inferno.createElement("div"), Inferno.createElement("div")]});',
-      errors: [{message: CREATE_ELEMENT_ERROR}]
+      errors: [{messageId: 'passChildrenAsArgs'}]
     },
     {
       code: '<MyComponent children="Children" />',
-      errors: [{message: JSX_ERROR}]
+      errors: [{messageId: 'nestChildren'}]
     },
     {
       code: 'Inferno.createElement(MyComponent, {children: "Children"});',
-      errors: [{message: CREATE_ELEMENT_ERROR}]
+      errors: [{messageId: 'passChildrenAsArgs'}]
     },
     {
       code: '<MyComponent className="class-name" children="Children" />;',
-      errors: [{message: JSX_ERROR}]
+      errors: [{messageId: 'nestChildren'}]
     },
     {
       code: 'Inferno.createElement(MyComponent, {children: "Children", className: "class-name"});',
-      errors: [{message: CREATE_ELEMENT_ERROR}]
+      errors: [{messageId: 'passChildrenAsArgs'}]
     },
     {
       code: '<MyComponent {...props} children="Children" />;',
-      errors: [{message: JSX_ERROR}]
+      errors: [{messageId: 'nestChildren'}]
     },
     {
       code: 'Inferno.createElement(MyComponent, {...props, children: "Children"})',
-      errors: [{message: CREATE_ELEMENT_ERROR}]
+      errors: [{messageId: 'passChildrenAsArgs'}]
     }
   ]
 });

@@ -78,27 +78,32 @@ ruleTester.run('jsx-no-undef', rule, {
   invalid: [{
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<App />);',
     errors: [{
-      message: '\'App\' is not defined.'
+      messageId: 'undefined',
+      data: {identifier: 'App'}
     }]
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Appp.Foo />);',
     errors: [{
-      message: '\'Appp\' is not defined.'
+      messageId: 'undefined',
+      data: {identifier: 'Appp'}
     }]
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Apppp:Foo />);',
     errors: [{
-      message: '\'Apppp\' is not defined.'
+      messageId: 'undefined',
+      data: {identifier: 'Apppp'}
     }]
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.Foo />);',
     errors: [{
-      message: '\'appp\' is not defined.'
+      messageId: 'undefined',
+      data: {identifier: 'appp'}
     }]
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.foo.Bar />);',
     errors: [{
-      message: '\'appp\' is not defined.'
+      messageId: 'undefined',
+      data: {identifier: 'appp'}
     }]
   }, {
     code: `
@@ -111,7 +116,8 @@ ruleTester.run('jsx-no-undef', rule, {
     `,
     parserOptions: Object.assign({sourceType: 'module'}, parserOptions),
     errors: [{
-      message: '\'Text\' is not defined.'
+      messageId: 'undefined',
+      data: {identifier: 'Text'}
     }],
     options: [{
       allowGlobals: false
@@ -123,7 +129,8 @@ ruleTester.run('jsx-no-undef', rule, {
   }, {
     code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Foo />);',
     errors: [{
-      message: '\'Foo\' is not defined.'
+      messageId: 'undefined',
+      data: {identifier: 'Foo'}
     }]
   }]
 });

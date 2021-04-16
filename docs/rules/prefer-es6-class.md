@@ -14,7 +14,7 @@ Inferno offers you two ways to create traditional components: using the ES5 `cre
 
 Will enforce ES6 classes for Inferno Components. This is the default mode.
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 var Hello = createClass({
@@ -24,7 +24,7 @@ var Hello = createClass({
 });
 ```
 
-The following patterns are **not** considered warnings:
+Examples of **correct** code for this rule:
 
 ```jsx
 class Hello extends Inferno.Component {
@@ -38,7 +38,7 @@ class Hello extends Inferno.Component {
 
 Will enforce ES5 classes for Inferno Components.
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 class Hello extends Inferno.Component {
@@ -48,7 +48,7 @@ class Hello extends Inferno.Component {
 }
 ```
 
-The following patterns are **not** considered warnings:
+Examples of **correct** code for this rule:
 
 ```jsx
 var Hello = createClass({

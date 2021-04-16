@@ -22,10 +22,6 @@ const parserOptions = {
   }
 };
 
-function errorMessage(elementName) {
-  return `Void DOM element <${elementName} /> cannot receive children.`;
-}
-
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
@@ -92,38 +88,62 @@ ruleTester.run('void-dom-elements-no-children', rule, {
   invalid: [
     {
       code: '<br>Foo</br>;',
-      errors: [{message: errorMessage('br')}]
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'br'}
+      }]
     },
     {
       code: '<br children="Foo" />;',
-      errors: [{message: errorMessage('br')}]
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'br'}
+      }]
     },
     {
       code: '<img {...props} children="Foo" />;',
-      errors: [{message: errorMessage('img')}]
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'img'}
+      }]
     },
     {
       code: '<br dangerouslySetInnerHTML={{ __html: "Foo" }} />;',
-      errors: [{message: errorMessage('br')}]
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'br'}
+      }]
     },
     {
       code: 'Inferno.createElement("br", {}, "Foo");',
-      errors: [{message: errorMessage('br')}]
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'br'}
+      }]
     },
     {
       code: 'Inferno.createElement("br", { children: "Foo" });',
-      errors: [{message: errorMessage('br')}]
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'br'}
+      }]
     },
     {
       code: 'Inferno.createElement("br", { dangerouslySetInnerHTML: { __html: "Foo" } });',
-      errors: [{message: errorMessage('br')}]
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'br'}
+      }]
     },
     {
       code: `
         import Inferno, {createElement} from "inferno";
         createElement("img", {}, "Foo");
       `,
-      errors: [{message: errorMessage('img')}],
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'img'}
+      }],
       parser: parsers.BABEL_ESLINT
     },
     {
@@ -131,7 +151,10 @@ ruleTester.run('void-dom-elements-no-children', rule, {
         import Inferno, {createElement} from "inferno";
         createElement("img", { children: "Foo" });
       `,
-      errors: [{message: errorMessage('img')}],
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'img'}
+      }],
       parser: parsers.BABEL_ESLINT
     },
     {
@@ -139,7 +162,10 @@ ruleTester.run('void-dom-elements-no-children', rule, {
         import Inferno, {createElement} from "inferno";
         createElement("img", { dangerouslySetInnerHTML: { __html: "Foo" } });
       `,
-      errors: [{message: errorMessage('img')}],
+      errors: [{
+        messageId: 'noChildrenInVoidEl',
+        data: {element: 'img'}
+      }],
       parser: parsers.BABEL_ESLINT
     }
   ]

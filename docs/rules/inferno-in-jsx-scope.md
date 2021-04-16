@@ -11,7 +11,7 @@ If you are using the @jsx pragma this rule will check the designated variable an
 
 ## Rule Details
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 var Hello = <div>Hello {this.props.name}</div>;
@@ -24,7 +24,7 @@ var Inferno = require('inferno');
 var Hello = <div>Hello {this.props.name}</div>;
 ```
 
-The following patterns are **not** considered warnings:
+Examples of **correct** code for this rule:
 
 ```jsx
 import Inferno from 'inferno';

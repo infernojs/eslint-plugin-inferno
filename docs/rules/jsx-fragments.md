@@ -18,13 +18,13 @@ Support for fragments was added in Inferno v6, so the rule will warn on either o
 
 This is the default mode. It will enforce the shorthand syntax for Inferno fragments, with one exception. [Keys or attributes are not supported by the shorthand syntax][short_syntax], so the rule will not warn on standard-form fragments that use those.
 
-The following pattern is considered a warning:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 <Inferno.Fragment><Foo /></Inferno.Fragment>
 ```
 
-The following patterns are **not** considered warnings:
+Examples of **correct** code for this rule:
 
 ```jsx
 <><Foo /></>
@@ -38,13 +38,13 @@ The following patterns are **not** considered warnings:
 
 This mode enforces the standard form for Inferno fragments.
 
-The following pattern is considered a warning:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 <><Foo /></>
 ```
 
-The following patterns are **not** considered warnings:
+Examples of **correct** code for this rule:
 
 ```jsx
 <Inferno.Fragment><Foo /></Inferno.Fragment>

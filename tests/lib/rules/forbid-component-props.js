@@ -23,9 +23,6 @@ const parserOptions = {
 // Tests
 // -----------------------------------------------------------------------------
 
-const CLASSNAME_ERROR_MESSAGE = 'Prop `className` is forbidden on Components';
-const STYLE_ERROR_MESSAGE = 'Prop `style` is forbidden on Components';
-
 const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('forbid-component-props', rule, {
 
@@ -104,6 +101,18 @@ ruleTester.run('forbid-component-props', rule, {
     options: [{
       forbid: [{propName: 'className', allowedFor: ['InfernoModal']}]
     }]
+  }, {
+    code: 'const item = (<AntdLayout.Content className="antdFoo" />);',
+    options: [{
+      forbid: [{propName: 'className', allowedFor: ['AntdLayout.Content']}]
+    }]
+  }, {
+    code: 'const item = (<this.ReactModal className="foo" />);',
+    options: [{
+      forbid: [{propName: 'className', allowedFor: ['this.ReactModal']}]
+    }]
+  }, {
+    code: '<fbt:param name="Total number of files" number={true} />'
   }],
 
   invalid: [{
@@ -116,7 +125,8 @@ ruleTester.run('forbid-component-props', rule, {
       '});'
     ].join('\n'),
     errors: [{
-      message: CLASSNAME_ERROR_MESSAGE,
+      messageId: 'propIsForbidden',
+      data: {prop: 'className'},
       line: 4,
       column: 17,
       type: 'JSXAttribute'
@@ -131,7 +141,8 @@ ruleTester.run('forbid-component-props', rule, {
       '});'
     ].join('\n'),
     errors: [{
-      message: STYLE_ERROR_MESSAGE,
+      messageId: 'propIsForbidden',
+      data: {prop: 'style'},
       line: 4,
       column: 17,
       type: 'JSXAttribute'
@@ -147,7 +158,8 @@ ruleTester.run('forbid-component-props', rule, {
     ].join('\n'),
     options: [{forbid: ['className', 'style']}],
     errors: [{
-      message: CLASSNAME_ERROR_MESSAGE,
+      messageId: 'propIsForbidden',
+      data: {prop: 'className'},
       line: 4,
       column: 17,
       type: 'JSXAttribute'
@@ -163,7 +175,8 @@ ruleTester.run('forbid-component-props', rule, {
     ].join('\n'),
     options: [{forbid: ['className', 'style']}],
     errors: [{
-      message: STYLE_ERROR_MESSAGE,
+      messageId: 'propIsForbidden',
+      data: {prop: 'style'},
       line: 4,
       column: 17,
       type: 'JSXAttribute'
@@ -174,7 +187,8 @@ ruleTester.run('forbid-component-props', rule, {
       forbid: [{propName: 'className', allowedFor: ['InfernoModal']}]
     }],
     errors: [{
-      message: CLASSNAME_ERROR_MESSAGE,
+      messageId: 'propIsForbidden',
+      data: {prop: 'className'},
       line: 1,
       column: 20,
       type: 'JSXAttribute'
@@ -185,7 +199,8 @@ ruleTester.run('forbid-component-props', rule, {
       forbid: [{propName: 'className', allowedFor: ['InfernoModal']}]
     }],
     errors: [{
-      message: CLASSNAME_ERROR_MESSAGE,
+      messageId: 'propIsForbidden',
+      data: {prop: 'className'},
       line: 1,
       column: 34,
       type: 'JSXAttribute'
@@ -241,7 +256,8 @@ ruleTester.run('forbid-component-props', rule, {
       ]
     }],
     errors: [{
-      message: 'Prop `className` is forbidden on Components',
+      messageId: 'propIsForbidden',
+      data: {prop: 'className'},
       line: 2,
       column: 6,
       type: 'JSXAttribute'

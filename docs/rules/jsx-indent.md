@@ -9,7 +9,7 @@ Fixer will fix whitespace and tabs indentation.
 
 This rule is aimed to enforce consistent indentation style. The default style is `4 spaces`.
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 // 2 spaces indentation
@@ -39,7 +39,7 @@ To enable checking the indentation of attributes or add indentation to logical e
 ...
 ```
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 // 2 spaces indentation
@@ -60,6 +60,7 @@ The following patterns are considered warnings:
     (bar) => <div>hi</div>
 }
   />
+  }>
 </App>
 
 // [2, 2, {indentLogicalExpressions: true}]
@@ -70,7 +71,7 @@ The following patterns are considered warnings:
 </App>
 ```
 
-The following patterns are **not** warnings:
+Examples of **correct** code for this rule:
 
 ```jsx
 
@@ -98,6 +99,7 @@ The following patterns are **not** warnings:
     (bar) => <div>hi</div>
 }
   />
+  }>
 </App>
 
 // [2, 2, {indentLogicalExpressions: true}]

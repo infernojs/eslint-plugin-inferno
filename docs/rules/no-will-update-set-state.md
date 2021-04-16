@@ -4,7 +4,7 @@ Updating the state during the componentWillUpdate step can lead to indeterminate
 
 ## Rule Details
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 var Hello = createClass({
@@ -19,7 +19,7 @@ var Hello = createClass({
 });
 ```
 
-The following patterns are **not** considered warnings:
+Examples of **correct** code for this rule:
 
 ```jsx
 var Hello = createClass({
@@ -59,7 +59,7 @@ var Hello = createClass({
 
 By default this rule forbids any call to `this.setState` in `componentWillUpdate` outside of functions. The `disallow-in-func` mode makes this rule more strict by disallowing calls to `this.setState` even within functions.
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```jsx
 var Hello = createClass({

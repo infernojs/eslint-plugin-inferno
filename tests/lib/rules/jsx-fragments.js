@@ -91,7 +91,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['element'],
     settings,
     errors: [{
-      message: 'Prefer Act.Frag over fragment shorthand'
+      messageId: 'preferPragma',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: '<Act.Frag><Foo /></Act.Frag>'
   }, {
@@ -99,7 +100,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['syntax'],
     settings,
     errors: [{
-      message: 'Prefer fragment shorthand over Act.Frag'
+      messageId: 'preferFragment',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: '<><Foo /></>'
   }, {
@@ -107,7 +109,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['syntax'],
     settings,
     errors: [{
-      message: 'Prefer fragment shorthand over Act.Frag'
+      messageId: 'preferFragment',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: '<></>'
   }, {
@@ -118,7 +121,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['syntax'],
     settings,
     errors: [{
-      message: 'Prefer fragment shorthand over Act.Frag'
+      messageId: 'preferFragment',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: `
       import Act, { Frag as F } from 'inferno';
@@ -132,7 +136,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['syntax'],
     settings,
     errors: [{
-      message: 'Prefer fragment shorthand over Act.Frag'
+      messageId: 'preferFragment',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: `
       import Act, { Frag as F } from 'inferno';
@@ -146,7 +151,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['syntax'],
     settings,
     errors: [{
-      message: 'Prefer fragment shorthand over Act.Frag'
+      messageId: 'preferFragment',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: `
       import Act, { Frag } from 'inferno';
@@ -160,7 +166,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['syntax'],
     settings,
     errors: [{
-      message: 'Prefer fragment shorthand over Act.Frag'
+      messageId: 'preferFragment',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: `
       const F = Act.Frag;
@@ -174,7 +181,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['syntax'],
     settings,
     errors: [{
-      message: 'Prefer fragment shorthand over Act.Frag'
+      messageId: 'preferFragment',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: `
       const { Frag } = Act;
@@ -188,7 +196,8 @@ ruleTester.run('jsx-fragments', rule, {
     options: ['syntax'],
     settings,
     errors: [{
-      message: 'Prefer fragment shorthand over Act.Frag'
+      messageId: 'preferFragment',
+      data: {react: 'Act', fragment: 'Frag'}
     }],
     output: `
       const { Frag } = require('inferno');

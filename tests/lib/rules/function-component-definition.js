@@ -69,6 +69,32 @@ ruleTester.run('function-component-definition', rule, {
     code: 'var Foo = Inferno.memo(function Foo() { return <p/> })',
     options: [{namedComponents: 'function-declaration'}]
   }, {
+    // shouldn't trigger this rule since functions stating with a lowercase
+    // letter are not considered components
+    code: `
+    const selectAvatarByUserId = (state, id) => {
+      const user = selectUserById(state, id)
+      return null
+    }
+    `,
+    options: [{namedComponents: 'function-declaration'}]
+  }, {
+    // shouldn't trigger this rule since functions stating with a lowercase
+    // letter are not considered components
+    code: `
+      function ensureValidSourceType(sourceType: string) {
+        switch (sourceType) {
+          case 'ALBUM':
+          case 'PLAYLIST':
+            return sourceType;
+          default:
+            return null;
+        }
+      }
+    `,
+    options: [{namedComponents: 'arrow-function'}],
+    parser: parsers.TYPESCRIPT_ESLINT
+  }, {
     code: 'function Hello(props: Test) { return <p/> }',
     options: [{namedComponents: 'function-declaration'}],
     parser: parsers.TYPESCRIPT_ESLINT
@@ -140,6 +166,144 @@ ruleTester.run('function-component-definition', rule, {
     code: 'function Hello(props): InfernoNode { return <p/> }',
     options: [{namedComponents: 'function-declaration'}],
     parser: parsers.TYPESCRIPT_ESLINT
+  },
+  // https://github.com/yannickcr/eslint-plugin-react/issues/2765
+  {
+    code: [
+      'const obj = {',
+      '  serialize: (el) => {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'function-declaration'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize: (el) => {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'arrow-function'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize: (el) => {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'function-expression'}]
+  },
+  {
+    code: [
+      'const obj = {',
+      '  serialize: function (el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'function-declaration'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize: function (el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'arrow-function'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize: function (el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'function-expression'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize(el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'function-declaration'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize(el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'arrow-function'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize(el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{namedComponents: 'function-expression'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize(el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{unnamedComponents: 'arrow-function'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize(el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{unnamedComponents: 'function-expression'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize: (el) => {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{unnamedComponents: 'arrow-function'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize: (el) => {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{unnamedComponents: 'function-expression'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize: function (el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{unnamedComponents: 'arrow-function'}]
+  }, {
+    code: [
+      'const obj = {',
+      '  serialize: function (el) {',
+      '    return <p/>',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{unnamedComponents: 'function-expression'}]
   }],
 
   invalid: [{
@@ -154,7 +318,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
@@ -168,7 +332,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
@@ -182,7 +346,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
@@ -196,7 +360,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
@@ -210,7 +374,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}]
+    errors: [{messageId: 'function-declaration'}]
   }, {
     code: [
       'var Hello = (props) => {',
@@ -223,7 +387,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-expression'}],
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
@@ -237,7 +401,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-expression'}],
-    errors: [{message: 'Function component is not a function expression'}]
+    errors: [{messageId: 'function-expression'}]
   }, {
     code: [
       'function wrap(Component) {',
@@ -253,7 +417,7 @@ ruleTester.run('function-component-definition', rule, {
       '  }',
       '}'
     ].join('\n'),
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     options: [{unnamedComponents: 'arrow-function'}]
   }, {
     code: [
@@ -270,7 +434,7 @@ ruleTester.run('function-component-definition', rule, {
       '  }',
       '}'
     ].join('\n'),
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     options: [{unnamedComponents: 'function-expression'}],
     parser: parsers.BABEL_ESLINT
   }, {
@@ -285,7 +449,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -299,7 +463,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -313,7 +477,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -327,7 +491,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -341,7 +505,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-expression'}],
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -355,7 +519,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-expression'}],
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -369,7 +533,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-expression'}],
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -383,7 +547,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -397,7 +561,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -411,7 +575,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -425,7 +589,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -439,7 +603,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -453,7 +617,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-expression'}],
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -467,7 +631,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -481,7 +645,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-expression'}],
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -495,7 +659,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -509,7 +673,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -523,7 +687,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
     code: [
@@ -540,7 +704,7 @@ ruleTester.run('function-component-definition', rule, {
       '  }',
       '}'
     ].join('\n'),
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     options: [{unnamedComponents: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
@@ -558,7 +722,7 @@ ruleTester.run('function-component-definition', rule, {
       '  }',
       '}'
     ].join('\n'),
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     options: [{unnamedComponents: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
@@ -576,7 +740,7 @@ ruleTester.run('function-component-definition', rule, {
       '  }',
       '}'
     ].join('\n'),
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     options: [{unnamedComponents: 'function-expression'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
@@ -594,7 +758,7 @@ ruleTester.run('function-component-definition', rule, {
       '  }',
       '}'
     ].join('\n'),
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     options: [{unnamedComponents: 'arrow-function'}],
     parser: parsers.TYPESCRIPT_ESLINT
   }, {
@@ -612,7 +776,7 @@ ruleTester.run('function-component-definition', rule, {
       '  }',
       '}'
     ].join('\n'),
-    errors: [{message: 'Function component is not a function expression'}],
+    errors: [{messageId: 'function-expression'}],
     options: [{unnamedComponents: 'function-expression'}],
     parser: parsers.TYPESCRIPT_ESLINT
   },
@@ -628,7 +792,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
@@ -642,7 +806,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
@@ -656,7 +820,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'function-declaration'}],
-    errors: [{message: 'Function component is not a function declaration'}],
+    errors: [{messageId: 'function-declaration'}],
     parser: parsers.BABEL_ESLINT
   },
   {
@@ -671,7 +835,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{namedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.BABEL_ESLINT
   }, {
     code: [
@@ -685,7 +849,7 @@ ruleTester.run('function-component-definition', rule, {
       '}'
     ].join('\n'),
     options: [{unnamedComponents: 'arrow-function'}],
-    errors: [{message: 'Function component is not an arrow function'}],
+    errors: [{messageId: 'arrow-function'}],
     parser: parsers.BABEL_ESLINT
   }]
 });

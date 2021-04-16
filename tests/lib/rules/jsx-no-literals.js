@@ -27,23 +27,66 @@ const parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-function stringsMessage(str) {
-  return `Strings not allowed in JSX files: “${str}”`;
-}
-
-function jsxMessage(str) {
-  return `Missing JSX expression container around literal string: “${str}”`;
-}
-
-function invalidProp(str) {
-  return `Invalid prop value: “${str}”`;
-}
-
 const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-no-literals', rule, {
 
-  valid: [
+  valid: [].concat(
     {
+      code: `
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                <button type="button"></button>
+              </div>
+            );
+          }
+        }
+      `,
+      options: [{noStrings: true, allowedStrings: ['button', 'submit']}]
+    }, {
+      code: `
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                <button type="button"></button>
+              </div>
+            );
+          }
+        }
+      `,
+      options: [{noStrings: true, allowedStrings: ['button', 'submit']}],
+      parser: parsers.BABEL_ESLINT
+    }, parsers.TS([{
+      code: `
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                <button type="button"></button>
+              </div>
+            );
+          }
+        }
+      `,
+      options: [{noStrings: true, allowedStrings: ['button', 'submit']}],
+      parser: parsers.TYPESCRIPT_ESLINT
+    }, {
+      code: `
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                <button type="button"></button>
+              </div>
+            );
+          }
+        }
+      `,
+      options: [{noStrings: true, allowedStrings: ['button', 'submit']}],
+      parser: parsers['@TYPESCRIPT_ESLINT']
+    }]), {
       code: `
         class Comp1 extends Component {
           render() {
@@ -276,8 +319,13 @@ ruleTester.run('jsx-no-literals', rule, {
         }      `,
       parser: parsers.BABEL_ESLINT,
       options: [{noStrings: true, ignoreProps: false}]
+    },
+    {
+      code: `
+        <img alt='blank image'></img>
+      `
     }
-  ],
+  ),
 
   invalid: [
     {
@@ -289,7 +337,10 @@ ruleTester.run('jsx-no-literals', rule, {
         }
       `,
       parser: parsers.BABEL_ESLINT,
-      errors: [{message: jsxMessage('test')}]
+      errors: [{
+        messageId: 'literalNotInJSXExpression',
+        data: {text: 'test'}
+      }]
     }, {
       code: `
         class Comp1 extends Component {
@@ -299,7 +350,10 @@ ruleTester.run('jsx-no-literals', rule, {
         }
       `,
       parser: parsers.BABEL_ESLINT,
-      errors: [{message: jsxMessage('test')}]
+      errors: [{
+        messageId: 'literalNotInJSXExpression',
+        data: {text: 'test'}
+      }]
     }, {
       code: `
         class Comp1 extends Component {
@@ -310,7 +364,10 @@ ruleTester.run('jsx-no-literals', rule, {
         }
       `,
       parser: parsers.BABEL_ESLINT,
-      errors: [{message: jsxMessage('test')}]
+      errors: [{
+        messageId: 'literalNotInJSXExpression',
+        data: {text: 'test'}
+      }]
     }, {
       code: `
         class Comp1 extends Component {
@@ -321,7 +378,10 @@ ruleTester.run('jsx-no-literals', rule, {
         }
       `,
       parser: parsers.BABEL_ESLINT,
-      errors: [{message: jsxMessage('test')}]
+      errors: [{
+        messageId: 'literalNotInJSXExpression',
+        data: {text: 'test'}
+      }]
     }, {
       code: `
         var Hello = createClass({
@@ -332,7 +392,10 @@ ruleTester.run('jsx-no-literals', rule, {
         });
       `,
       parser: parsers.BABEL_ESLINT,
-      errors: [{message: jsxMessage('hello')}]
+      errors: [{
+        messageId: 'literalNotInJSXExpression',
+        data: {text: 'hello'}
+      }]
     }, {
       code: `
         class Comp1 extends Component {
@@ -346,7 +409,10 @@ ruleTester.run('jsx-no-literals', rule, {
         }
       `,
       parser: parsers.BABEL_ESLINT,
-      errors: [{message: jsxMessage('asdjfl')}]
+      errors: [{
+        messageId: 'literalNotInJSXExpression',
+        data: {text: 'asdjfl'}
+      }]
     }, {
       code: `
         class Comp1 extends Component {
@@ -362,7 +428,10 @@ ruleTester.run('jsx-no-literals', rule, {
         }
       `,
       parser: parsers.BABEL_ESLINT,
-      errors: [{message: jsxMessage('asdjfl\n                test\n                foo')}]
+      errors: [{
+        messageId: 'literalNotInJSXExpression',
+        data: {text: 'asdjfl\n                test\n                foo'}
+      }]
     }, {
       code: `
         class Comp1 extends Component {
@@ -378,7 +447,10 @@ ruleTester.run('jsx-no-literals', rule, {
         }
       `,
       parser: parsers.BABEL_ESLINT,
-      errors: [{message: jsxMessage('test')}]
+      errors: [{
+        messageId: 'literalNotInJSXExpression',
+        data: {text: 'test'}
+      }]
     }, {
       code: `
         <Foo bar="test">
@@ -386,10 +458,14 @@ ruleTester.run('jsx-no-literals', rule, {
         </Foo>
       `,
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [
-        {message: invalidProp('bar="test"')},
-        {message: stringsMessage('\'Test\'')}
-      ]
+      errors: [{
+        messageId: 'invalidPropValue',
+        data: {text: 'bar="test"'}
+      },
+      {
+        messageId: 'noStringsInJSX',
+        data: {text: '\'Test\''}
+      }]
     }, {
       code: `
         <Foo bar="test">
@@ -397,10 +473,14 @@ ruleTester.run('jsx-no-literals', rule, {
         </Foo>
       `,
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [
-        {message: invalidProp('bar="test"')},
-        {message: stringsMessage('\'Test\'')}
-      ]
+      errors: [{
+        messageId: 'invalidPropValue',
+        data: {text: 'bar="test"'}
+      },
+      {
+        messageId: 'noStringsInJSX',
+        data: {text: '\'Test\''}
+      }]
     }, {
       code: `
         <Foo bar="test">
@@ -408,10 +488,14 @@ ruleTester.run('jsx-no-literals', rule, {
         </Foo>
       `,
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [
-        {message: invalidProp('bar="test"')},
-        {message: stringsMessage('Test')}
-      ]
+      errors: [{
+        messageId: 'invalidPropValue',
+        data: {text: 'bar="test"'}
+      },
+      {
+        messageId: 'noStringsInJSX',
+        data: {text: 'Test'}
+      }]
     }, {
       code: `
         <Foo>
@@ -419,40 +503,64 @@ ruleTester.run('jsx-no-literals', rule, {
         </Foo>
       `,
       options: [{noStrings: true}],
-      errors: [{message: stringsMessage('`Test`')}]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '`Test`'}
+      }]
     }, {
       code: '<Foo bar={`Test`} />',
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [{message: stringsMessage('`Test`')}]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '`Test`'}
+      }]
     }, {
       code: '<Foo bar={`${baz}`} />',
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [{message: stringsMessage('`${baz}`')}]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '`${baz}`'}
+      }]
     }, {
       code: '<Foo bar={`Test ${baz}`} />',
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [{message: stringsMessage('`Test ${baz}`')}]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '`Test ${baz}`'}
+      }]
     }, {
       code: '<Foo bar={`foo` + \'bar\'} />',
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [
-        {message: stringsMessage('`foo`')},
-        {message: stringsMessage('\'bar\'')}
-      ]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '`foo`'}
+      },
+      {
+        messageId: 'noStringsInJSX',
+        data: {text: '\'bar\''}
+      }]
     }, {
       code: '<Foo bar={`foo` + `bar`} />',
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [
-        {message: stringsMessage('`foo`')},
-        {message: stringsMessage('`bar`')}
-      ]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '`foo`'}
+      },
+      {
+        messageId: 'noStringsInJSX',
+        data: {text: '`bar`'}
+      }]
     }, {
       code: '<Foo bar={\'foo\' + `bar`} />',
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [
-        {message: stringsMessage('\'foo\'')},
-        {message: stringsMessage('`bar`')}
-      ]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '\'foo\''}
+      },
+      {
+        messageId: 'noStringsInJSX',
+        data: {text: '`bar`'}
+      }]
     }, {
       code: `
         class Comp1 extends Component {
@@ -462,16 +570,31 @@ ruleTester.run('jsx-no-literals', rule, {
         }
       `,
       options: [{noStrings: true, allowedStrings: ['asd'], ignoreProps: false}],
-      errors: [
-        {message: stringsMessage('\'foo\'')},
-        {message: stringsMessage('asdf')}
-      ]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '\'foo\''}
+      },
+      {
+        messageId: 'noStringsInJSX',
+        data: {text: 'asdf'}
+      }]
     }, {
       code: '<Foo bar={\'bar\'} />',
       options: [{noStrings: true, ignoreProps: false}],
-      errors: [
-        {message: stringsMessage('\'bar\'')}
-      ]
+      errors: [{
+        messageId: 'noStringsInJSX',
+        data: {text: '\'bar\''}
+      }]
+    },
+    {
+      code: `
+        <img alt='blank image'></img>
+      `,
+      options: [{noAttributeStrings: true}],
+      errors: [{
+        messageId: 'noStringsInAttributes',
+        data: {text: '\'blank image\''}
+      }]
     }
   ]
 });

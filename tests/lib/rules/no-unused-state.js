@@ -20,7 +20,8 @@ const eslintTester = new RuleTester({parserOptions});
 
 function getErrorMessages(unusedFields) {
   return unusedFields.map((field) => ({
-    message: `Unused state field: '${field}'`
+    messageId: 'unusedStateField',
+    data: {name: field}
   }));
 }
 
@@ -1193,6 +1194,16 @@ eslintTester.run('no-unused-state', rule, {
       `,
       parser: parsers.BABEL_ESLINT,
       errors: getErrorMessages(['initial'])
+    }, {
+      code: `
+        wrap(class NotWorking extends React.Component {
+            state = {
+                dummy: null
+            };
+        });
+      `,
+      parser: parsers.BABEL_ESLINT,
+      errors: getErrorMessages(['dummy'])
     }, {
       code: `
       class Foo extends Component {
