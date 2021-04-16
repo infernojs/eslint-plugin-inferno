@@ -1,4 +1,4 @@
-# Require or prevent a new line after jsx elements and expressions. (react/jsx-newline)
+# Require or prevent a new line after jsx elements and expressions. (inferno/jsx-newline)
 
 **Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
 
@@ -9,7 +9,7 @@ This is a stylistic rule intended to make JSX code more readable by requiring or
 ## Rule Options
 ```json
 ...
-"react/jsx-new-line": [<enabled>, { "prevent": <boolean> }]
+"inferno/jsx-new-line": [<enabled>, { "prevent": <boolean> }]
 ...
 ```
 

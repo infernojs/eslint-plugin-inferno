@@ -30,7 +30,7 @@ When to allow a JSX filename extension. By default all files may have a JSX exte
 
 ```js
 "rules": {
-  "react/jsx-filename-extension": [1, { "allow": "as-needed" }]
+  "inferno/jsx-filename-extension": [1, { "allow": "as-needed" }]
 }
 ```
 

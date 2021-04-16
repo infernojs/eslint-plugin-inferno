@@ -66,32 +66,32 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
     code: 'var App, a = <App />;',
     errors: [{
       messageId: 'notInScope',
-      data: {name: 'React'}
+      data: {name: 'Inferno'}
     }]
   }, {
     code: 'var a = <App />;',
     errors: [{
       messageId: 'notInScope',
-      data: {name: 'React'}
+      data: {name: 'Inferno'}
     }]
   }, {
     code: 'var a = <img />;',
     errors: [{
       messageId: 'notInScope',
-      data: {name: 'React'}
+      data: {name: 'Inferno'}
     }]
   }, {
     code: 'var a = <>fragment</>;',
     parser: parsers.BABEL_ESLINT,
     errors: [{
       messageId: 'notInScope',
-      data: {name: 'React'}
+      data: {name: 'Inferno'}
     }]
   }, {
     code: '/** @jsx Inferno.DOM */ var a = <img />;',
     errors: [{
       messageId: 'notInScope',
-      data: {name: 'React'}
+      data: {name: 'Inferno'}
     }]
   }, {
     code: '/** @jsx Foo.bar */ var Inferno, a = <img />;',

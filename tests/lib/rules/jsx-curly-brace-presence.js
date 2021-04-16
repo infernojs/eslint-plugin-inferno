@@ -407,7 +407,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
     },
     {
       code: `
-        import React from "react";
+        import Inferno from "inferno";
 
         const Component = () => {
           return <span>{"/*"}</span>;

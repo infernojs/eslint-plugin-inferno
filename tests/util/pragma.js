@@ -15,8 +15,8 @@ const DEFAULT_CONFIG = {
 };
 
 const DEFAULT_SETTINGS = {
-  react: {
-    pragma: 'React'
+  inferno: {
+    pragma: 'Inferno'
   }
 };
 
@@ -48,11 +48,11 @@ describe('pragma', () => {
       );
     });
 
-    it('defaults to the value of settings.react.pragma', () => {
+    it('defaults to the value of settings.inferno.pragma', () => {
       const code = '';
       assert.strictEqual(
         getFromContext(fakeContext(code)),
-        DEFAULT_SETTINGS.react.pragma
+        DEFAULT_SETTINGS.inferno.pragma
       );
     });
 

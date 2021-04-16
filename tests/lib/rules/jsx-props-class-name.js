@@ -20,7 +20,6 @@ const parserOptions = {
   }
 };
 
-
 const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-props-class-name', rule, {
   valid: [{

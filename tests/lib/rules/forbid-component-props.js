@@ -107,9 +107,9 @@ ruleTester.run('forbid-component-props', rule, {
       forbid: [{propName: 'className', allowedFor: ['AntdLayout.Content']}]
     }]
   }, {
-    code: 'const item = (<this.ReactModal className="foo" />);',
+    code: 'const item = (<this.InfernoModal className="foo" />);',
     options: [{
-      forbid: [{propName: 'className', allowedFor: ['this.ReactModal']}]
+      forbid: [{propName: 'className', allowedFor: ['this.InfernoModal']}]
     }]
   }, {
     code: '<fbt:param name="Total number of files" number={true} />'

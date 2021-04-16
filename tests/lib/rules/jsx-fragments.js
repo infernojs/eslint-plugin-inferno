@@ -92,7 +92,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferPragma',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: '<Act.Frag><Foo /></Act.Frag>'
   }, {
@@ -101,7 +101,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferFragment',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: '<><Foo /></>'
   }, {
@@ -110,7 +110,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferFragment',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: '<></>'
   }, {
@@ -122,7 +122,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferFragment',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: `
       import Act, { Frag as F } from 'inferno';
@@ -137,7 +137,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferFragment',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: `
       import Act, { Frag as F } from 'inferno';
@@ -152,7 +152,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferFragment',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: `
       import Act, { Frag } from 'inferno';
@@ -167,7 +167,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferFragment',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: `
       const F = Act.Frag;
@@ -182,7 +182,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferFragment',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: `
       const { Frag } = Act;
@@ -197,7 +197,7 @@ ruleTester.run('jsx-fragments', rule, {
     settings,
     errors: [{
       messageId: 'preferFragment',
-      data: {react: 'Act', fragment: 'Frag'}
+      data: {inferno: 'Act', fragment: 'Frag'}
     }],
     output: `
       const { Frag } = require('inferno');

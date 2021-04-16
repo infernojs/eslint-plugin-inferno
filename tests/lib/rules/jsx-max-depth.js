@@ -110,7 +110,7 @@ ruleTester.run('jsx-max-depth', rule, {
   }, {
     code: [
       'export function MyComponent() {',
-      '  const A = <React.Fragment>{<div />}</React.Fragment>;',
+      '  const A = <Inferno.Fragment>{<div />}</Inferno.Fragment>;',
       '  return <div>{A}</div>;',
       '}'
     ].join('\n')

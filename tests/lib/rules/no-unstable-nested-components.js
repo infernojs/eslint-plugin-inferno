@@ -45,10 +45,10 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent() {
-        return React.createElement(
+        return Inferno.createElement(
           "div",
           null,
-          React.createElement(OutsideDefinedFunctionComponent, null)
+          Inferno.createElement(OutsideDefinedFunctionComponent, null)
         );
       }
       `
@@ -68,75 +68,10 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent() {
-        return React.createElement(SomeComponent, {
-          footer: React.createElement(OutsideDefinedComponent, null),
-          header: React.createElement("div", null)
+        return Inferno.createElement(SomeComponent, {
+          footer: Inferno.createElement(OutsideDefinedComponent, null),
+          header: Inferno.createElement("div", null)
         });
-      }
-      `
-    },
-    {
-      code: `
-      function ParentComponent() {
-        const MemoizedNestedComponent = React.useCallback(() => <div />, []);
-
-        return (
-          <div>
-            <MemoizedNestedComponent />
-          </div>
-        );
-      }
-      `
-    },
-    {
-      code: `
-      function ParentComponent() {
-        const MemoizedNestedComponent = React.useCallback(
-          () => React.createElement("div", null),
-          []
-        );
-
-        return React.createElement(
-          "div",
-          null,
-          React.createElement(MemoizedNestedComponent, null)
-        );
-      }
-      `
-    },
-    {
-      code: `
-      function ParentComponent() {
-        const MemoizedNestedFunctionComponent = React.useCallback(
-          function () {
-            return <div />;
-          },
-          []
-        );
-
-        return (
-          <div>
-            <MemoizedNestedFunctionComponent />
-          </div>
-        );
-      }
-      `
-    },
-    {
-      code: `
-      function ParentComponent() {
-        const MemoizedNestedFunctionComponent = React.useCallback(
-          function () {
-            return React.createElement("div", null);
-          },
-          []
-        );
-
-        return React.createElement(
-          "div",
-          null,
-          React.createElement(MemoizedNestedFunctionComponent, null)
-        );
       }
       `
     },
@@ -195,10 +130,10 @@ ruleTester.run('no-unstable-nested-components', rule, {
       code: `
       function ParentComponent() {
         function getComponent() {
-          return React.createElement("div", null);
+          return Inferno.createElement("div", null);
         }
 
-        return React.createElement("div", null, getComponent());
+        return Inferno.createElement("div", null, getComponent());
       }
       `
     },
@@ -245,10 +180,10 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent() {
-        return React.createElement(
+        return Inferno.createElement(
             RenderPropComponent,
             null,
-            () => React.createElement("div", null)
+            () => Inferno.createElement("div", null)
         );
       }
       `
@@ -287,11 +222,11 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent(props) {
-        return React.createElement(
+        return Inferno.createElement(
           "ul",
           null,
           props.items.map(() =>
-            React.createElement(
+            Inferno.createElement(
               "li",
               { key: item.id },
               item.name
@@ -321,11 +256,11 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent(props) {
-        return React.createElement(
+        return Inferno.createElement(
           "ul",
           null,
           props.items.map(function Item() {
-            return React.createElement(
+            return Inferno.createElement(
               "li",
               { key: item.id },
               item.name
@@ -347,7 +282,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function createTestComponent(props) {
-        return React.createElement("div", null);
+        return Inferno.createElement("div", null);
       }
       `
     },
@@ -366,8 +301,8 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent() {
-        return React.createElement(ComponentWithProps, {
-          footer: () => React.createElement("div", null)
+        return Inferno.createElement(ComponentWithProps, {
+          footer: () => Inferno.createElement("div", null)
         });
       }
       `,
@@ -399,8 +334,8 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent() {
-        return React.createElement(ComponentForProps, {
-          renderFooter: () => React.createElement("div", null)
+        return Inferno.createElement(ComponentForProps, {
+          renderFooter: () => Inferno.createElement("div", null)
         });
       }
       `
@@ -478,7 +413,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
     },
     {
       code: `
-      const ParentComponent = createReactClass({
+      const ParentComponent = createInfernoClass({
         displayName: "ParentComponent",
         statics: {
           getSnapshotBeforeUpdate: function () {
@@ -537,13 +472,13 @@ ruleTester.run('no-unstable-nested-components', rule, {
       code: `
       function ParentComponent() {
         function UnstableNestedFunctionComponent() {
-          return React.createElement("div", null);
+          return Inferno.createElement("div", null);
         }
 
-        return React.createElement(
+        return Inferno.createElement(
           "div",
           null,
-          React.createElement(UnstableNestedFunctionComponent, null)
+          Inferno.createElement(UnstableNestedFunctionComponent, null)
         );
       }
       `,
@@ -569,13 +504,13 @@ ruleTester.run('no-unstable-nested-components', rule, {
       code: `
       function ParentComponent() {
         const UnstableNestedVariableComponent = () => {
-          return React.createElement("div", null);
+          return Inferno.createElement("div", null);
         }
 
-        return React.createElement(
+        return Inferno.createElement(
           "div",
           null,
-          React.createElement(UnstableNestedVariableComponent, null)
+          Inferno.createElement(UnstableNestedVariableComponent, null)
         );
       }
       `,
@@ -601,13 +536,13 @@ ruleTester.run('no-unstable-nested-components', rule, {
       code: `
       const ParentComponent = () => {
         function UnstableNestedFunctionComponent() {
-          return React.createElement("div", null);
+          return Inferno.createElement("div", null);
         }
 
-        return React.createElement(
+        return Inferno.createElement(
           "div",
           null,
-          React.createElement(UnstableNestedFunctionComponent, null)
+          Inferno.createElement(UnstableNestedFunctionComponent, null)
         );
       }
       `,
@@ -633,13 +568,13 @@ ruleTester.run('no-unstable-nested-components', rule, {
       code: `
       export default () => {
         function UnstableNestedFunctionComponent() {
-          return React.createElement("div", null);
+          return Inferno.createElement("div", null);
         }
 
-        return React.createElement(
+        return Inferno.createElement(
           "div",
           null,
-          React.createElement(UnstableNestedFunctionComponent, null)
+          Inferno.createElement(UnstableNestedFunctionComponent, null)
         );
       };
       `,
@@ -665,13 +600,13 @@ ruleTester.run('no-unstable-nested-components', rule, {
       code: `
       const ParentComponent = () => {
         const UnstableNestedVariableComponent = () => {
-          return React.createElement("div", null);
+          return Inferno.createElement("div", null);
         }
 
-        return React.createElement(
+        return Inferno.createElement(
           "div",
           null,
-          React.createElement(UnstableNestedVariableComponent, null)
+          Inferno.createElement(UnstableNestedVariableComponent, null)
         );
       }
       `,
@@ -680,7 +615,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent() {
-        class UnstableNestedClassComponent extends React.Component {
+        class UnstableNestedClassComponent extends Inferno.Component {
           render() {
             return <div />;
           }
@@ -698,16 +633,16 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ParentComponent() {
-        class UnstableNestedClassComponent extends React.Component {
+        class UnstableNestedClassComponent extends Inferno.Component {
           render() {
-            return React.createElement("div", null);
+            return Inferno.createElement("div", null);
           }
         }
 
-        return React.createElement(
+        return Inferno.createElement(
           "div",
           null,
-          React.createElement(UnstableNestedClassComponent, null)
+          Inferno.createElement(UnstableNestedClassComponent, null)
         );
       }
       `,
@@ -715,9 +650,9 @@ ruleTester.run('no-unstable-nested-components', rule, {
     },
     {
       code: `
-      class ParentComponent extends React.Component {
+      class ParentComponent extends Inferno.Component {
         render() {
-          class UnstableNestedClassComponent extends React.Component {
+          class UnstableNestedClassComponent extends Inferno.Component {
             render() {
               return <div />;
             }
@@ -735,18 +670,18 @@ ruleTester.run('no-unstable-nested-components', rule, {
     },
     {
       code: `
-      class ParentComponent extends React.Component {
+      class ParentComponent extends Inferno.Component {
         render() {
-          class UnstableNestedClassComponent extends React.Component {
+          class UnstableNestedClassComponent extends Inferno.Component {
             render() {
-              return React.createElement("div", null);
+              return Inferno.createElement("div", null);
             }
           }
 
-          return React.createElement(
+          return Inferno.createElement(
             "div",
             null,
-            React.createElement(UnstableNestedClassComponent, null)
+            Inferno.createElement(UnstableNestedClassComponent, null)
           );
         }
       }
@@ -755,7 +690,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
     },
     {
       code: `
-      class ParentComponent extends React.Component {
+      class ParentComponent extends Inferno.Component {
         render() {
           function UnstableNestedFunctionComponent() {
             return <div />;
@@ -773,16 +708,16 @@ ruleTester.run('no-unstable-nested-components', rule, {
     },
     {
       code: `
-      class ParentComponent extends React.Component {
+      class ParentComponent extends Inferno.Component {
         render() {
           function UnstableNestedClassComponent() {
-            return React.createElement("div", null);
+            return Inferno.createElement("div", null);
           }
 
-          return React.createElement(
+          return Inferno.createElement(
             "div",
             null,
-            React.createElement(UnstableNestedClassComponent, null)
+            Inferno.createElement(UnstableNestedClassComponent, null)
           );
         }
       }
@@ -791,7 +726,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
     },
     {
       code: `
-      class ParentComponent extends React.Component {
+      class ParentComponent extends Inferno.Component {
         render() {
           const UnstableNestedVariableComponent = () => {
             return <div />;
@@ -809,16 +744,16 @@ ruleTester.run('no-unstable-nested-components', rule, {
     },
     {
       code: `
-      class ParentComponent extends React.Component {
+      class ParentComponent extends Inferno.Component {
         render() {
           const UnstableNestedClassComponent = () => {
-            return React.createElement("div", null);
+            return Inferno.createElement("div", null);
           }
 
-          return React.createElement(
+          return Inferno.createElement(
             "div",
             null,
-            React.createElement(UnstableNestedClassComponent, null)
+            Inferno.createElement(UnstableNestedClassComponent, null)
           );
         }
       }
@@ -850,13 +785,13 @@ ruleTester.run('no-unstable-nested-components', rule, {
       function ParentComponent() {
         function getComponent() {
           function NestedUnstableFunctionComponent() {
-            return React.createElement("div", null);
+            return Inferno.createElement("div", null);
           }
 
-          return React.createElement(NestedUnstableFunctionComponent, null);
+          return Inferno.createElement(NestedUnstableFunctionComponent, null);
         }
 
-        return React.createElement("div", null, getComponent());
+        return Inferno.createElement("div", null, getComponent());
       }
       `,
       errors: [{message: ERROR_MESSAGE}]
@@ -883,13 +818,13 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ComponentWithProps(props) {
-        return React.createElement("div", null);
+        return Inferno.createElement("div", null);
       }
 
       function ParentComponent() {
-        return React.createElement(ComponentWithProps, {
+        return Inferno.createElement(ComponentWithProps, {
           footer: function SomeFooter() {
-            return React.createElement("div", null);
+            return Inferno.createElement("div", null);
           }
         });
       }
@@ -913,12 +848,12 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ComponentWithProps(props) {
-        return React.createElement("div", null);
+        return Inferno.createElement("div", null);
       }
 
       function ParentComponent() {
-        return React.createElement(ComponentWithProps, {
-          footer: () => React.createElement("div", null)
+        return Inferno.createElement(ComponentWithProps, {
+          footer: () => Inferno.createElement("div", null)
         });
       }
       `,
@@ -953,18 +888,18 @@ ruleTester.run('no-unstable-nested-components', rule, {
       }
 
       function ParentComponent() {
-        return React.createElement(
+        return Inferno.createElement(
           RenderPropComponent,
           null,
           () => {
             function UnstableNestedComponent() {
-              return React.createElement("div", null);
+              return Inferno.createElement("div", null);
             }
 
-            return React.createElement(
+            return Inferno.createElement(
               "div",
               null,
-              React.createElement(UnstableNestedComponent, null)
+              Inferno.createElement(UnstableNestedComponent, null)
             );
           }
         );
@@ -989,12 +924,12 @@ ruleTester.run('no-unstable-nested-components', rule, {
     {
       code: `
       function ComponentForProps(props) {
-        return React.createElement("div", null);
+        return Inferno.createElement("div", null);
       }
 
       function ParentComponent() {
-        return React.createElement(ComponentForProps, {
-          notPrefixedWithRender: () => React.createElement("div", null)
+        return Inferno.createElement(ComponentForProps, {
+          notPrefixedWithRender: () => Inferno.createElement("div", null)
         });
       }
       `,
@@ -1027,7 +962,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
     },
     {
       code: `
-      class ParentComponent extends React.Component {
+      class ParentComponent extends Inferno.Component {
         render() {
           const List = (props) => {
             const items = props.items

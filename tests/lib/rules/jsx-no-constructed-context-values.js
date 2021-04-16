@@ -28,7 +28,7 @@ const parserOptions = {
 // -----------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({parserOptions});
-ruleTester.run('react-no-constructed-context-values', rule, {
+ruleTester.run('inferno-no-constructed-context-values', rule, {
   valid: [].concat(
     {
       code: '<Context.Provider value={props}></Context.Provider>'
@@ -109,7 +109,7 @@ ruleTester.run('react-no-constructed-context-values', rule, {
     parsers.TS([
       {
         code: `
-          import React from 'react';
+          import Inferno from 'inferno';
           import MyContext from './MyContext';
 
           const value = '';
@@ -126,7 +126,7 @@ ruleTester.run('react-no-constructed-context-values', rule, {
       },
       {
         code: `
-          import React from 'react';
+          import Inferno from 'inferno';
           import MyContext from './MyContext';
 
           const value = '';
@@ -144,7 +144,7 @@ ruleTester.run('react-no-constructed-context-values', rule, {
     ]),
     {
       code: `
-        import React from 'react';
+        import Inferno from 'inferno';
         import BooleanContext from './BooleanContext';
 
         function ContextProvider(props) {

@@ -46,7 +46,7 @@ ruleTester.run('no-render-return-value', rule, {
     code: 'var Hello = Inferno.render(<div />, document.body);',
     errors: [{
       messageId: 'noReturnValue',
-      data: {node: 'ReactDOM'}
+      data: {node: 'Inferno'}
     }]
   }, {
     code: `
@@ -56,7 +56,7 @@ ruleTester.run('no-render-return-value', rule, {
     `,
     errors: [{
       messageId: 'noReturnValue',
-      data: {node: 'ReactDOM'}
+      data: {node: 'Inferno'}
     }]
   }, {
     code: `
@@ -66,43 +66,25 @@ ruleTester.run('no-render-return-value', rule, {
     `,
     errors: [{
       messageId: 'noReturnValue',
-      data: {node: 'ReactDOM'}
-    }]
-  }, {
-    code: 'var render = (a, b) => ReactDOM.render(a, b)',
-    errors: [{
-      messageId: 'noReturnValue',
-      data: {node: 'ReactDOM'}
-    }]
-  }, {
-    code: 'this.o = ReactDOM.render(<div />, document.body);',
-    errors: [{
-      messageId: 'noReturnValue',
-      data: {node: 'ReactDOM'}
-    }]
-  }, {
-    code: 'var v; v = ReactDOM.render(<div />, document.body);',
-    errors: [{
-      messageId: 'noReturnValue',
-      data: {node: 'ReactDOM'}
+      data: {node: 'Inferno'}
     }]
   }, {
     code: 'var render = (a, b) => Inferno.render(a, b)',
     errors: [{
       messageId: 'noReturnValue',
-      data: {node: 'React'}
+      data: {node: 'Inferno'}
     }]
   }, {
     code: 'this.o = Inferno.render(<div />, document.body);',
     errors: [{
       messageId: 'noReturnValue',
-      data: {node: 'ReactDOM'}
+      data: {node: 'Inferno'}
     }]
   }, {
     code: 'var v; v = Inferno.render(<div />, document.body);',
     errors: [{
       messageId: 'noReturnValue',
-      data: {node: 'React'}
+      data: {node: 'Inferno'}
     }]
   }]
 });

@@ -1249,7 +1249,7 @@ ruleTester.run('jsx-wrap-multilines', rule, {
       errors: [{messageId: 'missingParens'}]
     }, {
       code: [
-        'import React from \'react\';',
+        'import Inferno from \'inferno\';',
         '',
         'const A =',
         '<div>',
@@ -1257,7 +1257,7 @@ ruleTester.run('jsx-wrap-multilines', rule, {
         '</div>;'
       ].join('\n'),
       output: [
-        'import React from \'react\';',
+        'import Inferno from \'inferno\';',
         '',
         'const A = (',
         '<div>',

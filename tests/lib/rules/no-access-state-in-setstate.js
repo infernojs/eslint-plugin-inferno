@@ -21,7 +21,7 @@ const parserOptions = {
 };
 
 const settings = {
-  react: {
+  inferno: {
     createClass: 'createClass'
   }
 };
@@ -111,7 +111,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     parserOptions
   }, {
     code: `
-      class ComponentA extends React.Component {
+      class ComponentA extends Inferno.Component {
         state = {
           greeting: 'hello',
         };
@@ -229,7 +229,7 @@ ruleTester.run('no-access-state-in-setstate', rule, {
     errors: [{messageId: 'useCallback'}]
   }, {
     code: `
-      class Hello extends React.Component {
+      class Hello extends Inferno.Component {
         onClick() {
           this.setState(this.state, () => console.log(this.state));
         }

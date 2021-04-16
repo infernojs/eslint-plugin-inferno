@@ -216,7 +216,7 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
       code: `
         const Comp = () => (
           <html>
-            <React.Fragment />
+            <Inferno.Fragment />
           </html>
         );
       `,

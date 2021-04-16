@@ -134,7 +134,7 @@ ruleTester.run('no-this-in-sfc', rule, {
         }).validator(),
         run({ remember }) {
             if (Meteor.isServer) {
-                const connectionId = this.connection.id; // react/no-this-in-sfc
+                const connectionId = this.connection.id; // inferno/no-this-in-sfc
                 return Methods.prepareLogin(connectionId, remember);
             }
             return null;

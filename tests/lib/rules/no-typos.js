@@ -29,9 +29,9 @@ const ruleTester = new RuleTester();
 ruleTester.run('no-typos', rule, {
   valid: [].concat({
     code: `
-        import createReactClass from 'create-react-class'
+        import createInfernoClass from 'create-inferno-class'
         function hello (extra = {}) {
-          return createReactClass({
+          return createInfernoClass({
             noteType: 'hello',
             renderItem () {
               return null
@@ -631,11 +631,11 @@ ruleTester.run('no-typos', rule, {
     parserOptions
   }, {
     code: `
-      import React from 'react';
+      import Inferno from 'inferno';
 
       const A = { B: 'C' };
 
-      export default class MyComponent extends React.Component {
+      export default class MyComponent extends Inferno.Component {
         [A.B] () {
           return null
         }
@@ -1009,23 +1009,5 @@ ruleTester.run('no-typos', rule, {
         parserOptions: parserOptions
       },
     */
-  }, parsers.TS([{
-    code: `
-      import 'prop-types'
-    `,
-    parser: parsers.TYPESCRIPT_ESLINT,
-    parserOptions,
-    errors: [{
-      messageId: 'noPropTypesBinding'
-    }]
-  }, {
-    code: `
-      import 'prop-types'
-    `,
-    parser: parsers['@TYPESCRIPT_ESLINT'],
-    parserOptions,
-    errors: [{
-      messageId: 'noPropTypesBinding'
-    }]
-  }]))
+  })
 });

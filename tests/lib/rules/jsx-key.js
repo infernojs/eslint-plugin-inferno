@@ -89,7 +89,7 @@ ruleTester.run('jsx-key', rule, {
     errors: [{
       messageId: 'missingIterKeyUsePrag',
       data: {
-        reactPrag: 'Act',
+        infernoPrag: 'Act',
         fragPrag: 'Frag'
       }
     }]
@@ -101,33 +101,9 @@ ruleTester.run('jsx-key', rule, {
     errors: [{
       messageId: 'missingArrayKeyUsePrag',
       data: {
-        reactPrag: 'Act',
+        infernoPrag: 'Act',
         fragPrag: 'Frag'
       }
     }]
-  }, {
-    code: '[<App {...obj} key="keyAfterSpread" />];',
-    parser: parsers.BABEL_ESLINT,
-    options: [{checkKeyMustBeforeSpread: true}],
-    settings,
-    errors: [{messageId: 'keyBeforeSpread'}]
-  }, {
-    code: '[<App {...obj} key="keyAfterSpread" />];',
-    parser: parsers.TYPESCRIPT_ESLINT,
-    options: [{checkKeyMustBeforeSpread: true}],
-    settings,
-    errors: [{messageId: 'keyBeforeSpread'}]
-  }, {
-    code: '[<div {...obj} key="keyAfterSpread" />];',
-    parser: parsers.BABEL_ESLINT,
-    options: [{checkKeyMustBeforeSpread: true}],
-    settings,
-    errors: [{messageId: 'keyBeforeSpread'}]
-  }, {
-    code: '[<div {...obj} key="keyAfterSpread" />];',
-    parser: parsers.TYPESCRIPT_ESLINT,
-    options: [{checkKeyMustBeforeSpread: true}],
-    settings,
-    errors: [{messageId: 'keyBeforeSpread'}]
   })
 });

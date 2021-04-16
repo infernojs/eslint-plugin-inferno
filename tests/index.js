@@ -42,13 +42,13 @@ describe('configurations', () => {
     assert(plugin.configs[configName]);
 
     Object.keys(plugin.configs[configName].rules).forEach((ruleName) => {
-      assert.ok(ruleName.startsWith('react/'));
-      const subRuleName = ruleName.slice('react/'.length);
+      assert.ok(ruleName.startsWith('inferno/'));
+      const subRuleName = ruleName.slice('inferno/'.length);
       assert(plugin.rules[subRuleName]);
     });
 
     ruleFiles.forEach((ruleName) => {
-      const inRecommendedConfig = !!plugin.configs[configName].rules[`react/${ruleName}`];
+      const inRecommendedConfig = !!plugin.configs[configName].rules[`inferno/${ruleName}`];
       const isRecommended = plugin.rules[ruleName].meta.docs[configName];
       if (inRecommendedConfig) {
         assert(isRecommended, `${ruleName} metadata should mark it as recommended`);
@@ -63,27 +63,13 @@ describe('configurations', () => {
     assert(plugin.configs[configName]);
 
     Object.keys(plugin.configs[configName].rules).forEach((ruleName) => {
-      assert.ok(ruleName.startsWith('react/'));
+      assert.ok(ruleName.startsWith('inferno/'));
       assert.equal(plugin.configs[configName].rules[ruleName], 2);
     });
 
     ruleFiles.forEach((ruleName) => {
       const inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
-      const inConfig = typeof plugin.configs[configName].rules[`react/${ruleName}`] !== 'undefined';
-      assert(inDeprecatedRules ^ inConfig); // eslint-disable-line no-bitwise
-    });
-  });
-
-  it('should export a \'jsx-runtime\' configuration', () => {
-    const configName = 'jsx-runtime';
-    assert(plugin.configs[configName]);
-
-    Object.keys(plugin.configs[configName].rules).forEach((ruleName) => {
-      assert.ok(ruleName.startsWith('react/'));
-      assert.equal(plugin.configs[configName].rules[ruleName], 0);
-
-      const inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
-      const inConfig = typeof plugin.configs[configName].rules[ruleName] !== 'undefined';
+      const inConfig = typeof plugin.configs[configName].rules[`inferno/${ruleName}`] !== 'undefined';
       assert(inDeprecatedRules ^ inConfig); // eslint-disable-line no-bitwise
     });
   });

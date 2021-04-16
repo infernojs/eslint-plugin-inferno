@@ -223,12 +223,12 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      import React from 'react';
+      import Inferno from 'inferno';
       function memo() {
         var outOfScope = "hello"
         return null;
       }
-      class ComponentY extends React.Component {
+      class ComponentY extends Inferno.Component {
         memoCities = memo((cities) => cities.map((v) => ({ label: v })));
         render() {
           return (
@@ -397,7 +397,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      const forwardRef = React.forwardRef;
+      const forwardRef = Inferno.forwardRef;
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -412,7 +412,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      const memo = React.memo;
+      const memo = Inferno.memo;
       const HelloComponent = (props) => {
         return <div></div>;
       };
@@ -427,7 +427,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      const {forwardRef} = React;
+      const {forwardRef} = Inferno;
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -442,7 +442,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      const {memo} = React;
+      const {memo} = Inferno;
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -457,7 +457,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      import React, { memo } from 'react';
+      import Inferno, { memo } from 'inferno';
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -472,7 +472,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      import {forwardRef} from 'react';
+      import {forwardRef} from 'inferno';
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -487,7 +487,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      const { memo } = require('react');
+      const { memo } = require('inferno');
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -502,7 +502,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      const {forwardRef} = require('react');
+      const {forwardRef} = require('inferno');
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -517,7 +517,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      const forwardRef = require('react').forwardRef;
+      const forwardRef = require('inferno').forwardRef;
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -532,7 +532,7 @@ ruleTester.run('no-multi-comp', rule, {
     }]
   }, {
     code: `
-      const memo = require('react').memo;
+      const memo = require('inferno').memo;
       const HelloComponent = (0, (props) => {
         return <div></div>;
       });
@@ -554,7 +554,7 @@ ruleTester.run('no-multi-comp', rule, {
         const Label = memo(() => <Text />);
       `,
     settings: {
-      react: {
+      inferno: {
         pragma: 'Foo'
       }
     },

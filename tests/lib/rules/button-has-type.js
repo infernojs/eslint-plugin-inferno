@@ -45,15 +45,15 @@ ruleTester.run('button-has-type', rule, {
     {code: 'Inferno.createElement("span")'},
     {code: 'Inferno.createElement("span", {type: "foo"})'},
     {code: 'Inferno.createElement("button", {type: "button"})'},
-    {code: 'React.createElement("button", {type: \'button\'})'},
-    {code: 'React.createElement("button", {type: `button`})'},
-    {code: 'React.createElement("button", {type: \'submit\'})'},
-    {code: 'React.createElement("button", {type: `submit`})'},
-    {code: 'React.createElement("button", {type: \'reset\'})'},
-    {code: 'React.createElement("button", {type: `reset`})'},
-    {code: 'React.createElement("button", {type: condition ? "button" : "submit"})'},
-    {code: 'React.createElement("button", {type: condition ? \'button\' : \'submit\'})'},
-    {code: 'React.createElement("button", {type: condition ? `button` : `submit`})'},
+    {code: 'Inferno.createElement("button", {type: \'button\'})'},
+    {code: 'Inferno.createElement("button", {type: `button`})'},
+    {code: 'Inferno.createElement("button", {type: \'submit\'})'},
+    {code: 'Inferno.createElement("button", {type: `submit`})'},
+    {code: 'Inferno.createElement("button", {type: \'reset\'})'},
+    {code: 'Inferno.createElement("button", {type: `reset`})'},
+    {code: 'Inferno.createElement("button", {type: condition ? "button" : "submit"})'},
+    {code: 'Inferno.createElement("button", {type: condition ? \'button\' : \'submit\'})'},
+    {code: 'Inferno.createElement("button", {type: condition ? `button` : `submit`})'},
     {
       code: 'Inferno.createElement("button", {type: "button"})',
       options: [{reset: false}]
@@ -174,7 +174,7 @@ ruleTester.run('button-has-type', rule, {
       }]
     },
     {
-      code: 'React.createElement("button", {type: foo})',
+      code: 'Inferno.createElement("button", {type: foo})',
       errors: [{
         messageId: 'complexType'
       }]
@@ -195,20 +195,20 @@ ruleTester.run('button-has-type', rule, {
       }]
     },
     {
-      code: 'React.createElement("button", {type: condition ? "button" : foo})',
+      code: 'Inferno.createElement("button", {type: condition ? "button" : foo})',
       errors: [{
         messageId: 'complexType'
       }]
     },
     {
-      code: 'React.createElement("button", {type: condition ? "button" : "foo"})',
+      code: 'Inferno.createElement("button", {type: condition ? "button" : "foo"})',
       errors: [{
         messageId: 'invalidValue',
         data: {value: 'foo'}
       }]
     },
     {
-      code: 'React.createElement("button", {type: condition ? "button" : "reset"})',
+      code: 'Inferno.createElement("button", {type: condition ? "button" : "reset"})',
       options: [{reset: false}],
       errors: [{
         messageId: 'forbiddenValue',
@@ -216,20 +216,20 @@ ruleTester.run('button-has-type', rule, {
       }]
     },
     {
-      code: 'React.createElement("button", {type: condition ? foo : "button"})',
+      code: 'Inferno.createElement("button", {type: condition ? foo : "button"})',
       errors: [{
         messageId: 'complexType'
       }]
     },
     {
-      code: 'React.createElement("button", {type: condition ? "foo" : "button"})',
+      code: 'Inferno.createElement("button", {type: condition ? "foo" : "button"})',
       errors: [{
         messageId: 'invalidValue',
         data: {value: 'foo'}
       }]
     },
     {
-      code: 'React.createElement("button", {type: condition ? "reset" : "button"})',
+      code: 'Inferno.createElement("button", {type: condition ? "reset" : "button"})',
       options: [{reset: false}],
       errors: [{
         messageId: 'forbiddenValue',

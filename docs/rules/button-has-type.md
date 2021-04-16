@@ -31,7 +31,7 @@ var Hello = Inferno.createElement('span', {type: 'foo'}, 'Hello')
 var Hello = Inferno.createElement('button', {type: 'button'}, 'Hello')
 var Hello = Inferno.createElement('button', {type: 'submit'}, 'Hello')
 var Hello = Inferno.createElement('button', {type: 'reset'}, 'Hello')
-var Hello = React.createElement('button', {type: condition ? 'button' : 'submit'}, 'Hello')
+var Hello = Inferno.createElement('button', {type: condition ? 'button' : 'submit'}, 'Hello')
 ```
 
 ## Rule Options
@@ -55,7 +55,7 @@ var Hello = <button type="reset">Hello</button>
 var Hello = <button type={condition ? "button" : "reset"}>Hello</button>
 
 var Hello = Inferno.createElement('button', {type: 'reset'}, 'Hello')
-var Hello = React.createElement('button', {type: condition ? "button" : "reset"}, 'Hello')
+var Hello = Inferno.createElement('button', {type: condition ? "button" : "reset"}, 'Hello')
 ```
 
 ## When Not To Use It

@@ -12,7 +12,7 @@ const ruleTableRows = Object.keys(rules)
     return [
       docs.recommended ? '✔' : '',
       fixable ? '🔧' : '',
-      `[react/${id}](docs/rules/${id}.md)`,
+      `[inferno/${id}](docs/rules/${id}.md)`,
       docs.description
     ].join(' | ');
   });
@@ -26,8 +26,8 @@ const buildRulesTable = (rows) => {
     .join('\n');
 };
 
-const BASIC_RULES = () => buildRulesTable(ruleTableRows.filter((rule) => !rule.includes('react/jsx-')));
-const JSX_RULES = () => buildRulesTable(ruleTableRows.filter((rule) => rule.includes('react/jsx-')));
+const BASIC_RULES = () => buildRulesTable(ruleTableRows.filter((rule) => !rule.includes('inferno/jsx-')));
+const JSX_RULES = () => buildRulesTable(ruleTableRows.filter((rule) => rule.includes('inferno/jsx-')));
 
 module.exports = {
   transforms: {

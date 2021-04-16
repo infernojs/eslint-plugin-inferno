@@ -1196,7 +1196,7 @@ eslintTester.run('no-unused-state', rule, {
       errors: getErrorMessages(['initial'])
     }, {
       code: `
-        wrap(class NotWorking extends React.Component {
+        wrap(class NotWorking extends Inferno.Component {
             state = {
                 dummy: null
             };
