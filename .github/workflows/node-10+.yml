@@ -28,8 +28,6 @@ jobs:
         eslint:
           - 7
           - 6
-          - 5
-          - 4
 
     steps:
       - uses: actions/checkout@v2
