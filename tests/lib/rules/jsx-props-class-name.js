@@ -16,32 +16,32 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-props-class-name', rule, {
   valid: [{
     code: '<div className="" />',
-    options: ['className']
+    options: ['className'],
   },
   {
     code: '<div class="" />',
-    options: ['class']
-  }
+    options: ['class'],
+  },
   ],
   invalid: [{
     code: '<div className="" />',
     output: '<div class="" />',
     options: ['class'],
-    errors: [{message: 'Invalid attribute \'className\' found, use \'class\' instead'}]
+    errors: [{ message: 'Invalid attribute \'className\' found, use \'class\' instead' }],
   },
   {
     code: '<div class="" />',
     output: '<div className="" />',
     options: ['className'],
-    errors: [{message: 'Invalid attribute \'class\' found, use \'className\' instead'}]
-  }
-  ]
+    errors: [{ message: 'Invalid attribute \'class\' found, use \'className\' instead' }],
+  },
+  ],
 });

@@ -19,118 +19,138 @@ const parsers = require('../../helpers/parsers');
 const parserOptions = {
   ecmaVersion: 2018,
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
+  jsxPragma: null,
 };
 
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
-const linter = ruleTester.linter || eslint.linter;
-linter.defineRule('no-undef', require('eslint/lib/rules/no-undef'));
+const ruleTester = new RuleTester({ parserOptions });
+const linter = ruleTester.linter || eslint.linter || eslint.Linter;
+linter.defineRule('no-undef', require('../../helpers/getESLintCoreRule')('no-undef'));
 
 ruleTester.run('jsx-no-undef', rule, {
-  valid: [{
-    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);'
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);',
-    parser: parsers.BABEL_ESLINT
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<img />);'
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<x-gif />);'
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.Foo />);'
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.foo.Bar />);'
-  }, {
-    code: `
-      /*eslint no-undef:1*/
-      var Inferno;
-      class Hello extends Inferno.Component {
-        render() {
-          return <this.props.tag />
+  valid: parsers.all([
+    {
+      code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);',
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<img />);',
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<x-gif />);',
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.Foo />);',
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.foo.Bar />);',
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Apppp:Foo />);',
+      features: ['jsx namespace'],
+    },
+    {
+      code: `
+        /*eslint no-undef:1*/
+        var Inferno;
+        class Hello extends Inferno.Component {
+          render() {
+            return <this.props.tag />
+          }
         }
-      }
-    `
-  }, {
-    code: 'var Inferno; Inferno.render(<Text />);',
-    globals: {
-      Text: true
-    }
-  }, {
-    code: `
-      import Text from "cool-module";
-      const TextWrapper = function (props) {
-        return (
-          <Text />
-        );
-      };
-    `,
-    parserOptions: Object.assign({sourceType: 'module'}, parserOptions),
-    options: [{
-      allowGlobals: false
-    }],
-    parser: parsers.BABEL_ESLINT
-  }],
-  invalid: [{
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<App />);',
-    errors: [{
-      messageId: 'undefined',
-      data: {identifier: 'App'}
-    }]
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Appp.Foo />);',
-    errors: [{
-      messageId: 'undefined',
-      data: {identifier: 'Appp'}
-    }]
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Apppp:Foo />);',
-    errors: [{
-      messageId: 'undefined',
-      data: {identifier: 'Apppp'}
-    }]
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.Foo />);',
-    errors: [{
-      messageId: 'undefined',
-      data: {identifier: 'appp'}
-    }]
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.foo.Bar />);',
-    errors: [{
-      messageId: 'undefined',
-      data: {identifier: 'appp'}
-    }]
-  }, {
-    code: `
-      const TextWrapper = function (props) {
-        return (
-          <Text />
-        );
-      };
-      export default TextWrapper;
-    `,
-    parserOptions: Object.assign({sourceType: 'module'}, parserOptions),
-    errors: [{
-      messageId: 'undefined',
-      data: {identifier: 'Text'}
-    }],
-    options: [{
-      allowGlobals: false
-    }],
-    parser: parsers.BABEL_ESLINT,
-    globals: {
-      Text: true
-    }
-  }, {
-    code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Foo />);',
-    errors: [{
-      messageId: 'undefined',
-      data: {identifier: 'Foo'}
-    }]
-  }]
+      `,
+    },
+    {
+      code: 'var Inferno; Inferno.render(<Text />);',
+      globals: {
+        Text: true,
+      },
+      features: ['no-babel'], // TODO: FIXME: remove `no-babel` and fix
+    },
+    {
+      code: `
+        import Text from "cool-module";
+        const TextWrapper = function (props) {
+          return (
+            <Text />
+          );
+        };
+      `,
+      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
+      options: [{ allowGlobals: false }],
+    },
+  ].map(parsers.disableNewTS)),
+
+  invalid: parsers.all([
+    {
+      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<App />);',
+      errors: [
+        {
+          messageId: 'undefined',
+          data: { identifier: 'App' },
+        },
+      ],
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Appp.Foo />);',
+      errors: [
+        {
+          messageId: 'undefined',
+          data: { identifier: 'Appp' },
+        },
+      ],
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.Foo />);',
+      errors: [
+        {
+          messageId: 'undefined',
+          data: { identifier: 'appp' },
+        },
+      ],
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.foo.Bar />);',
+      errors: [
+        {
+          messageId: 'undefined',
+          data: { identifier: 'appp' },
+        },
+      ],
+    },
+    {
+      code: `
+        const TextWrapper = function (props) {
+          return (
+            <Text />
+          );
+        };
+        export default TextWrapper;
+      `,
+      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
+      errors: [
+        {
+          messageId: 'undefined',
+          data: { identifier: 'Text' },
+        },
+      ],
+      options: [{ allowGlobals: false }],
+      globals: {
+        Text: true,
+      },
+    },
+    {
+      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Foo />);',
+      errors: [
+        {
+          messageId: 'undefined',
+          data: { identifier: 'Foo' },
+        },
+      ],
+    },
+  ].map(parsers.disableNewTS)),
 });

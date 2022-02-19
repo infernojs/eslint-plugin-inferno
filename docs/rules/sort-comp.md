@@ -2,7 +2,8 @@
 
 When creating Inferno components it is more convenient to always follow the same organisation for method order to help you easily find lifecycle methods, event handlers, etc.
 
-**Fixable:** This rule is automatically fixable using the [`sort-comp` transform](https://github.com/infernojs/inferno-codemod/blob/master/transforms/sort-comp.js) in [inferno-codemod](https://www.npmjs.com/package/inferno-codemod).
+By default, all lifecycle methods from React are considered lifecycle methods, even if not supported in Inferno.
+This is for compatibility reasons when codebase is shared with React and Inferno
 
 ## Rule Details
 

@@ -18,8 +18,8 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
@@ -34,99 +34,120 @@ const withoutJSX = 'module.exports = {}';
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-filename-extension', rule, {
-
-  valid: [
+  valid: parsers.all([
     {
       filename: '<text>',
-      code: withJSXElement
+      code: withJSXElement,
     },
     {
       filename: 'MyComponent.jsx',
-      code: withJSXElement
-    }, {
+      code: withJSXElement,
+    },
+    {
       filename: 'MyComponent.js',
       code: withoutJSX,
-      options: [{allow: 'as-needed'}]
-    }, {
+      options: [{ allow: 'as-needed' }],
+    },
+    {
       filename: 'MyComponent.jsx',
       code: withJSXElement,
-      options: [{allow: 'as-needed'}]
-    }, {
+      options: [{ allow: 'as-needed' }],
+    },
+    {
       filename: 'MyComponent.js',
-      options: [{extensions: ['.js', '.jsx']}],
-      code: withJSXElement
-    }, {
+      options: [{ extensions: ['.js', '.jsx'] }],
+      code: withJSXElement,
+    },
+    {
       filename: 'notAComponent.js',
-      code: withoutJSX
-    }, {
+      code: withoutJSX,
+    },
+    {
       filename: '<text>',
       code: withJSXFragment,
-      parser: parsers.BABEL_ESLINT
+      features: ['fragment'],
     },
     {
       filename: 'MyComponent.jsx',
       code: withJSXFragment,
-      parser: parsers.BABEL_ESLINT
-    }, {
+      features: ['fragment'],
+    },
+    {
       filename: 'MyComponent.js',
-      options: [{extensions: ['.js', '.jsx']}],
+      options: [{ extensions: ['.js', '.jsx'] }],
       code: withJSXFragment,
-      parser: parsers.BABEL_ESLINT
-    }
-  ],
+      features: ['fragment'],
+    },
+  ]),
 
-  invalid: [
+  invalid: parsers.all([
     {
       filename: 'MyComponent.js',
       code: withJSXElement,
-      errors: [{
-        messageId: 'noJSXWithExtension',
-        data: {ext: '.js'}
-      }]
-    }, {
+      errors: [
+        {
+          messageId: 'noJSXWithExtension',
+          data: { ext: '.js' },
+        },
+      ],
+    },
+    {
       filename: 'MyComponent.jsx',
       code: withoutJSX,
-      options: [{allow: 'as-needed'}],
-      errors: [{
-        messageId: 'extensionOnlyForJSX',
-        data: {ext: '.jsx'}
-      }]
-    }, {
+      options: [{ allow: 'as-needed' }],
+      errors: [
+        {
+          messageId: 'extensionOnlyForJSX',
+          data: { ext: '.jsx' },
+        },
+      ],
+    },
+    {
       filename: 'notAComponent.js',
       code: withJSXElement,
-      options: [{allow: 'as-needed'}],
-      errors: [{
-        messageId: 'noJSXWithExtension',
-        data: {ext: '.js'}
-      }]
-    }, {
+      options: [{ allow: 'as-needed' }],
+      errors: [
+        {
+          messageId: 'noJSXWithExtension',
+          data: { ext: '.js' },
+        },
+      ],
+    },
+    {
       filename: 'MyComponent.jsx',
       code: withJSXElement,
-      options: [{extensions: ['.js']}],
-      errors: [{
-        messageId: 'noJSXWithExtension',
-        data: {ext: '.jsx'}
-      }]
-    }, {
+      options: [{ extensions: ['.js'] }],
+      errors: [
+        {
+          messageId: 'noJSXWithExtension',
+          data: { ext: '.jsx' },
+        },
+      ],
+    },
+    {
       filename: 'MyComponent.js',
       code: withJSXFragment,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'noJSXWithExtension',
-        data: {ext: '.js'}
-      }]
-    }, {
+      features: ['fragment'],
+      errors: [
+        {
+          messageId: 'noJSXWithExtension',
+          data: { ext: '.js' },
+        },
+      ],
+    },
+    {
       filename: 'MyComponent.jsx',
       code: withJSXFragment,
-      parser: parsers.BABEL_ESLINT,
-      options: [{extensions: ['.js']}],
-      errors: [{
-        messageId: 'noJSXWithExtension',
-        data: {ext: '.jsx'}
-      }]
-    }
-  ]
-
+      features: ['fragment'],
+      options: [{ extensions: ['.js'] }],
+      errors: [
+        {
+          messageId: 'noJSXWithExtension',
+          data: { ext: '.jsx' },
+        },
+      ],
+    },
+  ]),
 });

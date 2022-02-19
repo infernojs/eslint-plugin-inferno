@@ -1,8 +1,7 @@
 # Prevent usage of `javascript:` URLs (inferno/jsx-no-script-url)
 
-**In Inferno 16.9** any URLs starting with `javascript:` [scheme](https://wiki.whatwg.org/wiki/URL_schemes#javascript:_URLs) log a warning.
-Inferno considers the pattern as a dangerous attack surface, see [details](https://infernojs.org/blog/2019/08/08/inferno-v16.9.0.html#deprecating-javascript-urls).
-**In a future major release**, Inferno will throw an error if it encounters a `javascript:` URL.
+**In Inferno 8** any URLs starting with `javascript:` [scheme](https://wiki.whatwg.org/wiki/URL_schemes#javascript:_URLs) log a warning.
+See React blog for more [details](https://reactjs.org/blog/2019/08/08/react-v16.9.0.html#deprecating-javascript-urls)
 
 ## Rule Details
 

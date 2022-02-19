@@ -18,29 +18,30 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('prefer-stateless-function', rule, {
-
-  valid: [
+  valid: parsers.all([
     {
       // Already a stateless function
       code: `
         const Foo = function(props) {
           return <div>{props.foo}</div>;
         };
-      `
-    }, {
+      `,
+    },
+    {
       // Already a stateless (arrow) function
-      code: 'const Foo = ({foo}) => <div>{foo}</div>;'
-    }, {
+      code: 'const Foo = ({foo}) => <div>{foo}</div>;',
+    },
+    {
       // Extends from PureComponent and uses props
       code: `
         class Foo extends Inferno.PureComponent {
@@ -49,10 +50,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      options: [{
-        ignorePureComponents: true
-      }]
-    }, {
+      options: [{ ignorePureComponents: true }],
+    },
+    {
       // Extends from PureComponent and uses context
       code: `
         class Foo extends Inferno.PureComponent {
@@ -61,10 +61,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      options: [{
-        ignorePureComponents: true
-      }]
-    }, {
+      options: [{ ignorePureComponents: true }],
+    },
+    {
       // Extends from PureComponent in an expression context.
       code: `
         const Foo = class extends Inferno.PureComponent {
@@ -74,10 +73,9 @@ ruleTester.run('prefer-stateless-function', rule, {
         };
       `,
       parserOptions,
-      options: [{
-        ignorePureComponents: true
-      }]
-    }, {
+      options: [{ ignorePureComponents: true }],
+    },
+    {
       // Has a lifecyle method
       code: `
         class Foo extends Inferno.Component {
@@ -88,8 +86,9 @@ ruleTester.run('prefer-stateless-function', rule, {
             return <div>{this.props.foo}</div>;
           }
         }
-      `
-    }, {
+      `,
+    },
+    {
       // Has a state
       code: `
         class Foo extends Inferno.Component {
@@ -100,8 +99,9 @@ ruleTester.run('prefer-stateless-function', rule, {
             return <div onClick={this.changeState.bind(this)}>{this.state.foo || "bar"}</div>;
           }
         }
-      `
-    }, {
+      `,
+    },
+    {
       // Use refs
       code: `
         class Foo extends Inferno.Component {
@@ -112,8 +112,9 @@ ruleTester.run('prefer-stateless-function', rule, {
             return <div ref="foo" onClick={this.doStuff}>{this.props.foo}</div>;
           }
         }
-      `
-    }, {
+      `,
+    },
+    {
       // Has an additional method
       code: `
         class Foo extends Inferno.Component {
@@ -122,8 +123,9 @@ ruleTester.run('prefer-stateless-function', rule, {
             return <div>{this.props.foo}</div>;
           }
         }
-      `
-    }, {
+      `,
+    },
+    {
       // Has an empty (no super) constructor
       code: `
         class Foo extends Inferno.Component {
@@ -132,8 +134,9 @@ ruleTester.run('prefer-stateless-function', rule, {
             return <div>{this.props.foo}</div>;
           }
         }
-      `
-    }, {
+      `,
+    },
+    {
       // Has a constructor
       code: `
         class Foo extends Inferno.Component {
@@ -144,8 +147,9 @@ ruleTester.run('prefer-stateless-function', rule, {
             return <div>{this.props.foo}</div>;
           }
         }
-      `
-    }, {
+      `,
+    },
+    {
       // Has a constructor (2)
       code: `
         class Foo extends Inferno.Component {
@@ -156,8 +160,9 @@ ruleTester.run('prefer-stateless-function', rule, {
             return <div>{this.props.foo}</div>;
           }
         }
-      `
-    }, {
+      `,
+    },
+    {
       // Issue 2187
       code: `
         class Foo extends Inferno.Component {
@@ -168,8 +173,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.TYPESCRIPT_ESLINT
-    }, {
+      features: ['no-default', 'no-babel'],
+    },
+    {
       // Use this.bar
       code: `
         class Foo extends Inferno.Component {
@@ -178,8 +184,8 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+    },
+    {
       // Use this.bar (destructuring)
       code: `
         class Foo extends Inferno.Component {
@@ -189,8 +195,8 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+    },
+    {
       // Use this[bar]
       code: `
         class Foo extends Inferno.Component {
@@ -199,8 +205,8 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+    },
+    {
       // Use this['bar']
       code: `
         class Foo extends Inferno.Component {
@@ -209,8 +215,8 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+    },
+    {
       code: `
         export default (Component) => (
           class Test extends Inferno.Component {
@@ -221,8 +227,8 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         );
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+    },
+    {
       // Has childContextTypes
       code: `
         class Foo extends Inferno.Component {
@@ -234,8 +240,8 @@ ruleTester.run('prefer-stateless-function', rule, {
           color: PropTypes.string
         };
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+    },
+    {
       // Uses a decorator
       code: `
         @foo
@@ -245,8 +251,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+      features: ['decorators'],
+    },
+    {
       // Uses a called decorator
       code: `
         @foo("bar")
@@ -256,8 +263,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+      features: ['decorators'],
+    },
+    {
       // Uses multiple decorators
       code: `
         @foo
@@ -268,7 +276,7 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
+      features: ['decorators'],
     },
     {
       code: `
@@ -278,13 +286,83 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      options: [{
-        ignorePureComponents: true
-      }]
-    }
-  ],
+      options: [{ ignorePureComponents: true }],
+    },
+    {
+      code: `
+        import Inferno, {PureComponent, PropTypes} from 'inferno'
 
-  invalid: [
+        export default function errorDecorator (options) {
+          return WrappedComponent => {
+            class Wrapper extends PureComponent {
+              static propTypes = {
+                error: PropTypes.string
+              }
+              render () {
+                const {error, ...props} = this.props
+                if (error) {
+                  return <div>Error! {error}</div>
+                } else {
+                  return <WrappedComponent {...props} />
+                }
+              }
+            }
+            return Wrapper
+          }
+        }
+      `,
+      features: ['class fields'],
+      options: [{ ignorePureComponents: true }],
+    },
+    {
+      code: `
+        import Inferno, {PureComponent, PropTypes} from 'inferno'
+
+        export default function errorDecorator (options) {
+          return WrappedComponent =>
+            class Wrapper extends PureComponent {
+              static propTypes = {
+                error: PropTypes.string
+              }
+              render () {
+                const {error, ...props} = this.props
+                if (error) {
+                  return <div>Error! {error}</div>
+                } else {
+                  return <WrappedComponent {...props} />
+                }
+              }
+            }
+        }
+      `,
+      features: ['class fields'],
+      options: [{ ignorePureComponents: true }],
+    },
+    {
+      code: `
+        export default function errorDecorator (options) {
+          return WrappedComponent =>
+            class Wrapper extends Inferno.PureComponent {
+              static propTypes = {
+                error: PropTypes.string
+              }
+              render () {
+                const {error, ...props} = this.props
+                if (error) {
+                  return <div>Error! {error}</div>
+                } else {
+                  return <WrappedComponent {...props} />
+                }
+              }
+            }
+        }
+      `,
+      features: ['class fields'],
+      options: [{ ignorePureComponents: true }],
+    },
+  ]),
+
+  invalid: parsers.all([
     {
       // Only use this.props
       code: `
@@ -294,10 +372,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           render() {
@@ -305,10 +382,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.PureComponent {
           render() {
@@ -316,10 +392,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.PureComponent {
           render() {
@@ -327,10 +402,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           static get displayName() {
@@ -341,11 +415,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           static displayName = 'Foo';
@@ -354,11 +426,10 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      features: ['class fields'],
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           static get propTypes() {
@@ -371,11 +442,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           static propTypes = {
@@ -386,11 +455,10 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      features: ['class fields'],
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           props: {
@@ -401,11 +469,10 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      features: ['flow'],
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           constructor() {
@@ -416,11 +483,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           render() {
@@ -429,10 +494,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           render() {
@@ -443,11 +507,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         var Foo = createClass({
           render: function() {
@@ -458,10 +520,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         });
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           render() {
@@ -469,10 +530,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           static defaultProps = {
@@ -484,11 +544,10 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      features: ['class fields'],
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           static get defaultProps() {
@@ -502,10 +561,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           render() {
@@ -517,10 +575,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           foo: true
         };
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           static contextTypes = {
@@ -532,11 +589,10 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      features: ['class fields'],
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           static get contextTypes() {
@@ -550,10 +606,9 @@ ruleTester.run('prefer-stateless-function', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }, {
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+    {
       code: `
         class Foo extends Inferno.Component {
           render() {
@@ -565,9 +620,7 @@ ruleTester.run('prefer-stateless-function', rule, {
           foo: PropTypes.boolean
         };
       `,
-      errors: [{
-        messageId: 'componentShouldBePure'
-      }]
-    }
-  ]
+      errors: [{ messageId: 'componentShouldBePure' }],
+    },
+  ]),
 });

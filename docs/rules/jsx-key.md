@@ -22,7 +22,7 @@ Examples of **correct** code for this rule:
 ```jsx
 [<Hello key="first" />, <Hello key="second" />, <Hello key="third" />];
 
-data.map((x, i) => <Hello key={i}>{x}</Hello>);
+data.map((x) => <Hello key={x.id}>{x}</Hello>);
 
 <Hello key={id} {...{ id, caption }} />
 ```
@@ -57,10 +57,11 @@ Examples of **incorrect** code for this rule:
 <span {...spread} key={"key-after-spread"} />;
 ```
 
-## When not to use
+## When Not To Use It
 
 If you are not using JSX then you can disable this rule.
 
 Also, if you have some prevalent situation where you use arrow functions to
 return JSX that will not be held in an iterable, you may want to disable this
 rule.
+

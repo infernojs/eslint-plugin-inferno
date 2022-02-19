@@ -4,7 +4,9 @@
 
 'use strict';
 
+const semver = require('semver');
 const RuleTester = require('eslint').RuleTester;
+const tsEslintVersion = require('@typescript-eslint/parser/package.json').version;
 const rule = require('../../../lib/rules/no-unused-state');
 
 const parsers = require('../../helpers/parsers');
@@ -12,259 +14,364 @@ const parsers = require('../../helpers/parsers');
 const parserOptions = {
   ecmaVersion: 2018,
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
-const eslintTester = new RuleTester({parserOptions});
+const eslintTester = new RuleTester({ parserOptions });
 
 function getErrorMessages(unusedFields) {
   return unusedFields.map((field) => ({
     messageId: 'unusedStateField',
-    data: {name: field}
+    data: { name: field },
   }));
 }
 
 eslintTester.run('no-unused-state', rule, {
-  valid: [].concat(
-    `function StatelessFnUnaffectedTest(props) {
-       return <SomeComponent foo={props.foo} />;
-    };`,
-    `var NoStateTest = createClass({
-      render: function() {
-        return <SomeComponent />;
-      }
-    });`,
-    `var NoStateMethodTest = createClass({
-      render() {
-        return <SomeComponent />;
-      }
-    });`,
-    `var GetInitialStateTest = createClass({
-      getInitialState: function() {
-        return { foo: 0 };
-      },
-      render: function() {
-        return <SomeComponent foo={this.state.foo} />;
-      }
-    });`,
-    `var ComputedKeyFromVariableTest = createClass({
-      getInitialState: function() {
-        return { [foo]: 0 };
-      },
-      render: function() {
-        return <SomeComponent />;
-      }
-    });`,
-    `var ComputedKeyFromBooleanLiteralTest = createClass({
-      getInitialState: function() {
-        return { [true]: 0 };
-      },
-      render: function() {
-        return <SomeComponent foo={this.state[true]} />;
-      }
-    });`,
-    `var ComputedKeyFromNumberLiteralTest = createClass({
-      getInitialState: function() {
-        return { [123]: 0 };
-      },
-      render: function() {
-        return <SomeComponent foo={this.state[123]} />;
-      }
-    });`,
-    `var ComputedKeyFromExpressionTest = createClass({
-      getInitialState: function() {
-        return { [foo + bar]: 0 };
-      },
-      render: function() {
-        return <SomeComponent />;
-      }
-    });`,
-    `var ComputedKeyFromBinaryExpressionTest = createClass({
-      getInitialState: function() {
-        return { ['foo' + 'bar' * 8]: 0 };
-      },
-      render: function() {
-        return <SomeComponent />;
-      }
-    });`,
-    `var ComputedKeyFromStringLiteralTest = createClass({
-      getInitialState: function() {
-        return { ['foo']: 0 };
-      },
-      render: function() {
-        return <SomeComponent foo={this.state.foo} />;
-      }
-    });`,
-    `var ComputedKeyFromTemplateLiteralTest = createClass({
-      getInitialState: function() {
-        return { [\`foo\${bar}\`]: 0 };
-      },
-      render: function() {
-        return <SomeComponent />;
-      }
-    });`,
-    `var ComputedKeyFromTemplateLiteralTest = createClass({
-      getInitialState: function() {
-        return { [\`foo\`]: 0 };
-      },
-      render: function() {
-        return <SomeComponent foo={this.state['foo']} />;
-      }
-    });`,
-    `var GetInitialStateMethodTest = createClass({
-      getInitialState() {
-        return { foo: 0 };
-      },
-      render() {
-        return <SomeComponent foo={this.state.foo} />;
-      }
-    });`,
-    `var SetStateTest = createClass({
-      onFooChange(newFoo) {
-        this.setState({ foo: newFoo });
-      },
-      render() {
-        return <SomeComponent foo={this.state.foo} />;
-      }
-    });`,
-    `var MultipleSetState = createClass({
-      getInitialState() {
-        return { foo: 0 };
-      },
-      update() {
-        this.setState({foo: 1});
-      },
-      render() {
-        return <SomeComponent onClick={this.update} foo={this.state.foo} />;
-      }
-    });`,
-    `class NoStateTest extends Inferno.Component {
-      render() {
-        return <SomeComponent />;
-      }
-    }`,
-    `class CtorStateTest extends Inferno.Component {
-      constructor() {
-        this.state = { foo: 0 };
-      }
-      render() {
-        return <SomeComponent foo={this.state.foo} />;
-      }
-    }`,
-    `class ComputedKeyFromVariableTest extends Inferno.Component {
-      constructor() {
-        this.state = { [foo]: 0 };
-      }
-      render() {
-        return <SomeComponent />;
-      }
-    }`,
-    `class ComputedKeyFromBooleanLiteralTest extends Inferno.Component {
-      constructor() {
-        this.state = { [false]: 0 };
-      }
-      render() {
-        return <SomeComponent foo={this.state['false']} />;
-      }
-    }`,
-    `class ComputedKeyFromNumberLiteralTest extends Inferno.Component {
-      constructor() {
-        this.state = { [345]: 0 };
-      }
-      render() {
-        return <SomeComponent foo={this.state[345]} />;
-      }
-    }`,
-    `class ComputedKeyFromExpressionTest extends Inferno.Component {
-      constructor() {
-        this.state = { [foo + bar]: 0 };
-      }
-      render() {
-        return <SomeComponent />;
-      }
-    }`,
-    `class ComputedKeyFromBinaryExpressionTest extends Inferno.Component {
-      constructor() {
-        this.state = { [1 + 2 * 8]: 0 };
-      }
-      render() {
-        return <SomeComponent />;
-      }
-    }`,
-    `class ComputedKeyFromStringLiteralTest extends Inferno.Component {
-      constructor() {
-        this.state = { ['foo']: 0 };
-      }
-      render() {
-        return <SomeComponent foo={this.state.foo} />;
-      }
-    }`,
-    `class ComputedKeyFromTemplateLiteralTest extends Inferno.Component {
-      constructor() {
-        this.state = { [\`foo\${bar}\`]: 0 };
-      }
-      render() {
-        return <SomeComponent />;
-      }
-    }`,
-    `class ComputedKeyFromTemplateLiteralTest extends Inferno.Component {
-      constructor() {
-        this.state = { [\`foo\`]: 0 };
-      }
-      render() {
-        return <SomeComponent foo={this.state.foo} />;
-      }
-    }`,
-    `class SetStateTest extends Inferno.Component {
-        onFooChange(newFoo) {
-          this.setState({ foo: newFoo });
-        }
-        render() {
-          return <SomeComponent foo={this.state.foo} />;
-        }
-      }`,
+  valid: parsers.all([].concat(
     {
-      code: `class ClassPropertyStateTest extends Inferno.Component {
+      code: `
+        function StatelessFnUnaffectedTest(props) {
+          return <SomeComponent foo={props.foo} />;
+        };
+      `,
+    },
+    {
+      code: `
+        var NoStateTest = createClass({
+          render: function() {
+            return <SomeComponent />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var NoStateMethodTest = createClass({
+          render() {
+            return <SomeComponent />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var GetInitialStateTest = createClass({
+          getInitialState: function() {
+            return { foo: 0 };
+          },
+          render: function() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var ComputedKeyFromVariableTest = createClass({
+          getInitialState: function() {
+            return { [foo]: 0 };
+          },
+          render: function() {
+            return <SomeComponent />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var ComputedKeyFromBooleanLiteralTest = createClass({
+          getInitialState: function() {
+            return { [true]: 0 };
+          },
+          render: function() {
+            return <SomeComponent foo={this.state[true]} />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var ComputedKeyFromNumberLiteralTest = createClass({
+          getInitialState: function() {
+            return { [123]: 0 };
+          },
+          render: function() {
+            return <SomeComponent foo={this.state[123]} />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var ComputedKeyFromExpressionTest = createClass({
+          getInitialState: function() {
+            return { [foo + bar]: 0 };
+          },
+          render: function() {
+            return <SomeComponent />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var ComputedKeyFromBinaryExpressionTest = createClass({
+          getInitialState: function() {
+            return { ['foo' + 'bar' * 8]: 0 };
+          },
+          render: function() {
+            return <SomeComponent />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var ComputedKeyFromStringLiteralTest = createClass({
+          getInitialState: function() {
+            return { ['foo']: 0 };
+          },
+          render: function() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var ComputedKeyFromTemplateLiteralTest = createClass({
+          getInitialState: function() {
+            return { [\`foo\${bar}\`]: 0 };
+          },
+          render: function() {
+            return <SomeComponent />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var ComputedKeyFromTemplateLiteralTest = createClass({
+          getInitialState: function() {
+            return { [\`foo\`]: 0 };
+          },
+          render: function() {
+            return <SomeComponent foo={this.state['foo']} />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var GetInitialStateMethodTest = createClass({
+          getInitialState() {
+            return { foo: 0 };
+          },
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var SetStateTest = createClass({
+          onFooChange(newFoo) {
+            this.setState({ foo: newFoo });
+          },
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var MultipleSetState = createClass({
+          getInitialState() {
+            return { foo: 0 };
+          },
+          update() {
+            this.setState({foo: 1});
+          },
+          render() {
+            return <SomeComponent onClick={this.update} foo={this.state.foo} />;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        class NoStateTest extends Inferno.Component {
+          render() {
+            return <SomeComponent />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class CtorStateTest extends Inferno.Component {
+          constructor() {
+            this.state = { foo: 0 };
+          }
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ComputedKeyFromVariableTest extends Inferno.Component {
+          constructor() {
+            this.state = { [foo]: 0 };
+          }
+          render() {
+            return <SomeComponent />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ComputedKeyFromBooleanLiteralTest extends Inferno.Component {
+          constructor() {
+            this.state = { [false]: 0 };
+          }
+          render() {
+            return <SomeComponent foo={this.state['false']} />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ComputedKeyFromNumberLiteralTest extends Inferno.Component {
+          constructor() {
+            this.state = { [345]: 0 };
+          }
+          render() {
+            return <SomeComponent foo={this.state[345]} />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ComputedKeyFromExpressionTest extends Inferno.Component {
+          constructor() {
+            this.state = { [foo + bar]: 0 };
+          }
+          render() {
+            return <SomeComponent />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ComputedKeyFromBinaryExpressionTest extends Inferno.Component {
+          constructor() {
+            this.state = { [1 + 2 * 8]: 0 };
+          }
+          render() {
+            return <SomeComponent />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ComputedKeyFromStringLiteralTest extends Inferno.Component {
+          constructor() {
+            this.state = { ['foo']: 0 };
+          }
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ComputedKeyFromTemplateLiteralTest extends Inferno.Component {
+          constructor() {
+            this.state = { [\`foo\${bar}\`]: 0 };
+          }
+          render() {
+            return <SomeComponent />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ComputedKeyFromTemplateLiteralTest extends Inferno.Component {
+          constructor() {
+            this.state = { [\`foo\`]: 0 };
+          }
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class SetStateTest extends Inferno.Component {
+          onFooChange(newFoo) {
+            this.setState({ foo: newFoo });
+          }
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class ClassPropertyStateTest extends Inferno.Component {
           state = { foo: 0 };
           render() {
             return <SomeComponent foo={this.state.foo} />;
           }
-        }`,
-      parser: parsers.BABEL_ESLINT
-    }, parsers.TS([{
-      code: `
-        class OptionalChaining extends Inferno.Component {
-          constructor() {
-            this.state = { foo: 0 };
-          }
-          render() {
-            return <SomeComponent foo={this.state?.foo} />;
-          }
-        }`,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }]), {
-      code: `
-        class OptionalChaining extends Inferno.Component {
-          constructor() {
-            this.state = { foo: 0 };
-          }
-          render() {
-            return <SomeComponent foo={this.state?.foo} />;
-          }
-        }`,
-      parser: parsers.BABEL_ESLINT
+        }
+      `,
+      features: ['class fields'],
     },
-    `class VariableDeclarationTest extends Inferno.Component {
-        constructor() {
-          this.state = { foo: 0 };
+    {
+      code: `
+        class OptionalChaining extends Inferno.Component {
+          constructor() {
+            this.state = { foo: 0 };
+          }
+          render() {
+            return <SomeComponent foo={this.state?.foo} />;
+          }
         }
-        render() {
-          const foo = this.state.foo;
-          return <SomeComponent foo={foo} />;
+      `,
+      features: ['optional chaining'],
+      parserOptions: {
+        ecmaVersion: 2020,
+      },
+    },
+    {
+      code: `
+        class VariableDeclarationTest extends Inferno.Component {
+          constructor() {
+            this.state = { foo: 0 };
+          }
+          render() {
+            const foo = this.state.foo;
+            return <SomeComponent foo={foo} />;
+          }
         }
-      }`,
-    `class DestructuringTest extends Inferno.Component {
+      `,
+    },
+    `
+      class DestructuringTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -272,8 +379,10 @@ eslintTester.run('no-unused-state', rule, {
           const {foo: myFoo} = this.state;
           return <SomeComponent foo={myFoo} />;
         }
-      }`,
-    `class ShorthandDestructuringTest extends Inferno.Component {
+      }
+    `,
+    `
+      class ShorthandDestructuringTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -281,8 +390,10 @@ eslintTester.run('no-unused-state', rule, {
           const {foo} = this.state;
           return <SomeComponent foo={foo} />;
         }
-      }`,
-    `class AliasDeclarationTest extends Inferno.Component {
+      }
+    `,
+    `
+      class AliasDeclarationTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -290,8 +401,10 @@ eslintTester.run('no-unused-state', rule, {
           const state = this.state;
           return <SomeComponent foo={state.foo} />;
         }
-      }`,
-    `class AliasAssignmentTest extends Inferno.Component {
+      }
+    `,
+    `
+      class AliasAssignmentTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -300,8 +413,10 @@ eslintTester.run('no-unused-state', rule, {
           state = this.state;
           return <SomeComponent foo={state.foo} />;
         }
-      }`,
-    `class DestructuringAliasTest extends Inferno.Component {
+      }
+    `,
+    `
+      class DestructuringAliasTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -309,8 +424,10 @@ eslintTester.run('no-unused-state', rule, {
           const {state: myState} = this;
           return <SomeComponent foo={myState.foo} />;
         }
-      }`,
-    `class ShorthandDestructuringAliasTest extends Inferno.Component {
+      }
+    `,
+    `
+      class ShorthandDestructuringAliasTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -318,8 +435,10 @@ eslintTester.run('no-unused-state', rule, {
           const {state} = this;
           return <SomeComponent foo={state.foo} />;
         }
-      }`,
-    `class RestPropertyTest extends Inferno.Component {
+      }
+    `,
+    `
+      class RestPropertyTest extends Inferno.Component {
         constructor() {
           this.state = {
             foo: 0,
@@ -330,20 +449,24 @@ eslintTester.run('no-unused-state', rule, {
           const {foo, ...others} = this.state;
           return <SomeComponent foo={foo} bar={others.bar} />;
         }
-      }`,
+      }
+    `,
     {
-      code: `class DeepDestructuringTest extends Inferno.Component {
-        state = { foo: 0, bar: 0 };
-        render() {
-          const {state: {foo, ...others}} = this;
-          return <SomeComponent foo={foo} bar={others.bar} />;
+      code: `
+        class DeepDestructuringTest extends Inferno.Component {
+          state = { foo: 0, bar: 0 };
+          render() {
+            const {state: {foo, ...others}} = this;
+            return <SomeComponent foo={foo} bar={others.bar} />;
+          }
         }
-      }`,
-      parser: parsers.BABEL_ESLINT
+      `,
+      features: ['class fields'],
     },
     // A cleverer analysis might recognize that the following should be errors,
     // but they're out of scope for this lint rule.
-    `class MethodArgFalseNegativeTest extends Inferno.Component {
+    `
+      class MethodArgFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -352,8 +475,10 @@ eslintTester.run('no-unused-state', rule, {
           this.consumeFoo(this.state.foo);
           return <SomeComponent />;
         }
-      }`,
-    `class AssignedToObjectFalseNegativeTest extends Inferno.Component {
+      }
+    `,
+    `
+      class AssignedToObjectFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -361,8 +486,10 @@ eslintTester.run('no-unused-state', rule, {
           const obj = { foo: this.state.foo, bar: 0 };
           return <SomeComponent bar={obj.bar} />;
         }
-      }`,
-    `class ComputedAccessFalseNegativeTest extends Inferno.Component {
+      }
+    `,
+    `
+      class ComputedAccessFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0, bar: 1 };
         }
@@ -370,16 +497,20 @@ eslintTester.run('no-unused-state', rule, {
           const bar = 'bar';
           return <SomeComponent bar={this.state[bar]} />;
         }
-      }`,
-    `class JsxSpreadFalseNegativeTest extends Inferno.Component {
+      }
+    `,
+    `
+      class JsxSpreadFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
         render() {
           return <SomeComponent {...this.state} />;
         }
-      }`,
-    `class AliasedJsxSpreadFalseNegativeTest extends Inferno.Component {
+      }
+    `,
+    `
+      class AliasedJsxSpreadFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -387,8 +518,10 @@ eslintTester.run('no-unused-state', rule, {
           const state = this.state;
           return <SomeComponent {...state} />;
         }
-      }`,
-    `class ObjectSpreadFalseNegativeTest extends Inferno.Component {
+      }
+    `,
+    `
+      class ObjectSpreadFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -396,8 +529,10 @@ eslintTester.run('no-unused-state', rule, {
           const attrs = { ...this.state, foo: 1 };
           return <SomeComponent foo={attrs.foo} />;
         }
-      }`,
-    `class ShadowingFalseNegativeTest extends Inferno.Component {
+      }
+    `,
+    `
+      class ShadowingFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0 };
         }
@@ -410,8 +545,10 @@ eslintTester.run('no-unused-state', rule, {
           }
           return <SomeComponent foo={foo} />;
         }
-      }`,
-    `class NonRenderClassMethodFalseNegativeTest extends Inferno.Component {
+      }
+    `,
+    `
+      class NonRenderClassMethodFalseNegativeTest extends Inferno.Component {
         constructor() {
           this.state = { foo: 0, bar: 0 };
         }
@@ -426,583 +563,708 @@ eslintTester.run('no-unused-state', rule, {
         render() {
           return <SomeComponent />;
         }
-      }`,
+      }
+    `,
     {
-      code: `class TypeCastExpressionSpreadFalseNegativeTest extends Inferno.Component {
-        constructor() {
-          this.state = { foo: 0 };
+      code: `
+        class TypeCastExpressionSpreadFalseNegativeTest extends Inferno.Component {
+          constructor() {
+            this.state = { foo: 0 };
+          }
+          render() {
+            return <SomeComponent {...(this.state: any)} />;
+          }
         }
-        render() {
-          return <SomeComponent {...(this.state: any)} />;
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
+      `,
+      features: ['flow'],
     },
     {
-      code: `class ArrowFunctionClassMethodDestructuringFalseNegativeTest extends Inferno.Component {
-        constructor() {
-          this.state = { foo: 0 };
-        }
+      code: `
+        class ArrowFunctionClassMethodDestructuringFalseNegativeTest extends Inferno.Component {
+          constructor() {
+            this.state = { foo: 0 };
+          }
 
-        doSomething = () => {
-          const { state: { foo } } = this;
+          doSomething = () => {
+            const { state: { foo } } = this;
 
-          return foo;
-        }
+            return foo;
+          }
 
-        render() {
-          return <SomeComponent />;
+          render() {
+            return <SomeComponent />;
+          }
         }
-      }`,
-      parser: parsers.BABEL_ESLINT
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: `class ArrowFunctionClassMethodWithClassPropertyTransformFalseNegativeTest extends Inferno.Component {
-        state = { foo: 0 };
+      code: `
+        class ArrowFunctionClassMethodWithClassPropertyTransformFalseNegativeTest extends Inferno.Component {
+          state = { foo: 0 };
 
-        doSomething = () => {
-          const { state:{ foo } } = this;
+          doSomething = () => {
+            const { state:{ foo } } = this;
 
-          return foo;
+            return foo;
+          }
+
+          render() {
+            return <SomeComponent />;
+          }
         }
-
-        render() {
-          return <SomeComponent />;
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: `class ArrowFunctionClassMethodDeepDestructuringFalseNegativeTest extends Inferno.Component {
-        state = { foo: { bar: 0 } };
+      code: `
+        class ArrowFunctionClassMethodDeepDestructuringFalseNegativeTest extends Inferno.Component {
+          state = { foo: { bar: 0 } };
 
-        doSomething = () => {
-          const { state: { foo: { bar }}} = this;
+          doSomething = () => {
+            const { state: { foo: { bar }}} = this;
 
-          return bar;
+            return bar;
+          }
+
+          render() {
+            return <SomeComponent />;
+          }
         }
-
-        render() {
-          return <SomeComponent />;
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: `class ArrowFunctionClassMethodDestructuringAssignmentFalseNegativeTest extends Inferno.Component {
-        state = { foo: 0 };
+      code: `
+        class ArrowFunctionClassMethodDestructuringAssignmentFalseNegativeTest extends Inferno.Component {
+          state = { foo: 0 };
 
-        doSomething = () => {
-          const { state: { foo: bar }} = this;
+          doSomething = () => {
+            const { state: { foo: bar }} = this;
 
-          return bar;
+            return bar;
+          }
+
+          render() {
+            return <SomeComponent />;
+          }
         }
-
-        render() {
-          return <SomeComponent />;
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: `class ThisStateAsAnObject extends Inferno.Component {
-        state = {
-          active: true
-        };
-
-        render() {
-          return <div className={classNames('overflowEdgeIndicator', className, this.state)} />;
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: `class GetDerivedStateFromPropsTest extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            id: 123,
+      code: `
+        class ThisStateAsAnObject extends Inferno.Component {
+          state = {
+            active: true
           };
+
+          render() {
+            return <div className={classNames('overflowEdgeIndicator', className, this.state)} />;
+          }
         }
-        static getDerivedStateFromProps(nextProps, otherState) {
-          if (otherState.id === nextProps.id) {
-            return {
-              selected: true,
+      `,
+      features: ['class fields'],
+    },
+    {
+      code: `
+        class GetDerivedStateFromPropsTest extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              id: 123,
             };
           }
-          return null;
-        }
-        render() {
-          return (
-            <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
-          );
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: `class ComponentDidUpdateTest extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            id: 123,
-          };
-        }
-
-        componentDidUpdate(someProps, someState) {
-          if (someState.id === someProps.id) {
-            doStuff();
+          static getDerivedStateFromProps(nextProps, otherState) {
+            if (otherState.id === nextProps.id) {
+              return {
+                selected: true,
+              };
+            }
+            return null;
+          }
+          render() {
+            return (
+              <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
+            );
           }
         }
-        render() {
-          return (
-            <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
-          );
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
+      `,
     },
     {
-      code: `class ShouldComponentUpdateTest extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            id: 123,
-          };
+      code: `
+        class ComponentDidUpdateTest extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              id: 123,
+            };
+          }
+
+          componentDidUpdate(someProps, someState) {
+            if (someState.id === someProps.id) {
+              doStuff();
+            }
+          }
+          render() {
+            return (
+              <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
+            );
+          }
         }
-        shouldComponentUpdate(nextProps, nextState) {
-          return nextState.id === nextProps.id;
-        }
-        render() {
-          return (
-            <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
-          );
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
+      `,
     },
     {
-      code: `class NestedScopesTest extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            id: 123,
-          };
-        }
-        shouldComponentUpdate(nextProps, nextState) {
-          return (function() {
+      code: `
+        class ShouldComponentUpdateTest extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              id: 123,
+            };
+          }
+          shouldComponentUpdate(nextProps, nextState) {
             return nextState.id === nextProps.id;
-          })();
-        }
-        render() {
-          return (
-            <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
-          );
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Foo extends Component {
-        state = {
-          initial: 'foo',
-        }
-        handleChange = () => {
-          this.setState(state => ({
-            current: state.initial
-          }));
-        }
-        render() {
-          const { current } = this.state;
-          return <div>{current}</div>
-        }
-      }
-      `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Foo extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            initial: 'foo',
+          }
+          render() {
+            return (
+              <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
+            );
           }
         }
-        handleChange = () => {
-          this.setState(state => ({
-            current: state.initial
-          }));
-        }
-        render() {
-          const { current } = this.state;
-          return <div>{current}</div>
-        }
-      }
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Foo extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            initial: 'foo',
-          }
-        }
-        handleChange = () => {
-          this.setState((state, props) => ({
-            current: state.initial
-          }));
-        }
-        render() {
-          const { current } = this.state;
-          return <div>{current}</div>
-        }
-      }
-      `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      var Foo = createClass({
-        getInitialState: function() {
-          return { initial: 'foo' };
-        },
-        handleChange: function() {
-          this.setState(state => ({
-            current: state.initial
-          }));
-        },
-        render() {
-          const { current } = this.state;
-          return <div>{current}</div>
-        }
-      });
-      `
-    }, {
-      code: `
-      var Foo = createClass({
-        getInitialState: function() {
-          return { initial: 'foo' };
-        },
-        handleChange: function() {
-          this.setState((state, props) => ({
-            current: state.initial
-          }));
-        },
-        render() {
-          const { current } = this.state;
-          return <div>{current}</div>
-        }
-      });
-      `
-    }, {
-      code: `
-      class SetStateDestructuringCallback extends Component {
-        state = {
-            used: 1, unused: 2
-        }
-        handleChange = () => {
-          this.setState(({unused}) => ({
-            used: unused * unused,
-          }));
-        }
-        render() {
-          return <div>{this.state.used}</div>
-        }
-      }
-      `,
-      parser: parsers.BABEL_ESLINT
     },
     {
       code: `
-      class SetStateCallbackStateCondition extends Component {
-        state = {
-            isUsed: true,
-            foo: 'foo'
+        class NestedScopesTest extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              id: 123,
+            };
+          }
+          shouldComponentUpdate(nextProps, nextState) {
+            return (function() {
+              return nextState.id === nextProps.id;
+            })();
+          }
+          render() {
+            return (
+              <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
+            );
+          }
         }
-        handleChange = () => {
-          this.setState((prevState) => (prevState.isUsed ? {foo: 'bar', isUsed: false} : {}));
-        }
-        render() {
-          return <SomeComponent foo={this.state.foo} />;
-        }
-      }
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      // Don't error out
-      code: `
-      class Foo extends Component {
-        handleChange = function() {
-          this.setState(() => ({ foo: value }));
-        }
-        render() {
-          return <SomeComponent foo={this.state.foo} />;
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      // Don't error out
-      code: `
-      class Foo extends Component {
-        handleChange = function() {
-          this.setState(state => ({ foo: value }));
-        }
-        render() {
-          return <SomeComponent foo={this.state.foo} />;
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      // Don't error out
-      code: `
-      class Foo extends Component {
-        static handleChange = () => {
-          this.setState(state => ({ foo: value }));
-        }
-        render() {
-          return <SomeComponent foo={this.state.foo} />;
-        }
-      }`,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Foo extends Component {
-        state = {
-          thisStateAliasProp,
-          thisStateAliasRestProp,
-          thisDestructStateAliasProp,
-          thisDestructStateAliasRestProp,
-          thisDestructStateDestructRestProp,
-          thisSetStateProp,
-          thisSetStateRestProp,
-        } as unknown
-
-        constructor() {
-          // other methods of defining state props
-          ((this as unknown).state as unknown) = { thisStateProp } as unknown;
-          ((this as unknown).setState as unknown)({ thisStateDestructProp } as unknown);
-          ((this as unknown).setState as unknown)(state => ({ thisDestructStateDestructProp } as unknown));
-        }
-
-        thisStateAlias() {
-          const state = (this as unknown).state as unknown;
-
-          (state as unknown).thisStateAliasProp as unknown;
-          const { ...thisStateAliasRest } = state as unknown;
-          (thisStateAliasRest as unknown).thisStateAliasRestProp as unknown;
-        }
-
-        thisDestructStateAlias() {
-          const { state } = this as unknown;
-
-          (state as unknown).thisDestructStateAliasProp as unknown;
-          const { ...thisDestructStateAliasRest } = state as unknown;
-          (thisDestructStateAliasRest as unknown).thisDestructStateAliasRestProp as unknown;
-        }
-
-        thisSetState() {
-          ((this as unknown).setState as unknown)(state => (state as unknown).thisSetStateProp as unknown);
-          ((this as unknown).setState as unknown)(({ ...thisSetStateRest }) => (thisSetStateRest as unknown).thisSetStateRestProp as unknown);
-        }
-
-        render() {
-          ((this as unknown).state as unknown).thisStateProp as unknown;
-          const { thisStateDestructProp } = (this as unknown).state as unknown;
-          const { state: { thisDestructStateDestructProp, ...thisDestructStateDestructRest } } = this as unknown;
-          (thisDestructStateDestructRest as unknown).thisDestructStateDestructRestProp as unknown;
-
-          return null;
-        }
-      }
-      `,
-      parser: parsers.TYPESCRIPT_ESLINT
-    }
-  ),
-
-  invalid: [
+    },
     {
-      code: `var UnusedGetInitialStateTest = createClass({
+      code: `
+        class Foo extends Component {
+          state = {
+            initial: 'foo',
+          }
+          handleChange = () => {
+            this.setState(state => ({
+              current: state.initial
+            }));
+          }
+          render() {
+            const { current } = this.state;
+            return <div>{current}</div>
+          }
+        }
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+    },
+    {
+      code: `
+        class Foo extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              initial: 'foo',
+            }
+          }
+          handleChange = () => {
+            this.setState(state => ({
+              current: state.initial
+            }));
+          }
+          render() {
+            const { current } = this.state;
+            return <div>{current}</div>
+          }
+        }
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+    },
+    {
+      code: `
+        class Foo extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              initial: 'foo',
+            }
+          }
+          handleChange = () => {
+            this.setState((state, props) => ({
+              current: state.initial
+            }));
+          }
+          render() {
+            const { current } = this.state;
+            return <div>{current}</div>
+          }
+        }
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+    },
+    {
+      code: `
+        var Foo = createClass({
+          getInitialState: function() {
+            return { initial: 'foo' };
+          },
+          handleChange: function() {
+            this.setState(state => ({
+              current: state.initial
+            }));
+          },
+          render() {
+            const { current } = this.state;
+            return <div>{current}</div>
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var Foo = createClass({
+          getInitialState: function() {
+            return { initial: 'foo' };
+          },
+          handleChange: function() {
+            this.setState((state, props) => ({
+              current: state.initial
+            }));
+          },
+          render() {
+            const { current } = this.state;
+            return <div>{current}</div>
+          }
+        });
+      `,
+      features: ['no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+    },
+    {
+      code: `
+        class SetStateDestructuringCallback extends Component {
+          state = {
+              used: 1, unused: 2
+          }
+          handleChange = () => {
+            this.setState(({unused}) => ({
+              used: unused * unused,
+            }));
+          }
+          render() {
+            return <div>{this.state.used}</div>
+          }
+        }
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+    },
+    {
+      code: `
+        class SetStateCallbackStateCondition extends Component {
+          state = {
+              isUsed: true,
+              foo: 'foo'
+          }
+          handleChange = () => {
+            this.setState((prevState) => (prevState.isUsed ? {foo: 'bar', isUsed: false} : {}));
+          }
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        }
+      `,
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+    },
+    {
+      // Don't error out
+      code: `
+        class Foo extends Component {
+          handleChange = function() {
+            this.setState(() => ({ foo: value }));
+          }
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        }
+      `,
+      features: ['class fields'],
+    },
+    {
+      // Don't error out
+      code: `
+        class Foo extends Component {
+          handleChange = function() {
+            this.setState(state => ({ foo: value }));
+          }
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        }
+      `,
+      features: ['class fields'],
+    },
+    {
+      // Don't error out
+      code: `
+        class Foo extends Component {
+          static handleChange = () => {
+            this.setState(state => ({ foo: value }));
+          }
+          render() {
+            return <SomeComponent foo={this.state.foo} />;
+          }
+        }
+      `,
+      features: ['class fields'],
+    },
+    {
+      code: `
+        class Foo extends Component {
+          state = {
+            thisStateAliasProp,
+            thisStateAliasRestProp,
+            thisDestructStateAliasProp,
+            thisDestructStateAliasRestProp,
+            thisDestructStateDestructRestProp,
+            thisSetStateProp,
+            thisSetStateRestProp,
+          } as unknown
+
+          constructor() {
+            // other methods of defining state props
+            ((this as unknown).state as unknown) = { thisStateProp } as unknown;
+            ((this as unknown).setState as unknown)({ thisStateDestructProp } as unknown);
+            ((this as unknown).setState as unknown)(state => ({ thisDestructStateDestructProp } as unknown));
+          }
+
+          thisStateAlias() {
+            const state = (this as unknown).state as unknown;
+
+            (state as unknown).thisStateAliasProp as unknown;
+            const { ...thisStateAliasRest } = state as unknown;
+            (thisStateAliasRest as unknown).thisStateAliasRestProp as unknown;
+          }
+
+          thisDestructStateAlias() {
+            const { state } = this as unknown;
+
+            (state as unknown).thisDestructStateAliasProp as unknown;
+            const { ...thisDestructStateAliasRest } = state as unknown;
+            (thisDestructStateAliasRest as unknown).thisDestructStateAliasRestProp as unknown;
+          }
+
+          thisSetState() {
+            ((this as unknown).setState as unknown)(state => (state as unknown).thisSetStateProp as unknown);
+            ((this as unknown).setState as unknown)(({ ...thisSetStateRest }) => (thisSetStateRest as unknown).thisSetStateRestProp as unknown);
+          }
+
+          render() {
+            ((this as unknown).state as unknown).thisStateProp as unknown;
+            const { thisStateDestructProp } = (this as unknown).state as unknown;
+            const { state: { thisDestructStateDestructProp, ...thisDestructStateDestructRest } } = this as unknown;
+            (thisDestructStateDestructRest as unknown).thisDestructStateDestructRestProp as unknown;
+
+            return null;
+          }
+        }
+      `,
+      features: ['ts', 'no-babel'],
+    },
+    semver.satisfies(tsEslintVersion, '>= 5') ? {
+      code: `
+        interface Props {}
+
+        interface State {
+          flag: boolean;
+        }
+
+        export default class RuleTest extends Inferno.Component<Props, State> {
+          readonly state: State = {
+            flag: false,
+          };
+
+          static getDerivedStateFromProps = (props: Props, state: State) => {
+            const newState: Partial<State> = {};
+            if (!state.flag) {
+              newState.flag = true;
+            }
+            return newState;
+          };
+        }
+      `,
+      features: ['ts', 'no-babel-old', 'no-ts-old'],
+    } : [],
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          onCancel = (data) => {
+            console.log('Cancelled', data)
+            this.setState({ status: 'Cancelled. Try again?' })
+          }
+          render() {
+            const { status } = this.state;
+            return <div>{status}</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+    },
+    {
+      code: `
+        class KarmaRefundPillComponent extends GenericPillComponent {
+          renderContent = () => {
+            const { action } = this.props
+
+            return (
+              <Box fontSize={[1]} mx={[2]} minWidth="10px" minHeight="26px" alignItems="center">
+                <FormattedText
+                  fields={getKarmaClaimLevel1Fields(action)}
+                  i18nKey="pillTemplates.karmarefund.summary"
+                  fontSize={[1]}
+                />
+              </Box>
+            )
+          }
+        }
+      `,
+      features: ['ts'],
+    }
+  )),
+
+  invalid: parsers.all([
+    {
+      code: `
+        var UnusedGetInitialStateTest = createClass({
           getInitialState: function() {
             return { foo: 0 };
           },
           render: function() {
             return <SomeComponent />;
           }
-        })`,
-      errors: getErrorMessages(['foo'])
+        })
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `var UnusedComputedStringLiteralKeyStateTest = createClass({
+      code: `
+        var UnusedComputedStringLiteralKeyStateTest = createClass({
           getInitialState: function() {
             return { ['foo']: 0 };
           },
           render: function() {
             return <SomeComponent />;
           }
-        })`,
-      errors: getErrorMessages(['foo'])
+        })
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `var UnusedComputedTemplateLiteralKeyStateTest = createClass({
+      code: `
+        var UnusedComputedTemplateLiteralKeyStateTest = createClass({
           getInitialState: function() {
             return { [\`foo\`]: 0 };
           },
           render: function() {
             return <SomeComponent />;
           }
-        })`,
-      errors: getErrorMessages(['foo'])
+        })
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `var UnusedComputedNumberLiteralKeyStateTest = createClass({
+      code: `
+        var UnusedComputedNumberLiteralKeyStateTest = createClass({
           getInitialState: function() {
             return { [123]: 0 };
           },
           render: function() {
             return <SomeComponent />;
           }
-        })`,
-      errors: getErrorMessages(['123'])
+        })
+      `,
+      errors: getErrorMessages(['123']),
     },
     {
-      code: `var UnusedComputedBooleanLiteralKeyStateTest = createClass({
+      code: `
+        var UnusedComputedBooleanLiteralKeyStateTest = createClass({
           getInitialState: function() {
             return { [true]: 0 };
           },
           render: function() {
             return <SomeComponent />;
           }
-        })`,
-      errors: getErrorMessages(['true'])
+        })
+      `,
+      errors: getErrorMessages(['true']),
     },
     {
-      code: `var UnusedGetInitialStateMethodTest = createClass({
+      code: `
+        var UnusedGetInitialStateMethodTest = createClass({
           getInitialState() {
             return { foo: 0 };
           },
           render() {
             return <SomeComponent />;
           }
-        })`,
-      errors: getErrorMessages(['foo'])
+        })
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `var UnusedSetStateTest = createClass({
+      code: `
+        var UnusedSetStateTest = createClass({
           onFooChange(newFoo) {
             this.setState({ foo: newFoo });
           },
           render() {
             return <SomeComponent />;
           }
-        });`,
-      errors: getErrorMessages(['foo'])
+        });
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `class UnusedCtorStateTest extends Inferno.Component {
+      code: `
+        class UnusedCtorStateTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
           render() {
             return <SomeComponent />;
           }
-        }`,
-      errors: getErrorMessages(['foo'])
+        }
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `class UnusedSetStateTest extends Inferno.Component {
+      code: `
+        class UnusedSetStateTest extends Inferno.Component {
           onFooChange(newFoo) {
             this.setState({ foo: newFoo });
           }
           render() {
             return <SomeComponent />;
           }
-        }`,
-      errors: getErrorMessages(['foo'])
+        }
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `class UnusedClassPropertyStateTest extends Inferno.Component {
+      code: `
+        class UnusedClassPropertyStateTest extends Inferno.Component {
           state = { foo: 0 };
           render() {
             return <SomeComponent />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['foo']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class UnusedComputedStringLiteralKeyStateTest extends Inferno.Component {
+      code: `
+        class UnusedComputedStringLiteralKeyStateTest extends Inferno.Component {
           state = { ['foo']: 0 };
           render() {
             return <SomeComponent />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['foo']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class UnusedComputedTemplateLiteralKeyStateTest extends Inferno.Component {
+      code: `
+        class UnusedComputedTemplateLiteralKeyStateTest extends Inferno.Component {
           state = { [\`foo\`]: 0 };
           render() {
             return <SomeComponent />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['foo']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class UnusedComputedTemplateLiteralKeyStateTest extends Inferno.Component {
+      code: `
+        class UnusedComputedTemplateLiteralKeyStateTest extends Inferno.Component {
           state = { [\`foo \\n bar\`]: 0 };
           render() {
             return <SomeComponent />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['foo \\n bar']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class UnusedComputedBooleanLiteralKeyStateTest extends Inferno.Component {
+      code: `
+        class UnusedComputedBooleanLiteralKeyStateTest extends Inferno.Component {
           state = { [true]: 0 };
           render() {
             return <SomeComponent />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['true']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class UnusedComputedNumberLiteralKeyStateTest extends Inferno.Component {
+      code: `
+        class UnusedComputedNumberLiteralKeyStateTest extends Inferno.Component {
           state = { [123]: 0 };
           render() {
             return <SomeComponent />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['123']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class UnusedComputedFloatLiteralKeyStateTest extends Inferno.Component {
+      code: `
+        class UnusedComputedFloatLiteralKeyStateTest extends Inferno.Component {
           state = { [123.12]: 0 };
           render() {
             return <SomeComponent />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['123.12']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class UnusedStateWhenPropsAreSpreadTest extends Inferno.Component {
+      code: `
+        class UnusedStateWhenPropsAreSpreadTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
           render() {
             return <SomeComponent {...this.props} />;
           }
-        }`,
-      errors: getErrorMessages(['foo'])
+        }
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `class AliasOutOfScopeTest extends Inferno.Component {
+      code: `
+        class AliasOutOfScopeTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
@@ -1013,11 +1275,13 @@ eslintTester.run('no-unused-state', rule, {
           someMethod() {
             const outOfScope = state.foo;
           }
-        }`,
-      errors: getErrorMessages(['foo'])
+        }
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `class MultipleErrorsTest extends Inferno.Component {
+      code: `
+        class MultipleErrorsTest extends Inferno.Component {
           constructor() {
             this.state = {
               foo: 0,
@@ -1030,11 +1294,13 @@ eslintTester.run('no-unused-state', rule, {
             let {state} = this;
             return <SomeComponent baz={state.baz} qux={state.qux} />;
           }
-        }`,
-      errors: getErrorMessages(['foo', 'bar'])
+        }
+      `,
+      errors: getErrorMessages(['foo', 'bar']),
     },
     {
-      code: `class MultipleErrorsForSameKeyTest extends Inferno.Component {
+      code: `
+        class MultipleErrorsForSameKeyTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
@@ -1044,11 +1310,13 @@ eslintTester.run('no-unused-state', rule, {
           render() {
             return <SomeComponent />;
           }
-        }`,
-      errors: getErrorMessages(['foo', 'foo'])
+        }
+      `,
+      errors: getErrorMessages(['foo', 'foo']),
     },
     {
-      code: `class UnusedRestPropertyFieldTest extends Inferno.Component {
+      code: `
+        class UnusedRestPropertyFieldTest extends Inferno.Component {
           constructor() {
             this.state = {
               foo: 0,
@@ -1059,11 +1327,13 @@ eslintTester.run('no-unused-state', rule, {
             const {bar, ...others} = this.state;
             return <SomeComponent bar={bar} />;
           }
-        }`,
-      errors: getErrorMessages(['foo'])
+        }
+      `,
+      errors: getErrorMessages(['foo']),
     },
     {
-      code: `class UnusedStateArrowFunctionMethodTest extends Inferno.Component {
+      code: `
+        class UnusedStateArrowFunctionMethodTest extends Inferno.Component {
           constructor() {
             this.state = { foo: 0 };
           }
@@ -1073,12 +1343,14 @@ eslintTester.run('no-unused-state', rule, {
           render() {
             return <SomeComponent />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['foo']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class TypeCastExpressionTest extends Inferno.Component {
+      code: `
+        class TypeCastExpressionTest extends Inferno.Component {
           constructor() {
             this.state = {
               foo: 0,
@@ -1094,107 +1366,115 @@ eslintTester.run('no-unused-state', rule, {
             baz = (others: any)['baz'];
             return <SomeComponent foo={foo} bar={bar} baz={baz} />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['qux']),
-      parser: parsers.BABEL_ESLINT
+      features: ['flow'],
     },
     {
-      code: `class UnusedDeepDestructuringTest extends Inferno.Component {
+      code: `
+        class UnusedDeepDestructuringTest extends Inferno.Component {
           state = { foo: 0, bar: 0 };
           render() {
             const {state: {foo}} = this;
             return <SomeComponent foo={foo} />;
           }
-        }`,
+        }
+      `,
       errors: getErrorMessages(['bar']),
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields'],
     },
     {
-      code: `class FakePrevStateVariableTest extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            id: 123,
-            foo: 456
-          };
-        }
+      code: `
+        class FakePrevStateVariableTest extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              id: 123,
+              foo: 456
+            };
+          }
 
-        componentDidUpdate(someProps, someState) {
-          if (someState.id === someProps.id) {
-            const prevState = { foo: 789 };
-            console.log(prevState.foo);
+          componentDidUpdate(someProps, someState) {
+            if (someState.id === someProps.id) {
+              const prevState = { foo: 789 };
+              console.log(prevState.foo);
+            }
+          }
+          render() {
+            return (
+              <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
+            );
           }
         }
-        render() {
-          return (
-            <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
-          );
-        }
-      }`,
-      errors: getErrorMessages(['foo']),
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: `class UseStateParameterOfNonLifecycleTest extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            foo: 123,
-          };
-        }
-        nonLifecycle(someProps, someState) {
-          doStuff(someState.foo)
-        }
-        render() {
-          return (
-            <SomeComponent />
-          );
-        }
-      }`,
-      errors: getErrorMessages(['foo']),
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: `class MissingStateParameterTest extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            id: 123
-          };
-        }
-
-        componentDidUpdate(someProps) {
-          const prevState = { id: 456 };
-          console.log(prevState.id);
-        }
-        render() {
-          return (
-            <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
-          );
-        }
-      }`,
-      errors: getErrorMessages(['id']),
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Foo extends Component {
-        state = {
-          initial: 'foo',
-        }
-        handleChange = () => {
-          this.setState(() => ({
-            current: 'hi'
-          }));
-        }
-        render() {
-          const { current } = this.state;
-          return <div>{current}</div>
-        }
-      }
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: getErrorMessages(['initial'])
-    }, {
+      errors: getErrorMessages(['foo']),
+    },
+    {
+      code: `
+        class UseStateParameterOfNonLifecycleTest extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              foo: 123,
+            };
+          }
+          nonLifecycle(someProps, someState) {
+            doStuff(someState.foo)
+          }
+          render() {
+            return (
+              <SomeComponent />
+            );
+          }
+        }
+      `,
+      errors: getErrorMessages(['foo']),
+    },
+    {
+      code: `
+        class MissingStateParameterTest extends Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              id: 123
+            };
+          }
+
+          componentDidUpdate(someProps) {
+            const prevState = { id: 456 };
+            console.log(prevState.id);
+          }
+          render() {
+            return (
+              <h1>{this.state.selected ? 'Selected' : 'Not selected'}</h1>
+            );
+          }
+        }
+      `,
+      errors: getErrorMessages(['id']),
+    },
+    {
+      code: `
+        class Foo extends Component {
+          state = {
+            initial: 'foo',
+          }
+          handleChange = () => {
+            this.setState(() => ({
+              current: 'hi'
+            }));
+          }
+          render() {
+            const { current } = this.state;
+            return <div>{current}</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      errors: getErrorMessages(['initial']),
+    },
+    {
       code: `
         wrap(class NotWorking extends Inferno.Component {
             state = {
@@ -1202,60 +1482,61 @@ eslintTester.run('no-unused-state', rule, {
             };
         });
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: getErrorMessages(['dummy'])
-    }, {
+      features: ['class fields'],
+      errors: getErrorMessages(['dummy']),
+    },
+    {
       code: `
-      class Foo extends Component {
-        state = {
-          thisStateAliasPropUnused,
-          thisStateAliasRestPropUnused,
-          thisDestructStateAliasPropUnused,
-          thisDestructStateAliasRestPropUnused,
-          thisDestructStateDestructRestPropUnused,
-          thisSetStatePropUnused,
-          thisSetStateRestPropUnused,
-        } as unknown
+        class Foo extends Component {
+          state = {
+            thisStateAliasPropUnused,
+            thisStateAliasRestPropUnused,
+            thisDestructStateAliasPropUnused,
+            thisDestructStateAliasRestPropUnused,
+            thisDestructStateDestructRestPropUnused,
+            thisSetStatePropUnused,
+            thisSetStateRestPropUnused,
+          } as unknown
 
-        constructor() {
-          // other methods of defining state props
-          ((this as unknown).state as unknown) = { thisStatePropUnused } as unknown;
-          ((this as unknown).setState as unknown)({ thisStateDestructPropUnused } as unknown);
-          ((this as unknown).setState as unknown)(state => ({ thisDestructStateDestructPropUnused } as unknown));
+          constructor() {
+            // other methods of defining state props
+            ((this as unknown).state as unknown) = { thisStatePropUnused } as unknown;
+            ((this as unknown).setState as unknown)({ thisStateDestructPropUnused } as unknown);
+            ((this as unknown).setState as unknown)(state => ({ thisDestructStateDestructPropUnused } as unknown));
+          }
+
+          thisStateAlias() {
+            const state = (this as unknown).state as unknown;
+
+            (state as unknown).thisStateAliasProp as unknown;
+            const { ...thisStateAliasRest } = state as unknown;
+            (thisStateAliasRest as unknown).thisStateAliasRestProp as unknown;
+          }
+
+          thisDestructStateAlias() {
+            const { state } = this as unknown;
+
+            (state as unknown).thisDestructStateAliasProp as unknown;
+            const { ...thisDestructStateAliasRest } = state as unknown;
+            (thisDestructStateAliasRest as unknown).thisDestructStateAliasRestProp as unknown;
+          }
+
+          thisSetState() {
+            ((this as unknown).setState as unknown)(state => (state as unknown).thisSetStateProp as unknown);
+            ((this as unknown).setState as unknown)(({ ...thisSetStateRest }) => (thisSetStateRest as unknown).thisSetStateRestProp as unknown);
+          }
+
+          render() {
+            ((this as unknown).state as unknown).thisStateProp as unknown;
+            const { thisStateDestructProp } = (this as unknown).state as unknown;
+            const { state: { thisDestructStateDestructProp, ...thisDestructStateDestructRest } } = this as unknown;
+            (thisDestructStateDestructRest as unknown).thisDestructStateDestructRestProp as unknown;
+
+            return null;
+          }
         }
-
-        thisStateAlias() {
-          const state = (this as unknown).state as unknown;
-
-          (state as unknown).thisStateAliasProp as unknown;
-          const { ...thisStateAliasRest } = state as unknown;
-          (thisStateAliasRest as unknown).thisStateAliasRestProp as unknown;
-        }
-
-        thisDestructStateAlias() {
-          const { state } = this as unknown;
-
-          (state as unknown).thisDestructStateAliasProp as unknown;
-          const { ...thisDestructStateAliasRest } = state as unknown;
-          (thisDestructStateAliasRest as unknown).thisDestructStateAliasRestProp as unknown;
-        }
-
-        thisSetState() {
-          ((this as unknown).setState as unknown)(state => (state as unknown).thisSetStateProp as unknown);
-          ((this as unknown).setState as unknown)(({ ...thisSetStateRest }) => (thisSetStateRest as unknown).thisSetStateRestProp as unknown);
-        }
-
-        render() {
-          ((this as unknown).state as unknown).thisStateProp as unknown;
-          const { thisStateDestructProp } = (this as unknown).state as unknown;
-          const { state: { thisDestructStateDestructProp, ...thisDestructStateDestructRest } } = this as unknown;
-          (thisDestructStateDestructRest as unknown).thisDestructStateDestructRestProp as unknown;
-
-          return null;
-        }
-      }
       `,
-      parser: parsers.TYPESCRIPT_ESLINT,
+      features: ['ts', 'no-babel'],
       errors: getErrorMessages([
         'thisStateAliasPropUnused',
         'thisStateAliasRestPropUnused',
@@ -1266,8 +1547,8 @@ eslintTester.run('no-unused-state', rule, {
         'thisSetStateRestPropUnused',
         'thisStatePropUnused',
         'thisStateDestructPropUnused',
-        'thisDestructStateDestructPropUnused'
-      ])
-    }
-  ]
+        'thisDestructStateDestructPropUnused',
+      ]),
+    },
+  ]),
 });

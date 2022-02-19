@@ -22,14 +22,13 @@ const rule = require('../../../lib/rules/static-property-placement');
 const parsers = require('../../helpers/parsers');
 
 const ruleTesterConfig = {
-  parser: parsers.BABEL_ESLINT,
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true
-    }
-  }
+      jsx: true,
+    },
+  },
 };
 
 // ------------------------------------------------------------------------------
@@ -38,13 +37,13 @@ const ruleTesterConfig = {
 
 const ruleTester = new RuleTester(ruleTesterConfig);
 ruleTester.run('static-property-placement', rule, {
-  valid: [
+  valid: parsers.all([
     // ------------------------------------------------------------------------------
     // Ignore creatClass/createClass and Static Functional Components
     // ------------------------------------------------------------------------------
     {
       // Do not error on createClass pragma
-      code: [`
+      code: `
         var MyComponent = createClass({
           childContextTypes: {
             something: PropTypes.bool
@@ -68,12 +67,12 @@ ruleTester.run('static-property-placement', rule, {
             return null;
           },
         });
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error on createClass pragma
-      code: [`
+      code: `
         var MyComponent = Inferno.createClass({
           childContextTypes: {
             something: PropTypes.bool
@@ -97,12 +96,12 @@ ruleTester.run('static-property-placement', rule, {
             return null;
           },
         });
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error on SFC arrow function with return
-      code: [`
+      code: `
         const MyComponent = () => {
             return <div>Hello</div>;
         };
@@ -124,11 +123,11 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           something: PropTypes.bool
         };
-      `].join('\n')
+      `,
     },
     {
       // Do not error on SFC arrow function with direct return
-      code: [`
+      code: `
         const MyComponent = () => (<div>Hello</div>);
 
         MyComponent.childContextTypes = {
@@ -148,11 +147,11 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           something: PropTypes.bool
         };
-      `].join('\n')
+      `,
     },
     {
       // Do not error on SFC as unnamed function
-      code: [`
+      code: `
         export function MyComponent () {
             return <div>Hello</div>;
         };
@@ -174,7 +173,7 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           something: PropTypes.bool
         };
-      `].join('\n')
+      `,
     },
 
     {
@@ -183,7 +182,7 @@ ruleTester.run('static-property-placement', rule, {
         class Foo {
           static get propTypes() {}
         }
-      `
+      `,
     },
 
     {
@@ -193,7 +192,8 @@ ruleTester.run('static-property-placement', rule, {
           static propTypes = {}
         }
       `,
-      options: [PROPERTY_ASSIGNMENT]
+      features: ['class fields'],
+      options: [PROPERTY_ASSIGNMENT],
     },
 
     // ------------------------------------------------------------------------------
@@ -201,38 +201,40 @@ ruleTester.run('static-property-placement', rule, {
     // ------------------------------------------------------------------------------
     {
       // Do not error if no properties defined
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
           }
         }
-      `].join('\n')
+      `,
     },
     {
       // Do not error if unchecked properties defined
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static randomlyNamed = {
             name: 'random'
           }
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Do not error if unchecked static properties defined and assignment rule enabled
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static randomlyNamed = {
             name: 'random'
           }
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      features: ['class fields'],
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if unchecked assignment properties defined and assignment rule enabled
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -242,12 +244,12 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.randomlyNamed = {
           name: 'random'
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if unchecked assignment properties defined and static rule enabled
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -257,38 +259,40 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.randomlyNamed = {
           name: 'random'
         }
-      `].join('\n')
+      `,
     },
     // ------------------------------------------------------------------------------
     // childContextTypes - static field
     // ------------------------------------------------------------------------------
     {
       // Do not error if childContextTypes correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Do not error if childContextTypes correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
           };
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {childContextTypes: STATIC_PUBLIC_FIELD}]
+      `,
+      features: ['class fields'],
+      options: [PROPERTY_ASSIGNMENT, { childContextTypes: STATIC_PUBLIC_FIELD }],
     },
     // ------------------------------------------------------------------------------
     // childContextTypes - static getter
     // ------------------------------------------------------------------------------
     {
       // Do not error if childContextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
@@ -296,12 +300,12 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [STATIC_GETTER]
+      `,
+      options: [STATIC_GETTER],
     },
     {
       // Do not error if contextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
@@ -309,15 +313,15 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {childContextTypes: STATIC_GETTER}]
+      `,
+      options: [PROPERTY_ASSIGNMENT, { childContextTypes: STATIC_GETTER }],
     },
     // ------------------------------------------------------------------------------
     // childContextTypes - assignment
     // ------------------------------------------------------------------------------
     {
       // Do not error if childContextTypes correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -327,12 +331,12 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.childContextTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if childContextTypes correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -342,39 +346,41 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.childContextTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD, {childContextTypes: PROPERTY_ASSIGNMENT}]
+      `,
+      options: [STATIC_PUBLIC_FIELD, { childContextTypes: PROPERTY_ASSIGNMENT }],
     },
     // ------------------------------------------------------------------------------
     // contextTypes - static field
     // ------------------------------------------------------------------------------
     {
       // Do not error if contextTypes correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static contextTypes = {
             something: PropTypes.bool
           };
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Do not error if contextTypes correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static contextTypes = {
             something: PropTypes.bool
           };
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {contextTypes: STATIC_PUBLIC_FIELD}]
+      `,
+      features: ['class fields'],
+      options: [PROPERTY_ASSIGNMENT, { contextTypes: STATIC_PUBLIC_FIELD }],
     },
     // ------------------------------------------------------------------------------
     // contextTypes - static getter
     // ------------------------------------------------------------------------------
     {
       // Do not error if contextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get contextTypes() {
             return {
@@ -382,12 +388,12 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [STATIC_GETTER]
+      `,
+      options: [STATIC_GETTER],
     },
     {
       // Do not error if contextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get contextTypes() {
             return {
@@ -395,15 +401,15 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {contextTypes: STATIC_GETTER}]
+      `,
+      options: [PROPERTY_ASSIGNMENT, { contextTypes: STATIC_GETTER }],
     },
     // ------------------------------------------------------------------------------
     // contextTypes - assignment
     // ------------------------------------------------------------------------------
     {
       // Do not error if contextTypes correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -413,12 +419,12 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.contextTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if contextTypes correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -428,60 +434,62 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.contextTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD, {contextTypes: PROPERTY_ASSIGNMENT}]
+      `,
+      options: [STATIC_PUBLIC_FIELD, { contextTypes: PROPERTY_ASSIGNMENT }],
     },
     // ------------------------------------------------------------------------------
     // contextType - static field
     // ------------------------------------------------------------------------------
     {
       // Do not error if contextType correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static contextType = MyContext;
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Do not error if contextType correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static contextType = MyContext;
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {contextType: STATIC_PUBLIC_FIELD}]
+      `,
+      options: [PROPERTY_ASSIGNMENT, { contextType: STATIC_PUBLIC_FIELD }],
+      features: ['class fields'],
     },
     // ------------------------------------------------------------------------------
     // contextType - static getter
     // ------------------------------------------------------------------------------
     {
       // Do not error if contextType correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get contextType() {
              return MyContext;
           }
         }
-      `].join('\n'),
-      options: [STATIC_GETTER]
+      `,
+      options: [STATIC_GETTER],
     },
     {
       // Do not error if contextType correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get contextType() {
              return MyContext;
           }
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {contextType: STATIC_GETTER}]
+      `,
+      options: [PROPERTY_ASSIGNMENT, { contextType: STATIC_GETTER }],
     },
     // ------------------------------------------------------------------------------
     // contextType - assignment
     // ------------------------------------------------------------------------------
     {
       // Do not error if contextType correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -489,12 +497,12 @@ ruleTester.run('static-property-placement', rule, {
         }
 
         MyComponent.contextType = MyContext;
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if contextType correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -502,60 +510,62 @@ ruleTester.run('static-property-placement', rule, {
         }
 
         MyComponent.contextType = MyContext;
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD, {contextType: PROPERTY_ASSIGNMENT}]
+      `,
+      options: [STATIC_PUBLIC_FIELD, { contextType: PROPERTY_ASSIGNMENT }],
     },
     // ------------------------------------------------------------------------------
     // displayName - static field
     // ------------------------------------------------------------------------------
     {
       // Do not error if displayName correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static displayName = "Hello";
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Do not error if displayName correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static displayName = "Hello";
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {displayName: STATIC_PUBLIC_FIELD}]
+      `,
+      features: ['class fields'],
+      options: [PROPERTY_ASSIGNMENT, { displayName: STATIC_PUBLIC_FIELD }],
     },
     // ------------------------------------------------------------------------------
     // displayName - static getter
     // ------------------------------------------------------------------------------
     {
       // Do not error if displayName correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get displayName() {
             return "Hello";
           }
         }
-      `].join('\n'),
-      options: [STATIC_GETTER]
+      `,
+      options: [STATIC_GETTER],
     },
     {
       // Do not error if contextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get displayName() {
             return "Hello";
           }
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {displayName: STATIC_GETTER}]
+      `,
+      options: [PROPERTY_ASSIGNMENT, { displayName: STATIC_GETTER }],
     },
     // ------------------------------------------------------------------------------
     // displayName - assignment
     // ------------------------------------------------------------------------------
     {
       // Do not error if displayName correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -563,12 +573,12 @@ ruleTester.run('static-property-placement', rule, {
         }
 
         MyComponent.displayName = "Hello";
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if displayName correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -576,39 +586,41 @@ ruleTester.run('static-property-placement', rule, {
         }
 
         MyComponent.displayName = "Hello";
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD, {displayName: PROPERTY_ASSIGNMENT}]
+      `,
+      options: [STATIC_PUBLIC_FIELD, { displayName: PROPERTY_ASSIGNMENT }],
     },
     // ------------------------------------------------------------------------------
     // defaultProps - static field
     // ------------------------------------------------------------------------------
     {
       // Do not error if defaultProps correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static defaultProps = {
             something: 'Bob'
           };
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Do not error if defaultProps correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static defaultProps = {
             something: 'Bob'
           };
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {defaultProps: STATIC_PUBLIC_FIELD}]
+      `,
+      features: ['class fields'],
+      options: [PROPERTY_ASSIGNMENT, { defaultProps: STATIC_PUBLIC_FIELD }],
     },
     // ------------------------------------------------------------------------------
     // defaultProps - static getter
     // ------------------------------------------------------------------------------
     {
       // Do not error if defaultProps correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get defaultProps() {
             return {
@@ -616,12 +628,12 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [STATIC_GETTER]
+      `,
+      options: [STATIC_GETTER],
     },
     {
       // Do not error if contextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get defaultProps() {
             return {
@@ -629,15 +641,15 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {defaultProps: STATIC_GETTER}]
+      `,
+      options: [PROPERTY_ASSIGNMENT, { defaultProps: STATIC_GETTER }],
     },
     // ------------------------------------------------------------------------------
     // defaultProps - assignment
     // ------------------------------------------------------------------------------
     {
       // Do not error if defaultProps correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -647,12 +659,12 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.defaultProps = {
           name: 'Bob'
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if defaultProps correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -662,39 +674,41 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.defaultProps = {
           name: 'Bob'
         }
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD, {defaultProps: PROPERTY_ASSIGNMENT}]
+      `,
+      options: [STATIC_PUBLIC_FIELD, { defaultProps: PROPERTY_ASSIGNMENT }],
     },
     // ------------------------------------------------------------------------------
     // propTypes - static field
     // ------------------------------------------------------------------------------
     {
       // Do not error if propTypes correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static propTypes = {
             something: PropTypes.bool
           };
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Do not error if propTypes correctly defined - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static propTypes = {
             something: PropTypes.bool
           };
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {propTypes: STATIC_PUBLIC_FIELD}]
+      `,
+      features: ['class fields'],
+      options: [PROPERTY_ASSIGNMENT, { propTypes: STATIC_PUBLIC_FIELD }],
     },
     // ------------------------------------------------------------------------------
     // propTypes - static getter
     // ------------------------------------------------------------------------------
     {
       // Do not error if propTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get propTypes() {
             return {
@@ -702,12 +716,12 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [STATIC_GETTER]
+      `,
+      options: [STATIC_GETTER],
     },
     {
       // Do not error if contextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get propTypes() {
             return {
@@ -715,15 +729,15 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {propTypes: STATIC_GETTER}]
+      `,
+      options: [PROPERTY_ASSIGNMENT, { propTypes: STATIC_GETTER }],
     },
     // ------------------------------------------------------------------------------
     // propTypes - assignment
     // ------------------------------------------------------------------------------
     {
       // Do not error if propTypes correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -733,12 +747,12 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if propTypes correctly defined - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -748,15 +762,15 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD, {propTypes: PROPERTY_ASSIGNMENT}]
+      `,
+      options: [STATIC_PUBLIC_FIELD, { propTypes: PROPERTY_ASSIGNMENT }],
     },
     // ------------------------------------------------------------------------------
     // multiple - static field
     // ------------------------------------------------------------------------------
     {
       // Do not error if multiple properties and match config - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
@@ -778,11 +792,12 @@ ruleTester.run('static-property-placement', rule, {
             something: PropTypes.bool
           };
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Do not error if multiple properties and match config - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
@@ -804,22 +819,23 @@ ruleTester.run('static-property-placement', rule, {
             something: PropTypes.bool
           };
         }
-      `].join('\n'),
+      `,
+      features: ['class fields'],
       options: [PROPERTY_ASSIGNMENT, {
         childContextTypes: STATIC_PUBLIC_FIELD,
         contextTypes: STATIC_PUBLIC_FIELD,
         contextType: STATIC_PUBLIC_FIELD,
         displayName: STATIC_PUBLIC_FIELD,
         defaultProps: STATIC_PUBLIC_FIELD,
-        propTypes: STATIC_PUBLIC_FIELD
-      }]
+        propTypes: STATIC_PUBLIC_FIELD,
+      }],
     },
     // ------------------------------------------------------------------------------
     // multiple - static getter
     // ------------------------------------------------------------------------------
     {
       // Do not error if childContextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
@@ -853,12 +869,12 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [STATIC_GETTER]
+      `,
+      options: [STATIC_GETTER],
     },
     {
       // Do not error if contextTypes correctly defined - static getter
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
@@ -892,22 +908,22 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
+      `,
       options: [PROPERTY_ASSIGNMENT, {
         childContextTypes: STATIC_GETTER,
         contextTypes: STATIC_GETTER,
         contextType: STATIC_GETTER,
         displayName: STATIC_GETTER,
         defaultProps: STATIC_GETTER,
-        propTypes: STATIC_GETTER
-      }]
+        propTypes: STATIC_GETTER,
+      }],
     },
     // ------------------------------------------------------------------------------
     // multiple - assignment
     // ------------------------------------------------------------------------------
     {
       // Do not error if multiple properties and match config - assignment
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -931,12 +947,12 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT]
+      `,
+      options: [PROPERTY_ASSIGNMENT],
     },
     {
       // Do not error if multiple properties and match config - static field
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -960,21 +976,21 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
+      `,
       options: [STATIC_PUBLIC_FIELD, {
         childContextTypes: PROPERTY_ASSIGNMENT,
         contextTypes: PROPERTY_ASSIGNMENT,
         displayName: PROPERTY_ASSIGNMENT,
         defaultProps: PROPERTY_ASSIGNMENT,
-        propTypes: PROPERTY_ASSIGNMENT
-      }]
+        propTypes: PROPERTY_ASSIGNMENT,
+      }],
     },
     // ------------------------------------------------------------------------------
     // combined - mixed
     // ------------------------------------------------------------------------------
     {
       // Do not error if mixed property positions and match config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
@@ -996,16 +1012,17 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
+      `,
+      features: ['class fields'],
       options: [STATIC_PUBLIC_FIELD, {
         displayName: STATIC_GETTER,
         defaultProps: PROPERTY_ASSIGNMENT,
-        propTypes: PROPERTY_ASSIGNMENT
-      }]
+        propTypes: PROPERTY_ASSIGNMENT,
+      }],
     },
     {
       // Do not error if mixed property positions and match config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
@@ -1027,19 +1044,20 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
+      `,
+      features: ['class fields'],
       options: [PROPERTY_ASSIGNMENT, {
         childContextTypes: STATIC_PUBLIC_FIELD,
         contextTypes: STATIC_PUBLIC_FIELD,
-        displayName: STATIC_GETTER
-      }]
+        displayName: STATIC_GETTER,
+      }],
     },
     // ------------------------------------------------------------------------------
     // mixed component types
     // ------------------------------------------------------------------------------
     {
       // SFC ignored and component is valid
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
@@ -1061,11 +1079,12 @@ ruleTester.run('static-property-placement', rule, {
         OtherComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     {
       // Multiple components validated
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
@@ -1087,14 +1106,15 @@ ruleTester.run('static-property-placement', rule, {
             name: PropTypes.string.isRequired
           }
         }
-      `].join('\n')
+      `,
+      features: ['class fields'],
     },
     // ------------------------------------------------------------------------------
     // edge cases
     // ------------------------------------------------------------------------------
     {
       // Do not error if property assignment is inside a class function
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static displayName = "Hello";
 
@@ -1102,12 +1122,13 @@ ruleTester.run('static-property-placement', rule, {
             console.log(MyComponent.displayName);
           }
         }
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD]
+      `,
+      features: ['class fields'],
+      options: [STATIC_PUBLIC_FIELD],
     },
     {
       // Do not error if display name value changed
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static displayName = "Hello";
 
@@ -1115,18 +1136,19 @@ ruleTester.run('static-property-placement', rule, {
             MyComponent.displayName = "Bonjour";
           }
         }
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD]
-    }
-  ],
+      `,
+      features: ['class fields'],
+      options: [STATIC_PUBLIC_FIELD],
+    },
+  ]),
 
-  invalid: [
+  invalid: parsers.all([
     // ------------------------------------------------------------------------------
     // expected static field when got property assigment
     // ------------------------------------------------------------------------------
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -1152,37 +1174,37 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
+      `,
       errors: [
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -1208,48 +1230,48 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
+      `,
       options: [PROPERTY_ASSIGNMENT, {
         childContextTypes: STATIC_PUBLIC_FIELD,
         contextTypes: STATIC_PUBLIC_FIELD,
         contextType: STATIC_PUBLIC_FIELD,
         displayName: STATIC_PUBLIC_FIELD,
         defaultProps: STATIC_PUBLIC_FIELD,
-        propTypes: STATIC_PUBLIC_FIELD
+        propTypes: STATIC_PUBLIC_FIELD,
       }],
       errors: [
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     // ------------------------------------------------------------------------------
     // expected static field when got static getter
     // ------------------------------------------------------------------------------
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
@@ -1283,37 +1305,37 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
+      `,
       errors: [
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
@@ -1347,48 +1369,51 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {
-        childContextTypes: STATIC_PUBLIC_FIELD,
-        contextTypes: STATIC_PUBLIC_FIELD,
-        contextType: STATIC_PUBLIC_FIELD,
-        displayName: STATIC_PUBLIC_FIELD,
-        defaultProps: STATIC_PUBLIC_FIELD,
-        propTypes: STATIC_PUBLIC_FIELD
-      }],
+      `,
+      options: [
+        PROPERTY_ASSIGNMENT,
+        {
+          childContextTypes: STATIC_PUBLIC_FIELD,
+          contextTypes: STATIC_PUBLIC_FIELD,
+          contextType: STATIC_PUBLIC_FIELD,
+          displayName: STATIC_PUBLIC_FIELD,
+          defaultProps: STATIC_PUBLIC_FIELD,
+          propTypes: STATIC_PUBLIC_FIELD,
+        },
+      ],
       errors: [
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     // ------------------------------------------------------------------------------
     // expected property assignment when got static field
     // ------------------------------------------------------------------------------
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
@@ -1410,38 +1435,39 @@ ruleTester.run('static-property-placement', rule, {
             something: PropTypes.bool
           };
         }
-      `].join('\n'),
+      `,
+      features: ['class fields'],
       options: [PROPERTY_ASSIGNMENT],
       errors: [
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
@@ -1463,48 +1489,52 @@ ruleTester.run('static-property-placement', rule, {
             something: PropTypes.bool
           };
         }
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD, {
-        childContextTypes: PROPERTY_ASSIGNMENT,
-        contextTypes: PROPERTY_ASSIGNMENT,
-        contextType: PROPERTY_ASSIGNMENT,
-        displayName: PROPERTY_ASSIGNMENT,
-        defaultProps: PROPERTY_ASSIGNMENT,
-        propTypes: PROPERTY_ASSIGNMENT
-      }],
+      `,
+      features: ['class fields'],
+      options: [
+        STATIC_PUBLIC_FIELD,
+        {
+          childContextTypes: PROPERTY_ASSIGNMENT,
+          contextTypes: PROPERTY_ASSIGNMENT,
+          contextType: PROPERTY_ASSIGNMENT,
+          displayName: PROPERTY_ASSIGNMENT,
+          defaultProps: PROPERTY_ASSIGNMENT,
+          propTypes: PROPERTY_ASSIGNMENT,
+        },
+      ],
       errors: [
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     // ------------------------------------------------------------------------------
     // expected property assignment when got static getter
     // ------------------------------------------------------------------------------
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
@@ -1538,38 +1568,38 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
+      `,
       options: [PROPERTY_ASSIGNMENT],
       errors: [
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static get childContextTypes() {
             return {
@@ -1603,48 +1633,51 @@ ruleTester.run('static-property-placement', rule, {
             };
           }
         }
-      `].join('\n'),
-      options: [STATIC_GETTER, {
-        childContextTypes: PROPERTY_ASSIGNMENT,
-        contextTypes: PROPERTY_ASSIGNMENT,
-        contextType: PROPERTY_ASSIGNMENT,
-        displayName: PROPERTY_ASSIGNMENT,
-        defaultProps: PROPERTY_ASSIGNMENT,
-        propTypes: PROPERTY_ASSIGNMENT
-      }],
+      `,
+      options: [
+        STATIC_GETTER,
+        {
+          childContextTypes: PROPERTY_ASSIGNMENT,
+          contextTypes: PROPERTY_ASSIGNMENT,
+          contextType: PROPERTY_ASSIGNMENT,
+          displayName: PROPERTY_ASSIGNMENT,
+          defaultProps: PROPERTY_ASSIGNMENT,
+          propTypes: PROPERTY_ASSIGNMENT,
+        },
+      ],
       errors: [
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     // ------------------------------------------------------------------------------
     // expected static getter when got static field
     // ------------------------------------------------------------------------------
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
@@ -1666,38 +1699,39 @@ ruleTester.run('static-property-placement', rule, {
             something: PropTypes.bool
           };
         }
-      `].join('\n'),
+      `,
+      features: ['class fields'],
       options: [STATIC_GETTER],
       errors: [
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             something: PropTypes.bool
@@ -1719,48 +1753,52 @@ ruleTester.run('static-property-placement', rule, {
             something: PropTypes.bool
           };
         }
-      `].join('\n'),
-      options: [STATIC_PUBLIC_FIELD, {
-        childContextTypes: STATIC_GETTER,
-        contextTypes: STATIC_GETTER,
-        contextType: STATIC_GETTER,
-        displayName: STATIC_GETTER,
-        defaultProps: STATIC_GETTER,
-        propTypes: STATIC_GETTER
-      }],
+      `,
+      features: ['class fields'],
+      options: [
+        STATIC_PUBLIC_FIELD,
+        {
+          childContextTypes: STATIC_GETTER,
+          contextTypes: STATIC_GETTER,
+          contextType: STATIC_GETTER,
+          displayName: STATIC_GETTER,
+          defaultProps: STATIC_GETTER,
+          propTypes: STATIC_GETTER,
+        },
+      ],
       errors: [
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     // ------------------------------------------------------------------------------
     // expected static getter when got property assignment
     // ------------------------------------------------------------------------------
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -1786,38 +1824,38 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
+      `,
       options: [STATIC_GETTER],
       errors: [
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     {
       // Error if multiple properties are incorrectly positioned according to config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           render() {
             return null;
@@ -1843,48 +1881,51 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {
-        childContextTypes: STATIC_GETTER,
-        contextTypes: STATIC_GETTER,
-        contextType: STATIC_GETTER,
-        displayName: STATIC_GETTER,
-        defaultProps: STATIC_GETTER,
-        propTypes: STATIC_GETTER
-      }],
+      `,
+      options: [
+        PROPERTY_ASSIGNMENT,
+        {
+          childContextTypes: STATIC_GETTER,
+          contextTypes: STATIC_GETTER,
+          contextType: STATIC_GETTER,
+          displayName: STATIC_GETTER,
+          defaultProps: STATIC_GETTER,
+          propTypes: STATIC_GETTER,
+        },
+      ],
       errors: [
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     // ------------------------------------------------------------------------------
     // combined - mixed
     // ------------------------------------------------------------------------------
     {
       // Error if mixed property positions but dont match config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
@@ -1908,42 +1949,46 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {
-        defaultProps: STATIC_GETTER,
-        propTypes: STATIC_PUBLIC_FIELD,
-        displayName: STATIC_PUBLIC_FIELD
-      }],
+      `,
+      features: ['class fields'],
+      options: [
+        PROPERTY_ASSIGNMENT,
+        {
+          defaultProps: STATIC_GETTER,
+          propTypes: STATIC_PUBLIC_FIELD,
+          displayName: STATIC_PUBLIC_FIELD,
+        },
+      ],
       errors: [
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notStaticClassProp',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     {
       // Error if mixed property positions but dont match config
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
@@ -1967,46 +2012,50 @@ ruleTester.run('static-property-placement', rule, {
         MyComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [STATIC_GETTER, {
-        childContextTypes: PROPERTY_ASSIGNMENT,
-        contextTypes: PROPERTY_ASSIGNMENT,
-        contextType: PROPERTY_ASSIGNMENT,
-        displayName: PROPERTY_ASSIGNMENT
-      }],
+      `,
+      features: ['class fields'],
+      options: [
+        STATIC_GETTER,
+        {
+          childContextTypes: PROPERTY_ASSIGNMENT,
+          contextTypes: PROPERTY_ASSIGNMENT,
+          contextType: PROPERTY_ASSIGNMENT,
+          displayName: PROPERTY_ASSIGNMENT,
+        },
+      ],
       errors: [
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'notGetterClassFunc',
-          data: {name: 'propTypes'}
-        }
-      ]
+          data: { name: 'propTypes' },
+        },
+      ],
     },
     // ------------------------------------------------------------------------------
     // mixed component types
     // ------------------------------------------------------------------------------
     {
       // SFC ignored and component is invalid
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
@@ -2032,33 +2081,37 @@ ruleTester.run('static-property-placement', rule, {
         OtherComponent.propTypes = {
           name: PropTypes.string.isRequired
         }
-      `].join('\n'),
-      options: [PROPERTY_ASSIGNMENT, {
-        defaultProps: STATIC_PUBLIC_FIELD,
-        propTypes: STATIC_GETTER
-      }],
+      `,
+      features: ['class fields'],
+      options: [
+        PROPERTY_ASSIGNMENT,
+        {
+          defaultProps: STATIC_PUBLIC_FIELD,
+          propTypes: STATIC_GETTER,
+        },
+      ],
       errors: [
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'displayName'}
-        }
-      ]
+          data: { name: 'displayName' },
+        },
+      ],
     },
     {
       // Multiple components validated
-      code: [`
+      code: `
         class MyComponent extends Inferno.Component {
           static childContextTypes = {
             name: PropTypes.string.isRequired
@@ -2090,43 +2143,43 @@ ruleTester.run('static-property-placement', rule, {
             return "Hello";
           }
         }
-      `].join('\n'),
+      `,
+      features: ['class fields'],
       options: [PROPERTY_ASSIGNMENT],
       errors: [
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'childContextTypes'}
+          data: { name: 'childContextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextType'}
+          data: { name: 'contextType' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'displayName'}
+          data: { name: 'displayName' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'contextTypes'}
+          data: { name: 'contextTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'defaultProps'}
+          data: { name: 'defaultProps' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'propTypes'}
+          data: { name: 'propTypes' },
         },
         {
           messageId: 'declareOutsideClass',
-          data: {name: 'displayName'}
-        }
-      ]
-
-    }
-  ]
+          data: { name: 'displayName' },
+        },
+      ],
+    },
+  ]),
 });

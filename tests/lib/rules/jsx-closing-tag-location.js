@@ -18,87 +18,97 @@ const parserOptions = {
   sourceType: 'module',
   ecmaVersion: 2015,
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-closing-tag-location', rule, {
-  valid: [{
-    code: `
-      <App>
-        foo
-      </App>
-    `
-  }, {
-    code: `
-      <App>foo</App>
-    `
-  }, {
-    code: `
-      <>
-        foo
-      </>
-    `,
-    parser: parsers.BABEL_ESLINT
-  }, {
-    code: `
-      <>foo</>
-    `,
-    parser: parsers.BABEL_ESLINT
-  }],
-
-  invalid: [{
-    code: `
-      <App>
-        foo
+  valid: parsers.all([
+    {
+      code: `
+        <App>
+          foo
         </App>
-    `,
-    output: `
-      <App>
-        foo
-      </App>
-    `,
-    errors: [{messageId: 'matchIndent'}]
-  }, {
-    code: `
-      <App>
-        foo</App>
-    `,
-    output: `
-      <App>
-        foo
-      </App>
-    `,
-    errors: [{messageId: 'onOwnLine'}]
-  }, {
-    code: `
-      <>
-        foo
+      `,
+    },
+    {
+      code: `
+        <App>foo</App>
+      `,
+    },
+    {
+      code: `
+        <>
+          foo
         </>
-    `,
-    parser: parsers.BABEL_ESLINT,
-    output: `
-      <>
-        foo
-      </>
-    `,
-    errors: [{messageId: 'matchIndent'}]
-  }, {
-    code: `
-      <>
-        foo</>
-    `,
-    parser: parsers.BABEL_ESLINT,
-    output: `
-      <>
-        foo
-      </>
-    `,
-    errors: [{messageId: 'onOwnLine'}]
-  }]
+      `,
+      features: ['fragment'],
+    },
+    {
+      code: `
+        <>foo</>
+      `,
+      features: ['fragment'],
+    },
+  ]),
+
+  invalid: parsers.all([
+    {
+      code: `
+        <App>
+          foo
+          </App>
+      `,
+      output: `
+        <App>
+          foo
+        </App>
+      `,
+      errors: [{ messageId: 'matchIndent' }],
+    },
+    {
+      code: `
+        <App>
+          foo</App>
+      `,
+      output: `
+        <App>
+          foo
+        </App>
+      `,
+      errors: [{ messageId: 'onOwnLine' }],
+    },
+    {
+      code: `
+        <>
+          foo
+          </>
+      `,
+      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      output: `
+        <>
+          foo
+        </>
+      `,
+      errors: [{ messageId: 'matchIndent' }],
+    },
+    {
+      code: `
+        <>
+          foo</>
+      `,
+      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      output: `
+        <>
+          foo
+        </>
+      `,
+      errors: [{ messageId: 'onOwnLine' }],
+    },
+  ]),
 });

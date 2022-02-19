@@ -2,7 +2,7 @@
 
 Dangerous properties in Inferno are those whose behavior is known to be a common source of application vulnerabilities. The properties names clearly indicate they are dangerous and should be avoided unless great care is taken.
 
-See https://facebook.github.io/inferno/tips/dangerously-set-inner-html.html
+See https://reactjs.org/docs/dom-elements.html
 
 ## Rule Details
 

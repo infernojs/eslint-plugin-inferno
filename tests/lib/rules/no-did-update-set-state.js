@@ -18,69 +18,16 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
-ruleTester.run('no-did-update-set-state', rule, {
-
-  valid: [{
-    code: `
-      var Hello = createClass({
-        render: function() {
-          return <div>Hello {this.props.name}</div>;
-        }
-      });
-    `
-  }, {
-    code: `
-      var Hello = createClass({
-        componentDidUpdate: function() {}
-      });
-    `
-  }, {
-    code: `
-      var Hello = createClass({
-        componentDidUpdate: function() {
-          someNonMemberFunction(arg);
-          this.someHandler = this.setState;
-        }
-      });
-    `
-  }, {
-    code: `
-      var Hello = createClass({
-        componentDidUpdate: function() {
-          someClass.onSomeEvent(function(data) {
-            this.setState({
-              data: data
-            });
-          })
-        }
-      });
-    `
-  }, {
-    code: `
-      var Hello = createClass({
-        componentDidUpdate: function() {
-          function handleEvent(data) {
-            this.setState({
-              data: data
-            });
-          }
-          someClass.onSomeEvent(handleEvent)
-        }
-      });
-    `,
-    parser: parsers.BABEL_ESLINT
-  }],
-
-  invalid: [{
+const invalid = [
+  {
     code: `
       var Hello = createClass({
         componentDidUpdate: function() {
@@ -90,11 +37,14 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       });
     `,
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       class Hello extends Inferno.Component {
         componentDidUpdate() {
@@ -104,12 +54,14 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       }
     `,
-    parser: parsers.BABEL_ESLINT,
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       class Hello extends Inferno.Component {
         componentDidUpdate = () => {
@@ -119,27 +71,33 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       }
     `,
-    parser: parsers.BABEL_ESLINT,
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
-      var Hello = createClass({
-        componentDidUpdate: function() {
-          this.setState({
-            data: data
-          });
-        }
-      });
-    `,
+    var Hello = createClass({
+      componentDidUpdate: function() {
+        this.setState({
+          data: data
+        });
+      }
+    });
+  `,
     options: ['disallow-in-func'],
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       class Hello extends Inferno.Component {
         componentDidUpdate() {
@@ -149,13 +107,15 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       }
     `,
-    parser: parsers.BABEL_ESLINT,
     options: ['disallow-in-func'],
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       var Hello = createClass({
         componentDidUpdate: function() {
@@ -168,11 +128,14 @@ ruleTester.run('no-did-update-set-state', rule, {
       });
     `,
     options: ['disallow-in-func'],
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       class Hello extends Inferno.Component {
         componentDidUpdate() {
@@ -184,13 +147,15 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       }
     `,
-    parser: parsers.BABEL_ESLINT,
     options: ['disallow-in-func'],
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       var Hello = createClass({
         componentDidUpdate: function() {
@@ -202,11 +167,14 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       });
     `,
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       class Hello extends Inferno.Component {
         componentDidUpdate() {
@@ -218,12 +186,14 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       }
     `,
-    parser: parsers.BABEL_ESLINT,
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       var Hello = createClass({
         componentDidUpdate: function() {
@@ -231,13 +201,15 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       });
     `,
-    parser: parsers.BABEL_ESLINT,
     options: ['disallow-in-func'],
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }, {
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+  {
     code: `
       class Hello extends Inferno.Component {
         componentDidUpdate() {
@@ -245,11 +217,80 @@ ruleTester.run('no-did-update-set-state', rule, {
         }
       }
     `,
-    parser: parsers.BABEL_ESLINT,
     options: ['disallow-in-func'],
-    errors: [{
-      messageId: 'noSetState',
-      data: {name: 'componentDidUpdate'}
-    }]
-  }]
+    errors: [
+      {
+        messageId: 'noSetState',
+        data: { name: 'componentDidUpdate' },
+      },
+    ],
+  },
+];
+
+const ruleTester = new RuleTester({ parserOptions });
+ruleTester.run('no-did-update-set-state', rule, {
+  valid: parsers.all([].concat(
+    {
+      code: `
+        var Hello = createClass({
+          render: function() {
+            return <div>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var Hello = createClass({
+          componentDidUpdate: function() {}
+        });
+      `,
+    },
+    {
+      code: `
+        var Hello = createClass({
+          componentDidUpdate: function() {
+            someNonMemberFunction(arg);
+            this.someHandler = this.setState;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var Hello = createClass({
+          componentDidUpdate: function() {
+            someClass.onSomeEvent(function(data) {
+              this.setState({
+                data: data
+              });
+            })
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var Hello = createClass({
+          componentDidUpdate: function() {
+            function handleEvent(data) {
+              this.setState({
+                data: data
+              });
+            }
+            someClass.onSomeEvent(handleEvent)
+          }
+        });
+      `,
+    }
+    // invalid.map((test) => {
+    //   const newTest = Object.assign({}, test, {
+    //     settings: Object.assign({}, test.settings, {}),
+    //   });
+    //   delete newTest.errors;
+    //   return newTest;
+    // })
+  )),
+
+  invalid: parsers.all(invalid),
 });

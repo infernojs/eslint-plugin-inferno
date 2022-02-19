@@ -12,30 +12,36 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../../lib/rules/no-danger');
 
+const parsers = require('../../helpers/parsers');
+
 const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-danger', rule, {
-  valid: [
-    {code: '<App />;'},
-    {code: '<App dangerouslySetInnerHTML={{ __html: "" }} />;'},
-    {code: '<div className="bar"></div>;'}
-  ],
-  invalid: [{
-    code: '<div dangerouslySetInnerHTML={{ __html: "" }}></div>;',
-    errors: [{
-      messageId: 'dangerousProp',
-      data: {name: 'dangerouslySetInnerHTML'}
-    }]
-  }]
+  valid: parsers.all([
+    { code: '<App />;' },
+    { code: '<App dangerouslySetInnerHTML={{ __html: "" }} />;' },
+    { code: '<div className="bar"></div>;' },
+  ]),
+  invalid: parsers.all([
+    {
+      code: '<div dangerouslySetInnerHTML={{ __html: "" }}></div>;',
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+  ]),
 });

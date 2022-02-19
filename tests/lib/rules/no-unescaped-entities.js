@@ -16,7 +16,7 @@ const resolve = require('resolve');
 let allowsInvalidJSX = false;
 try {
   // eslint-disable-next-line import/no-extraneous-dependencies, global-require, import/no-dynamic-require
-  allowsInvalidJSX = semver.satisfies(require(resolve.sync('acorn-jsx/package.json', {basedir: path.dirname(require.resolve('eslint'))})).version, '< 5.2');
+  allowsInvalidJSX = semver.satisfies(require(resolve.sync('acorn-jsx/package.json', { basedir: path.dirname(require.resolve('eslint')) })).version, '< 5.2');
 } catch (e) { /**/ }
 
 const RuleTester = require('eslint').RuleTester;
@@ -28,18 +28,17 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-unescaped-entities', rule, {
-
-  valid: [
+  valid: parsers.all([
     {
       code: `
         var Hello = createClass({
@@ -49,24 +48,27 @@ ruleTester.run('no-unescaped-entities', rule, {
             );
           }
         });
-      `
-    }, {
+      `,
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
             return <div>Here is some text!</div>;
           }
         });
-      `
-    }, {
+      `,
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
             return <div>I&rsquo;ve escaped some entities: &gt; &lt; &amp;</div>;
           }
         });
-      `
-    }, {
+      `,
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -75,15 +77,16 @@ ruleTester.run('no-unescaped-entities', rule, {
             and here are some escaped entities: &gt; &lt; &amp;</div>;
           }
         });
-      `
-    }, {
+      `,
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
             return <div>{">" + "<" + "&" + '"'}</div>;
           },
         });
-      `
+      `,
     },
     {
       code: `
@@ -93,8 +96,9 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      parser: parsers.BABEL_ESLINT
-    }, {
+      features: ['fragment'],
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -102,7 +106,7 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      parser: parsers.BABEL_ESLINT
+      features: ['fragment'],
     },
     {
       code: `
@@ -112,24 +116,84 @@ ruleTester.run('no-unescaped-entities', rule, {
           },
         });
       `,
-      parser: parsers.BABEL_ESLINT
-    }
-  ],
+      features: ['fragment'],
+    },
+  ]),
 
-  invalid: [
-    (allowsInvalidJSX && {
-      code: `
-        var Hello = createClass({
-          render: function() {
-            return <div>> default parser</div>;
-          }
-        });
-      `,
-      errors: [{
-        messageId: 'unescapedEntityAlts',
-        data: {entity: '>', alts: '`&gt;`'}
-      }]
-    }), {
+  invalid: parsers.all([].concat(
+    allowsInvalidJSX ? [
+      {
+        code: `
+          var Hello = createClass({
+            render: function() {
+              return <div>> default parser</div>;
+            }
+          });
+        `,
+        errors: [
+          {
+            messageId: 'unescapedEntityAlts',
+            data: { entity: '>', alts: '`&gt;`' },
+          },
+        ],
+      },
+      {
+        code: `
+          var Hello = createClass({
+            render: function() {
+              return <div>first line is ok
+              so is second
+              and here are some bad entities: ></div>
+            }
+          });
+        `,
+        errors: [
+          {
+            messageId: 'unescapedEntityAlts',
+            data: { entity: '>', alts: '`&gt;`' },
+          },
+        ],
+      },
+      {
+        code: `
+          var Hello = createClass({
+            render: function() {
+              return <div>Multiple errors: '>> default parser</div>;
+            }
+          });
+        `,
+        errors: [
+          {
+            messageId: 'unescapedEntityAlts',
+            data: { entity: '\'', alts: '`&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`' },
+          },
+          {
+            messageId: 'unescapedEntityAlts',
+            data: { entity: '>', alts: '`&gt;`' },
+          },
+          {
+            messageId: 'unescapedEntityAlts',
+            data: { entity: '>', alts: '`&gt;`' },
+          },
+        ],
+      },
+      {
+        code: `
+          var Hello = createClass({
+            render: function() {
+              return <div>{"Unbalanced braces - default parser"}}</div>;
+            }
+          });
+        `,
+        errors: [
+          {
+            messageId: 'unescapedEntityAlts',
+            data: { entity: '}', alts: '`&#125;`' },
+          },
+        ],
+      },
+    ] : [],
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -137,26 +201,15 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'unescapedEntityAlts',
-        data: {entity: '>', alts: '`&gt;`'}
-      }]
-    }, (allowsInvalidJSX && {
-      code: `
-        var Hello = createClass({
-          render: function() {
-            return <div>first line is ok
-            so is second
-            and here are some bad entities: ></div>
-          }
-        });
-      `,
-      errors: [{
-        messageId: 'unescapedEntityAlts',
-        data: {entity: '>', alts: '`&gt;`'}
-      }]
-    }), {
+      features: ['fragment', 'no-ts', 'no-default'],
+      errors: [
+        {
+          messageId: 'unescapedEntityAlts',
+          data: { entity: '>', alts: '`&gt;`' },
+        },
+      ],
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -166,12 +219,15 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'unescapedEntityAlts',
-        data: {entity: '>', alts: '`&gt;`'}
-      }]
-    }, {
+      features: ['fragment', 'no-ts', 'no-default'],
+      errors: [
+        {
+          messageId: 'unescapedEntityAlts',
+          data: { entity: '>', alts: '`&gt;`' },
+        },
+      ],
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -179,45 +235,14 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      errors: [{
-        messageId: 'unescapedEntityAlts',
-        data: {entity: '\'', alts: '`&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`'}
-      }]
-    }, (allowsInvalidJSX && {
-      code: `
-        var Hello = createClass({
-          render: function() {
-            return <div>Multiple errors: '>> default parser</div>;
-          }
-        });
-      `,
       errors: [
         {
           messageId: 'unescapedEntityAlts',
-          data: {entity: '\'', alts: '`&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`'}
+          data: { entity: '\'', alts: '`&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`' },
         },
-        {
-          messageId: 'unescapedEntityAlts',
-          data: {entity: '>', alts: '`&gt;`'}
-        },
-        {
-          messageId: 'unescapedEntityAlts',
-          data: {entity: '>', alts: '`&gt;`'}
-        }
-      ]
-    }), (allowsInvalidJSX && {
-      code: `
-        var Hello = createClass({
-          render: function() {
-            return <div>{"Unbalanced braces - default parser"}}</div>;
-          }
-        });
-      `,
-      errors: [{
-        messageId: 'unescapedEntityAlts',
-        data: {entity: '}', alts: '`&#125;`'}
-      }]
-    }), {
+      ],
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -225,12 +250,15 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'unescapedEntityAlts',
-        data: {entity: '}', alts: '`&#125;`'}
-      }]
-    }, {
+      features: ['fragment', 'no-ts', 'no-default'],
+      errors: [
+        {
+          messageId: 'unescapedEntityAlts',
+          data: { entity: '}', alts: '`&#125;`' },
+        },
+      ],
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -238,15 +266,16 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{
-        messageId: 'unescapedEntity',
-        data: {entity: '&'}
-      }],
-      options: [{
-        forbid: ['&']
-      }]
-    }, {
+      features: ['fragment'],
+      errors: [
+        {
+          messageId: 'unescapedEntity',
+          data: { entity: '&' },
+        },
+      ],
+      options: [{ forbid: ['&'] }],
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -254,14 +283,15 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      errors: [{
-        messageId: 'unescapedEntity',
-        data: {entity: '&'}
-      }],
-      options: [{
-        forbid: ['&']
-      }]
-    }, {
+      errors: [
+        {
+          messageId: 'unescapedEntity',
+          data: { entity: '&' },
+        },
+      ],
+      options: [{ forbid: ['&'] }],
+    },
+    {
       code: `
         var Hello = createClass({
           render: function() {
@@ -269,16 +299,22 @@ ruleTester.run('no-unescaped-entities', rule, {
           }
         });
       `,
-      errors: [{
-        messageId: 'unescapedEntityAlts',
-        data: {entity: '&', alts: '`&amp;`'}
-      }],
-      options: [{
-        forbid: [{
-          char: '&',
-          alternatives: ['&amp;']
-        }]
-      }]
+      errors: [
+        {
+          messageId: 'unescapedEntityAlts',
+          data: { entity: '&', alts: '`&amp;`' },
+        },
+      ],
+      options: [
+        {
+          forbid: [
+            {
+              char: '&',
+              alternatives: ['&amp;'],
+            },
+          ],
+        },
+      ],
     }
-  ].filter(Boolean)
+  )),
 });

@@ -53,6 +53,6 @@ Inferno.createElement(Namespaced.Element);
 Inferno.createElement('div', {}, Inferno.createElement('button', {}, Inferno.createElement('input')));
 ```
 
-## When not to use
+## When Not To Use It
 
 If you don't want to forbid any elements.

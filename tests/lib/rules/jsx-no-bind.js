@@ -19,71 +19,81 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-no-bind', rule, {
-
-  valid: [
+  valid: parsers.all([
     // Not covered by the rule
     {
-      code: '<div onClick={this._handleClick}></div>'
+      code: '<div onClick={this._handleClick}></div>',
     },
     {
-      code: '<div meaningOfLife={42}></div>'
+      code: '<div onClick={this._handleClick}></div>',
+      options: [{}],
     },
     {
-      code: '<div onClick={getHandler()}></div>'
+      code: '<Foo onClick={this._handleClick} />',
+    },
+    {
+      code: '<Foo onClick={this._handleClick} />',
+      options: [{}],
+    },
+    {
+      code: '<div meaningOfLife={42}></div>',
+    },
+    {
+      code: '<div onClick={getHandler()}></div>',
     },
 
     // bind() and arrow functions in refs explicitly ignored
     {
       code: '<div ref={c => this._input = c}></div>',
-      options: [{ignoreRefs: true}]
+      options: [{ ignoreRefs: true }],
     },
     {
       code: '<div ref={this._refCallback.bind(this)}></div>',
-      options: [{ignoreRefs: true}]
+      options: [{ ignoreRefs: true }],
     },
     {
       code: '<div ref={function (c) {this._input = c}}></div>',
-      options: [{ignoreRefs: true}]
+      options: [{ ignoreRefs: true }],
     },
 
     // bind() explicitly allowed
     {
       code: '<div onClick={this._handleClick.bind(this)}></div>',
-      options: [{allowBind: true}]
+      options: [{ allowBind: true }],
     },
 
     // Arrow functions explicitly allowed
     {
       code: '<div onClick={() => alert("1337")}></div>',
-      options: [{allowArrowFunctions: true}]
+      options: [{ allowArrowFunctions: true }],
     },
     {
       code: '<div onClick={async () => alert("1337")}></div>',
-      options: [{allowArrowFunctions: true}]
+      options: [{ allowArrowFunctions: true }],
     },
 
     // Functions explicitly allowed
     {
       code: '<div onClick={function () { alert("1337") }}></div>',
-      options: [{allowFunctions: true}]
+      options: [{ allowFunctions: true }],
     },
     {
       code: '<div onClick={function * () { alert("1337") }}></div>',
-      options: [{allowFunctions: true}]
+      options: [{ allowFunctions: true }],
     },
     {
       code: '<div onClick={async function () { alert("1337") }}></div>',
-      options: [{allowFunctions: true}]
+      options: [{ allowFunctions: true }],
     },
 
     // Redux connect
@@ -96,7 +106,7 @@ ruleTester.run('jsx-no-bind', rule, {
         }
         export default connect()(Hello);
       `,
-      options: [{allowBind: true}]
+      options: [{ allowBind: true }],
     },
 
     // Backbone view with a bind
@@ -108,7 +118,7 @@ ruleTester.run('jsx-no-bind', rule, {
             this.onTap.bind(this);
           }
         });
-      `
+      `,
     },
     {
       code: `
@@ -118,7 +128,7 @@ ruleTester.run('jsx-no-bind', rule, {
             return true;
           }
         };
-      `
+      `,
     },
     {
       code: `
@@ -128,188 +138,201 @@ ruleTester.run('jsx-no-bind', rule, {
             return true;
           }
         };
-      `
+      `,
     },
 
     {
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    const click = this.onTap.bind(this);',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n')
+      code: `
+        class Hello extends Component {
+          render() {
+            const click = this.onTap.bind(this);
+            return <div onClick={onClick}>Hello</div>;
+          }
+        };
+      `,
     },
     {
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    foo.onClick = this.onTap.bind(this);',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n')
+      code: `
+        class Hello extends Component {
+          render() {
+            foo.onClick = this.onTap.bind(this);
+            return <div onClick={onClick}>Hello</div>;
+          }
+        };
+      `,
     },
     {
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    return (<div>{',
-        '      this.props.list.map(this.wrap.bind(this, "span"))',
-        '    }</div>);',
-        '  }',
-        '};'
-      ].join('\n')
+      code: `
+        class Hello extends Component {
+          render() {
+            return (<div>{
+              this.props.list.map(this.wrap.bind(this, "span"))
+            }</div>);
+          }
+        };
+      `,
     },
     {
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    const click = () => true;',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n')
+      code: `
+        class Hello extends Component {
+          render() {
+            const click = () => true;
+            return <div onClick={onClick}>Hello</div>;
+          }
+        };
+      `,
     },
     {
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    return (<div>{',
-        '      this.props.list.map(item => <item hello="true"/>)',
-        '    }</div>);',
-        '  }',
-        '};'
-      ].join('\n')
+      code: `
+        class Hello extends Component {
+          render() {
+            return (<div>{
+              this.props.list.map(item => <item hello="true"/>)
+            }</div>);
+          }
+        };
+      `,
     },
     {
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    const click = this.bar::baz',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello extends Component {
+          render() {
+            const click = this.bar::baz
+            return <div onClick={onClick}>Hello</div>;
+          }
+        };
+      `,
+      features: ['bind operator'],
     },
     {
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    return (<div>{',
-        '      this.props.list.map(this.bar::baz)',
-        '    }</div>);',
-        '  }',
-        '};'
-      ].join('\n'),
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello extends Component {
+          render() {
+            return (<div>{
+              this.props.list.map(this.bar::baz)
+            }</div>);
+          }
+        };
+      `,
+      features: ['bind operator'],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    return (<div>{',
-        '      this.props.list.map(this.wrap.bind(this, "span"))',
-        '    }</div>);',
-        '  }',
-        '});'
-      ].join('\n')
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            return (<div>{
+              this.props.list.map(this.wrap.bind(this, "span"))
+            }</div>);
+          }
+        });
+      `,
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    const click = this.bar::baz',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '});'
-      ].join('\n'),
-      parser: parsers.BABEL_ESLINT
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const click = this.bar::baz
+            return <div onClick={onClick}>Hello</div>;
+          }
+        });
+      `,
+      features: ['bind operator'],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    const click = () => true',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '});'
-      ].join('\n')
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const click = () => true
+            return <div onClick={onClick}>Hello</div>;
+          }
+        });
+      `,
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const onClick = this.doSomething.bind(this, "no")',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const onClick = this.doSomething.bind(this, "no")
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      features: ['class fields'],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = async () => {',
-        '    return (<div>{',
-        '      this.props.list.map(this.wrap.bind(this, "span"))',
-        '    }</div>);',
-        '  }',
-        '};'
-      ].join('\n'),
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = async () => {
+            return (<div>{
+              this.props.list.map(this.wrap.bind(this, "span"))
+            }</div>);
+          }
+        };
+      `,
+      features: ['class fields'],
     },
     {
       // issue #1543: don't crash on uninitialized variables
-      code: [
-        'class Hello extends Component {',
-        '  render() {',
-        '    let click;',
-        '    return <div onClick={onClick}>Hello</div>;',
-        '  }',
-        '}'
-      ].join('\n')
+      code: `
+        class Hello extends Component {
+          render() {
+            let click;
+            return <div onClick={onClick}>Hello</div>;
+          }
+        }
+      `,
     },
 
     // ignore DOM components
     {
       code: '<div onClick={this._handleClick.bind(this)}></div>',
-      options: [{ignoreDOMComponents: true}]
+      options: [{ ignoreDOMComponents: true }],
     },
     {
       code: '<div onClick={() => alert("1337")}></div>',
-      options: [{ignoreDOMComponents: true}]
+      options: [{ ignoreDOMComponents: true }],
     },
     {
       code: '<div onClick={function () { alert("1337") }}></div>',
-      options: [{ignoreDOMComponents: true}]
+      options: [{ ignoreDOMComponents: true }],
     },
     {
       code: '<div foo={::this.onChange} />',
-      options: [{ignoreDOMComponents: true}],
-      parser: parsers.BABEL_ESLINT
-    }
-  ],
+      options: [{ ignoreDOMComponents: true }],
+      features: ['bind operator'],
+    },
 
-  invalid: [
+    // Local function declaration
+    {
+      code: `
+        function click() { return true; }
+        class Hello23 extends Inferno.Component {
+          renderDiv() {
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [],
+    },
+  ]),
+
+  invalid: parsers.all([
     // .bind()
     {
       code: '<div onClick={this._handleClick.bind(this)}></div>',
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
       code: '<div onClick={someGlobalFunction.bind(this)}></div>',
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
       code: '<div onClick={window.lol.bind(this)}></div>',
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
       code: '<div ref={this._refCallback.bind(this)}></div>',
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
       code: `
@@ -320,7 +343,7 @@ ruleTester.run('jsx-no-bind', rule, {
           }
         });
       `,
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
       code: `
@@ -331,42 +354,42 @@ ruleTester.run('jsx-no-bind', rule, {
           }
         };
       `,
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv() {',
-        '    const click = this.doSomething.bind(this, "no")',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'bindCall'}]
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv() {
+            const click = this.doSomething.bind(this, "no")
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'bindCall' }],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const click = this.doSomething.bind(this, "no")',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'bindCall'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const click = this.doSomething.bind(this, "no")
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'bindCall' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = async () => {',
-        '    const click = this.doSomething.bind(this, "no")',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'bindCall'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = async () => {
+            const click = this.doSomething.bind(this, "no")
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'bindCall' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
       code: `
@@ -376,47 +399,47 @@ ruleTester.run('jsx-no-bind', rule, {
           )
         };
       `,
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '   return <div onClick={this.doSomething.bind(this, "hey")} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'bindCall'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+          return <div onClick={this.doSomething.bind(this, "hey")} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'bindCall' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    const doThing = this.doSomething.bind(this, "hey")',
-        '    return <div onClick={doThing} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'bindCall'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const doThing = this.doSomething.bind(this, "hey")
+            return <div onClick={doThing} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'bindCall' }],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const click = () => true',
-        '    const renderStuff = () => {',
-        '      const click = this.doSomething.bind(this, "hey")',
-        '      return <div onClick={click} />',
-        '    }',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const click = () => true
+            const renderStuff = () => {
+              const click = this.doSomething.bind(this, "hey")
+              return <div onClick={click} />
+            }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
       errors: [
-        {messageId: 'bindCall'},
-        {messageId: 'arrowFunc'}
+        { messageId: 'bindCall' },
+        { messageId: 'arrowFunc' },
       ],
-      parser: parsers.BABEL_ESLINT
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
       code: `
@@ -426,7 +449,7 @@ ruleTester.run('jsx-no-bind', rule, {
           )
         };
       `,
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
       code: `
@@ -436,7 +459,7 @@ ruleTester.run('jsx-no-bind', rule, {
           )
         };
       `,
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
       code: `
@@ -446,7 +469,7 @@ ruleTester.run('jsx-no-bind', rule, {
           )
         };
       `,
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
     {
       code: `
@@ -456,350 +479,365 @@ ruleTester.run('jsx-no-bind', rule, {
           )
         };
       `,
-      errors: [{messageId: 'bindCall'}]
+      errors: [{ messageId: 'bindCall' }],
     },
 
     // Arrow functions
     {
       code: '<div onClick={() => alert("1337")}></div>',
-      errors: [{messageId: 'arrowFunc'}]
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
       code: '<div onClick={async () => alert("1337")}></div>',
-      errors: [{messageId: 'arrowFunc'}]
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
       code: '<div onClick={() => 42}></div>',
-      errors: [{messageId: 'arrowFunc'}]
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
       code: '<div onClick={param => { first(); second(); }}></div>',
-      errors: [{messageId: 'arrowFunc'}]
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
       code: '<div ref={c => this._input = c}></div>',
-      errors: [{messageId: 'arrowFunc'}]
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const click = () => true',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'arrowFunc'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const click = () => true
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'arrowFunc' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = async () => {',
-        '    const click = () => true',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'arrowFunc'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = async () => {
+            const click = () => true
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'arrowFunc' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = async () => {',
-        '    const click = async () => true',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'arrowFunc'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = async () => {
+            const click = async () => true
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'arrowFunc' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '   return <div onClick={() => true} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'arrowFunc'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+          return <div onClick={() => true} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '   return <div onClick={async () => true} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'arrowFunc'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+          return <div onClick={async () => true} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    const doThing = () => true',
-        '    return <div onClick={doThing} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'arrowFunc'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const doThing = () => true
+            return <div onClick={doThing} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    const doThing = async () => true',
-        '    return <div onClick={doThing} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'arrowFunc'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const doThing = async () => true
+            return <div onClick={doThing} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'arrowFunc' }],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const click = ::this.onChange',
-        '    const renderStuff = () => {',
-        '      const click = () => true',
-        '      return <div onClick={click} />',
-        '    }',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const click = ::this.onChange
+            const renderStuff = () => {
+              const click = () => true
+              return <div onClick={click} />
+            }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
       errors: [
-        {messageId: 'arrowFunc'},
-        {messageId: 'bindExpression'}
+        { messageId: 'arrowFunc' },
+        { messageId: 'bindExpression' },
       ],
-      parser: parsers.BABEL_ESLINT
+      features: ['bind operator'],
     },
 
     // Functions
     {
       code: '<div onClick={function () { alert("1337") }}></div>',
-      errors: [{messageId: 'func'}]
+      errors: [{ messageId: 'func' }],
     },
     {
       code: '<div onClick={function * () { alert("1337") }}></div>',
-      errors: [{messageId: 'func'}]
+      errors: [{ messageId: 'func' }],
     },
     {
       code: '<div onClick={async function () { alert("1337") }}></div>',
-      errors: [{messageId: 'func'}]
+      errors: [{ messageId: 'func' }],
     },
     {
       code: '<div ref={function (c) { this._input = c }}></div>',
-      errors: [{messageId: 'func'}]
+      errors: [{ messageId: 'func' }],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const click = function () { return true }',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'func'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const click = function () { return true }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'func' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const click = function * () { return true }',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'func'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const click = function * () { return true }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'func' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = async () => {',
-        '    const click = function () { return true }',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'func'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = async () => {
+            const click = function () { return true }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'func' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = async () => {',
-        '    const click = async function () { return true }',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'func'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = async () => {
+            const click = async function () { return true }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'func' }],
+      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '   return <div onClick={function () { return true }} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'func'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+          return <div onClick={function () { return true }} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'func' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '   return <div onClick={function * () { return true }} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'func'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+          return <div onClick={function * () { return true }} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'func' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '   return <div onClick={async function () { return true }} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'func'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+          return <div onClick={async function () { return true }} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'func' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    const doThing = function () { return true }',
-        '    return <div onClick={doThing} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'func'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const doThing = function () { return true }
+            return <div onClick={doThing} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'func' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    const doThing = async function () { return true }',
-        '    return <div onClick={doThing} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'func'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const doThing = async function () { return true }
+            return <div onClick={doThing} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'func' }],
     },
     {
-      code: [
-        'var Hello = Inferno.createClass({',
-        '  render: function() { ',
-        '    const doThing = function * () { return true }',
-        '    return <div onClick={doThing} />',
-        '  }',
-        '});'
-      ].join('\n'),
-      errors: [{messageId: 'func'}]
+      code: `
+        var Hello = Inferno.createClass({
+          render: function() {
+            const doThing = function * () { return true }
+            return <div onClick={doThing} />
+          }
+        });
+      `,
+      errors: [{ messageId: 'func' }],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const click = ::this.onChange',
-        '    const renderStuff = () => {',
-        '      const click = function () { return true }',
-        '      return <div onClick={click} />',
-        '    }',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const click = ::this.onChange
+            const renderStuff = () => {
+              const click = function () { return true }
+              return <div onClick={click} />
+            }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
       errors: [
-        {messageId: 'func'},
-        {messageId: 'bindExpression'}
+        { messageId: 'func' },
+        { messageId: 'bindExpression' },
       ],
-      parser: parsers.BABEL_ESLINT
+      features: ['bind operator'],
     },
 
     // Bind expression
     {
       code: '<div foo={::this.onChange} />',
-      errors: [{messageId: 'bindExpression'}],
-      parser: parsers.BABEL_ESLINT
+      errors: [{ messageId: 'bindExpression' }],
+      features: ['bind operator'],
     },
     {
       code: '<div foo={foo.bar::baz} />',
-      errors: [{messageId: 'bindExpression'}],
-      parser: parsers.BABEL_ESLINT
+      errors: [{ messageId: 'bindExpression' }],
+      features: ['bind operator'],
     },
     {
       code: '<div foo={foo::bar} />',
-      errors: [{messageId: 'bindExpression'}],
-      parser: parsers.BABEL_ESLINT
+      errors: [{ messageId: 'bindExpression' }],
+      features: ['bind operator'],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv() {',
-        '    const click = ::this.onChange',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'bindExpression'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv() {
+            const click = ::this.onChange
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'bindExpression' }],
+      features: ['bind operator'],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv() {',
-        '    const click = this.bar::baz',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'bindExpression'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv() {
+            const click = this.bar::baz
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'bindExpression' }],
+      features: ['bind operator'],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = async () => {',
-        '    const click = this.bar::baz',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'bindExpression'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = async () => {
+            const click = this.bar::baz
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'bindExpression' }],
+      features: ['bind operator'],
     },
     {
-      code: [
-        'class Hello23 extends Inferno.Component {',
-        '  renderDiv = () => {',
-        '    const click = true',
-        '    const renderStuff = () => {',
-        '      const click = this.bar::baz',
-        '      return <div onClick={click} />',
-        '    }',
-        '    return <div onClick={click}>Hello</div>;',
-        '  }',
-        '};'
-      ].join('\n'),
-      errors: [{messageId: 'bindExpression'}],
-      parser: parsers.BABEL_ESLINT
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv = () => {
+            const click = true
+            const renderStuff = () => {
+              const click = this.bar::baz
+              return <div onClick={click} />
+            }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [{ messageId: 'bindExpression' }],
+      features: ['bind operator'],
+    },
+
+    // Local function declaration
+    {
+      code: `
+        class Hello23 extends Inferno.Component {
+          renderDiv() {
+            function click() { return true; }
+            return <div onClick={click}>Hello</div>;
+          }
+        };
+      `,
+      errors: [
+        { messageId: 'func' },
+      ],
     },
 
     // ignore DOM components
     {
       code: '<Foo onClick={this._handleClick.bind(this)} />',
-      options: [{ignoreDOMComponents: true}],
-      errors: [{messageId: 'bindCall'}]
-    }
-  ]
+      options: [{ ignoreDOMComponents: true }],
+      errors: [{ messageId: 'bindCall' }],
+    },
+  ]),
 });

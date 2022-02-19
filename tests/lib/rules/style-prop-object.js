@@ -12,301 +12,296 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../../lib/rules/style-prop-object');
 
+const parsers = require('../../helpers/parsers');
+
 const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('style-prop-object', rule, {
-  valid: [
+  valid: parsers.all([
     {
-      code: '<div style={{ color: "red" }} />'
+      code: '<div style={{ color: "red" }} />',
     },
     {
-      code: '<Hello style={{ color: "red" }} />'
+      code: '<Hello style={{ color: "red" }} />',
     },
     {
-      code: [
-        'function redDiv() {',
-        '  const styles = { color: "red" };',
-        '  return <div style={styles} />;',
-        '}'
-      ].join('\n')
-    },
-    {
-      code: [
-        'function redDiv() {',
-        '  const styles = { color: "red" };',
-        '  return <Hello style={styles} />;',
-        '}'
-      ].join('\n')
-    },
-    {
-      code: [
-        'const styles = { color: "red" };',
-        'function redDiv() {',
-        '  return <div style={styles} />;',
-        '}'
-      ].join('\n')
-    },
-    {
-      code: [
-        'function redDiv(props) {',
-        '  return <div style={props.styles} />;',
-        '}'
-      ].join('\n')
-    },
-    {
-      code: [
-        'import styles from \'./styles\';',
-        'function redDiv() {',
-        '  return <div style={styles} />;',
-        '}'
-      ].join('\n')
-    },
-    {
-      code: [
-        'import mystyles from \'./styles\';',
-        'const styles = Object.assign({ color: \'red\' }, mystyles);',
-        'function redDiv() {',
-        '  return <div style={styles} />;',
-        '}'
-      ].join('\n'),
-      parserOptions: {
-        ecmaVersion: 2018,
-        sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true
+      code: `
+        function redDiv() {
+          const styles = { color: "red" };
+          return <div style={styles} />;
         }
-      }
+      `,
     },
     {
-      code: [
-        'const otherProps = { style: { color: "red" } };',
-        'const { a, b, ...props } = otherProps;',
-        '<div {...props} />'
-      ].join('\n')
+      code: `
+        function redDiv() {
+          const styles = { color: "red" };
+          return <Hello style={styles} />;
+        }
+      `,
     },
     {
-      code: [
-        'const styles = Object.assign({ color: \'red\' }, mystyles);',
-        'Inferno.createElement("div", { style: styles });'
-      ].join('\n'),
-      parserOptions: Object.assign({sourceType: 'module'}, parserOptions)
+      code: `
+        const styles = { color: "red" };
+        function redDiv() {
+          return <div style={styles} />;
+        }
+      `,
     },
     {
-      code: '<div style></div>'
+      code: `
+        function redDiv(props) {
+          return <div style={props.styles} />;
+        }
+      `,
     },
     {
-      code: [
-        'Inferno.createElement(MyCustomElem, {',
-        '  [style]: true',
-        '}, \'My custom Elem\')'
-      ].join('\n')
+      code: `
+        import styles from './styles';
+        function redDiv() {
+          return <div style={styles} />;
+        }
+      `,
     },
     {
-      code: [
-        'let style;',
-        '<div style={style}></div>'
-      ].join('\n')
+      code: `
+        import mystyles from './styles';
+        const styles = Object.assign({ color: 'red' }, mystyles);
+        function redDiv() {
+          return <div style={styles} />;
+        }
+      `,
     },
     {
-      code: [
-        'let style = null;',
-        '<div style={style}></div>'
-      ].join('\n')
+      code: `
+        const otherProps = { style: { color: "red" } };
+        const { a, b, ...props } = otherProps;
+        <div {...props} />
+      `,
     },
     {
-      code: [
-        'let style = undefined;',
-        '<div style={style}></div>'
-      ].join('\n')
+      code: `
+        const styles = Object.assign({ color: 'red' }, mystyles);
+        Inferno.createElement("div", { style: styles });
+      `,
+      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
     },
     {
-      code: '<div style={undefined}></div>'
+      code: '<div style></div>',
     },
     {
-      code: [
-        'const props = { style: undefined };',
-        '<div {...props} />'
-      ].join('\n')
+      code: `
+        Inferno.createElement(MyCustomElem, {
+          [style]: true
+        }, 'My custom Elem')
+      `,
     },
     {
-      code: [
-        'const otherProps = { style: undefined };',
-        'const { a, b, ...props } = otherProps;',
-        '<div {...props} />'
-      ].join('\n')
+      code: `
+        let style;
+        <div style={style}></div>
+      `,
     },
     {
-      code: [
-        'Inferno.createElement("div", {',
-        '  style: undefined',
-        '})'
-      ].join('\n')
+      code: `
+        let style = null;
+        <div style={style}></div>
+      `,
     },
     {
-      code: [
-        'let style;',
-        'Inferno.createElement("div", {',
-        '  style',
-        '})'
-      ].join('\n')
+      code: `
+        let style = undefined;
+        <div style={style}></div>
+      `,
     },
     {
-      code: '<div style={null}></div>'
+      code: '<div style={undefined}></div>',
     },
     {
-      code: [
-        'const props = { style: null };',
-        '<div {...props} />'
-      ].join('\n')
+      code: `
+        const props = { style: undefined };
+        <div {...props} />
+      `,
     },
     {
-      code: [
-        'const otherProps = { style: null };',
-        'const { a, b, ...props } = otherProps;',
-        '<div {...props} />'
-      ].join('\n')
+      code: `
+        const otherProps = { style: undefined };
+        const { a, b, ...props } = otherProps;
+        <div {...props} />
+      `,
     },
     {
-      code: [
-        'Inferno.createElement("div", {',
-        '  style: null',
-        '})'
-      ].join('\n')
+      code: `
+        Inferno.createElement("div", {
+          style: undefined
+        })
+      `,
     },
     {
-      code: [
-        'const MyComponent = (props) => {',
-        '  Inferno.createElement(MyCustomElem, {',
-        '    ...props',
-        '  });',
-        '};'
-      ].join('\n')
+      code: `
+        let style;
+        Inferno.createElement("div", {
+          style
+        })
+      `,
+    },
+    {
+      code: '<div style={null}></div>',
+    },
+    {
+      code: `
+        const props = { style: null };
+        <div {...props} />
+      `,
+    },
+    {
+      code: `
+        const otherProps = { style: null };
+        const { a, b, ...props } = otherProps;
+        <div {...props} />
+      `,
+    },
+    {
+      code: `
+        Inferno.createElement("div", {
+          style: null
+        })
+      `,
+    },
+    {
+      code: `
+        const MyComponent = (props) => {
+          Inferno.createElement(MyCustomElem, {
+            ...props
+          });
+        };
+      `,
     },
     {
       code: '<MyComponent style="myStyle" />',
-      options: [
-        {
-          allow: ['MyComponent']
-        }
-      ]
+      options: [{ allow: ['MyComponent'] }],
     },
     {
       code: 'Inferno.createElement(MyComponent, { style: "mySpecialStyle" })',
-      options: [
-        {
-          allow: ['MyComponent']
-        }
-      ]
-    }
-  ],
-  invalid: [
+      options: [{ allow: ['MyComponent'] }],
+    },
+  ]),
+  invalid: parsers.all([
     {
       code: '<div style="color: \'red\'" />',
-      errors: [{
-        messageId: 'stylePropNotObject',
-        line: 1,
-        column: 6,
-        type: 'JSXAttribute'
-      }]
+      errors: [
+        {
+          messageId: 'stylePropNotObject',
+          line: 1,
+          column: 6,
+          type: 'JSXAttribute',
+        },
+      ],
     },
     {
       code: '<Hello style="color: \'red\'" />',
-      errors: [{
-        messageId: 'stylePropNotObject',
-        line: 1,
-        column: 8,
-        type: 'JSXAttribute'
-      }]
+      errors: [
+        {
+          messageId: 'stylePropNotObject',
+          line: 1,
+          column: 8,
+          type: 'JSXAttribute',
+        },
+      ],
     },
     {
       code: '<div style={true} />',
-      errors: [{
-        messageId: 'stylePropNotObject',
-        line: 1,
-        column: 6,
-        type: 'JSXAttribute'
-      }]
+      errors: [
+        {
+          messageId: 'stylePropNotObject',
+          line: 1,
+          column: 6,
+          type: 'JSXAttribute',
+        },
+      ],
     },
     {
-      code: [
-        'const styles = \'color: "red"\';',
-        'function redDiv2() {',
-        '  return <div style={styles} />;',
-        '}'
-      ].join('\n'),
-      errors: [{
-        messageId: 'stylePropNotObject',
-        line: 3,
-        column: 22,
-        type: 'Identifier'
-      }]
+      code: `
+        const styles = 'color: "red"';
+        function redDiv2() {
+          return <div style={styles} />;
+        }
+      `,
+      errors: [
+        {
+          messageId: 'stylePropNotObject',
+          line: 4,
+          column: 30,
+          type: 'Identifier',
+        },
+      ],
     },
     {
-      code: [
-        'const styles = \'color: "red"\';',
-        'function redDiv2() {',
-        '  return <Hello style={styles} />;',
-        '}'
-      ].join('\n'),
-      errors: [{
-        messageId: 'stylePropNotObject',
-        line: 3,
-        column: 24,
-        type: 'Identifier'
-      }]
+      code: `
+        const styles = 'color: "red"';
+        function redDiv2() {
+          return <Hello style={styles} />;
+        }
+      `,
+      errors: [
+        {
+          messageId: 'stylePropNotObject',
+          line: 4,
+          column: 32,
+          type: 'Identifier',
+        },
+      ],
     },
     {
-      code: [
-        'const styles = true;',
-        'function redDiv() {',
-        '  return <div style={styles} />;',
-        '}'
-      ].join('\n'),
-      errors: [{
-        messageId: 'stylePropNotObject',
-        line: 3,
-        column: 22,
-        type: 'Identifier'
-      }]
+      code: `
+        const styles = true;
+        function redDiv() {
+          return <div style={styles} />;
+        }
+      `,
+      errors: [
+        {
+          messageId: 'stylePropNotObject',
+          line: 4,
+          column: 30,
+          type: 'Identifier',
+        },
+      ],
     },
     {
       code: '<MyComponent style="myStyle" />',
-      options: [
+      options: [{ allow: ['MyOtherComponent'] }],
+      errors: [
         {
-          allow: ['MyOtherComponent']
-        }
+          messageId: 'stylePropNotObject',
+          line: 1,
+          column: 14,
+          type: 'JSXAttribute',
+        },
       ],
-      errors: [{
-        messageId: 'stylePropNotObject',
-        line: 1,
-        column: 14,
-        type: 'JSXAttribute'
-      }]
     },
     {
       code: 'Inferno.createElement(MyComponent, { style: "mySpecialStyle" })',
-      options: [
+      options: [{ allow: ['MyOtherComponent'] }],
+      errors: [
         {
-          allow: ['MyOtherComponent']
-        }
+          messageId: 'stylePropNotObject',
+          line: 1,
+          column: 45,
+          type: 'Literal',
+        },
       ],
-      errors: [{
-        messageId: 'stylePropNotObject',
-        line: 1,
-        column: 45,
-        type: 'Literal'
-      }]
-    }
-  ]
+    },
+  ]),
 });

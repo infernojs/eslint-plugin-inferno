@@ -12,7 +12,8 @@ jobs:
         name: 'nvm install lts/* && npm install'
         with:
           node-version: 'lts/*'
-          skip-ls-check: true
+        env:
+          NPM_CONFIG_LEGACY_PEER_DEPS: true
       - run: npm run pretest
 
   posttest:
@@ -24,5 +25,8 @@ jobs:
         name: 'nvm install lts/* && npm install'
         with:
           node-version: 'lts/*'
-          skip-ls-check: true
+        env:
+          NPM_CONFIG_LEGACY_PEER_DEPS: true
+      - run: npx ls-engines
+      - run: echo 'legacy-peer-deps=true' >> .npmrc
       - run: npm run posttest

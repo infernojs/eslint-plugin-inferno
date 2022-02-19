@@ -16,8 +16,8 @@ const parsers = require('../../helpers/parsers');
 const parserOptions = {
   ecmaVersion: 2018,
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // -----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ const parserOptions = {
 
 const ruleTester = new RuleTester();
 ruleTester.run('no-redundant-should-component-update', rule, {
-  valid: [
+  valid: parsers.all([
     {
       code: `
         class Foo extends Inferno.Component {
@@ -35,7 +35,7 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           }
         }
       `,
-      parserOptions
+      parserOptions,
     },
     {
       code: `
@@ -46,7 +46,6 @@ ruleTester.run('no-redundant-should-component-update', rule, {
         }
       `,
       parserOptions,
-      parser: parsers.BABEL_ESLINT
     },
     {
       code: `
@@ -56,8 +55,8 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
-      parserOptions
+      features: ['class fields'],
+      parserOptions,
     },
     {
       code: `
@@ -69,11 +68,11 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           };
         }
       `,
-      parserOptions
-    }
-  ],
+      parserOptions,
+    },
+  ]),
 
-  invalid: [
+  invalid: parsers.all([
     {
       code: `
         class Foo extends Inferno.PureComponent {
@@ -82,11 +81,13 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'noShouldCompUpdate',
-        data: {component: 'Foo'}
-      }],
-      parserOptions
+      errors: [
+        {
+          messageId: 'noShouldCompUpdate',
+          data: { component: 'Foo' },
+        },
+      ],
+      parserOptions,
     },
     {
       code: `
@@ -96,11 +97,13 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'noShouldCompUpdate',
-        data: {component: 'Foo'}
-      }],
-      parserOptions
+      errors: [
+        {
+          messageId: 'noShouldCompUpdate',
+          data: { component: 'Foo' },
+        },
+      ],
+      parserOptions,
     },
     {
       code: `
@@ -110,12 +113,14 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'noShouldCompUpdate',
-        data: {component: 'Foo'}
-      }],
-      parser: parsers.BABEL_ESLINT,
-      parserOptions
+      errors: [
+        {
+          messageId: 'noShouldCompUpdate',
+          data: { component: 'Foo' },
+        },
+      ],
+      features: ['class fields'],
+      parserOptions,
     },
     {
       code: `
@@ -127,11 +132,13 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           };
         }
       `,
-      errors: [{
-        messageId: 'noShouldCompUpdate',
-        data: {component: 'Bar'}
-      }],
-      parserOptions
+      errors: [
+        {
+          messageId: 'noShouldCompUpdate',
+          data: { component: 'Bar' },
+        },
+      ],
+      parserOptions,
     },
     {
       code: `
@@ -143,11 +150,13 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           };
         }
       `,
-      errors: [{
-        messageId: 'noShouldCompUpdate',
-        data: {component: 'Bar'}
-      }],
-      parserOptions
+      errors: [
+        {
+          messageId: 'noShouldCompUpdate',
+          data: { component: 'Bar' },
+        },
+      ],
+      parserOptions,
     },
     {
       code: `
@@ -157,11 +166,13 @@ ruleTester.run('no-redundant-should-component-update', rule, {
           }
         }
       `,
-      errors: [{
-        messageId: 'noShouldCompUpdate',
-        data: {component: 'Foo'}
-      }],
-      parserOptions
-    }
-  ]
+      errors: [
+        {
+          messageId: 'noShouldCompUpdate',
+          data: { component: 'Foo' },
+        },
+      ],
+      parserOptions,
+    },
+  ]),
 });

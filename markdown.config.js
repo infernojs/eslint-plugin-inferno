@@ -2,18 +2,18 @@
 
 /* eslint-disable no-restricted-syntax */
 
-const {rules} = require('./index');
+const { rules } = require('./index');
 
 const ruleTableRows = Object.keys(rules)
   .sort()
   .map((id) => {
-    const {meta} = rules[id];
-    const {fixable, docs} = meta;
+    const { meta } = rules[id];
+    const { fixable, docs } = meta;
     return [
       docs.recommended ? '✔' : '',
       fixable ? '🔧' : '',
       `[inferno/${id}](docs/rules/${id}.md)`,
-      docs.description
+      docs.description,
     ].join(' | ');
   });
 
@@ -32,9 +32,9 @@ const JSX_RULES = () => buildRulesTable(ruleTableRows.filter((rule) => rule.incl
 module.exports = {
   transforms: {
     BASIC_RULES,
-    JSX_RULES
+    JSX_RULES,
   },
   callback: () => {
     console.log('The auto-generating of rules finished!');
-  }
+  },
 };

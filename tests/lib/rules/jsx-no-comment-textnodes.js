@@ -18,376 +18,159 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-no-comment-textnodes', rule, {
-
-  valid: [
+  valid: parsers.all([
     {
       code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              {/* valid */}
-            </div>
-          );
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                {/* valid */}
+              </div>
+            );
+          }
         }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <>
-              {/* valid */}
-            </>
-          );
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (<div>{/* valid */}</div>);
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          const bar = (<div>{/* valid */}</div>);
-          return bar;
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      var Hello = createClass({
-        foo: (<div>{/* valid */}</div>),
-        render() {
-          return this.foo;
-        },
-      });
-    `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              {/* valid */}
-              {/* valid 2 */}
-              {/* valid 3 */}
-            </div>
-          );
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-            </div>
-          );
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      var foo = require('foo');
-    `,
-      parser: parsers.BABEL_ESLINT
-    }, {
-      code: `
-      <Foo bar='test'>
-        {/* valid */}
-      </Foo>
-    `,
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: `
-      <strong>
-        &nbsp;https://www.example.com/attachment/download/1
-      </strong>
-    `,
-      parser: parsers.BABEL_ESLINT
-    },
-
-    // inside element declarations
-    {
-      code: `
-      <Foo /* valid */ placeholder={'foo'}/>
-    `,
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: `
-      </* valid */></>
-    `,
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: `
-      <></* valid *//>
-    `,
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: `
-      <Foo title={'foo' /* valid */}/>
-    `,
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: '<pre>&#x2F;&#x2F; TODO: Write perfect code</pre>'
-    },
-    {
-      code: '<pre>&#x2F;&#x2F; TODO: Write perfect code</pre>',
-      parser: parsers.BABEL_ESLINT
-    },
-    {
-      code: '<pre>&#x2F;&#42; TODO: Write perfect code &#42;&#x2F;</pre>'
-    },
-    {
-      code: '<pre>&#x2F;&#42; TODO: Write perfect code &#42;&#x2F;</pre>',
-      parser: parsers.BABEL_ESLINT
-    }
-  ].concat(parsers.TS([
-    {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              {/* valid */}
-            </div>
-          );
-        }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <>
-              {/* valid */}
-            </>
-          );
-        }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (<div>{/* valid */}</div>);
-        }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          const bar = (<div>{/* valid */}</div>);
-          return bar;
-        }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }, {
-      code: `
-      var Hello = createInfernoClass({
-        foo: (<div>{/* valid */}</div>),
-        render() {
-          return this.foo;
-        },
-      });
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              {/* valid */}
-              {/* valid 2 */}
-              {/* valid 3 */}
-            </div>
-          );
-        }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-            </div>
-          );
-        }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }, {
-      code: `
-      var foo = require('foo');
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }, {
-      code: `
-      <Foo bar='test'>
-        {/* valid */}
-      </Foo>
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    },
-    {
-      code: `
-      <strong>
-        &nbsp;https://www.example.com/attachment/download/1
-      </strong>
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    },
-
-    // inside element declarations
-    {
-      code: `
-      <Foo /* valid */ placeholder={'foo'}/>
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    },
-    {
-      code: `
-      <Foo title={'foo' /* valid */}/>
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    },
-    {
-      code: '<pre>&#x2F;&#x2F; TODO: Write perfect code</pre>',
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    },
-    {
-      code: '<pre>&#x2F;&#42; TODO: Write perfect code &#42;&#x2F;</pre>',
-      parser: parsers['@TYPESCRIPT_ESLINT']
-    }
-  ])),
-
-  invalid: [
-    {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (<div>// invalid</div>);
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (<>// invalid</>);
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (<div>/* invalid */</div>);
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              // invalid
-            </div>
-          );
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              asdjfl
-              /* invalid */
-              foo
-            </div>
-          );
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
-      code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              {'asdjfl'}
-              // invalid
-              {'foo'}
-            </div>
-          );
-        }
-      }
-    `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [{messageId: 'putCommentInBraces'}]
-    },
-    {
-      code: `
-        const Component2 = () => {
-          return <span>/*</span>;
-        };
       `,
-      errors: [{messageId: 'putCommentInBraces'}]
-    }
-  ].concat(parsers.TS([
+    },
+    {
+      code: `
+        class Comp1 extends Component {
+          render() {
+            return (
+              <>
+                {/* valid */}
+              </>
+            );
+          }
+        }
+      `,
+      features: ['fragment'],
+    },
+    {
+      code: `
+        class Comp1 extends Component {
+          render() {
+            return (<div>{/* valid */}</div>);
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class Comp1 extends Component {
+          render() {
+            const bar = (<div>{/* valid */}</div>);
+            return bar;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        var Hello = createClass({
+          foo: (<div>{/* valid */}</div>),
+          render() {
+            return this.foo;
+          },
+        });
+      `,
+    },
+    {
+      code: `
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                {/* valid */}
+                {/* valid 2 */}
+                {/* valid 3 */}
+              </div>
+            );
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+              </div>
+            );
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        var foo = require('foo');
+      `,
+    },
+    {
+      code: `
+        <Foo bar='test'>
+          {/* valid */}
+        </Foo>
+      `,
+    },
+    {
+      code: `
+        <strong>
+          &nbsp;https://www.example.com/attachment/download/1
+        </strong>
+      `,
+    },
+
+    // inside element declarations
+    {
+      code: `
+        <Foo /* valid */ placeholder={'foo'}/>
+      `,
+    },
+    {
+      code: `
+        </* valid */></>
+      `,
+      features: ['fragment'],
+    },
+    {
+      code: `
+        <></* valid *//>
+      `,
+      features: ['fragment', 'no-ts'], // TODO: FIXME: figure out why both TS parsers fail on this
+    },
+    {
+      code: `
+        <Foo title={'foo' /* valid */}/>
+      `,
+    },
+    {
+      code: '<pre>&#x2F;&#x2F; TODO: Write perfect code</pre>',
+    },
+    {
+      code: '<pre>&#x2F;&#42; TODO: Write perfect code &#42;&#x2F;</pre>',
+    },
+    {
+      code: `
+        <div>
+          <span className="pl-c"><span className="pl-c">&#47;&#47;</span> ...</span><br />
+        </div>
+      `,
+    },
+  ]),
+
+  invalid: parsers.all([
     {
       code: `
         class Comp1 extends Component {
@@ -396,74 +179,85 @@ ruleTester.run('jsx-no-comment-textnodes', rule, {
           }
         }
       `,
-      parser: parsers['@TYPESCRIPT_ESLINT'],
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
+      features: ['no-ts-old'], // TODO: FIXME: remove this and figure out why the old TS parser hangs here
+      errors: [{ messageId: 'putCommentInBraces' }],
+    },
+    {
       code: `
-      class Comp1 extends Component {
-        render() {
-          return (<>// invalid</>);
+        class Comp1 extends Component {
+          render() {
+            return (<>// invalid</>);
+          }
         }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT'],
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
+      `,
+      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove this and figure out why the old TS parser hangs here
+      errors: [{ messageId: 'putCommentInBraces' }],
+    },
+    {
       code: `
-      class Comp1 extends Component {
-        render() {
-          return (<div>/* invalid */</div>);
+        class Comp1 extends Component {
+          render() {
+            return (<div>/* invalid */</div>);
+          }
         }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT'],
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
+      `,
+      features: ['no-ts-old'], // TODO: FIXME: remove this and figure out why the old TS parser hangs here
+      errors: [{ messageId: 'putCommentInBraces' }],
+    },
+    {
       code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              // invalid
-            </div>
-          );
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                // invalid
+              </div>
+            );
+          }
         }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT'],
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
+      `,
+      errors: [{ messageId: 'putCommentInBraces' }],
+    },
+    {
       code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              asdjfl
-              /* invalid */
-              foo
-            </div>
-          );
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                asdjfl
+                /* invalid */
+                foo
+              </div>
+            );
+          }
         }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT'],
-      errors: [{messageId: 'putCommentInBraces'}]
-    }, {
+      `,
+      errors: [{ messageId: 'putCommentInBraces' }],
+    },
+    {
       code: `
-      class Comp1 extends Component {
-        render() {
-          return (
-            <div>
-              {'asdjfl'}
-              // invalid
-              {'foo'}
-            </div>
-          );
+        class Comp1 extends Component {
+          render() {
+            return (
+              <div>
+                {'asdjfl'}
+                // invalid
+                {'foo'}
+              </div>
+            );
+          }
         }
-      }
-    `,
-      parser: parsers['@TYPESCRIPT_ESLINT'],
-      errors: [{messageId: 'putCommentInBraces'}]
-    }
-  ]))
+      `,
+      errors: [{ messageId: 'putCommentInBraces' }],
+    },
+    {
+      code: `
+        const Component2 = () => {
+          return <span>/*</span>;
+        };
+      `,
+      features: ['no-ts-old'], // TODO: FIXME: remove this and figure out why the old TS parser hangs here
+      errors: [{ messageId: 'putCommentInBraces' }],
+    },
+  ]),
 });

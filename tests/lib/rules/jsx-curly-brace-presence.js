@@ -12,6 +12,8 @@
 // ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester;
+const semver = require('semver');
+const eslintPkg = require('eslint/package.json');
 const rule = require('../../../lib/rules/jsx-curly-brace-presence');
 
 const parsers = require('../../helpers/parsers');
@@ -20,266 +22,266 @@ const parserOptions = {
   sourceType: 'module',
   ecmaVersion: 2015,
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-curly-brace-presence', rule, {
-  valid: [
+  valid: parsers.all([].concat(
     {
-      code: '<App {...props}>foo</App>'
+      code: '<App {...props}>foo</App>',
     },
     {
       code: '<>foo</>',
-      parser: parsers.BABEL_ESLINT
+      features: ['fragment'],
     },
     {
       code: '<App {...props}>foo</App>',
-      options: [{props: 'never'}]
+      options: [{ props: 'never' }],
     },
     /*
      * There is no way to inject the space into JSX without an expression container
      * so this format should always be allowed regardless of the `children` option.
      */
     {
-      code: '<App>{\' \'}</App>'
+      code: '<App>{\' \'}</App>',
     },
     {
-      code: '<App>{\' \'}\n</App>'
+      code: '<App>{\' \'}\n</App>',
     },
     {
-      code: '<App>{\'     \'}</App>'
+      code: '<App>{\'     \'}</App>',
     },
     {
-      code: '<App>{\'     \'}\n</App>'
+      code: '<App>{\'     \'}\n</App>',
     },
     {
       code: '<App>{\' \'}</App>',
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: '<App>{\'    \'}</App>',
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: '<App>{\' \'}</App>',
-      options: [{children: 'always'}]
+      options: [{ children: 'always' }],
     },
     {
       code: '<App>{\'        \'}</App>',
-      options: [{children: 'always'}]
+      options: [{ children: 'always' }],
     },
     {
       code: '<App {...props}>foo</App>',
-      options: [{props: 'always'}]
+      options: [{ props: 'always' }],
     },
     {
       code: '<App>{`Hello ${word} World`}</App>',
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: `
-      <Inferno.Fragment>
-        foo{' '}
-        <span>bar</span>
-      </Inferno.Fragment>
-    `,
-      options: [{children: 'never'}]
+        <Inferno.Fragment>
+          foo{' '}
+          <span>bar</span>
+        </Inferno.Fragment>
+      `,
+      options: [{ children: 'never' }],
     },
     {
       code: `
-      <>
-        foo{' '}
-        <span>bar</span>
-      </>
-    `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}]
+        <>
+          foo{' '}
+          <span>bar</span>
+        </>
+      `,
+      features: ['fragment'],
+      options: [{ children: 'never' }],
     },
     {
       code: '<App>{`Hello \\n World`}</App>',
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: '<App>{`Hello ${word} World`}{`foo`}</App>',
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: '<App prop={`foo ${word} bar`}>foo</App>',
-      options: [{props: 'never'}]
+      options: [{ props: 'never' }],
     },
     {
       code: '<App prop={`foo ${word} bar`} />',
-      options: [{props: 'never'}]
+      options: [{ props: 'never' }],
     },
     {
       code: '<App>{<myApp></myApp>}</App>',
-      options: [{children: 'always'}]
+      options: [{ children: 'always' }],
     },
     {
-      code: '<App>{[]}</App>'
+      code: '<App>{[]}</App>',
     },
     {
-      code: '<App>foo</App>'
+      code: '<App>foo</App>',
     },
     {
-      code: '<App>{"foo"}{<Component>bar</Component>}</App>'
+      code: '<App>{"foo"}{<Component>bar</Component>}</App>',
     },
     {
-      code: `<App prop='bar'>foo</App>`
+      code: `<App prop='bar'>foo</App>`,
     },
     {
-      code: '<App prop={true}>foo</App>'
+      code: '<App prop={true}>foo</App>',
     },
     {
-      code: '<App prop>foo</App>'
+      code: '<App prop>foo</App>',
     },
     {
-      code: `<App prop='bar'>{'foo \\n bar'}</App>`
+      code: `<App prop='bar'>{'foo \\n bar'}</App>`,
     },
     {
-      code: `<App prop={ ' ' }/>`
+      code: `<App prop={ ' ' }/>`,
     },
     {
       code: `<MyComponent prop='bar'>foo</MyComponent>`,
-      options: [{props: 'never'}]
+      options: [{ props: 'never' }],
     },
     {
       code: `<MyComponent prop="bar">foo</MyComponent>`,
-      options: [{props: 'never'}]
+      options: [{ props: 'never' }],
     },
     {
       code: '<MyComponent>foo</MyComponent>',
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: '<MyComponent>{<App/>}{"123"}</MyComponent>',
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: `<App>{"foo 'bar' \\"foo\\" bar"}</App>`,
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: `<MyComponent prop={'bar'}>foo</MyComponent>`,
-      options: [{props: 'always'}]
+      options: [{ props: 'always' }],
     },
     {
       code: `<MyComponent>{'foo'}</MyComponent>`,
-      options: [{children: 'always'}]
+      options: [{ children: 'always' }],
     },
     {
       code: `<MyComponent prop={"bar"}>foo</MyComponent>`,
-      options: [{props: 'always'}]
+      options: [{ props: 'always' }],
     },
     {
       code: `<MyComponent>{"foo"}</MyComponent>`,
-      options: [{children: 'always'}]
+      options: [{ children: 'always' }],
     },
     {
       code: `<MyComponent>{'foo'}</MyComponent>`,
-      options: [{children: 'ignore'}]
+      options: [{ children: 'ignore' }],
     },
     {
       code: `<MyComponent prop={'bar'}>foo</MyComponent>`,
-      options: [{props: 'ignore'}]
+      options: [{ props: 'ignore' }],
     },
     {
       code: '<MyComponent>foo</MyComponent>',
-      options: [{children: 'ignore'}]
+      options: [{ children: 'ignore' }],
     },
     {
       code: `<MyComponent prop='bar'>foo</MyComponent>`,
-      options: [{props: 'ignore'}]
+      options: [{ props: 'ignore' }],
     },
     {
       code: `<MyComponent prop="bar">foo</MyComponent>`,
-      options: [{props: 'ignore'}]
+      options: [{ props: 'ignore' }],
     },
     {
       code: `<MyComponent prop='bar'>{'foo'}</MyComponent>`,
-      options: [{children: 'always', props: 'never'}]
+      options: [{ children: 'always', props: 'never' }],
     },
     {
       code: `<MyComponent prop={'bar'}>foo</MyComponent>`,
-      options: [{children: 'never', props: 'always'}]
+      options: [{ children: 'never', props: 'always' }],
     },
     {
       code: `<MyComponent prop={'bar'}>{'foo'}</MyComponent>`,
-      options: ['always']
+      options: ['always'],
     },
     {
       code: `<MyComponent prop={"bar"}>{"foo"}</MyComponent>`,
-      options: ['always']
+      options: ['always'],
     },
     {
       code: `<MyComponent prop={"bar"} attr={'foo'} />`,
-      options: ['always']
+      options: ['always'],
     },
     {
       code: `<MyComponent prop="bar" attr='foo' />`,
-      options: ['never']
+      options: ['never'],
     },
     {
       code: `<MyComponent prop='bar'>foo</MyComponent>`,
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent prop={`bar ${word} foo`}>{`foo ${word}`}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{"div { margin-top: 0; }"}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{"<Foo />"}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent prop={"Hello \\u1026 world"}>bar</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{"Hello \\u1026 world"}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent prop={"Hello &middot; world"}>bar</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{"Hello &middot; world"}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{"Hello \\n world"}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{"space after "}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{" space before"}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{`space after `}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: '<MyComponent>{` space before`}</MyComponent>',
-      options: ['never']
+      options: ['never'],
     },
     {
       code: ['<a a={"start\\', '\\', 'end"}/>'].join('/n'),
-      options: ['never']
+      options: ['never'],
     },
     {
       code: `
@@ -288,7 +290,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           b
         \`} />
       `,
-      options: ['never']
+      options: ['never'],
     },
     {
       code: `
@@ -297,7 +299,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           b
         \`} />
       `,
-      options: ['always']
+      options: ['always'],
     },
     {
       code: `
@@ -308,7 +310,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           \`}
         </App>
       `,
-      options: ['never']
+      options: ['never'],
     },
     {
       code: `
@@ -317,7 +319,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           b
         \`}</App>
       `,
-      options: ['always']
+      options: ['always'],
     },
     {
       code: `
@@ -325,8 +327,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           %
         </MyComponent>
       `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: `
@@ -336,8 +337,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           { ' space before' }
         </MyComponent>
       `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: `
@@ -347,8 +347,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           { \` space before\` }
         </MyComponent>
       `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: `
@@ -357,14 +356,13 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           <div>bar</div>
         </MyComponent>
       `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}]
+      options: [{ children: 'never' }],
     },
     {
       code: `
         <MyComponent p={<Foo>Bar</Foo>}>
         </MyComponent>
-      `
+      `,
     },
     {
       code: `
@@ -378,8 +376,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           </div>
         </MyComponent>
       `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'always'}]
+      options: [{ children: 'always' }],
     },
     {
       code: `
@@ -388,14 +385,7 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           &nbsp;
         </App>
       `,
-      options: [{children: 'always'}]
-    },
-    {
-      code: `
-        const Component2 = () => {
-          return <span>/*</span>;
-        };
-      `
+      options: [{ children: 'always' }],
     },
     {
       code: `
@@ -403,7 +393,16 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           return <span>/*</span>;
         };
       `,
-      options: [{props: 'never', children: 'never'}]
+      features: ['no-ts-old'], // the old TS parser hangs forever on this one
+    },
+    {
+      code: `
+        const Component2 = () => {
+          return <span>/*</span>;
+        };
+      `,
+      options: [{ props: 'never', children: 'never' }],
+      features: ['no-ts-old'], // the old TS parser hangs forever on this one
     },
     {
       code: `
@@ -413,90 +412,109 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           return <span>{"/*"}</span>;
         };
       `,
-      options: [{props: 'never', children: 'never'}]
+      options: [{ props: 'never', children: 'never' }],
+      features: ['no-ts-old'], // the old TS parser hangs forever on this one
     },
     {
-      code: `<App>{/* comment */}</App>`
+      code: `<App>{/* comment */}</App>`,
+    },
+    (semver.satisfies(eslintPkg.version, '> 3') ? [
+      {
+        code: `<App>{/* comment */ <Foo />}</App>`,
+      },
+      {
+        code: `<App>{/* comment */ 'foo'}</App>`,
+      },
+      {
+        code: `<App prop={/* comment */ 'foo'} />`,
+      },
+      {
+        code: `
+          <App>
+            {
+              // comment
+              <Foo />
+            }
+          </App>
+        `,
+      },
+    ] : []),
+    {
+      code: `<App horror=<div /> />`,
+      features: ['no-ts'],
     },
     {
-      code: `<App>{/* comment */ <Foo />}</App>`
+      code: `<App horror={<div />} />`,
     },
     {
-      code: `<App>{/* comment */ 'foo'}</App>`
+      code: `<App horror=<div /> />`,
+      options: [{ propElementValues: 'ignore' }],
+      features: ['no-ts'],
     },
     {
-      code: `<App prop={/* comment */ 'foo'} />`
-    },
-    {
-      code: `
-        <App>
-          {
-            // comment
-            <Foo />
-          }
-        </App>
-      `
+      code: `<App horror={<div />} />`,
+      options: [{ propElementValues: 'ignore' }],
     }
-  ],
+  )),
 
-  invalid: [
+  invalid: parsers.all([].concat(
     {
       code: '<App prop={`foo`} />',
       output: '<App prop="foo" />',
-      options: [{props: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}]
+      options: [{ props: 'never' }],
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: '<App>{<myApp></myApp>}</App>',
       output: '<App><myApp></myApp></App>',
-      options: [{children: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}]
+      options: [{ children: 'never' }],
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: '<App>{<myApp></myApp>}</App>',
       output: '<App><myApp></myApp></App>',
-      errors: [{messageId: 'unnecessaryCurly'}]
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: '<App prop={`foo`}>foo</App>',
       output: '<App prop="foo">foo</App>',
-      options: [{props: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}]
+      options: [{ props: 'never' }],
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: '<App>{`foo`}</App>',
       output: '<App>foo</App>',
-      options: [{children: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}]
+      options: [{ children: 'never' }],
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: '<>{`foo`}</>',
       output: '<>foo</>',
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}]
+      features: ['fragment'],
+      options: [{ children: 'never' }],
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: `<MyComponent>{'foo'}</MyComponent>`,
       output: '<MyComponent>foo</MyComponent>',
-      errors: [{messageId: 'unnecessaryCurly'}]
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: `<MyComponent prop={'bar'}>foo</MyComponent>`,
       output: `<MyComponent prop="bar">foo</MyComponent>`,
-      errors: [{messageId: 'unnecessaryCurly'}]
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: `<MyComponent>{'foo'}</MyComponent>`,
       output: '<MyComponent>foo</MyComponent>',
-      options: [{children: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}]
+      options: [{ children: 'never' }],
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: `<MyComponent prop={'bar'}>foo</MyComponent>`,
       output: '<MyComponent prop="bar">foo</MyComponent>',
-      options: [{props: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}]
+      options: [{ props: 'never' }],
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: `
@@ -509,9 +527,8 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           %
         </MyComponent>
       `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}]
+      options: [{ children: 'never' }],
+      errors: [{ messageId: 'unnecessaryCurly' }],
     },
     {
       code: `
@@ -532,13 +549,12 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           baz
         </MyComponent>
       `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}],
+      options: [{ children: 'never' }],
       errors: [
-        {messageId: 'unnecessaryCurly'},
-        {messageId: 'unnecessaryCurly'},
-        {messageId: 'unnecessaryCurly'}
-      ]
+        { messageId: 'unnecessaryCurly' },
+        { messageId: 'unnecessaryCurly' },
+        { messageId: 'unnecessaryCurly' },
+      ],
     },
     {
       code: `
@@ -561,212 +577,246 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           {'some-complicated-exp'}
         </MyComponent>
       `,
-      parser: parsers.BABEL_ESLINT,
-      options: [{children: 'never'}],
-      errors: [{messageId: 'unnecessaryCurly'}, {messageId: 'unnecessaryCurly'}]
+      features: ['no-default', 'no-ts-new', 'no-babel-new'], // TODO: FIXME: remove no-default and no-ts-new and fix
+      options: [{ children: 'never' }],
+      errors: [
+        { messageId: 'unnecessaryCurly', line: 3 },
+        { messageId: 'unnecessaryCurly', line: 5 },
+      ],
     },
+    semver.satisfies(eslintPkg.version, '^7.5.0') ? { // require('@babel/eslint-parser/package.json').peerDependencies.eslint
+      // TODO: figure out how to make all other parsers work this well
+      code: `
+        <MyComponent>
+          {'foo'}
+          <div>
+            {'bar'}
+          </div>
+          {'baz'}
+          {'some-complicated-exp'}
+        </MyComponent>
+      `,
+      output: `
+        <MyComponent>
+          foo
+          <div>
+            bar
+          </div>
+          baz
+          some-complicated-exp
+        </MyComponent>
+      `,
+      parser: parsers['@BABEL_ESLINT'],
+      parserOptions: parsers.babelParserOptions({}, new Set()),
+      options: [{ children: 'never' }],
+      errors: [
+        { messageId: 'unnecessaryCurly', line: 3 },
+        { messageId: 'unnecessaryCurly', line: 5 },
+        { messageId: 'unnecessaryCurly', line: 7 },
+        { messageId: 'unnecessaryCurly', line: 8 },
+      ],
+    } : [],
     {
       code: `<MyComponent prop='bar'>foo</MyComponent>`,
       output: '<MyComponent prop={"bar"}>foo</MyComponent>',
-      options: [{props: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ props: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: `<MyComponent prop="foo 'bar'">foo</MyComponent>`,
       output: `<MyComponent prop={"foo 'bar'"}>foo</MyComponent>`,
-      options: [{props: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ props: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: `<MyComponent prop='foo "bar"'>foo</MyComponent>`,
       output: `<MyComponent prop={"foo \\"bar\\""}>foo</MyComponent>`,
-      options: [{props: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ props: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: `<MyComponent prop="foo 'bar'">foo</MyComponent>`,
       output: `<MyComponent prop={"foo 'bar'"}>foo</MyComponent>`,
-      options: [{props: 'always'}],
-      errors: [{messageId: 'missingCurly'}],
-      parser: parsers.BABEL_ESLINT
+      options: [{ props: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: '<MyComponent>foo bar </MyComponent>',
       output: `<MyComponent>{"foo bar "}</MyComponent>`,
-      options: [{children: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ children: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: `<MyComponent prop="foo 'bar' \\n ">foo</MyComponent>`,
       output: `<MyComponent prop={"foo 'bar' \\\\n "}>foo</MyComponent>`,
-      options: [{props: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ props: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: '<MyComponent>foo bar \\r </MyComponent>',
       output: '<MyComponent>{"foo bar \\\\r "}</MyComponent>',
-      options: [{children: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ children: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: `<MyComponent>foo bar 'foo'</MyComponent>`,
       output: `<MyComponent>{"foo bar 'foo'"}</MyComponent>`,
-      options: [{children: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ children: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: '<MyComponent>foo bar "foo"</MyComponent>',
       output: '<MyComponent>{"foo bar \\"foo\\""}</MyComponent>',
-      options: [{children: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ children: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: '<MyComponent>foo bar <App/></MyComponent>',
       output: '<MyComponent>{"foo bar "}<App/></MyComponent>',
-      options: [{children: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ children: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: '<MyComponent>foo \\n bar</MyComponent>',
       output: '<MyComponent>{"foo \\\\n bar"}</MyComponent>',
-      options: [{children: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ children: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: '<MyComponent>foo \\u1234 bar</MyComponent>',
       output: '<MyComponent>{"foo \\\\u1234 bar"}</MyComponent>',
-      options: [{children: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ children: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: `<MyComponent prop='foo \\u1234 bar' />`,
       output: '<MyComponent prop={"foo \\\\u1234 bar"} />',
-      options: [{props: 'always'}],
-      errors: [{messageId: 'missingCurly'}]
+      options: [{ props: 'always' }],
+      errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: `<MyComponent prop={'bar'}>{'foo'}</MyComponent>`,
       output: '<MyComponent prop="bar">foo</MyComponent>',
       options: ['never'],
       errors: [
-        {messageId: 'unnecessaryCurly'}, {messageId: 'unnecessaryCurly'}
-      ]
+        { messageId: 'unnecessaryCurly' }, { messageId: 'unnecessaryCurly' },
+      ],
     },
     {
       code: `<MyComponent prop='bar'>foo</MyComponent>`,
       output: '<MyComponent prop={"bar"}>{"foo"}</MyComponent>',
       options: ['always'],
       errors: [
-        {messageId: 'missingCurly'}, {messageId: 'missingCurly'}
-      ]
+        { messageId: 'missingCurly' }, { messageId: 'missingCurly' },
+      ],
     },
     {
       code: `<App prop={'foo'} attr={" foo "} />`,
       output: '<App prop="foo" attr=" foo " />',
       errors: [
-        {messageId: 'unnecessaryCurly'}, {messageId: 'unnecessaryCurly'}
+        { messageId: 'unnecessaryCurly' }, { messageId: 'unnecessaryCurly' },
       ],
-      options: [{props: 'never'}]
+      options: [{ props: 'never' }],
     },
     {
       code: `<App prop='foo' attr="bar" />`,
       output: '<App prop={"foo"} attr={"bar"} />',
       errors: [
-        {messageId: 'missingCurly'}, {messageId: 'missingCurly'}
+        { messageId: 'missingCurly' }, { messageId: 'missingCurly' },
       ],
-      options: [{props: 'always'}]
+      options: [{ props: 'always' }],
     },
     {
       code: `<App prop='foo' attr={"bar"} />`,
       output: `<App prop={"foo"} attr={"bar"} />`,
-      errors: [{messageId: 'missingCurly'}],
-      options: [{props: 'always'}]
+      errors: [{ messageId: 'missingCurly' }],
+      options: [{ props: 'always' }],
     },
     {
       code: `<App prop={'foo'} attr='bar' />`,
       output: `<App prop={'foo'} attr={"bar"} />`,
-      errors: [{messageId: 'missingCurly'}],
-      options: [{props: 'always'}]
+      errors: [{ messageId: 'missingCurly' }],
+      options: [{ props: 'always' }],
     },
     {
       code: `<App prop='foo &middot; bar' />`,
-      errors: [{messageId: 'missingCurly'}],
-      options: [{props: 'always'}],
-      output: `<App prop={"foo &middot; bar"} />`
+      errors: [{ messageId: 'missingCurly' }],
+      options: [{ props: 'always' }],
+      output: `<App prop={"foo &middot; bar"} />`,
     },
     {
       code: '<App>foo &middot; bar</App>',
-      errors: [{messageId: 'missingCurly'}],
-      options: [{children: 'always'}],
-      output: '<App>{"foo &middot; bar"}</App>'
+      errors: [{ messageId: 'missingCurly' }],
+      options: [{ children: 'always' }],
+      output: '<App>{"foo &middot; bar"}</App>',
     },
     {
       code: `<App>{'foo "bar"'}</App>`,
       output: `<App>foo "bar"</App>`,
-      errors: [{messageId: 'unnecessaryCurly'}],
-      options: [{children: 'never'}]
+      errors: [{ messageId: 'unnecessaryCurly' }],
+      options: [{ children: 'never' }],
     },
     {
       code: `<App>{"foo 'bar'"}</App>`,
       output: `<App>foo 'bar'</App>`,
-      errors: [{messageId: 'unnecessaryCurly'}],
-      options: [{children: 'never'}]
+      errors: [{ messageId: 'unnecessaryCurly' }],
+      options: [{ children: 'never' }],
     },
     {
-      code: [
-        '<App prop="    ',
-        '   a     ',
-        '     b      c',
-        '        d',
-        '">',
-        '  a',
-        '      b     c   ',
-        '         d      ',
-        '</App>'
-      ].join('\n'),
+      code: `
+        <App prop="    
+           a     
+             b      c
+                d
+        ">
+          a
+              b     c   
+                 d      
+        </App>
+      `,
       errors: [
-        {messageId: 'missingCurly'}, {messageId: 'missingCurly'}
+        { messageId: 'missingCurly' }, { messageId: 'missingCurly' },
       ],
       options: ['always'],
-      output: [
-        '<App prop="    ',
-        '   a     ',
-        '     b      c',
-        '        d',
-        '">',
-        '  {"a"}',
-        '      {"b     c   "}',
-        '         {"d      "}',
-        '</App>'
-      ].join('\n')
+      output: `
+        <App prop="    
+           a     
+             b      c
+                d
+        ">
+          {"a"}
+              {"b     c   "}
+                 {"d      "}
+        </App>
+      `,
     },
     {
-      code: [
-        `<App prop='    `,
-        '   a     ',
-        '     b      c',
-        '        d',
-        `'>`,
-        '  a',
-        '      b     c   ',
-        '         d      ',
-        '</App>'
-      ].join('\n'),
+      code: `
+        <App prop='    
+           a     
+             b      c
+                d
+        '>
+          a
+              b     c   
+                 d      
+        </App>
+      `,
       errors: [
-        {messageId: 'missingCurly'}, {messageId: 'missingCurly'}
+        { messageId: 'missingCurly' }, { messageId: 'missingCurly' },
       ],
       options: ['always'],
-      output: [
-        `<App prop='    `,
-        '   a     ',
-        '     b      c',
-        '        d',
-        `'>`,
-        '  {"a"}',
-        '      {"b     c   "}',
-        '         {"d      "}',
-        '</App>'
-      ].join('\n')
+      output: `
+        <App prop='    
+           a     
+             b      c
+                d
+        '>
+          {"a"}
+              {"b     c   "}
+                 {"d      "}
+        </App>
+      `,
     },
     {
       code: `
@@ -794,13 +844,13 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
         </App>
       `,
       errors: [
-        {messageId: 'missingCurly'},
-        {messageId: 'missingCurly'},
-        {messageId: 'missingCurly'},
-        {messageId: 'missingCurly'},
-        {messageId: 'missingCurly'}
+        { messageId: 'missingCurly' },
+        { messageId: 'missingCurly' },
+        { messageId: 'missingCurly' },
+        { messageId: 'missingCurly' },
+        { messageId: 'missingCurly' },
       ],
-      options: [{children: 'always'}]
+      options: [{ children: 'always' }],
     },
     {
       code: `
@@ -817,10 +867,8 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           &nbsp;
         </App>
       `,
-      errors: [
-        {messageId: 'missingCurly'}
-      ],
-      options: [{children: 'always'}]
+      errors: [{ messageId: 'missingCurly' }],
+      options: [{ children: 'always' }],
     },
     {
       code: `
@@ -830,9 +878,9 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
         <Box mb="1rem" />
       `,
       errors: [
-        {messageId: 'unnecessaryCurly'}
+        { messageId: 'unnecessaryCurly' },
       ],
-      options: [{props: 'never'}]
+      options: [{ props: 'never' }],
     },
     {
       code: `
@@ -841,20 +889,34 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
       output: `
         <Box mb="1rem {}" />
       `,
-      errors: [{messageId: 'unnecessaryCurly'}],
-      options: ['never']
+      errors: [{ messageId: 'unnecessaryCurly' }],
+      options: ['never'],
     },
     {
       code: '<MyComponent prop={"{ style: true }"}>bar</MyComponent>',
       output: '<MyComponent prop="{ style: true }">bar</MyComponent>',
-      errors: [{messageId: 'unnecessaryCurly'}],
-      options: ['never']
+      errors: [{ messageId: 'unnecessaryCurly' }],
+      options: ['never'],
     },
     {
       code: '<MyComponent prop={"< style: true >"}>foo</MyComponent>',
       output: '<MyComponent prop="< style: true >">foo</MyComponent>',
-      errors: [{messageId: 'unnecessaryCurly'}],
-      options: ['never']
+      errors: [{ messageId: 'unnecessaryCurly' }],
+      options: ['never'],
+    },
+    {
+      code: `<App horror=<div /> />`,
+      output: `<App horror={<div />} />`,
+      errors: [{ messageId: 'missingCurly' }],
+      options: [{ props: 'always', children: 'always', propElementValues: 'always' }],
+      features: ['no-ts'],
+    },
+    {
+      code: `<App horror={<div />} />`,
+      output: `<App horror=<div /> />`,
+      errors: [{ messageId: 'unnecessaryCurly' }],
+      options: [{ props: 'never', children: 'never', propElementValues: 'never' }],
+      features: ['no-ts'],
     }
-  ]
+  )),
 });

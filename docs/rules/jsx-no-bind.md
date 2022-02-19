@@ -2,6 +2,8 @@
 
 A `bind` call or [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) in a JSX prop will create a brand new function on every single render. This is bad for performance, as it may cause unnecessary re-renders if a brand new function is passed as a prop to a component that uses reference equality check on the prop to determine if it should update.
 
+Note that this behavior is different for `ref` props, which is a special case in React that **does not** cause re-renders when a brand new function is passed.  See [`ignore-refs`](#ignorerefs) below for more information.
+
 ## Rule Details
 
 Examples of **incorrect** code for this rule:
@@ -11,6 +13,10 @@ Examples of **incorrect** code for this rule:
 ```
 ```jsx
 <Foo onClick={() => console.log('Hello!')}></Foo>
+```
+```jsx
+function onClick() { console.log('Hello!'); }
+<Foo onClick={onClick} />
 ```
 
 Examples of **correct** code for this rule:
@@ -42,10 +48,19 @@ Examples of **correct** code for this rule, when `ignoreDOMComponents` is `true`
 
 ### `ignoreRefs`
 
+Refs are a special-case that do not behave like other props. Sending a new function in on ever render will **not** cause re-renders like it could with any other prop.
+
+However, there is a [caveat with callback refs](https://reactjs.org/docs/refs-and-the-dom.html#caveats-with-callback-refs):
+> If the ref callback is defined as an inline function, it will get called twice during updates, first with null and then again with the DOM element. This is because a new instance of the function is created with each render, so React needs to clear the old ref and set up the new one. You can avoid this by defining the ref callback as a bound method on the class, but note that it shouldn’t matter in most cases.
+
+You can also avoid this behavior using [`createRef`](https://reactjs.org/docs/react-api.html#reactcreateref) or [`useRef`](https://reactjs.org/docs/hooks-reference.html#useref) (or [`useCallback`](https://reactjs.org/docs/hooks-reference.html#usecallback) if you have custom logic).
+
+If you are using a simple setter (as shown below) then you may not need this rule to fire for `ref`s, and can disable it specifically for refs with `ignoreRefs`.
+
 Examples of **correct** code for this rule, when `ignoreRefs` is `true`:
 
 ```jsx
-<Foo ref={c => this._div = c} />
+<Foo ref={ref => { this._div = ref; }} />
 <Foo ref={this._refCallback.bind(this)} />
 ```
 
@@ -63,6 +78,11 @@ Examples of **correct** code for this rule, when `allowFunctions` is `true`:
 
 ```jsx
 <Foo onClick={function () { alert("1337") }} />
+```
+
+```jsx
+function onClick() { alert("1337"); }
+<Foo onClick={onClick} />
 ```
 
 ### `allowBind`
@@ -149,7 +169,7 @@ class Foo extends Inferno.Component {
 }
 ```
 
-A more sophisticated approach would be to use something like an [autobind ES7 decorator](https://www.npmjs.com/package/core-decorators#autobind) or [property initializers](https://facebook.github.io/inferno/blog/2015/01/27/inferno-v0.13.0-beta-1.html#autobinding).
+A more sophisticated approach would be to use something like an [autobind ES7 decorator](https://www.npmjs.com/package/core-decorators#autobind).
 
 ### Inferno Hooks
 

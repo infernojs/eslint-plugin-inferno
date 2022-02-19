@@ -14,7 +14,7 @@ declare global {
   type JSXSpreadAttribute = ASTNode;
 
   interface Context extends eslint.SourceCode {
-    getFirstTokens(node: estree.Node | ASTNode, options?: eslint.SourceCode.CursorWithCountOptions): eslint.AST.Token[];
+    getFirstTokens(node: estree.Node | ASTNode, options?: any): eslint.AST.Token[];
   }
 
   type TypeDeclarationBuilder = (annotation: ASTNode, parentName: string, seen: Set<typeof annotation>) => object;

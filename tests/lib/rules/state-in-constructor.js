@@ -15,14 +15,13 @@ const rule = require('../../../lib/rules/state-in-constructor');
 const parsers = require('../../helpers/parsers');
 
 const ruleTesterConfig = {
-  parser: parsers.BABEL_ESLINT,
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true
-    }
-  }
+      jsx: true,
+    },
+  },
 };
 
 // ------------------------------------------------------------------------------
@@ -31,327 +30,355 @@ const ruleTesterConfig = {
 
 const ruleTester = new RuleTester(ruleTesterConfig);
 ruleTester.run('state-in-constructor', rule, {
-  valid: [{
-    code: `
-      class Foo extends Inferno.Component {
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never']
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.state = { bar: 0 }
-        }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.state = { bar: 0 }
-        }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['always']
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.state = { bar: 0 }
-        }
-        baz = { bar: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.baz = { bar: 0 }
-        }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.baz = { bar: 0 }
-        }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never']
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        baz = { bar: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        baz = { bar: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never']
-  }, {
-    code: `
-      const Foo = () => <div>Foo</div>
-    `
-  }, {
-    code: `
-      const Foo = () => <div>Foo</div>
-    `,
-    options: ['never']
-  }, {
-    code: `
-      function Foo () {
-        return <div>Foo</div>
-      }
-    `
-  }, {
-    code: `
-      function Foo () {
-        return <div>Foo</div>
-      }
-    `,
-    options: ['never']
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        state = { bar: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never']
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        state = { bar: 0 }
-        baz = { bar: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never']
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.baz = { bar: 0 }
-        }
-        state = { baz: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never']
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          if (foobar) {
-            this.state = { bar: 0 }
+  valid: parsers.all([
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          render() {
+            return <div>Foo</div>
           }
         }
-        render() {
+      `,
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      options: ['never'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.state = { bar: 0 }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.state = { bar: 0 }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      options: ['always'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.state = { bar: 0 }
+          }
+          baz = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.baz = { bar: 0 }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.baz = { bar: 0 }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      options: ['never'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          baz = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          baz = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      options: ['never'],
+    },
+    {
+      code: `
+        const Foo = () => <div>Foo</div>
+      `,
+    },
+    {
+      code: `
+        const Foo = () => <div>Foo</div>
+      `,
+      options: ['never'],
+    },
+    {
+      code: `
+        function Foo () {
           return <div>Foo</div>
         }
-      }
-    `
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          foobar = { bar: 0 }
-        }
-        render() {
+      `,
+    },
+    {
+      code: `
+        function Foo () {
           return <div>Foo</div>
         }
-      }
-    `
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          foobar = { bar: 0 }
+      `,
+      options: ['never'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          state = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
         }
-        render() {
-          return <div>Foo</div>
+      `,
+      features: ['class fields'],
+      options: ['never'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          state = { bar: 0 }
+          baz = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
         }
-      }
-    `,
-    options: ['never']
-  }],
+      `,
+      features: ['class fields'],
+      options: ['never'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.baz = { bar: 0 }
+          }
+          state = { baz: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      options: ['never'],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            if (foobar) {
+              this.state = { bar: 0 }
+            }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            foobar = { bar: 0 }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            foobar = { bar: 0 }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      options: ['never'],
+    },
+  ]),
 
-  invalid: [{
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.state = { bar: 0 }
-        }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never'],
-    errors: [{
-      messageId: 'stateInitClassProp'
-    }]
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.state = { bar: 0 }
-        }
-        baz = { bar: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never'],
-    errors: [{
-      messageId: 'stateInitClassProp'
-    }]
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        state = { bar: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    errors: [{
-      messageId: 'stateInitConstructor'
-    }]
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        state = { bar: 0 }
-        baz = { bar: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    errors: [{
-      messageId: 'stateInitConstructor'
-    }]
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.baz = { bar: 0 }
-        }
-        state = { baz: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    errors: [{
-      messageId: 'stateInitConstructor'
-    }]
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.state = { bar: 0 }
-        }
-        state = { baz: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    errors: [{
-      messageId: 'stateInitConstructor'
-    }]
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          this.state = { bar: 0 }
-        }
-        state = { baz: 0 }
-        render() {
-          return <div>Foo</div>
-        }
-      }
-    `,
-    options: ['never'],
-    errors: [{
-      messageId: 'stateInitClassProp'
-    }]
-  }, {
-    code: `
-      class Foo extends Inferno.Component {
-        constructor(props) {
-          super(props)
-          if (foobar) {
+  invalid: parsers.all([
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
             this.state = { bar: 0 }
           }
+          render() {
+            return <div>Foo</div>
+          }
         }
-        render() {
-          return <div>Foo</div>
+      `,
+      options: ['never'],
+      errors: [{ messageId: 'stateInitClassProp' }],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.state = { bar: 0 }
+          }
+          baz = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
         }
-      }
-    `,
-    options: ['never'],
-    errors: [{
-      messageId: 'stateInitClassProp'
-    }]
-  }]
+      `,
+      features: ['class fields'],
+      options: ['never'],
+      errors: [{ messageId: 'stateInitClassProp' }],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          state = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      errors: [{ messageId: 'stateInitConstructor' }],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          state = { bar: 0 }
+          baz = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      errors: [{ messageId: 'stateInitConstructor' }],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.baz = { bar: 0 }
+          }
+          state = { baz: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      errors: [{ messageId: 'stateInitConstructor' }],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.state = { bar: 0 }
+          }
+          state = { baz: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      errors: [{ messageId: 'stateInitConstructor' }],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            this.state = { bar: 0 }
+          }
+          state = { baz: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      options: ['never'],
+      errors: [{ messageId: 'stateInitClassProp' }],
+    },
+    {
+      code: `
+        class Foo extends Inferno.Component {
+          constructor(props) {
+            super(props)
+            if (foobar) {
+              this.state = { bar: 0 }
+            }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+      features: ['class fields'],
+      options: ['never'],
+      errors: [{ messageId: 'stateInitClassProp' }],
+    },
+  ]),
 });

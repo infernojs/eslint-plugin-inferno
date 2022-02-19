@@ -18,139 +18,132 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-refs', rule, {
+  valid: parsers.all([
+    {
+      code: `
+        var Hello = createClass({
+          componentDidMount: function() {
+            var component = this.hello;
+          },
+          render: function() {
+            return <div ref={c => this.hello = c}>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var Hello = createClass({
+          render: function() {
+            return <div ref={\`hello\`}>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+    },
+    {
+      code: `
+        var Hello = createClass({
+          render: function() {
+            return <div ref={\`hello\${index}\`}>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+    },
+  ]),
 
-  valid: [{
-    code: `
-      var Hello = createClass({
-        componentDidMount: function() {
-           var component = this.hello;
-        },
-        render: function() {
-          return <div ref={c => this.hello = c}>Hello {this.props.name}</div>;
-        }
-      });
-    `,
-    parser: parsers.BABEL_ESLINT
-  },
-  {
-    code: [
-      'var Hello = createClass({',
-      '  render: function() {',
-      '    return <div ref={`hello`}>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
-    parser: parsers.BABEL_ESLINT
-  },
-  {
-    code: [
-      'var Hello = createClass({',
-      '  render: function() {',
-      '    return <div ref={`hello${index}`}>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
-    parser: parsers.BABEL_ESLINT
-  }
-  ],
-
-  invalid: [{
-    code: `
-      var Hello = createClass({
-        componentDidMount: function() {
-           var component = this.refs.hello;
-        },
-        render: function() {
-          return <div>Hello {this.props.name}</div>;
-        }
-      });
-    `,
-    parser: parsers.BABEL_ESLINT,
-    errors: [{messageId: 'thisRefsDeprecated'}]
-  }, {
-    code: `
-      var Hello = createClass({
-        render: function() {
-          return <div ref="hello">Hello {this.props.name}</div>;
-        }
-      });
-    `,
-    parser: parsers.BABEL_ESLINT,
-    errors: [{messageId: 'stringInRefDeprecated'}]
-  }, {
-    code: `
-      var Hello = createClass({
-        render: function() {
-          return <div ref={'hello'}>Hello {this.props.name}</div>;
-        }
-      });
-    `,
-    parser: parsers.BABEL_ESLINT,
-    errors: [{messageId: 'stringInRefDeprecated'}]
-  }, {
-    code: `
-      var Hello = createClass({
-        componentDidMount: function() {
-           var component = this.refs.hello;
-        },
-        render: function() {
-          return <div ref="hello">Hello {this.props.name}</div>;
-        }
-      });
-    `,
-    parser: parsers.BABEL_ESLINT,
-    errors: [{
-      messageId: 'thisRefsDeprecated'
-    }, {
-      messageId: 'stringInRefDeprecated'
-    }]
-  },
-  {
-    code: [
-      'var Hello = createClass({',
-      '  componentDidMount: function() {',
-      '  var component = this.refs.hello;',
-      '  },',
-      '  render: function() {',
-      '    return <div ref={`hello`}>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
-    parser: parsers.BABEL_ESLINT,
-    options: [{noTemplateLiterals: true}],
-    errors: [{
-      messageId: 'thisRefsDeprecated'
-    }, {
-      messageId: 'stringInRefDeprecated'
-    }]
-  },
-  {
-    code: [
-      'var Hello = createClass({',
-      '  componentDidMount: function() {',
-      '  var component = this.refs.hello;',
-      '  },',
-      '  render: function() {',
-      '    return <div ref={`hello${index}`}>Hello {this.props.name}</div>;',
-      '  }',
-      '});'
-    ].join('\n'),
-    parser: parsers.BABEL_ESLINT,
-    options: [{noTemplateLiterals: true}],
-    errors: [{
-      messageId: 'thisRefsDeprecated'
-    }, {
-      messageId: 'stringInRefDeprecated'
-    }]
-  }]
+  invalid: parsers.all([
+    {
+      code: `
+        var Hello = createClass({
+          componentDidMount: function() {
+            var component = this.refs.hello;
+          },
+          render: function() {
+            return <div>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+      errors: [{ messageId: 'thisRefsDeprecated' }],
+    },
+    {
+      code: `
+        var Hello = createClass({
+          render: function() {
+            return <div ref="hello">Hello {this.props.name}</div>;
+          }
+        });
+      `,
+      errors: [{ messageId: 'stringInRefDeprecated' }],
+    },
+    {
+      code: `
+        var Hello = createClass({
+          render: function() {
+            return <div ref={'hello'}>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+      errors: [{ messageId: 'stringInRefDeprecated' }],
+    },
+    {
+      code: `
+        var Hello = createClass({
+          componentDidMount: function() {
+            var component = this.refs.hello;
+          },
+          render: function() {
+            return <div ref="hello">Hello {this.props.name}</div>;
+          }
+        });
+      `,
+      errors: [
+        { messageId: 'thisRefsDeprecated' },
+        { messageId: 'stringInRefDeprecated' },
+      ],
+    },
+    {
+      code: `
+        var Hello = createClass({
+          componentDidMount: function() {
+          var component = this.refs.hello;
+          },
+          render: function() {
+            return <div ref={\`hello\`}>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+      options: [{ noTemplateLiterals: true }],
+      errors: [
+        { messageId: 'thisRefsDeprecated' },
+        { messageId: 'stringInRefDeprecated' },
+      ],
+    },
+    {
+      code: `
+        var Hello = createClass({
+          componentDidMount: function() {
+          var component = this.refs.hello;
+          },
+          render: function() {
+            return <div ref={\`hello\${index}\`}>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+      options: [{ noTemplateLiterals: true }],
+      errors: [
+        { messageId: 'thisRefsDeprecated' },
+        { messageId: 'stringInRefDeprecated' },
+      ],
+    },
+  ]),
 });

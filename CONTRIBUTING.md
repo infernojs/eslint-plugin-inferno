@@ -1,6 +1,6 @@
 # Contributing to ESLint-plugin-Inferno
 
-## ESLint Rules
+## `eslint` Rules
 
 ### Markup
 
