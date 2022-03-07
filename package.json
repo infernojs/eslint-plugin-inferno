@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.28.0",
+  "version": "7.29.3",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "doctrine": "^3.0.0",
     "estraverse": "^5.3.0",
     "jsx-ast-utils": "^3.2.1",
-    "minimatch": "^5.0.0",
+    "minimatch": "^5.0.1",
     "object.entries": "^1.1.5",
     "object.fromentries": "^2.0.5",
     "object.hasown": "^1.1.0",
@@ -48,8 +48,8 @@
     "@babel/preset-react": "^7.16.7",
     "@types/eslint": "=8.4.1",
     "@types/estree": "^0.0.51",
-    "@types/node": "^17.0.18",
-    "@typescript-eslint/parser": "^5.12.0",
+    "@types/node": "^17.0.21",
+    "@typescript-eslint/parser": "^5.13.0",
     "array.prototype.flatmap": "^1.2.5",
     "aud": "^2.0.0",
     "babel-eslint": "^8.2.6",
@@ -64,7 +64,7 @@
     "mocha": "^9.2.1",
     "semver": "^7.3.5",
     "sinon": "^13.0.1",
-    "typescript": "^4.5.5"
+    "typescript": "^4.6.2"
   },
   "peerDependencies": {
     "eslint": "^6 || ^7 || ^8"

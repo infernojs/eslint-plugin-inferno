@@ -55,9 +55,21 @@ ruleTester.run('no-array-index-key', rule, {
       code: 'foo.map((baz, i) => Inferno.cloneElement(someChild, { ...someChild.props }))',
     },
     {
+      code: 'foo.map((baz, i) => cloneElement(someChild, { ...someChild.props }))',
+    },
+    {
       code: `
         foo.map((item, i) => {
           return Inferno.cloneElement(someChild, {
+            key: item.id
+          })
+        })
+      `,
+    },
+    {
+      code: `
+        foo.map((item, i) => {
+          return cloneElement(someChild, {
             key: item.id
           })
         })
@@ -102,8 +114,22 @@ ruleTester.run('no-array-index-key', rule, {
     },
     {
       code: `
+        Inferno.Children.map(this.props.children, (child, index, arr) => {
+          return cloneElement(child, { key: child.id });
+        })
+      `,
+    },
+    {
+      code: `
         Children.forEach(this.props.children, (child, index, arr) => {
           return Inferno.cloneElement(child, { key: child.id });
+        })
+      `,
+    },
+    {
+      code: `
+        Children.forEach(this.props.children, (child, index, arr) => {
+          return cloneElement(child, { key: child.id });
         })
       `,
     },
@@ -147,8 +173,40 @@ ruleTester.run('no-array-index-key', rule, {
     },
     {
       code: `
+        import { cloneElement } from 'inferno';
+
+        foo.map((baz, i) => cloneElement(someChild, { ...someChild.props, key: i }))
+      `,
+      errors: [{ messageId: 'noArrayIndex' }],
+    },
+    {
+      code: `
         foo.map((item, i) => {
           return Inferno.cloneElement(someChild, {
+            key: i
+          })
+        })
+      `,
+      errors: [{ messageId: 'noArrayIndex' }],
+    },
+    {
+      code: `
+        import { cloneElement } from 'inferno';
+
+        foo.map((item, i) => {
+          return cloneElement(someChild, {
+            key: i
+          })
+        })
+      `,
+      errors: [{ messageId: 'noArrayIndex' }],
+    },
+    {
+      code: `
+        import { cloneVNode } from 'inferno-clone-vnode';
+
+        foo.map((item, i) => {
+          return cloneVNode(someChild, {
             key: i
           })
         })
@@ -229,33 +287,73 @@ ruleTester.run('no-array-index-key', rule, {
     },
     {
       code: `
-      Children.map(this.props.children, (child, index) => {
-        return Inferno.cloneElement(child, { key: index });
-      })
+        Children.map(this.props.children, (child, index) => {
+          return Inferno.cloneElement(child, { key: index });
+        })
       `,
       errors: [{ messageId: 'noArrayIndex' }],
     },
     {
       code: `
-      Inferno.Children.map(this.props.children, (child, index) => {
-        return Inferno.cloneElement(child, { key: index });
-      })
+        import { cloneElement } from 'inferno';
+
+        Children.map(this.props.children, (child, index) => {
+          return cloneElement(child, { key: index });
+        })
       `,
       errors: [{ messageId: 'noArrayIndex' }],
     },
     {
       code: `
-      Children.forEach(this.props.children, (child, index) => {
-        return Inferno.cloneElement(child, { key: index });
-      })
+        Inferno.Children.map(this.props.children, (child, index) => {
+          return Inferno.cloneElement(child, { key: index });
+        })
       `,
       errors: [{ messageId: 'noArrayIndex' }],
     },
     {
       code: `
-      Inferno.Children.forEach(this.props.children, (child, index) => {
-        return Inferno.cloneElement(child, { key: index });
-      })
+        import { cloneElement } from 'inferno';
+
+        Inferno.Children.map(this.props.children, (child, index) => {
+          return cloneElement(child, { key: index });
+        })
+      `,
+      errors: [{ messageId: 'noArrayIndex' }],
+    },
+    {
+      code: `
+        Children.forEach(this.props.children, (child, index) => {
+          return Inferno.cloneElement(child, { key: index });
+        })
+      `,
+      errors: [{ messageId: 'noArrayIndex' }],
+    },
+    {
+      code: `
+        import { cloneElement } from 'inferno';
+
+        Children.forEach(this.props.children, (child, index) => {
+          return cloneElement(child, { key: index });
+        })
+      `,
+      errors: [{ messageId: 'noArrayIndex' }],
+    },
+    {
+      code: `
+        Inferno.Children.forEach(this.props.children, (child, index) => {
+          return Inferno.cloneElement(child, { key: index });
+        })
+      `,
+      errors: [{ messageId: 'noArrayIndex' }],
+    },
+    {
+      code: `
+        import { cloneElement } from 'inferno';
+
+        Inferno.Children.forEach(this.props.children, (child, index) => {
+          return cloneElement(child, { key: index });
+        })
       `,
       errors: [{ messageId: 'noArrayIndex' }],
     },

@@ -1044,6 +1044,26 @@ eslintTester.run('no-unused-state', rule, {
         }
       `,
       features: ['ts'],
+    },
+    {
+      code: `
+        class AutoControlledComponent<P = {}, S = {}> extends UIComponent<P, S> {
+          static getDerivedStateFromProps: Inferno.GetDerivedStateFromProps<any, any>
+        }
+      `,
+      features: ['types'],
+    },
+    {
+      code: `
+        export const commonMixinWrapper = ComposeComponent => class extends ComposeComponent {
+          static getDerivedStateFromProps = ComposeComponent.getDerivedStateFromProps;
+          render() { return <div />; }
+        }
+      `,
+      features: ['class fields'],
+      parserOptions: {
+        sourceType: 'module',
+      },
     }
   )),
 

@@ -1162,6 +1162,73 @@ const Component = () => (
       `,
       features: ['flow'].concat(semver.satisfies(eslintVersion, '< 8') ? 'no-babel-old' : []),
     },
+    {
+      code: `
+        <a role={'button'}
+          className={\`navbar-burger \${open ? 'is-active' : ''}\`}
+          href={'#'}
+          aria-label={'menu'}
+          aria-expanded={false}
+          onClick={openMenu}>
+          <span aria-hidden={'true'}/>
+          <span aria-hidden={'true'}/>
+          <span aria-hidden={'true'}/>
+        </a>
+      `,
+      options: [2],
+    },
+    {
+      code: `
+        export default class App extends Inferno.Component {
+          state = {
+            name: '',
+          }
+
+          componentDidMount() {
+            this.fetchName()
+              .then(name => {
+                this.setState({name})
+              });
+          }
+
+          fetchName = () => {
+            const url = 'https://api.github.com/users/job13er'
+            return fetch(url)
+              .then(resp => resp.json())
+              .then(json => json.name)
+          }
+
+          render() {
+            const {name} = this.state
+            return (
+              <h1>Hello, {name}</h1>
+            )
+          }
+        }
+      `,
+      features: ['class fields'],
+      options: [2],
+    },
+    {
+      code: `
+        function test (foo) {
+          return foo != null
+            ? Math.max(0, Math.min(1, 10))
+            : 0
+        }
+      `,
+      options: [99],
+    },
+    {
+      code: `
+        function test (foo) {
+          return foo != null
+            ? <div>foo</div>
+            : <div>bar</div>
+        }
+      `,
+      options: [2],
+    },
   ]),
 
   invalid: parsers.all([].concat(

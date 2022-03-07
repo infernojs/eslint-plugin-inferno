@@ -66,6 +66,64 @@ ruleTester.run('jsx-key', rule, {
       code: '<div key="keyBeforeSpread" {...{}} />;',
       options: [{ checkKeyMustBeforeSpread: true }],
     },
+    {
+      code: `
+        const spans = [
+          <span key="notunique"/>,
+          <span key="notunique"/>,
+        ];
+      `,
+    },
+    {
+      code: `
+        function Component(props) {
+          return hasPayment ? (
+            <div className="stuff">
+              <BookingDetailSomething {...props} />
+              {props.modal && props.calculatedPrice && (
+                <SomeOtherThing items={props.something} discount={props.discount} />
+              )}
+            </div>
+          ) : null;
+        }
+      `,
+    },
+    {
+      code: `
+        import Inferno, { FC, useRef, useState } from 'inferno';
+
+        import './ResourceVideo.sass';
+        import VimeoVideoPlayInModal from '../vimeoVideoPlayInModal/VimeoVideoPlayInModal';
+
+        type Props = {
+          videoUrl: string;
+          videoTitle: string;
+        };
+        const ResourceVideo: FC<Props> = ({
+          videoUrl,
+          videoTitle,
+        }: Props): JSX.Element => {
+          return (
+            <div className="resource-video">
+              <VimeoVideoPlayInModal videoUrl={videoUrl} />
+              <h3>{videoTitle}</h3>
+            </div>
+          );
+        };
+
+        export default ResourceVideo;
+      `,
+      features: ['types'],
+    },
+    {
+      code: `
+        // testrule.jsx
+        const trackLink = () => {};
+        const getAnalyticsUiElement = () => {};
+
+        const onTextButtonClick = (e, item) => trackLink([, getAnalyticsUiElement(item), item.name], e);
+      `,
+    },
   ]),
   invalid: parsers.all([
     {
@@ -143,6 +201,34 @@ ruleTester.run('jsx-key', rule, {
       options: [{ checkKeyMustBeforeSpread: true }],
       settings,
       errors: [{ messageId: 'keyBeforeSpread' }],
+    },
+    {
+      code: `
+        const spans = [
+          <span key="notunique"/>,
+          <span key="notunique"/>,
+        ];
+      `,
+      options: [{ warnOnDuplicates: true }],
+      errors: [
+        { messageId: 'nonUniqueKeys', line: 3 },
+        { messageId: 'nonUniqueKeys', line: 4 },
+      ],
+    },
+    {
+      code: `
+        const div = (
+          <div>
+            <span key="notunique"/>
+            <span key="notunique"/>
+          </div>
+        );
+      `,
+      options: [{ warnOnDuplicates: true }],
+      errors: [
+        { messageId: 'nonUniqueKeys', line: 4 },
+        { messageId: 'nonUniqueKeys', line: 5 },
+      ],
     },
   ]),
 });
