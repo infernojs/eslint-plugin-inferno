@@ -3,12 +3,32 @@
 const flatMap = require('array.prototype.flatmap');
 const path = require('path');
 const semver = require('semver');
+const entries = require('object.entries');
 const version = require('eslint/package.json').version;
 const tsParserVersion = require('@typescript-eslint/parser/package.json').version;
 
 const disableNewTS = semver.satisfies(tsParserVersion, '>= 4.1') // this rule is not useful on v4.1+ of the TS parser
   ? (x) => Object.assign({}, x, { features: [].concat(x.features, 'no-ts-new') })
   : (x) => x;
+
+function minEcmaVersion(features, parserOptions) {
+  const minEcmaVersionForFeatures = {
+    'class fields': 2022,
+    'optional chaining': 2020,
+  };
+  const result = Math.max.apply(
+    Math,
+    [].concat(
+      (parserOptions && parserOptions.ecmaVersion) || [],
+      flatMap(entries(minEcmaVersionForFeatures), (entry) => {
+        const f = entry[0];
+        const y = entry[1];
+        return features.has(f) ? y : [];
+      })
+    ).map((y) => (y > 5 && y < 2015 ? y + 2009 : y)) // normalize editions to years
+  );
+  return Number.isFinite(result) ? result : undefined;
+}
 
 const NODE_MODULES = '../../node_modules';
 
@@ -56,7 +76,8 @@ const parsers = {
       }
       const features = new Set([].concat(test.features || []));
       delete test.features;
-      const es = test.parserOptions && test.parserOptions.ecmaVersion;
+
+      const es = minEcmaVersion(features, test.parserOptions);
 
       function addComment(testObject, parser) {
         const extras = [].concat(
@@ -120,7 +141,7 @@ const parsers = {
         || features.has('flow')
         || features.has('types')
         || features.has('ts');
-      const skipTS = semver.satisfies(version, '< 5')
+      const skipTS = semver.satisfies(version, '<= 5') // TODO: make these pass on eslint 5
         || features.has('no-ts')
         || features.has('flow')
         || features.has('jsx namespace')
@@ -130,10 +151,8 @@ const parsers = {
 
       return [].concat(
         skipBase ? [] : addComment(
-          Object.assign({}, test, features.has('class fields') && {
-            parserOptions: Object.assign({}, test.parserOptions, {
-              ecmaVersion: Math.max((test.parserOptions && test.parserOptions.ecmaVersion) || 0, 2022),
-            }),
+          Object.assign({}, test, typeof es === 'number' && {
+            parserOptions: Object.assign({}, test.parserOptions, { ecmaVersion: es }),
           }),
           'default'
         ),
@@ -145,7 +164,7 @@ const parsers = {
           parser: parsers['@BABEL_ESLINT'],
           parserOptions: parsers.babelParserOptions(test, features),
         }), '@babel/eslint-parser'),
-        tsNew ? addComment(Object.assign({}, test, { parser: parsers['@TYPESCRIPT_ESLINT'] }), '@typescript/eslint') : []
+        tsNew ? addComment(Object.assign({}, test, { parser: parsers['@TYPESCRIPT_ESLINT'] }), '@typescript-eslint/parser') : []
       );
     });
     return t;

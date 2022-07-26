@@ -18,11 +18,8 @@ Install [`eslint`](https://www.github.com/eslint/eslint) either locally or globa
 $ npm install eslint@7 --save-dev
 ```
 
-If you installed `eslint` globally, you have to install the Inferno plugin globally too. Otherwise, install it locally (strongly preferred)
+It is also possible to install ESLint globally rather than locally (using npm install eslint --global). However, this is not recommended, and any plugins or shareable configs that you use must be installed locally in either case.
 
-```sh
-$ npm install eslint-plugin-inferno --save-dev
-```
 
 # Configuration
 

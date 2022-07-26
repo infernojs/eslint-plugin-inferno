@@ -25,6 +25,15 @@ var Hello = createClass({
 });
 ```
 
+```jsx
+class Hello extends React.Component {
+  render() {
+    return <div>Hello</div>;
+  }
+  static displayName = 'Hello';
+}
+```
+
 Examples of **correct** code for this rule:
 
 ```jsx
@@ -34,6 +43,15 @@ var Hello = createClass({
     return <div>Hello</div>;
   }
 });
+```
+
+```jsx
+class Hello extends React.Component {
+  static displayName = 'Hello';
+  render() {
+    return <div>Hello</div>;
+  }
+}
 ```
 
 ## Rule Options
@@ -126,6 +144,16 @@ var Hello = createClass({
 });
 ```
 
+```jsx
+class Hello extends React.Component {
+  render() {
+    return <div>Hello</div>;
+  }
+  onClick = this.onClick.bind(this);
+  onClick() {}
+}
+```
+
 Examples of **correct** code for this rule, with the above configuration:
 
 ```jsx
@@ -135,6 +163,16 @@ var Hello = createClass({
     return <div>Hello</div>;
   }
 });
+```
+
+```jsx
+class Hello extends React.Component {
+  onClick = this.onClick.bind(this);
+  onClick() {}
+  render() {
+    return <div>Hello</div>;
+  }
+}
 ```
 
 If you want to split your `render` method into smaller ones and keep them just before render:
@@ -168,6 +206,17 @@ var Hello = createClass({
 });
 ```
 
+```jsx
+class Hello extends React.Component {
+  renderButton = () => {}
+  onClick = this.onClick.bind(this);
+  onClick() {}
+  render() {
+    return <div>Hello</div>;
+  }
+}
+```
+
 Examples of **correct** code for this rule, with the above configuration:
 
 ```jsx
@@ -178,6 +227,17 @@ var Hello = createClass({
     return <div>Hello</div>;
   }
 });
+```
+
+```jsx
+class Hello extends React.Component {
+  onClick = this.onClick.bind(this);
+  onClick() {}
+  renderButton = () => {}
+  render() {
+    return <div>Hello</div>;
+  }
+}
 ```
 
 If you want to flow annotations to be at the top:

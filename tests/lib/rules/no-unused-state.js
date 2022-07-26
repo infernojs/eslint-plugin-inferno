@@ -353,9 +353,6 @@ eslintTester.run('no-unused-state', rule, {
         }
       `,
       features: ['optional chaining'],
-      parserOptions: {
-        ecmaVersion: 2020,
-      },
     },
     {
       code: `
@@ -1059,6 +1056,40 @@ eslintTester.run('no-unused-state', rule, {
           static getDerivedStateFromProps = ComposeComponent.getDerivedStateFromProps;
           render() { return <div />; }
         }
+      `,
+      features: ['class fields'],
+      parserOptions: {
+        sourceType: 'module',
+      },
+    },
+    {
+      code: `
+        import React, { PureComponent } from 'react';
+
+        class TestNoUnusedState extends Inferno.Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              id: null,
+            };
+          }
+
+          static getDerivedStateFromProps = (props, state) => {
+            if (state.id !== props.id) {
+              return {
+                id: props.id,
+              };
+            }
+
+            return null;
+          };
+
+          render() {
+            return <h1>{this.state.id}</h1>;
+          }
+        }
+
+        export default TestNoUnusedState;
       `,
       features: ['class fields'],
       parserOptions: {

@@ -63,9 +63,6 @@ ruleTester.run('inferno-no-constructed-context-values', rule, {
         }
       `,
       features: ['optional chaining'],
-      parserOptions: {
-        ecmaVersion: 2020,
-      },
     },
     {
       code: `

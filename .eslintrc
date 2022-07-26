@@ -11,30 +11,32 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "sourceType": "script",
+    "sourceType": "script"
   },
+    "ignorePatterns": [
+      "coverage/",
+      ".nyc_output/"
+    ],
   "rules": {
     "comma-dangle": [2, "always-multiline"],
     "object-shorthand": [2, "always", {
       "ignoreConstructors": false,
-      "avoidQuotes": false, // this is the override vs airbnb
+      "avoidQuotes": false // this is the override vs airbnb
     }],
     "max-len": [2, 120, {
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true,
-      "ignoreComments": true,
+      "ignoreComments": true
     }],
     "consistent-return": 0,
-
     "prefer-destructuring": [2, { "array": false, "object": false }, { "enforceForRenamedProperties": false }],
     "prefer-object-spread": 0, // until node 8 is required
     "prefer-rest-params": 0, // until node 6 is required
     "prefer-spread": 0, // until node 6 is required
     "function-call-argument-newline": 1, // TODO: enable
     "function-paren-newline": 0,
-    "no-plusplus": 1,
-    "no-param-reassign": 1,
-    "no-unreachable-loop": 1, // TODO: enable
+    "no-plusplus": 0,
+    "no-param-reassign": 0,
     "no-restricted-syntax": [2, {
       "selector": "ObjectPattern",
       "message": "Object destructuring is not compatible with Node v4"
@@ -43,25 +45,27 @@
     "valid-jsdoc": [2, {
       "requireReturn": false,
       "requireParamDescription": false,
-      "requireReturnDescription": false,
+      "requireReturnDescription": false
     }],
-
     "eslint-plugin/consistent-output": 0,
     "eslint-plugin/require-meta-schema": 0,
-    "eslint-plugin/require-meta-type": 0
+    "eslint-plugin/require-meta-type": 0,
+    "eslint-plugin/no-unused-message-ids": 0,
+    "eslint-plugin/prefer-output-null": 0,
+    "eslint-plugin/prefer-message-ids": 0
   },
   "overrides": [
     {
       "files": "tests/**",
       "rules": {
-        "no-template-curly-in-string": 1,
-      },
+        "no-template-curly-in-string": 1
+      }
     },
     {
       "files": "markdown.config.js",
       "rules": {
-        "no-console": 0,
-      },
-    },
-  ],
+        "no-console": 0
+      }
+    }
+  ]
 }
