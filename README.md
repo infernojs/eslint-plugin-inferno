@@ -120,7 +120,7 @@ Enable the rules that you would like to use.
 | ✔ | 🔧 | Rule | Description |
 | :---: | :---: | :--- | :--- |
 |  |  | [inferno/button-has-type](docs/rules/button-has-type.md) | Forbid "button" element without an explicit "type" attribute |
-|  |  | [inferno/destructuring-assignment](docs/rules/destructuring-assignment.md) | Enforce consistent usage of destructuring assignment of props, state, and context |
+|  | 🔧 | [inferno/destructuring-assignment](docs/rules/destructuring-assignment.md) | Enforce consistent usage of destructuring assignment of props, state, and context |
 |  |  | [inferno/forbid-component-props](docs/rules/forbid-component-props.md) | Forbid certain props on components |
 |  |  | [inferno/forbid-dom-props](docs/rules/forbid-dom-props.md) | Forbid certain props on DOM Nodes |
 |  |  | [inferno/forbid-elements](docs/rules/forbid-elements.md) | Forbid certain elements |
@@ -141,7 +141,7 @@ Enable the rules that you would like to use.
 |  | 🔧 | [inferno/no-invalid-html-attribute](docs/rules/no-invalid-html-attribute.md) | Forbid attribute with an invalid values` |
 | ✔ |  | [inferno/no-is-mounted](docs/rules/no-is-mounted.md) | Prevent usage of isMounted |
 |  |  | [inferno/no-multi-comp](docs/rules/no-multi-comp.md) | Prevent multiple component definition per file |
-|  |  | [inferno/no-namespace](docs/rules/no-namespace.md) | Enforce that namespaces are not used in React elements |
+|  |  | [inferno/no-namespace](docs/rules/no-namespace.md) | Enforce that namespaces are not used in Inferno elements |
 |  |  | [inferno/no-redundant-should-component-update](docs/rules/no-redundant-should-component-update.md) | Flag shouldComponentUpdate when extending PureComponent |
 | ✔ |  | [inferno/no-render-return-value](docs/rules/no-render-return-value.md) | Prevent usage of the return value of Inferno.render |
 |  |  | [inferno/no-set-state](docs/rules/no-set-state.md) | Prevent usage of setState |
@@ -193,6 +193,7 @@ Enable the rules that you would like to use.
 | ✔ |  | [inferno/jsx-no-comment-textnodes](docs/rules/jsx-no-comment-textnodes.md) | Comments inside children section of tag should be placed inside braces |
 |  |  | [inferno/jsx-no-constructed-context-values](docs/rules/jsx-no-constructed-context-values.md) | Prevents JSX context provider values from taking values that will cause needless rerenders. |
 | ✔ |  | [inferno/jsx-no-duplicate-props](docs/rules/jsx-no-duplicate-props.md) | Enforce no duplicate props |
+|  | 🔧 | [inferno/jsx-no-leaked-render](docs/rules/jsx-no-leaked-render.md) | Prevent problematic leaked values from being rendered |
 |  |  | [inferno/jsx-no-literals](docs/rules/jsx-no-literals.md) | Prevent using string literals in Inferno component definition |
 |  |  | [inferno/jsx-no-script-url](docs/rules/jsx-no-script-url.md) | Forbid `javascript:` URLs |
 | ✔ | 🔧 | [inferno/jsx-no-target-blank](docs/rules/jsx-no-target-blank.md) | Forbid `target="_blank"` attribute without `rel="noreferrer"` |
