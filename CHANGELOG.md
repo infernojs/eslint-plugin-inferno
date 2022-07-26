@@ -1,5 +1,8 @@
 # Change Log
 All notable changes to this project will be documented in this file.
+## 2022-07-26
+Everything re-branched from upstream.
+All bug fixes included from upstream.
 ## 2022-03-07
 Everything re-branched from upstream.
 All bug fixes included from upstream.
