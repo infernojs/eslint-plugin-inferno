@@ -1,4 +1,6 @@
-# Prevent usage of `javascript:` URLs (inferno/jsx-no-script-url)
+# Disallow usage of `javascript:` URLs (inferno/jsx-no-script-url)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 **In Inferno 8** any URLs starting with `javascript:` [scheme](https://wiki.whatwg.org/wiki/URL_schemes#javascript:_URLs) log a warning.
 See React blog for more [details](https://reactjs.org/blog/2019/08/08/react-v16.9.0.html#deprecating-javascript-urls)
@@ -21,6 +23,7 @@ Examples of **correct** code for this rule:
 ```
 
 ## Rule Options
+
 ```json
 {
   "inferno/jsx-no-script-url": [
@@ -42,9 +45,11 @@ Examples of **correct** code for this rule:
 Allows you to indicate a specific list of properties used by a custom component to be checked.
 
 ### name
+
 Component name.
 
 ### props
+
 List of properties that should be validated.
 
 Examples of **incorrect** code for this rule, when configured with the above options:

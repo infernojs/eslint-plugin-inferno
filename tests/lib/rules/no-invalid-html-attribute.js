@@ -249,7 +249,7 @@ ruleTester.run('no-invalid-html-attribute', rule, {
     },
     {
       code: 'Inferno.createElement("a", { rel: "alternatex" })',
-      output: 'Inferno.createElement("a", { rel: "alternatex" })',
+      output: null,
       errors: [
         {
           messageId: 'neverValid',
@@ -262,7 +262,7 @@ ruleTester.run('no-invalid-html-attribute', rule, {
     },
     {
       code: 'Inferno.createElement("a", { rel: ["alternatex"] })',
-      output: 'Inferno.createElement("a", { rel: ["alternatex"] })',
+      output: null,
       errors: [
         {
           messageId: 'neverValid',

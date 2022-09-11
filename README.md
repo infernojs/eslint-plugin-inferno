@@ -117,100 +117,100 @@ Enable the rules that you would like to use.
 🔧: Fixable with [`eslint --fix`](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems).
 
 <!-- AUTO-GENERATED-CONTENT:START (BASIC_RULES) -->
-| ✔ | 🔧 | Rule | Description |
-| :---: | :---: | :--- | :--- |
-|  |  | [inferno/button-has-type](docs/rules/button-has-type.md) | Forbid "button" element without an explicit "type" attribute |
-|  | 🔧 | [inferno/destructuring-assignment](docs/rules/destructuring-assignment.md) | Enforce consistent usage of destructuring assignment of props, state, and context |
-|  |  | [inferno/forbid-component-props](docs/rules/forbid-component-props.md) | Forbid certain props on components |
-|  |  | [inferno/forbid-dom-props](docs/rules/forbid-dom-props.md) | Forbid certain props on DOM Nodes |
-|  |  | [inferno/forbid-elements](docs/rules/forbid-elements.md) | Forbid certain elements |
-|  | 🔧 | [inferno/function-component-definition](docs/rules/function-component-definition.md) | Standardize the way function component get defined |
-|  |  | [inferno/iframe-missing-sandbox](docs/rules/iframe-missing-sandbox.md) | Enforce sandbox attribute on iframe elements |
-|  |  | [inferno/inferno-in-jsx-scope](docs/rules/inferno-in-jsx-scope.md) | Prevent missing Inferno when using JSX |
-|  |  | [inferno/no-access-state-in-setstate](docs/rules/no-access-state-in-setstate.md) | Reports when this.state is accessed within setState |
-|  |  | [inferno/no-adjacent-inline-elements](docs/rules/no-adjacent-inline-elements.md) | Prevent adjacent inline elements not separated by whitespace. |
-|  |  | [inferno/no-array-index-key](docs/rules/no-array-index-key.md) | Prevent usage of Array index in keys |
-|  | 🔧 | [inferno/no-arrow-function-lifecycle](docs/rules/no-arrow-function-lifecycle.md) | Lifecycle methods should be methods on the prototype, not class fields |
-| ✔ |  | [inferno/no-children-prop](docs/rules/no-children-prop.md) | Prevent passing of children as props. |
-|  |  | [inferno/no-danger](docs/rules/no-danger.md) | Prevent usage of dangerous JSX props |
-| ✔ |  | [inferno/no-danger-with-children](docs/rules/no-danger-with-children.md) | Report when a DOM element is using both children and dangerouslySetInnerHTML |
-|  |  | [inferno/no-did-mount-set-state](docs/rules/no-did-mount-set-state.md) | Prevent usage of setState in componentDidMount |
-|  |  | [inferno/no-did-update-set-state](docs/rules/no-did-update-set-state.md) | Prevent usage of setState in componentDidUpdate |
-| ✔ |  | [inferno/no-direct-mutation-state](docs/rules/no-direct-mutation-state.md) | Prevent direct mutation of this.state |
-| ✔ |  | [inferno/no-find-dom-node](docs/rules/no-find-dom-node.md) | Prevent usage of findDOMNode |
-|  | 🔧 | [inferno/no-invalid-html-attribute](docs/rules/no-invalid-html-attribute.md) | Forbid attribute with an invalid values` |
-| ✔ |  | [inferno/no-is-mounted](docs/rules/no-is-mounted.md) | Prevent usage of isMounted |
-|  |  | [inferno/no-multi-comp](docs/rules/no-multi-comp.md) | Prevent multiple component definition per file |
-|  |  | [inferno/no-namespace](docs/rules/no-namespace.md) | Enforce that namespaces are not used in Inferno elements |
-|  |  | [inferno/no-redundant-should-component-update](docs/rules/no-redundant-should-component-update.md) | Flag shouldComponentUpdate when extending PureComponent |
-| ✔ |  | [inferno/no-render-return-value](docs/rules/no-render-return-value.md) | Prevent usage of the return value of Inferno.render |
-|  |  | [inferno/no-set-state](docs/rules/no-set-state.md) | Prevent usage of setState |
-| ✔ |  | [inferno/no-string-refs](docs/rules/no-string-refs.md) | Prevent string definitions for references and prevent referencing this.refs |
-|  |  | [inferno/no-this-in-sfc](docs/rules/no-this-in-sfc.md) | Report "this" being used in stateless components |
-|  |  | [inferno/no-typos](docs/rules/no-typos.md) | Prevent common typos |
-| ✔ |  | [inferno/no-unescaped-entities](docs/rules/no-unescaped-entities.md) | Detect unescaped HTML entities, which might represent malformed tags |
-| ✔ | 🔧 | [inferno/no-unknown-property](docs/rules/no-unknown-property.md) | Prevent usage of unknown DOM property |
-|  |  | [inferno/no-unstable-nested-components](docs/rules/no-unstable-nested-components.md) | Prevent creating unstable components inside components |
-|  |  | [inferno/no-unused-class-component-methods](docs/rules/no-unused-class-component-methods.md) | Prevent declaring unused methods of component class |
-|  |  | [inferno/no-unused-state](docs/rules/no-unused-state.md) | Prevent definition of unused state fields |
-|  |  | [inferno/no-will-update-set-state](docs/rules/no-will-update-set-state.md) | Prevent usage of setState in componentWillUpdate |
-|  |  | [inferno/prefer-es6-class](docs/rules/prefer-es6-class.md) | Enforce ES5 or ES6 class for Inferno Components |
-|  |  | [inferno/prefer-stateless-function](docs/rules/prefer-stateless-function.md) | Enforce stateless components to be written as a pure function |
-|  |  | [inferno/require-optimization](docs/rules/require-optimization.md) | Enforce Inferno components to have a shouldComponentUpdate method |
-| ✔ |  | [inferno/require-render-return](docs/rules/require-render-return.md) | Enforce ES5 or ES6 class for returning value in render function |
-|  | 🔧 | [inferno/self-closing-comp](docs/rules/self-closing-comp.md) | Prevent extra closing tags for components without children |
-|  |  | [inferno/sort-comp](docs/rules/sort-comp.md) | Enforce component methods order |
-|  |  | [inferno/state-in-constructor](docs/rules/state-in-constructor.md) | State initialization in an ES6 class component should be in a constructor |
-|  |  | [inferno/static-property-placement](docs/rules/static-property-placement.md) | Defines where Inferno component static properties should be positioned. |
-|  |  | [inferno/style-prop-object](docs/rules/style-prop-object.md) | Enforce style prop value is an object |
-|  |  | [inferno/void-dom-elements-no-children](docs/rules/void-dom-elements-no-children.md) | Prevent passing of children to void DOM elements (e.g. `<br />`). |
+| ✔ | 🔧 | 💡 | Rule | Description |
+| :---: | :---: | :---: | :--- | :--- |
+|  |  |  | Disallow usage of `button` elements without an explicit `type` attribute |
+|  | 🔧 |  | Enforce consistent usage of destructuring assignment of props, state, and context |
+|  |  |  | Disallow certain props on components |
+|  |  |  | Disallow certain props on DOM Nodes |
+|  |  |  | Disallow certain elements |
+|  | 🔧 |  | Enforce a specific function type for function components |
+|  |  |  | Enforce sandbox attribute on iframe elements |
+|  |  |  | Disallow missing React when using JSX |
+|  | 🔧 |  | Enforce boolean attributes notation in JSX |
+|  |  |  | Enforce or disallow spaces inside of curly braces in JSX attributes and expressions |
+|  | 🔧 |  | Enforce closing bracket location in JSX |
+|  | 🔧 |  | Enforce closing tag location for multiline JSX |
+|  | 🔧 |  | Disallow unnecessary JSX expressions when literals alone are sufficient or enforce JSX expressions on literals in JSX children or attributes |
+|  | 🔧 |  | Enforce consistent linebreaks in curly braces in JSX attributes and expressions |
+|  | 🔧 |  | Enforce or disallow spaces inside of curly braces in JSX attributes and expressions |
+|  | 🔧 |  | Enforce or disallow spaces around equal signs in JSX attributes |
+|  |  |  | Disallow file extensions that may contain JSX |
+|  | 🔧 |  | Enforce proper position of the first property in JSX |
+|  | 🔧 |  | Enforce shorthand or standard form for Inferno fragments |
+|  |  |  | Enforce event handler naming conventions in JSX |
+|  | 🔧 |  | Enforce JSX indentation |
+|  | 🔧 |  | Enforce props indentation in JSX |
+| ✔ |  |  | Disallow missing `key` props in iterators/collection literals |
+|  |  |  | Enforce JSX maximum depth |
+|  | 🔧 |  | Enforce maximum of props on a single line in JSX |
+|  | 🔧 |  | Require or prevent a new line after jsx elements and expressions. |
+|  |  |  | Disallow `.bind()` or arrow functions in JSX props |
+| ✔ |  |  | Disallow comments from being inserted as text nodes |
+|  |  |  | Disallows JSX context provider values from taking values that will cause needless rerenders |
+| ✔ |  |  | Disallow duplicate properties in JSX |
+|  | 🔧 |  | Disallow problematic leaked values from being rendered |
+|  |  |  | Disallow usage of string literals in JSX |
+|  |  |  | Disallow usage of `javascript:` URLs |
+| ✔ | 🔧 |  | Disallow `target="_blank"` attribute without `rel="noreferrer"` |
+| ✔ |  |  | Disallow undeclared variables in JSX |
+|  | 🔧 |  | Disallow unnecessary fragments |
+|  | 🔧 |  | Require one JSX element per line |
+|  |  |  | Enforce PascalCase for user-defined JSX components |
+|  | 🔧 |  | Enforce 'class' or 'className' attributes |
+|  | 🔧 |  | Disallow multiple spaces between inline JSX props |
+|  |  |  | Disallow JSX prop spreading |
+|  |  |  | Enforce defaultProps declarations alphabetical sorting |
+|  | 🔧 |  | Enforce props alphabetical sorting |
+|  | 🔧 |  | Enforce spacing before closing bracket in JSX. ❌ This rule is deprecated. |
+|  | 🔧 |  | Enforce whitespace in and around the JSX opening and closing brackets |
+|  |  |  | Disallow React to be incorrectly marked as unused |
+| ✔ |  |  | Disallow variables used in JSX to be incorrectly marked as unused |
+|  | 🔧 |  | Disallow missing parentheses around multiline JSX |
+|  |  |  | Disallow when this.state is accessed within setState |
+|  |  |  | Disallow adjacent inline elements not separated by whitespace. |
+|  |  |  | Disallow usage of Array index in keys |
+|  | 🔧 |  | Lifecycle methods should be methods on the prototype, not class fields |
+| ✔ |  |  | Disallow passing of children as props |
+|  |  |  | Disallow usage of dangerous JSX properties |
+| ✔ |  |  | Disallow when a DOM element is using both children and dangerouslySetInnerHTML |
+|  |  |  | Disallow usage of setState in componentDidMount |
+|  |  |  | Disallow usage of setState in componentDidUpdate |
+| ✔ |  |  | Disallow direct mutation of this.state |
+| ✔ |  |  | Disallow usage of findDOMNode |
+|  | 🔧 |  | Disallow usage of invalid attributes |
+| ✔ |  |  | Disallow usage of isMounted |
+|  |  |  | Disallow multiple component definition per file |
+|  |  |  | Enforce that namespaces are not used in Inferno elements |
+|  |  |  | Disallow usage of shouldComponentUpdate when extending React.PureComponent |
+| ✔ |  |  | Disallow usage of the return value of ReactDOM.render |
+|  |  |  | Disallow usage of setState |
+| ✔ |  |  | Disallow using string references |
+|  |  |  | Disallow `this` from being used in stateless functional components |
+|  |  |  | Disallow common typos |
+| ✔ |  |  | Disallow unescaped HTML entities from appearing in markup |
+| ✔ | 🔧 |  | Disallow usage of unknown DOM property |
+|  |  |  | Disallow creating unstable components inside components |
+|  |  |  | Disallow declaring unused methods of component class |
+|  |  |  | Disallow definitions of unused state |
+|  |  |  | Disallow usage of setState in componentWillUpdate |
+|  |  |  | Enforce ES5 or ES6 class for Inferno Components |
+|  |  |  | Enforce stateless components to be written as a pure function |
+|  |  |  | Enforce Inferno components to have a shouldComponentUpdate method |
+| ✔ |  |  | Enforce ES5 or ES6 class for returning value in render function |
+|  | 🔧 |  | Disallow extra closing tags for components without children |
+|  |  |  | Enforce component methods order |
+|  |  |  | Enforce class component state initialization style |
+|  |  |  | Enforces where React component static properties should be positioned. |
+|  |  |  | Enforce style prop value is an object |
+|  |  |  | Disallow void DOM elements (e.g. `<img />`, `<br />`) from receiving children |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## JSX-specific rules
 
 <!-- AUTO-GENERATED-CONTENT:START (JSX_RULES) -->
-| ✔ | 🔧 | Rule | Description |
-| :---: | :---: | :--- | :--- |
-|  | 🔧 | [inferno/jsx-boolean-value](docs/rules/jsx-boolean-value.md) | Enforce boolean attributes notation in JSX |
-|  |  | [inferno/jsx-child-element-spacing](docs/rules/jsx-child-element-spacing.md) | Ensures inline tags are not rendered without spaces between them |
-|  | 🔧 | [inferno/jsx-closing-bracket-location](docs/rules/jsx-closing-bracket-location.md) | Validate closing bracket location in JSX |
-|  | 🔧 | [inferno/jsx-closing-tag-location](docs/rules/jsx-closing-tag-location.md) | Validate closing tag location for multiline JSX |
-|  | 🔧 | [inferno/jsx-curly-brace-presence](docs/rules/jsx-curly-brace-presence.md) | Disallow unnecessary JSX expressions when literals alone are sufficient or enfore JSX expressions on literals in JSX children or attributes |
-|  | 🔧 | [inferno/jsx-curly-newline](docs/rules/jsx-curly-newline.md) | Enforce consistent line breaks inside jsx curly |
-|  | 🔧 | [inferno/jsx-curly-spacing](docs/rules/jsx-curly-spacing.md) | Enforce or disallow spaces inside of curly braces in JSX attributes |
-|  | 🔧 | [inferno/jsx-equals-spacing](docs/rules/jsx-equals-spacing.md) | Disallow or enforce spaces around equal signs in JSX attributes |
-|  |  | [inferno/jsx-filename-extension](docs/rules/jsx-filename-extension.md) | Restrict file extensions that may contain JSX |
-|  | 🔧 | [inferno/jsx-first-prop-new-line](docs/rules/jsx-first-prop-new-line.md) | Ensure proper position of the first property in JSX |
-|  | 🔧 | [inferno/jsx-fragments](docs/rules/jsx-fragments.md) | Enforce shorthand or standard form for Inferno fragments |
-|  |  | [inferno/jsx-handler-names](docs/rules/jsx-handler-names.md) | Enforce event handler naming conventions in JSX |
-|  | 🔧 | [inferno/jsx-indent](docs/rules/jsx-indent.md) | Validate JSX indentation |
-|  | 🔧 | [inferno/jsx-indent-props](docs/rules/jsx-indent-props.md) | Validate props indentation in JSX |
-| ✔ |  | [inferno/jsx-key](docs/rules/jsx-key.md) | Report missing `key` props in iterators/collection literals |
-|  |  | [inferno/jsx-max-depth](docs/rules/jsx-max-depth.md) | Validate JSX maximum depth |
-|  | 🔧 | [inferno/jsx-max-props-per-line](docs/rules/jsx-max-props-per-line.md) | Limit maximum of props on a single line in JSX |
-|  | 🔧 | [inferno/jsx-newline](docs/rules/jsx-newline.md) | Require or prevent a new line after jsx elements and expressions. |
-|  |  | [inferno/jsx-no-bind](docs/rules/jsx-no-bind.md) | Prevents usage of Function.prototype.bind and arrow functions in Inferno component props |
-| ✔ |  | [inferno/jsx-no-comment-textnodes](docs/rules/jsx-no-comment-textnodes.md) | Comments inside children section of tag should be placed inside braces |
-|  |  | [inferno/jsx-no-constructed-context-values](docs/rules/jsx-no-constructed-context-values.md) | Prevents JSX context provider values from taking values that will cause needless rerenders. |
-| ✔ |  | [inferno/jsx-no-duplicate-props](docs/rules/jsx-no-duplicate-props.md) | Enforce no duplicate props |
-|  | 🔧 | [inferno/jsx-no-leaked-render](docs/rules/jsx-no-leaked-render.md) | Prevent problematic leaked values from being rendered |
-|  |  | [inferno/jsx-no-literals](docs/rules/jsx-no-literals.md) | Prevent using string literals in Inferno component definition |
-|  |  | [inferno/jsx-no-script-url](docs/rules/jsx-no-script-url.md) | Forbid `javascript:` URLs |
-| ✔ | 🔧 | [inferno/jsx-no-target-blank](docs/rules/jsx-no-target-blank.md) | Forbid `target="_blank"` attribute without `rel="noreferrer"` |
-| ✔ |  | [inferno/jsx-no-undef](docs/rules/jsx-no-undef.md) | Disallow undeclared variables in JSX |
-|  | 🔧 | [inferno/jsx-no-useless-fragment](docs/rules/jsx-no-useless-fragment.md) | Disallow unnecessary fragments |
-|  | 🔧 | [inferno/jsx-one-expression-per-line](docs/rules/jsx-one-expression-per-line.md) | Limit to one expression per line in JSX |
-|  |  | [inferno/jsx-pascal-case](docs/rules/jsx-pascal-case.md) | Enforce PascalCase for user-defined JSX components |
-|  | 🔧 | [inferno/jsx-props-class-name](docs/rules/jsx-props-class-name.md) | Enforce 'class' or 'className' attributes |
-|  | 🔧 | [inferno/jsx-props-no-multi-spaces](docs/rules/jsx-props-no-multi-spaces.md) | Disallow multiple spaces between inline JSX props |
-|  |  | [inferno/jsx-props-no-spreading](docs/rules/jsx-props-no-spreading.md) | Prevent JSX prop spreading |
-|  |  | [inferno/jsx-sort-default-props](docs/rules/jsx-sort-default-props.md) | Enforce default props alphabetical sorting |
-|  | 🔧 | [inferno/jsx-sort-props](docs/rules/jsx-sort-props.md) | Enforce props alphabetical sorting |
-|  | 🔧 | [inferno/jsx-space-before-closing](docs/rules/jsx-space-before-closing.md) | Validate spacing before closing bracket in JSX |
-|  | 🔧 | [inferno/jsx-tag-spacing](docs/rules/jsx-tag-spacing.md) | Validate whitespace in and around the JSX opening and closing brackets |
-|  |  | [inferno/jsx-uses-inferno](docs/rules/jsx-uses-inferno.md) | Prevent Inferno to be marked as unused |
-| ✔ |  | [inferno/jsx-uses-vars](docs/rules/jsx-uses-vars.md) | Prevent variables used in JSX to be marked as unused |
-|  | 🔧 | [inferno/jsx-wrap-multilines](docs/rules/jsx-wrap-multilines.md) | Prevent missing parentheses around multilines JSX |
+| ✔ | 🔧 | 💡 | Rule | Description |
+| :---: | :---: | :---: | :--- | :--- |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## List of not supported rules

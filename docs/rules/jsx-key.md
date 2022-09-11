@@ -1,4 +1,6 @@
-# Detect missing `key` prop (inferno/jsx-key)
+# Disallow missing `key` props in iterators/collection literals (inferno/jsx-key)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`, `recommended`.
 
 Warn if an element that likely requires a `key` prop--namely, one present in an
 array literal or an arrow function expression.
@@ -19,6 +21,10 @@ data.map(x => <Hello>{x}</Hello>);
 <Hello {...{ key: id, id, caption }} />
 ```
 
+```jsx
+Array.from([1, 2, 3], (x) => <Hello>{x}</Hello>);
+```
+
 In the last example the key is being spread, which is currently possible, but discouraged in favor of the statically provided key.
 
 Examples of **correct** code for this rule:
@@ -33,6 +39,10 @@ data.map((x) => <Hello key={x.id}>{x}</Hello>);
 
 ```jsx
 <Hello key={id} {...{ id, caption }} />
+```
+
+```jsx
+Array.from([1, 2, 3], (x) => <Hello key={x.id}>{x}</Hello>);
 ```
 
 ## Rule Options
@@ -59,7 +69,7 @@ data.map(x => <>{x}</>);
 
 ### `checkKeyMustBeforeSpread` (default: `false`)
 
-When `true` the rule will check if key prop after spread to avoid [createElement fallback](https://github.com/facebook/react/issues/20031#issuecomment-710346866).
+When `true` the rule will check if key prop after spread to avoid [createElement fallback](https://github.com/facebook/inferno/issues/20031#issuecomment-710346866).
 
 Examples of **incorrect** code for this rule:
 

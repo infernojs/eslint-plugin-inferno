@@ -99,7 +99,7 @@ new RuleTester({ parserOptions }).run('jsx-newline', rule, {
     },
     {
       code: `
-        {/* fake-eslint-disable-next-line react/forbid-component-props */}
+        {/* fake-eslint-disable-next-line inferno/forbid-component-props */}
         <Button popoverOpen='#settings-popover' style={{ width: 'fit-content' }}>
           <Icon f7='gear' />
         </Button>

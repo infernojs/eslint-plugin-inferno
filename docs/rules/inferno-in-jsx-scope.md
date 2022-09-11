@@ -1,11 +1,12 @@
-# Prevent missing Inferno when using JSX (inferno/inferno-in-jsx-scope)
+# Disallow missing Inferno when using JSX (inferno/inferno-in-jsx-scope)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`. This rule is disabled in the following configs: `jsx-runtime`.
 
 Note:
-This rule is not part of recommended set, because `babel-plugin-inferno` can handle inferno import declaration by itself.
+This rule is not part of recommended set, because `babel-plugin-inferno` can handle inferno import declaration automatically.
 Import inferno only if your code needs it.
 
-When using JSX, `<a />` expands to `Inferno.createElement("a")`. Therefore the
-`Inferno` variable must be in scope.
+When using JSX, `<a />` expands to `Inferno.createElement("a")`. Therefore, the `Inferno` variable must be in scope.
 
 If you are using the @jsx pragma this rule will check the designated variable and not the `Inferno` one.
 

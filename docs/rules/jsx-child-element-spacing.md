@@ -1,4 +1,6 @@
-# Enforce or disallow spaces inside of curly braces in JSX attributes and expressions. (inferno/jsx-child-element-spacing)
+# Enforce or disallow spaces inside of curly braces in JSX attributes and expressions (inferno/jsx-child-element-spacing)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 ## Rule Details
 

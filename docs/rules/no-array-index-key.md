@@ -1,4 +1,6 @@
-# Prevent usage of Array index in keys (inferno/no-array-index-key)
+# Disallow usage of Array index in keys (inferno/no-array-index-key)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 Warn if an element uses an Array index in its `key`.
 
@@ -106,4 +108,4 @@ things.reduceRight((collection, thing) => (
 
 ## When Not To Use It
 
-If there is nothing unique about the items, for example [you are breaking an array down in to chunks](https://github.com/jsx-eslint/eslint-plugin-react/issues/1123), then you may want to disable this rule with an override.
+If there is nothing unique about the items, for example [you are breaking an array down in to chunks](https://github.com/infernojs/eslint-plugin-inferno/issues/1123), then you may want to disable this rule with an override.

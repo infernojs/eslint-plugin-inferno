@@ -1,4 +1,6 @@
-# Prevents common typos (inferno/no-typos)
+# Disallow common typos (inferno/no-typos)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 Ensure no casing typos were made declaring static class properties and lifecycle methods.
 
@@ -9,22 +11,27 @@ This rule checks whether the declared static class properties and lifecycle meth
 It makes sure that the following class properties have
 no casing typos:
 
-* defaultProps
+- propTypes
+- contextTypes
+- childContextTypes
+- defaultProps
 
 and the following inferno lifecycle methods:
 
-* getDerivedStateFromProps
-* componentWillMount
-* componentDidMount
-* componentWillReceiveProps
-* shouldComponentUpdate
-* componentWillUpdate
-* getSnapshotBeforeUpdate
-* componentDidUpdate
-* componentDidCatch
-* componentWillUnmount
-* render
-
+- getDerivedStateFromProps
+- componentWillMount
+- UNSAFE_componentWillMount
+- componentDidMount
+- componentWillReceiveProps
+- UNSAFE_componentWillReceiveProps
+- shouldComponentUpdate
+- componentWillUpdate
+- UNSAFE_componentWillUpdate
+- getSnapshotBeforeUpdate
+- componentDidUpdate
+- componentDidCatch
+- componentWillUnmount
+- render
 
 Examples of **incorrect** code for this rule:
 

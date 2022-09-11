@@ -1,6 +1,11 @@
 # Enforce consistent usage of destructuring assignment of props, state, and context (inferno/destructuring-assignment)
 
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+
+🔧 This rule is automatically fixable using the `--fix` [flag](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix) on the command line.
+
 Rule can be set to either of `always` or `never`;
+
 ```js
 "inferno/destructuring-assignment": [<enabled>, 'always']
 ```

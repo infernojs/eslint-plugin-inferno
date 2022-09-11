@@ -1,4 +1,6 @@
-# Prevent using string references (inferno/no-string-refs)
+# Disallow using string references (inferno/no-string-refs)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`, `recommended`.
 
 Currently, two ways are supported by Inferno to refer to components. The first way, providing a string identifier, is now considered legacy in the official documentation. The documentation now prefers a second method -- referring to components by setting a property on the `this` object in the reference callback.
 
@@ -45,6 +47,7 @@ var Hello = createClass({
 ```js
 "inferno/no-string-refs": [<enabled>, {"noTemplateLiterals": <boolean>}]
 ```
+
 ### `noTemplateLiterals`
 
 When set to `true`, it will give warning when using template literals for refs.

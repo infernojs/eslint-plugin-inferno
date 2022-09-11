@@ -1,4 +1,6 @@
-# Enforce style prop value being an object (inferno/style-prop-object)
+# Enforce style prop value is an object (inferno/style-prop-object)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 Require that the value of the prop `style` be an object or a variable that is
 an object.
@@ -29,7 +31,6 @@ const styles = true;
 Inferno.createElement("div", { style: styles });
 ```
 
-
 Examples of **correct** code for this rule:
 
 ```jsx
@@ -49,6 +50,7 @@ Inferno.createElement("Hello", { style: { color: 'red' }});
 const styles = { height: '100px' };
 Inferno.createElement("div", { style: styles });
 ```
+
 ## Rule Options
 
 ```js
@@ -60,21 +62,26 @@ Inferno.createElement("div", { style: styles });
 ```
 
 ### `allow`
+
 A list of elements that are allowed to have a non-object value in their style attribute. The default value is `[]`.
 
 #### Example
+
 ```js
 {
   "allow": ["MyComponent"]
 }
 ```
+
 Examples of **incorrect** code for this rule:
+
 ```js
 <Hello style="a string">
 Inferno.createElement(Hello, { style: "some styling" });
 ```
 
 Examples of **correct** code for this rule:
+
 ```js
 <MyComponent style="a string">
 Inferno.createElement(MyComponent, { style: "some styling" });

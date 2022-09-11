@@ -1,5 +1,7 @@
 # Enforce defaultProps declarations alphabetical sorting (inferno/jsx-sort-default-props)
 
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+
 Some developers prefer to sort `defaultProps` declarations alphabetically to be able to find necessary declarations easier at a later time. Others feel that it adds complexity and becomes a burden to maintain.
 
 ## Rule Details

@@ -1,4 +1,6 @@
-# Prevent usage of setState in componentWillUpdate (inferno/no-will-update-set-state)
+# Disallow usage of setState in componentWillUpdate (inferno/no-will-update-set-state)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 Updating the state during the componentWillUpdate step can lead to indeterminate component state and is not allowed.
 

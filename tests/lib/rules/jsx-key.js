@@ -43,6 +43,11 @@ ruleTester.run('jsx-key', rule, {
     { code: '[1, 2, 3].map(function(x) { return <App key={x} /> });' },
     { code: '[1, 2, 3].map(x => <App key={x} />);' },
     { code: '[1, 2, 3].map(x => { return <App key={x} /> });' },
+    { code: 'Array.from([1, 2, 3], function(x) { return <App key={x} /> });' },
+    { code: 'Array.from([1, 2, 3], (x => <App key={x} />));' },
+    { code: 'Array.from([1, 2, 3], (x => {return <App key={x} />}));' },
+    { code: 'Array.from([1, 2, 3], someFn);' },
+    { code: 'Array.from([1, 2, 3]);' },
     { code: '[1, 2, 3].foo(x => <App />);' },
     { code: 'var App = () => <div />;' },
     { code: '[1, 2, 3].map(function(x) { return; });' },
@@ -148,6 +153,29 @@ ruleTester.run('jsx-key', rule, {
       `,
       features: ['optional chaining'],
     },
+    {
+      code: `
+        const baz = foo?.bar?.()?.[1] ?? 'qux';
+
+        qux()?.map()
+
+        const directiveRanges = comments?.map(tryParseTSDirective)
+      `,
+      features: ['optional chaining', 'nullish coalescing'],
+    },
+    {
+      code: `
+        import { observable } from "mobx";
+
+        export interface ClusterFrameInfo {
+          frameId: number;
+          processId: number;
+        }
+
+        export const clusterFrameMap = observable.map<string, ClusterFrameInfo>();
+      `,
+      features: ['types', 'no-babel-old'],
+    },
   ]),
   invalid: parsers.all([
     {
@@ -172,6 +200,18 @@ ruleTester.run('jsx-key', rule, {
     },
     {
       code: '[1, 2 ,3].map(x => { return <App /> });',
+      errors: [{ messageId: 'missingIterKey' }],
+    },
+    {
+      code: 'Array.from([1, 2 ,3], function(x) { return <App /> });',
+      errors: [{ messageId: 'missingIterKey' }],
+    },
+    {
+      code: 'Array.from([1, 2 ,3], (x => { return <App /> }));',
+      errors: [{ messageId: 'missingIterKey' }],
+    },
+    {
+      code: 'Array.from([1, 2 ,3], (x => <App />));',
       errors: [{ messageId: 'missingIterKey' }],
     },
     {

@@ -47,7 +47,7 @@ ruleTester.run('inferno-require-optimization', rule, {
         import Inferno, {Component} from "inferno";
         @infernoMixin.decorate(PureRenderMixin)
         class YourComponent extends Component {
-          componetnDidMount () {}
+          componentDidMount () {}
           render() {}
         }
       `,

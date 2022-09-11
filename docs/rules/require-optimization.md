@@ -1,6 +1,7 @@
 # Enforce Inferno components to have a shouldComponentUpdate method (inferno/require-optimization)
 
-This rule prevents you from creating Inferno components without declaring a `shouldComponentUpdate` method.
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+
 
 ## Rule Details
 
@@ -21,23 +22,23 @@ Examples of **correct** code for this rule:
 
 ```js
 class YourComponent extends Inferno.Component {
-	shouldComponentUpdate () {
-		return false;
-	}
+  shouldComponentUpdate () {
+    return false;
+  }
 }
 ```
 
 ```js
 createClass({
-	shouldComponentUpdate: function () {
-		return false;
-	}
+  shouldComponentUpdate: function () {
+    return false;
+  }
 });
 ```
 
 ```js
 createClass({
-	mixins: [PureRenderMixin]
+  mixins: [PureRenderMixin]
 });
 ```
 
@@ -56,9 +57,8 @@ createClass({
 ...
 ```
 
-* `enabled`: for enabling the rule. 0=off, 1=warn, 2=error. Defaults to 0.
-* `allowDecorators`: optional array of decorators names to allow validation.
-
+- `enabled`: for enabling the rule. 0=off, 1=warn, 2=error. Defaults to 0.
+- `allowDecorators`: optional array of decorators names to allow validation.
 
 ### `allowDecorators`
 

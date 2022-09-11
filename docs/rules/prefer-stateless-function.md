@@ -1,4 +1,6 @@
-# Enforce stateless Inferno Components to be written as a pure function (inferno/prefer-stateless-function)
+# Enforce stateless components to be written as a pure function (inferno/prefer-stateless-function)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 Stateless functional components are simpler than class based components and will benefit from future Inferno performance optimizations specific to these components.
 
@@ -6,11 +8,11 @@ Stateless functional components are simpler than class based components and will
 
 This rule will check your class based Inferno components for
 
-* methods/properties other than `displayName`, `propTypes`, `contextTypes`, `defaultProps`, `render` and useless constructor (same detection as `eslint` [no-useless-constructor rule](https://eslint.org/docs/rules/no-useless-constructor))
-* instance property other than `this.props` and `this.context`
-* extension of `Inferno.PureComponent` (if the `ignorePureComponents` flag is true)
-* presence of `ref` attribute in JSX
-* the use of decorators
+- methods/properties other than `displayName`, `propTypes`, `contextTypes`, `defaultProps`, `render` and useless constructor (same detection as `eslint` [no-useless-constructor rule](https://eslint.org/docs/rules/no-useless-constructor))
+- instance property other than `this.props` and `this.context`
+- extension of `Inferno.PureComponent` (if the `ignorePureComponents` flag is true)
+- presence of `ref` attribute in JSX
+- the use of decorators
 
 If none of these elements are found, the rule will warn you to write this component as a pure function.
 
@@ -49,7 +51,6 @@ class Foo extends Inferno.Component {
 }
 ```
 
-
 ## Rule Options
 
 ```js
@@ -58,8 +59,8 @@ class Foo extends Inferno.Component {
 ...
 ```
 
-* `enabled`: for enabling the rule. 0=off, 1=warn, 2=error. Defaults to 0.
-* `ignorePureComponents`: optional boolean set to `true` to ignore components extending from `Inferno.PureComponent` (default to `false`).
+- `enabled`: for enabling the rule. 0=off, 1=warn, 2=error. Defaults to 0.
+- `ignorePureComponents`: optional boolean set to `true` to ignore components extending from `Inferno.PureComponent` (default to `false`).
 
 ### `ignorePureComponents`
 

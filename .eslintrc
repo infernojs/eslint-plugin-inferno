@@ -48,6 +48,7 @@
       "requireReturnDescription": false
     }],
     "eslint-plugin/consistent-output": 0,
+        "eslint-plugin/require-meta-docs-description": [2, { "pattern": "^(Enforce|Require|Disallow)" }],
     "eslint-plugin/require-meta-schema": 0,
     "eslint-plugin/require-meta-type": 0,
     "eslint-plugin/no-unused-message-ids": 0,

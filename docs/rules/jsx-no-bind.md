@@ -1,8 +1,10 @@
-# No `.bind()` or Arrow Functions in JSX Props (inferno/jsx-no-bind)
+# Disallow `.bind()` or arrow functions in JSX props (inferno/jsx-no-bind)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 A `bind` call or [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) in a JSX prop will create a brand new function on every single render. This is bad for performance, as it may cause unnecessary re-renders if a brand new function is passed as a prop to a component that uses reference equality check on the prop to determine if it should update.
 
-Note that this behavior is different for `ref` props, which is a special case in React that **does not** cause re-renders when a brand new function is passed.  See [`ignore-refs`](#ignorerefs) below for more information.
+Note that this behavior is different for `ref` props, which is a special case in Inferno that **does not** cause re-renders when a brand new function is passed.  See [`ignore-refs`](#ignorerefs) below for more information.
 
 ## Rule Details
 
@@ -11,15 +13,18 @@ Examples of **incorrect** code for this rule:
 ```jsx
 <Foo onClick={this._handleClick.bind(this)}></Foo>
 ```
+
 ```jsx
 <Foo onClick={() => console.log('Hello!')}></Foo>
 ```
+
 ```jsx
 function onClick() { console.log('Hello!'); }
 <Foo onClick={onClick} />
 ```
 
 Examples of **correct** code for this rule:
+
 ```jsx
 <Foo onClick={this._handleClick}></Foo>
 ```
@@ -51,7 +56,7 @@ Examples of **correct** code for this rule, when `ignoreDOMComponents` is `true`
 Refs are a special-case that do not behave like other props. Sending a new function in on ever render will **not** cause re-renders like it could with any other prop.
 
 However, there is a [caveat with callback refs](https://reactjs.org/docs/refs-and-the-dom.html#caveats-with-callback-refs):
-> If the ref callback is defined as an inline function, it will get called twice during updates, first with null and then again with the DOM element. This is because a new instance of the function is created with each render, so React needs to clear the old ref and set up the new one. You can avoid this by defining the ref callback as a bound method on the class, but note that it shouldn’t matter in most cases.
+> If the ref callback is defined as an inline function, it will get called twice during updates, first with null and then again with the DOM element. This is because a new instance of the function is created with each render, so Inferno needs to clear the old ref and set up the new one. You can avoid this by defining the ref callback as a bound method on the class, but note that it shouldn’t matter in most cases.
 
 You can also avoid this behavior using [`createRef`](https://reactjs.org/docs/react-api.html#reactcreateref) or [`useRef`](https://reactjs.org/docs/hooks-reference.html#useref) (or [`useCallback`](https://reactjs.org/docs/hooks-reference.html#usecallback) if you have custom logic).
 

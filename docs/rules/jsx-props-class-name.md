@@ -1,10 +1,16 @@
-# Enforce 'class' or 'className' Attributes in JSX (inferno/jsx-props-class-name)
+# Enforce 'class' or 'className' attributes (inferno/jsx-props-class-name)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+
+🔧 This rule is automatically fixable using the `--fix` [flag](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix) on the command line.
+
+## Rule Details
 
 This rule will enforce one or the other to keep consistency in your code.
 
 **Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
 
-## Rule Details
+## Rule Options
 
 This rule has a string option:
 * className: (default) enforces the use of 'className' instead of 'class' in JSX attributes.

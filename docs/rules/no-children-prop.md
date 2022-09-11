@@ -1,4 +1,6 @@
-# Prevent passing of children as props (inferno/no-children-prop)
+# Disallow passing of children as props (inferno/no-children-prop)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`, `recommended`.
 
 Children should always be actual children, not passed in as a prop.
 
@@ -38,7 +40,7 @@ Inferno.createElement("div", 'Child 1', 'Child 2')
 ## Rule Options
 
 ```js
-"react/no-children-prop": [<enabled>, {
+"inferno/no-children-prop": [<enabled>, {
   "allowFunctions": <boolean> || false
 }]
 ```
@@ -51,12 +53,12 @@ The following patterns are considered warnings:
 
 ```jsx
 <MyComponent>{data => data.value}</MyComponent>
-React.createElement(MyComponent, {}, data => data.value)
+Inferno.createElement(MyComponent, {}, data => data.value)
 ```
 
 The following are **not** considered warnings:
 
 ```jsx
 <MyComponent children={data => data.value} />
-React.createElement(MyComponent, { children: data => data.value })
+Inferno.createElement(MyComponent, { children: data => data.value })
 ```

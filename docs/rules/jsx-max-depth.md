@@ -1,4 +1,6 @@
-# Validate JSX maximum depth (inferno/jsx-max-depth)
+# Enforce JSX maximum depth (inferno/jsx-max-depth)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 This option validates a specific depth for JSX.
 

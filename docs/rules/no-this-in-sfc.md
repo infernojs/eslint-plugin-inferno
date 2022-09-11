@@ -1,4 +1,6 @@
-# Prevent `this` from being used in stateless functional components (inferno/no-this-in-sfc)
+# Disallow `this` from being used in stateless functional components (inferno/no-this-in-sfc)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 When using a stateless functional component (SFC), props/context aren't accessed in the same way as a class component or the `createClass` format. Both props and context are passed as separate arguments to the component instead. Also, as the name suggests, a stateless component does not have state on `this.state`.
 

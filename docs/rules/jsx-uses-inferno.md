@@ -1,4 +1,6 @@
-# Prevent Inferno to be incorrectly marked as unused (inferno/jsx-uses-inferno)
+# Disallow Inferno to be incorrectly marked as unused (inferno/jsx-uses-inferno)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`. This rule is disabled in the following configs: `jsx-runtime`.
 
 Note:
 This rule is not part of recommended set, because `babel-plugin-inferno` can handle inferno import declaration by itself.

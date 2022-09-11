@@ -1,4 +1,8 @@
-# Enforce state initialization style (inferno/state-in-constructor)
+# Enforce class component state initialization style (inferno/state-in-constructor)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+
+## Rule Details
 
 This rule will enforce the state initialization style to be either in a constructor or with a class property.
 
@@ -67,7 +71,6 @@ class Foo extends Inferno.Component {
   }
 }
 ```
-
 
 ## When Not To Use It
 

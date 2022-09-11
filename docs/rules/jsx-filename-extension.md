@@ -1,4 +1,6 @@
-# Restrict file extensions that may contain JSX (inferno/jsx-filename-extension)
+# Disallow file extensions that may contain JSX (inferno/jsx-filename-extension)
+
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 ## Rule Details
 
