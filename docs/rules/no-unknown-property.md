@@ -1,8 +1,10 @@
-# Disallow usage of unknown DOM property (inferno/no-unknown-property)
+# Disallow usage of unknown DOM property (`inferno/no-unknown-property`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`, `recommended`.
+💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/jsx-eslint/eslint-plugin-react/#shareable-configs).
 
-🔧 This rule is automatically fixable using the `--fix` [flag](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix) on the command line.
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
+<!-- end auto-generated rule header -->
 
 In JSX most DOM properties and attributes should be camelCased to be consistent with standard JavaScript style. This can be a possible source of error if you are used to writing plain HTML.
 Only `data-*` and `aria-*` attributes are usings hyphens and lowercase letters in JSX.
@@ -58,7 +60,7 @@ var AtomPanel = <atom-panel class="foo"></atom-panel>;
 
 If you are using a library that passes something as a prop to JSX elements, it is recommended to add those props to the ignored properties.
 
-For example, if you use [emotion](https://emotion.sh/docs/introduction) and its [`css` prop](https://emotion.sh/docs/css-prop)),
+For example, if you use [emotion](https://emotion.sh/docs/introduction) and its [`css` prop](https://emotion.sh/docs/css-prop),
 add the following to your `.eslintrc` config file:
 
 ```js

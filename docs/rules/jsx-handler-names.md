@@ -1,6 +1,6 @@
-# Enforce event handler naming conventions in JSX (inferno/jsx-handler-names)
+# Enforce event handler naming conventions in JSX (`inferno/jsx-handler-names`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 Ensures that any component or prop methods used to handle events are correctly prefixed.
 

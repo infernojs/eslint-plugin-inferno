@@ -1,6 +1,6 @@
-# Enforce stateless components to be written as a pure function (inferno/prefer-stateless-function)
+# Enforce stateless components to be written as a pure function (`inferno/prefer-stateless-function`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 Stateless functional components are simpler than class based components and will benefit from future Inferno performance optimizations specific to these components.
 

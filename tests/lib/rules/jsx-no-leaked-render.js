@@ -9,6 +9,8 @@
 // Requirements
 //------------------------------------------------------------------------------
 
+const semver = require('semver');
+const eslintPkg = require('eslint/package.json');
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../../lib/rules/jsx-no-leaked-render');
 
@@ -193,51 +195,47 @@ ruleTester.run('jsx-no-leaked-render', rule, {
       `,
       options: [{ validStrategies: ['coerce'] }],
     },
-  ]),
+  ]) || [],
 
-  invalid: parsers.all([
+  invalid: parsers.all([].concat(
     // Common invalid cases with default options
     {
       code: `
-      const Example = () => {
-        return (
-          <>
-            {0 && <Something/>}
-            {'' && <Something/>}
-            {NaN && <Something/>}
-          </>
-        )
-      }
+        const Example = () => {
+          return (
+            <>
+              {0 && <Something/>}
+              {'' && <Something/>}
+              {NaN && <Something/>}
+            </>
+          )
+        }
       `,
       features: ['fragment'],
       errors: [
         {
           message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
           line: 5,
-          column: 14,
-        },
-        {
-          message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
-          line: 6,
-          column: 14,
+          column: 16,
         },
         {
           message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
           line: 7,
-          column: 14,
+          column: 16,
         },
       ],
       output: `
-      const Example = () => {
-        return (
-          <>
-            {0 ? <Something/> : null}
-            {'' ? <Something/> : null}
-            {NaN ? <Something/> : null}
-          </>
-        )
-      }
+        const Example = () => {
+          return (
+            <>
+              {0 ? <Something/> : null}
+              {'' && <Something/>}
+              {NaN ? <Something/> : null}
+            </>
+          )
+        }
       `,
+      settings: { react: { version: '18.0.0' } },
     },
 
     // Invalid tests with both strategies enabled (default)
@@ -770,7 +768,7 @@ ruleTester.run('jsx-no-leaked-render', rule, {
         const MyComponent = () => {
           const items = []
           const breakpoint = { phones: true }
-        
+
           return <div>{items.length > 0 && breakpoint.phones && <span />}</div>
         }
       `,
@@ -779,7 +777,7 @@ ruleTester.run('jsx-no-leaked-render', rule, {
         const MyComponent = () => {
           const items = []
           const breakpoint = { phones: true }
-        
+
           return <div>{items.length > 0 && !!breakpoint.phones && <span />}</div>
         }
       `,
@@ -789,5 +787,59 @@ ruleTester.run('jsx-no-leaked-render', rule, {
         column: 24,
       }],
     },
-  ]),
+    {
+      code: `
+        const MyComponent = () => {
+          return <div>{maybeObject && (isFoo ? <Aaa /> : <Bbb />)}</div>
+        }
+      `,
+      output: `
+        const MyComponent = () => {
+          return <div>{!!maybeObject && (isFoo ? <Aaa /> : <Bbb />)}</div>
+        }
+      `,
+      options: [{ validStrategies: ['coerce'] }],
+      errors: [{
+        message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
+        line: 3,
+        column: 24,
+      }],
+    },
+    {
+      code: `
+        const MyComponent = () => {
+          return <Something checked={isIndeterminate ? false : isChecked} />
+        }
+      `,
+      output: semver.satisfies(eslintPkg.version, '> 4') ? `
+        const MyComponent = () => {
+          return <Something checked={!isIndeterminate && isChecked} />
+        }
+      ` : null,
+      options: [{ validStrategies: ['coerce'] }],
+      errors: [{
+        message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
+        line: 3,
+        column: 38,
+      }],
+    },
+    {
+      code: `
+        const MyComponent = () => {
+          return <Something checked={cond && isIndeterminate ? false : isChecked} />
+        }
+      `,
+      output: semver.satisfies(eslintPkg.version, '> 4') ? `
+        const MyComponent = () => {
+          return <Something checked={!!cond && !!isIndeterminate ? false : isChecked} />
+        }
+      ` : null,
+      options: [{ validStrategies: ['coerce'] }],
+      errors: [{
+        message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
+        line: 3,
+        column: 38,
+      }],
+    }
+  )),
 });

@@ -1,6 +1,6 @@
-# Enforce component methods order (inferno/sort-comp)
+# Enforce component methods order (`inferno/sort-comp`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 🔧 This rule is automatically fixable using the [`sort-comp` transform](https://github.com/reactjs/react-codemod/blob/master/transforms/sort-comp.js) in [react-codemod](https://www.npmjs.com/package/react-codemod).
 

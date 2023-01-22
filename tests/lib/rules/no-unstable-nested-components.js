@@ -78,6 +78,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
       `,
     },
     {
+      // false-negative.
       code: `
         function ParentComponent() {
           const MemoizedNestedComponent = Inferno.useCallback(() => <div />, []);
@@ -91,6 +92,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
       `,
     },
     {
+      // false-negative.
       code: `
         function ParentComponent() {
           const MemoizedNestedComponent = Inferno.useCallback(
@@ -107,6 +109,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
       `,
     },
     {
+      // false-negative.
       code: `
         function ParentComponent() {
           const MemoizedNestedFunctionComponent = Inferno.useCallback(
@@ -125,6 +128,7 @@ ruleTester.run('no-unstable-nested-components', rule, {
       `,
     },
     {
+      // false-negative.
       code: `
         function ParentComponent() {
           const MemoizedNestedFunctionComponent = Inferno.useCallback(

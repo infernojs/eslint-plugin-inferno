@@ -27,7 +27,7 @@ const parserOptions = {
 
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-array-index-key', rule, {
-  valid: parsers.all(
+  valid: parsers.all([
     { code: '<Foo key="foo" />;' },
     { code: '<Foo key={i} />;' },
     { code: '<Foo key />;' },
@@ -136,8 +136,8 @@ ruleTester.run('no-array-index-key', rule, {
     {
       code: 'foo?.map(child => <Foo key={child.i} />)',
       features: ['optional chaining'],
-    }
-  ),
+    },
+  ]),
 
   invalid: parsers.all([].concat(
     {

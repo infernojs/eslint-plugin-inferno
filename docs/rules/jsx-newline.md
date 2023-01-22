@@ -1,8 +1,8 @@
-# Require or prevent a new line after jsx elements and expressions. (inferno/jsx-newline)
+# Require or prevent a new line after jsx elements and expressions (`inferno/jsx-newline`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
-🔧 This rule is automatically fixable using the `--fix` [flag](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix) on the command line.
+<!-- end auto-generated rule header -->
 
 ## Rule Details
 

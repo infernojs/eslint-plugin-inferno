@@ -1064,7 +1064,7 @@ eslintTester.run('no-unused-state', rule, {
     },
     {
       code: `
-        import React, { PureComponent } from 'inferno';
+        import Inferno, { PureComponent } from 'inferno';
 
         class TestNoUnusedState extends Inferno.Component {
           constructor(props) {

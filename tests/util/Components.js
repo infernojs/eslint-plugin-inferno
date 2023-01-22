@@ -25,28 +25,30 @@ describe('Components', () => {
       const done = orDone || instructionsOrDone;
       const instructions = orDone ? instructionsOrDone : instructionsOrDone;
 
-      const rule = Components.detect((_context, components, util) => {
-        const instructionResults = [];
+      const rule = {
+        create: Components.detect((_context, components, util) => {
+          const instructionResults = [];
 
-        const augmentedInstructions = fromEntries(
-          entries(instructions || {}).map((nodeTypeAndHandler) => {
-            const nodeType = nodeTypeAndHandler[0];
-            const handler = nodeTypeAndHandler[1];
-            return [nodeType, (node) => {
-              instructionResults.push({ type: nodeType, result: handler(node, context, components, util) });
-            }];
-          })
-        );
+          const augmentedInstructions = fromEntries(
+            entries(instructions || {}).map((nodeTypeAndHandler) => {
+              const nodeType = nodeTypeAndHandler[0];
+              const handler = nodeTypeAndHandler[1];
+              return [nodeType, (node) => {
+                instructionResults.push({ type: nodeType, result: handler(node, context, components, util) });
+              }];
+            })
+          );
 
-        return Object.assign({}, augmentedInstructions, {
-          'Program:exit'(node) {
-            if (augmentedInstructions['Program:exit']) {
-              augmentedInstructions['Program:exit'](node, context, components, util);
-            }
-            done(components, instructionResults);
-          },
-        });
-      });
+          return Object.assign({}, augmentedInstructions, {
+            'Program:exit'(node) {
+              if (augmentedInstructions['Program:exit']) {
+                augmentedInstructions['Program:exit'](node, context, components, util);
+              }
+              done(components, instructionResults);
+            },
+          });
+        }),
+      };
 
       const tests = {
         valid: parsers.all([Object.assign({}, test, {

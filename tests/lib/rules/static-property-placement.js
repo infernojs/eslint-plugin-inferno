@@ -39,7 +39,7 @@ const ruleTester = new RuleTester(ruleTesterConfig);
 ruleTester.run('static-property-placement', rule, {
   valid: parsers.all([
     // ------------------------------------------------------------------------------
-    // Ignore createClass/createReactClass and Static Functional Components
+    // Ignore createClass/createInfernoClass and Static Functional Components
     // ------------------------------------------------------------------------------
     {
       // Do not error on createClass pragma
@@ -2177,6 +2177,21 @@ ruleTester.run('static-property-placement', rule, {
         },
         {
           messageId: 'declareOutsideClass',
+          data: { name: 'displayName' },
+        },
+      ],
+    },
+    {
+      code: `
+        class MyComponent extends Inferno.Component {
+          displayName = 'Foo';
+        }
+      `,
+      features: ['class fields'],
+      options: [STATIC_PUBLIC_FIELD],
+      errors: [
+        {
+          messageId: 'notStaticClassProp',
           data: { name: 'displayName' },
         },
       ],

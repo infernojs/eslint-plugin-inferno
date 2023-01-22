@@ -1,6 +1,6 @@
-# Disallow usage of shouldComponentUpdate when extending Inferno.PureComponent (inferno/no-redundant-should-component-update)
+# Disallow usage of shouldComponentUpdate when extending Inferno.PureComponent (`inferno/no-redundant-should-component-update`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 Warns if you have `shouldComponentUpdate` defined when defining a component that extends Inferno.PureComponent.
 While having `shouldComponentUpdate` will still work, it becomes pointless to extend PureComponent.

@@ -1,6 +1,6 @@
-# Disallow usage of dangerous JSX properties (inferno/no-danger)
+# Disallow usage of dangerous JSX properties (`inferno/no-danger`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 Dangerous properties in Inferno are those whose behavior is known to be a common source of application vulnerabilities. The properties names clearly indicate they are dangerous and should be avoided unless great care is taken.
 

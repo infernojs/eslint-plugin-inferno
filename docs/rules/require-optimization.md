@@ -1,6 +1,6 @@
-# Enforce Inferno components to have a shouldComponentUpdate method (inferno/require-optimization)
+# Enforce Inferno components to have a shouldComponentUpdate method (`inferno/require-optimization`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 
 ## Rule Details

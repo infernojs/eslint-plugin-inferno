@@ -1,6 +1,6 @@
-# Enforce that namespaces are not used in Inferno elements (inferno/no-namespace)
+# Enforce that namespaces are not used in Inferno elements (`inferno/no-namespace`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 Enforces the absence of a namespace in Inferno elements, such as with `svg:circle`, as they are not supported in Inferno.
 

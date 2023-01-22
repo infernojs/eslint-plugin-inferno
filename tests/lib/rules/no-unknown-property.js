@@ -29,7 +29,7 @@ const parserOptions = {
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-unknown-property', rule, {
   valid: parsers.all([
-    // React components and their props/attributes should be fine
+    // Inferno components and their props/attributes should be fine
     { code: '<App class="bar" />;' },
     { code: '<App for="bar" />;' },
     { code: '<App someProp="bar" />;' },
@@ -49,7 +49,9 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<img src="cat_keyboard.jpeg" alt="A cat sleeping on a keyboard" align="top" />' },
     { code: '<input type="password" required />' },
     { code: '<input ref={this.input} type="radio" />' },
-    { code: '<div children="anything" />' },
+    { code: '<input type="file" webkitdirectory="" />' },
+    { code: '<input type="file" webkitDirectory="" />' },
+    { code: '<div inert children="anything" />' },
     { code: '<iframe scrolling="?" onLoad={a} onError={b} align="top" />' },
     { code: '<input key="bar" type="radio" />' },
     { code: '<button disabled>You cannot click me</button>;' },
@@ -60,18 +62,19 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<input type="checkbox" checked={checked} disabled={disabled} id={id} onChange={onChange} />' },
     { code: '<video playsInline />' },
     { code: '<img onError={foo} onLoad={bar} />' },
-    { code: '<picture onError={foo} onLoad={bar} />' },
+    { code: '<picture inert={false} onError={foo} onLoad={bar} />' },
     { code: '<iframe onError={foo} onLoad={bar} />' },
     { code: '<script onLoad={bar} onError={foo} />' },
     { code: '<source onError={foo} />' },
     { code: '<link onLoad={bar} onError={foo} />' },
     { code: '<link rel="preload" as="image" href="someHref" imageSrcSet="someImageSrcSet" imageSizes="someImageSizes" />' },
     { code: '<object onLoad={bar} />' },
-    { code: '<div allowFullScreen webkitAllowFullScreen mozAllowFullScreen />' },
+    { code: '<video allowFullScreen webkitAllowFullScreen mozAllowFullScreen />' },
+    { code: '<iframe allowFullScreen webkitAllowFullScreen mozAllowFullScreen />' },
     { code: '<table border="1" />' },
     { code: '<th abbr="abbr" />' },
     { code: '<td abbr="abbr" />' },
-    // React related attributes
+    // Inferno related attributes
     { code: '<input type="checkbox" defaultChecked={this.state.checkbox} />' },
     { code: '<div onTouchStart={this.startAnimation} onTouchEnd={this.stopAnimation} onTouchCancel={this.cancel} onTouchMove={this.move} onMouseMoveCapture={this.capture} onTouchCancelCapture={this.log} />' },
     // Case ignored attributes, for `charset` discussion see https://github.com/jsx-eslint/eslint-plugin-react/pull/1863
@@ -121,6 +124,7 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<view id="one" viewBox="0 0 100 100" />' },
     { code: '<hr align="top" />' },
     { code: '<applet align="top" />' },
+    { code: '<dialog onClose={handler} open id="dialog" returnValue="something" onCancel={handler2} />' },
     {
       code: `
         <table align="top">
@@ -142,13 +146,12 @@ ruleTester.run('no-unknown-property', rule, {
 
     // fbt
     { code: '<fbt desc="foo" doNotExtract />;' },
+    // fbs
+    { code: '<fbs desc="foo" doNotExtract />;' },
   ]),
   invalid: parsers.all([
     {
       code: '<div allowTransparency="true" />',
-      settings: {
-        react: { version: '16.1.0' },
-      },
       errors: [
         {
           messageId: 'unknownProp',
@@ -498,6 +501,14 @@ ruleTester.run('no-unknown-property', rule, {
             allowedTags: 'video',
           },
         },
+        {
+          messageId: 'invalidPropOnTag',
+          data: {
+            name: 'allowFullScreen',
+            tagName: 'div',
+            allowedTags: 'iframe, video',
+          },
+        },
       ],
     },
     {
@@ -559,6 +570,32 @@ ruleTester.run('no-unknown-property', rule, {
             name: 'abbr',
             tagName: 'div',
             allowedTags: 'th, td',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div webkitDirectory="" />',
+      errors: [
+        {
+          messageId: 'invalidPropOnTag',
+          data: {
+            name: 'webkitDirectory',
+            tagName: 'div',
+            allowedTags: 'input',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div webkitdirectory="" />',
+      errors: [
+        {
+          messageId: 'invalidPropOnTag',
+          data: {
+            name: 'webkitdirectory',
+            tagName: 'div',
+            allowedTags: 'input',
           },
         },
       ],

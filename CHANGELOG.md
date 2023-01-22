@@ -1,5 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
+## 2023-01-22
+Everything re-branched from upstream.
+All bug fixes included from upstream.
+
 ## 2022-09-11
 Everything re-branched from upstream.
 All bug fixes included from upstream.
@@ -44,3 +48,5 @@ New rules:
 - static-property-placement
 
 - inferno/jsx-props-class-name
+[`no-object-type-as-default-prop`]: docs/rules/no-object-type-as-default-prop.md
+[`sort-default-props`]: docs/rules/sort-default-props.md

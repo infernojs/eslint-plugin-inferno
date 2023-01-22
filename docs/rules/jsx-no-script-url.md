@@ -1,9 +1,9 @@
-# Disallow usage of `javascript:` URLs (inferno/jsx-no-script-url)
+# Disallow usage of `javascript:` URLs (`inferno/jsx-no-script-url`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 **In Inferno 8** any URLs starting with `javascript:` [scheme](https://wiki.whatwg.org/wiki/URL_schemes#javascript:_URLs) log a warning.
-See React blog for more [details](https://reactjs.org/blog/2019/08/08/react-v16.9.0.html#deprecating-javascript-urls)
+See Inferno blog for more [details](https://reactjs.org/blog/2019/08/08/react-v16.9.0.html#deprecating-javascript-urls)
 
 ## Rule Details
 

@@ -419,7 +419,7 @@ ruleTester.run('no-typos', rule, {
     },
     {
       code: `
-        import CustomInferno from "react"
+        import CustomInferno from "inferno"
         class Component extends Inferno.Component {};
         Component.propTypes = {
           b: CustomInferno.PropTypes.string,

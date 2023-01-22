@@ -1,6 +1,6 @@
-# Disallow usage of string literals in JSX (inferno/jsx-no-literals)
+# Disallow usage of string literals in JSX (`inferno/jsx-no-literals`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 There are a few scenarios where you want to avoid string literals in JSX. You may want to enforce consistency, reduce syntax highlighting issues, or ensure that strings are part of a translation system.
 

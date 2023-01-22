@@ -1,6 +1,6 @@
-# Enforce ES5 or ES6 class for Inferno Components (inferno/prefer-es6-class)
+# Enforce ES5 or ES6 class for Inferno Components (`inferno/prefer-es6-class`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 Inferno offers you two ways to create traditional components: using the ES5 `inferno-create-class` module or the new ES6 class system.
 

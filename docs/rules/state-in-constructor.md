@@ -1,6 +1,6 @@
-# Enforce class component state initialization style (inferno/state-in-constructor)
+# Enforce class component state initialization style (`inferno/state-in-constructor`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 ## Rule Details
 

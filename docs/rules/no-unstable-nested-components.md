@@ -1,10 +1,10 @@
-# Disallow creating unstable components inside components (inferno/no-unstable-nested-components)
+# Disallow creating unstable components inside components (`inferno/no-unstable-nested-components`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
-Creating components inside components without memoization leads to unstable components. The nested component and all its children are recreated during each re-render. Given stateful children of the nested component will lose their state on each re-render.
+Creating components inside components (nested components) will cause Inferno to throw away the state of those nested components on each re-render of their parent.
 
-Inferno reconciliation performs element type comparison with [reference equality](https://github.com/facebook/react/blob/v16.13.1/packages/react-reconciler/src/ReactChildFiber.js#L407). The reference to the same element changes on each re-render when defining components inside the render block. This leads to complete recreation of the current node and all its children. As a result the virtual DOM has to do extra unnecessary work and [possible bugs are introduced](https://codepen.io/ariperkkio/pen/vYLodLB).
+Inferno reconciliation performs element type comparison with [reference equality](https://reactjs.org/docs/reconciliation.html#elements-of-different-types). The reference to the same element changes on each re-render when defining components inside the render block. This leads to complete recreation of the current node and all its children. As a result the virtual DOM has to do extra unnecessary work and [possible bugs are introduced](https://codepen.io/ariperkkio/pen/vYLodLB).
 
 ## Rule Details
 
@@ -76,12 +76,20 @@ function Component() {
 
 ```jsx
 function Component() {
-  return (
-    <SomeComponent footer={<div />} />
-  )
+  return <SomeComponent footer={<div />} />;
 }
 ```
 
+⚠️ WARNING ⚠️:
+
+Creating nested but memoized components is currently not detected by this rule but should also be avoided.
+If the `useCallback` or `useMemo` hook has no dependency, you can safely move the component definition out of the render function.
+If the hook does have dependencies, you should refactor the code so that you're able to move the component definition out of the render function.
+If you want Inferno to throw away the state of the nested component, use a [`key`](https://reactjs.org/docs/lists-and-keys.html#keys) instead.
+
+```jsx
+function Component() {
+  // No ESLint warning but `MemoizedNestedComponent` should be moved outside of `Component`.
 By default component creation is allowed inside component props only if prop name starts with `render`. See `allowAsProps` option for disabling this limitation completely.
 
 ```jsx
@@ -104,7 +112,10 @@ function Component() {
 ...
 "inferno/no-unstable-nested-components": [
   "off" | "warn" | "error",
-  { "allowAsProps": true | false }
+  {
+    "allowAsProps": true | false,
+    "customValidators": [] /* optional array of validators used for propTypes validation */
+  }
 ]
 ...
 ```

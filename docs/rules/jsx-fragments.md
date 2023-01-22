@@ -1,8 +1,8 @@
-# Enforce shorthand or standard form for Inferno fragments (inferno/jsx-fragments)
+# Enforce shorthand or standard form for Inferno fragments (`inferno/jsx-fragments`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
-🔧 This rule is automatically fixable using the `--fix` [flag](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix) on the command line.
+<!-- end auto-generated rule header -->
 
 In JSX, a Inferno [fragment] is created either with `<Inferno.Fragment>...</Inferno.Fragment>`, or, using the shorthand syntax, `<>...</>`.
 

@@ -1,6 +1,6 @@
-# Enforce sandbox attribute on iframe elements (inferno/iframe-missing-sandbox)
+# Enforce sandbox attribute on iframe elements (`inferno/iframe-missing-sandbox`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 The sandbox attribute enables an extra set of restrictions for the content in the iframe. Using sandbox attribute is considered a good security practice.
 

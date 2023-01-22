@@ -1,6 +1,6 @@
-# Disallow common typos (inferno/no-typos)
+# Disallow common typos (`inferno/no-typos`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 Ensure no casing typos were made declaring static class properties and lifecycle methods.
 

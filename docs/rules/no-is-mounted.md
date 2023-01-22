@@ -1,6 +1,8 @@
-# Disallow usage of isMounted (inferno/no-is-mounted)
+# Disallow usage of isMounted (`inferno/no-is-mounted`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`, `recommended`.
+💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/jsx-eslint/eslint-plugin-react/#shareable-configs).
+
+<!-- end auto-generated rule header -->
 
 [`isMounted` is an anti-pattern][anti-pattern], is not available when using ES6 classes, and it is on its way to being officially deprecated.
 

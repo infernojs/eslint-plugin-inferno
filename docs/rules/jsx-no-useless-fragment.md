@@ -1,8 +1,8 @@
-# Disallow unnecessary fragments (inferno/jsx-no-useless-fragment)
+# Disallow unnecessary fragments (`inferno/jsx-no-useless-fragment`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
-🔧 This rule is automatically fixable using the `--fix` [flag](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix) on the command line.
+<!-- end auto-generated rule header -->
 
 A fragment is redundant if it contains only one child, or if it is the child of a html element, and is not a [keyed fragment](https://infernojs.org/docs/fragments.html#keyed-fragments).
 
@@ -62,6 +62,8 @@ const cat = <>meow</>
 
 {showFullName ? fullName : firstName}
 ```
+
+## Rule Options
 
 ### `allowExpressions`
 

@@ -1,4 +1,8 @@
-# Disallow Inferno to be incorrectly marked as unused (inferno/jsx-uses-inferno)
+# Disallow Inferno to be incorrectly marked as unused (`inferno/jsx-uses-inferno`)
+
+💼🚫 This rule is enabled in the ☑️ `recommended` [config](https://github.com/jsx-eslint/eslint-plugin-react/#shareable-configs). This rule is _disabled_ in the 🏃 `jsx-runtime` [config](https://github.com/jsx-eslint/eslint-plugin-react/#shareable-configs).
+
+<!-- end auto-generated rule header -->
 
 💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`. This rule is disabled in the following configs: `jsx-runtime`.
 

@@ -710,13 +710,13 @@ ruleTester.run('function-component-definition', rule, {
     },
     {
       code: `
-        import * as React from 'react';
+        import * as Inferno from 'inferno';
         function Hello(props: Test) {
           return Inferno.createElement('div');
         }
       `,
       output: `
-        import * as React from 'react';
+        import * as Inferno from 'inferno';
         const Hello = function(props: Test) {
           return Inferno.createElement('div');
         }

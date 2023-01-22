@@ -1,6 +1,6 @@
-# Disallow definitions of unused state (inferno/no-unused-state)
+# Disallow definitions of unused state (`inferno/no-unused-state`)
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
+<!-- end auto-generated rule header -->
 
 Warns you if you have defined a property on the state, but it is not being used anywhere.
 

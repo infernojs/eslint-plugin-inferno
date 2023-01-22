@@ -1,6 +1,5 @@
 'use strict';
 
-const flatMap = require('array.prototype.flatmap');
 const path = require('path');
 const semver = require('semver');
 const entries = require('object.entries');
@@ -21,7 +20,7 @@ function minEcmaVersion(features, parserOptions) {
     Math,
     [].concat(
       (parserOptions && parserOptions.ecmaVersion) || [],
-      flatMap(entries(minEcmaVersionForFeatures), (entry) => {
+      entries(minEcmaVersionForFeatures).flatMap((entry) => {
         const f = entry[0];
         const y = entry[1];
         return features.has(f) ? y : [];
@@ -67,7 +66,7 @@ const parsers = {
     });
   },
   all: function all(tests) {
-    const t = flatMap(tests, (test) => {
+    const t = tests.flatMap((test) => {
       if (typeof test === 'string') {
         test = { code: test };
       }
@@ -171,6 +170,7 @@ const parsers = {
         tsNew ? addComment(Object.assign({}, test, { parser: parsers['@TYPESCRIPT_ESLINT'] }), '@typescript-eslint/parser') : []
       );
     });
+
     return t;
   },
 };
