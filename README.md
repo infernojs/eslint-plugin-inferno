@@ -261,7 +261,7 @@ module.exports = [
       ...reactRecommended.languageOptions,
       globals: {
         ...globals.serviceworker,
-        ...globals.browser;
+        ...globals.browser,
       },
     },
   },
