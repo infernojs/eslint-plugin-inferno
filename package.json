@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.32.1",
+  "version": "7.32.2",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "array.prototype.tosorted": "^1.1.1",
     "estraverse": "^5.3.0",
     "jsx-ast-utils": "^3.3.3",
-    "minimatch": "^5.1.6",
+    "minimatch": "^8.0.3",
     "object.entries": "^1.1.6",
     "object.fromentries": "^2.0.6",
     "object.hasown": "^1.1.2",
@@ -37,31 +37,31 @@
     "semver": "^7.3.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
-    "@babel/eslint-parser": "^7.19.1",
-    "@babel/plugin-syntax-decorators": "^7.19.0",
+    "@babel/core": "^7.21.4",
+    "@babel/eslint-parser": "^7.21.3",
+    "@babel/plugin-syntax-decorators": "^7.21.0",
     "@babel/plugin-syntax-do-expressions": "^7.18.6",
     "@babel/plugin-syntax-function-bind": "^7.18.6",
     "@babel/preset-react": "^7.18.6",
-    "@types/eslint": "=8.4.10",
+    "@types/eslint": "=8.37.0",
     "@types/estree": "^1.0.0",
-    "@types/node": "^18.11.18",
-    "@typescript-eslint/parser": "^5.48.2",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/parser": "^5.57.1",
     "aud": "^2.0.2",
     "babel-eslint": "^8.2.6",
     "babel-plugin-inferno": "^6.6.0",
     "eslint": "^8",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-doc-generator": "^1.4.2",
+    "eslint-doc-generator": "^1.4.3",
     "eslint-plugin-eslint-plugin": "^5.0.8",
     "eslint-plugin-import": "^2.27.5",
-    "espree": "^9.4.1",
+    "espree": "^9.5.1",
     "istanbul": "^0.4.5",
     "markdownlint-cli": "^0.33.0",
     "mocha": "^10.2.0",
     "npmignore": "^0.3.0",
-    "sinon": "^15.0.1",
-    "typescript": "^4.9.4"
+    "sinon": "^15.0.3",
+    "typescript": "^5.0.4"
   },
   "peerDependencies": {
     "eslint": "^6 || ^7 || ^8"
