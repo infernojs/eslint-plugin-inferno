@@ -1,4 +1,8 @@
-# Enforce 'class' or 'className' attributes (inferno/jsx-props-class-name)
+# Enforce 'class' or 'className' attributes (`inferno/jsx-props-class-name`)
+
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
+<!-- end auto-generated rule header -->
 
 💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
