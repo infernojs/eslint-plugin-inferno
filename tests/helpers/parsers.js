@@ -2,7 +2,6 @@
 
 const path = require('path');
 const semver = require('semver');
-const entries = require('object.entries');
 const version = require('eslint/package.json').version;
 const tsParserVersion = require('@typescript-eslint/parser/package.json').version;
 
@@ -18,7 +17,7 @@ function minEcmaVersion(features, parserOptions) {
   };
   const result = Math.max(
     ...((parserOptions && parserOptions.ecmaVersion) || [],
-    entries(minEcmaVersionForFeatures).flatMap((entry) => {
+    Object.entries(minEcmaVersionForFeatures).flatMap((entry) => {
       const f = entry[0];
       const y = entry[1];
       return features.has(f) ? y : [];

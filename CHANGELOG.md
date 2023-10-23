@@ -1,5 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
+## 2023-10-23
+Everything re-branched from upstream.
+All bug fixes included from upstream.
+
+Following polyfills have been removed:
+```
+"array.prototype.flatmap"
+"object.entries"
+"object.fromentries"
+"object.hasown"
+"object.values"
+```
+
 ## 2023-04-09
 Everything re-branched from upstream.
 All bug fixes included from upstream.
