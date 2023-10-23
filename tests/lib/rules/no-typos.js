@@ -576,13 +576,14 @@ ruleTester.run('no-typos', rule, {
         }
       `,
       features: [].concat('class fields', semver.satisfies(babelEslintVersion, '< 9') ? 'no-babel-old' : []),
-      parserOptions: Object.assign({}, parserOptions, {
+      parserOptions: {
+        ...parserOptions,
         babelOptions: {
-          // classPrivateMethods: true,
+        // classPrivateMethods: true,
         },
         shippedProposals: true,
-      }),
-    }
+      },
+    },
   )),
 
   invalid: parsers.all([].concat(
@@ -855,6 +856,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'getDerivedStateFromProps',
           },
           type: 'MethodDefinition',
+          line: 3,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -863,6 +865,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentWillMount',
           },
           type: 'MethodDefinition',
+          line: 4,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -871,6 +874,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'UNSAFE_componentWillMount',
           },
           type: 'MethodDefinition',
+          line: 5,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -879,6 +883,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentDidMount',
           },
           type: 'MethodDefinition',
+          line: 6,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -887,6 +892,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentWillReceiveProps',
           },
           type: 'MethodDefinition',
+          line: 7,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -895,6 +901,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'UNSAFE_componentWillReceiveProps',
           },
           type: 'MethodDefinition',
+          line: 8,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -903,6 +910,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'shouldComponentUpdate',
           },
           type: 'MethodDefinition',
+          line: 9,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -911,6 +919,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentWillUpdate',
           },
           type: 'MethodDefinition',
+          line: 10,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -919,6 +928,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'UNSAFE_componentWillUpdate',
           },
           type: 'MethodDefinition',
+          line: 11,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -927,6 +937,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'getSnapshotBeforeUpdate',
           },
           type: 'MethodDefinition',
+          line: 12,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -935,6 +946,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentDidUpdate',
           },
           type: 'MethodDefinition',
+          line: 13,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -943,6 +955,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentDidCatch',
           },
           type: 'MethodDefinition',
+          line: 14,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -951,6 +964,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentWillUnmount',
           },
           type: 'MethodDefinition',
+          line: 15,
         },
       ],
     },
@@ -984,6 +998,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'getDerivedStateFromProps',
           },
           type: 'MethodDefinition',
+          line: 3,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -992,6 +1007,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentWillMount',
           },
           type: 'MethodDefinition',
+          line: 4,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1000,6 +1016,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'UNSAFE_componentWillMount',
           },
           type: 'MethodDefinition',
+          line: 5,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1008,6 +1025,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentDidMount',
           },
           type: 'MethodDefinition',
+          line: 6,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1016,6 +1034,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentWillReceiveProps',
           },
           type: 'MethodDefinition',
+          line: 7,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1024,6 +1043,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'UNSAFE_componentWillReceiveProps',
           },
           type: 'MethodDefinition',
+          line: 8,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1032,6 +1052,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'shouldComponentUpdate',
           },
           type: 'MethodDefinition',
+          line: 9,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1040,6 +1061,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentWillUpdate',
           },
           type: 'MethodDefinition',
+          line: 10,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1048,6 +1070,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'UNSAFE_componentWillUpdate',
           },
           type: 'MethodDefinition',
+          line: 11,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1056,6 +1079,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'getSnapshotBeforeUpdate',
           },
           type: 'MethodDefinition',
+          line: 12,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1064,6 +1088,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentDidUpdate',
           },
           type: 'MethodDefinition',
+          line: 13,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1072,6 +1097,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentDidCatch',
           },
           type: 'MethodDefinition',
+          line: 14,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1080,6 +1106,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'componentWillUnmount',
           },
           type: 'MethodDefinition',
+          line: 15,
         },
         {
           messageId: 'typoLifecycleMethod',
@@ -1088,6 +1115,7 @@ ruleTester.run('no-typos', rule, {
             expected: 'render',
           },
           type: 'MethodDefinition',
+          line: 16,
         },
       ],
     },
@@ -1846,7 +1874,7 @@ ruleTester.run('no-typos', rule, {
         },
       ],
     },
-    {
+    parsers.skipDueToMultiErrorSorting ? [] : {
       code: `
         class Hello extends Inferno.Component {
           GetDerivedStateFromProps() { }
@@ -1884,6 +1912,6 @@ ruleTester.run('no-typos', rule, {
           messageId: 'typoStaticClassProp',
         },
       ],
-    } : []
+    } : [],
   )),
 });

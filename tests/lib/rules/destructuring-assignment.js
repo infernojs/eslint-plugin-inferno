@@ -358,6 +358,27 @@ ruleTester.run('destructuring-assignment', rule, {
       `,
       options: ['always', { destructureInSignature: 'always' }],
     },
+    {
+      code: `
+        import { useContext } from 'inferno';
+
+        const MyComponent = (props) => {
+          const {foo} = useContext(aContext);
+          return <div>{foo}</div>
+        };
+      `,
+      options: ['always'],
+    },
+    {
+      code: `
+        import { useContext } from 'inferno';
+        const MyComponent = (props) => {
+          const foo = useContext(aContext);
+          return <div>{foo.test}</div>
+        };
+      `,
+      options: ['always'],
+    },
   ]),
 
   invalid: parsers.all([].concat(
@@ -758,7 +779,7 @@ ruleTester.run('destructuring-assignment', rule, {
         ],
         output: `
           function Foo({a}) {
-            
+${'            '}
             return <p>{a}</p>;
           }
         `,
@@ -779,12 +800,12 @@ ruleTester.run('destructuring-assignment', rule, {
         ],
         output: `
           function Foo({a}: FooProps) {
-            
+${'            '}
             return <p>{a}</p>;
           }
         `,
         features: ['ts', 'no-babel'],
       },
-    ] : []
+    ] : [],
   )),
 });

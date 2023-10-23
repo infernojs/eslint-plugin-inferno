@@ -145,7 +145,7 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
     `,
     `
       export default function NotAComponent({foo = {}}) {}
-    `
+    `,
   )),
   invalid: parsers.all([].concat(
     {
@@ -183,6 +183,6 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
         }
       `,
       errors: expectedViolations,
-    }
+    },
   )),
 });

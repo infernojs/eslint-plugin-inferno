@@ -7,7 +7,7 @@ const version = require('eslint/package.json').version;
 const tsParserVersion = require('@typescript-eslint/parser/package.json').version;
 
 const disableNewTS = semver.satisfies(tsParserVersion, '>= 4.1') // this rule is not useful on v4.1+ of the TS parser
-  ? (x) => Object.assign({}, x, { features: [].concat(x.features, 'no-ts-new') })
+  ? (x) => ({ ...x, features: [].concat(x.features, 'no-ts-new') })
   : (x) => x;
 
 function minEcmaVersion(features, parserOptions) {
@@ -16,16 +16,14 @@ function minEcmaVersion(features, parserOptions) {
     'optional chaining': 2020,
     'nullish coalescing': 2020,
   };
-  const result = Math.max.apply(
-    Math,
-    [].concat(
-      (parserOptions && parserOptions.ecmaVersion) || [],
-      entries(minEcmaVersionForFeatures).flatMap((entry) => {
-        const f = entry[0];
-        const y = entry[1];
-        return features.has(f) ? y : [];
-      })
-    ).map((y) => (y > 5 && y < 2015 ? y + 2009 : y)) // normalize editions to years
+  const result = Math.max(
+    ...((parserOptions && parserOptions.ecmaVersion) || [],
+    entries(minEcmaVersionForFeatures).flatMap((entry) => {
+      const f = entry[0];
+      const y = entry[1];
+      return features.has(f) ? y : [];
+    })
+    ).map((y) => (y > 5 && y < 2015 ? y + 2009 : y)), // normalize editions to years
   );
   return Number.isFinite(result) ? result : undefined;
 }
@@ -37,8 +35,10 @@ const parsers = {
   '@BABEL_ESLINT': path.join(__dirname, NODE_MODULES, '@babel/eslint-parser'),
   '@TYPESCRIPT_ESLINT': path.join(__dirname, NODE_MODULES, '@typescript-eslint/parser'),
   disableNewTS,
+  skipDueToMultiErrorSorting: semver.satisfies(process.versions.node, '^8 || ^9'),
   babelParserOptions: function parserOptions(test, features) {
-    return Object.assign({}, test.parserOptions, {
+    return {
+      ...test.parserOptions,
       requireConfigFile: false,
       babelOptions: {
         presets: [
@@ -54,16 +54,14 @@ const parsers = {
           allowReturnOutsideFunction: false,
         },
       },
-      ecmaFeatures: Object.assign(
-        {},
-        test.parserOptions && test.parserOptions.ecmaFeatures,
-        {
-          jsx: true,
-          modules: true,
-          legacyDecorators: features.has('decorators'),
-        }
-      ),
-    });
+      ecmaFeatures: {
+
+        ...test.parserOptions && test.parserOptions.ecmaFeatures,
+        jsx: true,
+        modules: true,
+        legacyDecorators: features.has('decorators'),
+      },
+    };
   },
   all: function all(tests) {
     const t = tests.flatMap((test) => {
@@ -85,7 +83,7 @@ const parsers = {
           `parser: ${parser}`,
           testObject.parserOptions ? `parserOptions: ${JSON.stringify(testObject.parserOptions)}` : [],
           testObject.options ? `options: ${JSON.stringify(testObject.options)}` : [],
-          testObject.settings ? `settings: ${JSON.stringify(testObject.settings)}` : []
+          testObject.settings ? `settings: ${JSON.stringify(testObject.settings)}` : [],
         );
 
         const extraComment = `\n// ${extras.join(', ')}`;
@@ -103,23 +101,22 @@ const parsers = {
             errors: testObject.errors.map(
               (errorObject) => {
                 const nextSuggestions = errorObject.suggestions && {
-                  suggestions: errorObject.suggestions.map((suggestion) => Object.assign({}, suggestion, {
-                    output: suggestion.output + extraComment,
-                  })),
+                  // eslint-disable-next-line max-len
+                  suggestions: errorObject.suggestions.map((suggestion) => ({ ...suggestion, output: suggestion.output + extraComment })),
                 };
 
-                return Object.assign({}, errorObject, nextSuggestions);
-              }
+                return { ...errorObject, ...nextSuggestions };
+              },
             ),
           };
 
-        return Object.assign(
-          {},
-          testObject,
-          nextCode,
-          nextOutput,
-          nextErrors
-        );
+        return {
+
+          ...testObject,
+          ...nextCode,
+          ...nextOutput,
+          ...nextErrors,
+        };
       }
 
       const skipBase = (features.has('class fields') && semver.satisfies(version, '< 8'))
@@ -154,20 +151,25 @@ const parsers = {
 
       return [].concat(
         skipBase ? [] : addComment(
-          Object.assign({}, test, typeof es === 'number' && {
-            parserOptions: Object.assign({}, test.parserOptions, { ecmaVersion: es }),
-          }),
-          'default'
+          {
+            ...test,
+            ...typeof es === 'number' && {
+              parserOptions: { ...test.parserOptions, ecmaVersion: es },
+            },
+          },
+          'default',
         ),
-        skipOldBabel ? [] : addComment(Object.assign({}, test, {
+        skipOldBabel ? [] : addComment({
+          ...test,
           parser: parsers.BABEL_ESLINT,
           parserOptions: parsers.babelParserOptions(test, features),
-        }), 'babel-eslint'),
-        skipNewBabel ? [] : addComment(Object.assign({}, test, {
+        }, 'babel-eslint'),
+        skipNewBabel ? [] : addComment({
+          ...test,
           parser: parsers['@BABEL_ESLINT'],
           parserOptions: parsers.babelParserOptions(test, features),
-        }), '@babel/eslint-parser'),
-        tsNew ? addComment(Object.assign({}, test, { parser: parsers['@TYPESCRIPT_ESLINT'] }), '@typescript-eslint/parser') : []
+        }, '@babel/eslint-parser'),
+        tsNew ? addComment({ ...test, parser: parsers['@TYPESCRIPT_ESLINT'] }, '@typescript-eslint/parser') : [],
       );
     });
 

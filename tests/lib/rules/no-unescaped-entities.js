@@ -9,8 +9,9 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const semver = require('semver');
 const path = require('path');
+
+const semver = require('semver');
 const resolve = require('resolve');
 
 let allowsInvalidJSX = false;
@@ -334,6 +335,6 @@ ruleTester.run('no-unescaped-entities', rule, {
           column: 34,
         },
       ],
-    }
+    },
   )),
 });

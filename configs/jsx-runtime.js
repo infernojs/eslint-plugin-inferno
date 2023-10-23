@@ -2,17 +2,17 @@
 
 const all = require('./all');
 
-module.exports = Object.assign({}, all, {
-  languageOptions: Object.assign({}, all.languageOptions, {
-    parserOptions: Object.assign({}, all.languageOptions.parserOptions, {
-      jsxPragma: null, // for @typescript/eslint-parser
-    }),
-  }),
+module.exports = {
+  ...all,
+  languageOptions: {
+    ...all.languageOptions,
+    parserOptions: { ...all.languageOptions.parserOptions, jsxPragma: null },
+  },
   rules: {
     'inferno/inferno-in-jsx-scope': 0,
     'inferno/jsx-uses-inferno': 0,
   },
-});
+};
 
 // this is so the `languageOptions` property won't be warned in the new config system
 Object.defineProperty(module.exports, 'languageOptions', { enumerable: false });

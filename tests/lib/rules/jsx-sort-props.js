@@ -296,7 +296,7 @@ ruleTester.run('jsx-sort-props', rule, {
         />
       `,
       options: [{ locale: 'sk-SK' }],
-    } : []
+    } : [],
   )),
   invalid: parsers.all([].concat(
     {
@@ -1101,6 +1101,6 @@ ruleTester.run('jsx-sort-props', rule, {
           line: 11,
         },
       ],
-    }
+    },
   )),
 });

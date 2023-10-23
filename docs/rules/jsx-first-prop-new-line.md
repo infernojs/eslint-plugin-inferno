@@ -107,7 +107,7 @@ Examples of **correct** code for this rule, when configured with `"multiline-mul
 ## Rule Options
 
 ```jsx
-"inferno/jsx-first-prop-new-line": `"always" | "never" | "multiline" | "multiline-multiprop"`
+"inferno/jsx-first-prop-new-line": `"always" | "never" | "multiline" | "multiprop" | "multiline-multiprop"`
 ```
 
 ## When Not To Use It

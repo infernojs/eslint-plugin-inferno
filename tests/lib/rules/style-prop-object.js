@@ -95,7 +95,7 @@ ruleTester.run('style-prop-object', rule, {
         const styles = Object.assign({ color: 'red' }, mystyles);
         Inferno.createElement("div", { style: styles });
       `,
-      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
+      parserOptions: { sourceType: 'module', ...parserOptions },
     },
     {
       code: '<div style></div>',

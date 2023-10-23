@@ -15,17 +15,20 @@ module.exports = {
   deprecatedRules: configAll.plugins.inferno.deprecatedRules,
   rules: allRules,
   configs: {
-    recommended: Object.assign({}, configRecommended, {
+    recommended: {
+      ...configRecommended,
       parserOptions: configRecommended.languageOptions.parserOptions,
       plugins,
-    }),
-    all: Object.assign({}, configAll, {
+    },
+    all: {
+      ...configAll,
       parserOptions: configAll.languageOptions.parserOptions,
       plugins,
-    }),
-    'jsx-runtime': Object.assign({}, configRuntime, {
+    },
+    'jsx-runtime': {
+      ...configRuntime,
       parserOptions: configRuntime.languageOptions.parserOptions,
       plugins,
-    }),
+    },
   },
 };

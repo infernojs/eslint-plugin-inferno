@@ -2,7 +2,8 @@
 
 const all = require('./all');
 
-module.exports = Object.assign({}, all, {
+module.exports = {
+  ...all,
   languageOptions: all.languageOptions,
   rules: {
     'inferno/jsx-key': 2,
@@ -22,7 +23,7 @@ module.exports = Object.assign({}, all, {
     'inferno/no-unknown-property': 2,
     'inferno/require-render-return': 2,
   },
-});
+};
 
 // this is so the `languageOptions` property won't be warned in the new config system
 Object.defineProperty(module.exports, 'languageOptions', { enumerable: false });

@@ -374,7 +374,7 @@ ruleTester.run('sort-default-props', rule, {
             z: PropTypes.string,
         };
       `,
-    }
+    },
   )),
 
   invalid: parsers.all([

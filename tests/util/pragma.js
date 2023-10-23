@@ -44,7 +44,7 @@ describe('pragma', () => {
       const code = '// @jsx jsx';
       assert.strictEqual(
         getFromContext(fakeContext(code)),
-        'jsx'
+        'jsx',
       );
     });
 
@@ -52,7 +52,7 @@ describe('pragma', () => {
       const code = '';
       assert.strictEqual(
         getFromContext(fakeContext(code)),
-        DEFAULT_SETTINGS.inferno.pragma
+        DEFAULT_SETTINGS.inferno.pragma,
       );
     });
 

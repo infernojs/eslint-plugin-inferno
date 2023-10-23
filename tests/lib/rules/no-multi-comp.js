@@ -101,7 +101,7 @@ ruleTester.run('no-multi-comp', rule, {
           return createElement("img");
         };
       `,
-      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
+      parserOptions: { sourceType: 'module', ...parserOptions },
     },
     {
       code: `

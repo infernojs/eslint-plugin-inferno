@@ -469,14 +469,15 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
       features: ['no-ts'],
       options: ['never'],
     },
+    // legit as this single template literal might be used for stringifying
     {
-      code: '<App label={`${label}${suffix}`} />',
-      options: [{ props: 'never' }],
+      code: '<App label={`${label}`} />',
+      options: ['never'],
     },
     {
-      code: '<App>{`${label}${suffix}`}</App>',
-      options: [{ children: 'never' }],
-    }
+      code: '<App>{`${label}`}</App>',
+      options: ['never'],
+    },
   )),
 
   invalid: parsers.all([].concat(
@@ -786,14 +787,14 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
     },
     {
       code: `
-        <App prop="    
-           a     
+        <App prop="${'    '}
+           a${'     '}
              b      c
                 d
         ">
           a
-              b     c   
-                 d      
+              b     c${'   '}
+                 d${'      '}
         </App>
       `,
       errors: [
@@ -801,8 +802,8 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
       ],
       options: ['always'],
       output: `
-        <App prop="    
-           a     
+        <App prop="${'    '}
+           a${'     '}
              b      c
                 d
         ">
@@ -814,14 +815,14 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
     },
     {
       code: `
-        <App prop='    
-           a     
+        <App prop='${'    '}
+           a${'     '}
              b      c
                 d
         '>
           a
-              b     c   
-                 d      
+              b     c${'   '}
+                 d${'      '}
         </App>
       `,
       errors: [
@@ -829,8 +830,8 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
       ],
       options: ['always'],
       output: `
-        <App prop='    
-           a     
+        <App prop='${'    '}
+           a${'     '}
              b      c
                 d
         '>
@@ -940,17 +941,5 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
       options: [{ props: 'never', children: 'never', propElementValues: 'never' }],
       features: ['no-ts'],
     },
-    {
-      code: '<App label={`${label}`} />',
-      output: '<App label={label} />',
-      errors: [{ messageId: 'unnecessaryCurly' }],
-      options: [{ props: 'never', children: 'never', propElementValues: 'never' }],
-    },
-    {
-      code: '<App>{`${label}`}</App>',
-      output: '<App>{label}</App>',
-      errors: [{ messageId: 'unnecessaryCurly' }],
-      options: [{ props: 'never', children: 'never', propElementValues: 'never' }],
-    }
   )),
 });

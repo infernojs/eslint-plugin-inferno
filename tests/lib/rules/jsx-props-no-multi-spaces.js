@@ -149,7 +149,7 @@ ruleTester.run('jsx-props-no-multi-spaces', rule, {
           />
         `,
       },
-    ] : [])
+    ] : []),
   )),
 
   invalid: parsers.all([].concat(
@@ -365,6 +365,6 @@ ruleTester.run('jsx-props-no-multi-spaces', rule, {
           },
         ],
       },
-    ] : [])
+    ] : []),
   )),
 });

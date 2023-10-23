@@ -389,6 +389,6 @@ ruleTester.run('no-array-index-key', rule, {
         ))
       `,
       errors: [{ messageId: 'noArrayIndex' }],
-    }
+    },
   )),
 });

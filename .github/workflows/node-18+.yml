@@ -14,7 +14,7 @@ jobs:
         with:
           versionsAsRoot: true
           type: majors
-          preset: '>=10'
+          preset: '>=18'
 
   latest:
     needs: [matrix]
@@ -29,42 +29,14 @@ jobs:
           - 8
           - 7
           - 6
+          - 5
+          - 4
           - 4.14 # last version without messageId
           - 3
         babel-eslint:
           - 10
           - 9
           - 8
-          - node-version: 5
-            babel-eslint: 10
-          - node-version: 5
-            babel-eslint: 9
-          - node-version: 4
-            babel-eslint: 10
-          - node-version: 4
-            babel-eslint: 9
-          - node-version: 15
-            eslint: 8
-          - node-version: 13
-            eslint: 8
-          - node-version: 11
-            eslint: 8
-          - node-version: 11
-            eslint: 7
-          - node-version: 10
-            eslint: 8
-          - node-version: 9
-            eslint: 8
-            eslint: 8
-          - node-version: 8
-            eslint: 8
-          - node-version: 7
-            eslint: 8
-          - node-version: 6
-            eslint: 8
-          - node-version: 5
-            eslint: 8
-          - node-version: 4
 
     steps:
       - uses: actions/checkout@v3
@@ -73,17 +45,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           after_install: |
-            npm install --no-save "eslint@${{ matrix.eslint }}" "@typescript-eslint/parser@${{ matrix.node-version >= 14 && '5' || (matrix.node-version >= 12 && '4' || (matrix.node-version >= 10 && '4.0' || (matrix.node-version >= 8 && '3' || '2'))) }}" "babel-eslint@${{ matrix.babel-eslint }}"
-          skip-ls-check: ${{ matrix.node-version < 10 && true || false }}
+            npm install --no-save "eslint@${{ matrix.eslint }}" "@typescript-eslint/parser@5" "babel-eslint@${{ matrix.babel-eslint }}"
         env:
           NPM_CONFIG_LEGACY_PEER_DEPS: true
       - run: npx ls-engines
-        if: ${{ matrix.node-version >= 12 }}
       - run: npm run unit-test
       - uses: codecov/codecov-action@v3
 
   node:
-    name: 'node 10+'
+    name: 'node 18+'
     needs: [latest]
     runs-on: ubuntu-latest
     steps:

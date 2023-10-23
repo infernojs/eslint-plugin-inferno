@@ -282,7 +282,7 @@ ruleTester.run('no-did-mount-set-state', rule, {
           }
         });
       `,
-    }
+    },
     // invalid.map((test) => {
     //   const newTest = Object.assign({}, test, {
     //     settings: Object.assign({}, test.settings, {}),

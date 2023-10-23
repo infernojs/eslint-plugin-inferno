@@ -45,7 +45,7 @@ ruleTester.run('jsx-indent', rule, {
     {
       code: `
         <App>
-        </App> 
+        </App>
       `,
     },
     {
@@ -2779,7 +2779,7 @@ const Component = () => (
         },
       ],
     },
-    {
+    parsers.skipDueToMultiErrorSorting ? [] : {
       code: `
         <div>
           text
@@ -2813,7 +2813,7 @@ const Component = () => (
         },
       ],
     },
-    {
+    parsers.skipDueToMultiErrorSorting ? [] : {
       code: `
         <div>
         \t  text
@@ -3163,6 +3163,6 @@ const Component = () => (
         { messageId: 'wrongIndent', line: 6 },
         { messageId: 'wrongIndent', line: 9 },
       ],
-    } : []
+    } : [],
   )),
 });
