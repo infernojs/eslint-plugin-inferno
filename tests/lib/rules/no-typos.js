@@ -1248,22 +1248,22 @@ ruleTester.run('no-typos', rule, {
         },
       ],
     },
-    {
-      code: `
-        import PropTypes from "prop-types";
-        class Component extends Inferno.Component {};
-        Component.propTypes = {
-            a: PropTypes.Number.isRequired
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Number' },
-        },
-      ],
-    },
+    // {
+    //   code: `
+    //     import PropTypes from "prop-types";
+    //     class Component extends Inferno.Component {};
+    //     Component.propTypes = {
+    //         a: PropTypes.Number.isRequired
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Number' },
+    //     },
+    //   ],
+    // },
     {
       code: `
         import PropTypes from "prop-types";
@@ -1280,189 +1280,189 @@ ruleTester.run('no-typos', rule, {
         },
       ],
     },
-    {
-      code: `
-        import PropTypes from "prop-types";
-        class Component extends Inferno.Component {
-          static propTypes = {
-            a: PropTypes.number.isrequired
-          }
-        };
-      `,
-      features: ['class fields'],
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropTypeChain',
-          data: { name: 'isrequired' },
-        },
-      ],
-    },
-    {
-      code: `
-        import PropTypes from "prop-types";
-        class Component extends Inferno.Component {
-          static propTypes = {
-            a: PropTypes.Number
-          }
-        };
-      `,
-      features: ['class fields'],
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Number' },
-        },
-      ],
-    },
-    {
-      code: `
-        import PropTypes from "prop-types";
-        class Component extends Inferno.Component {};
-        Component.propTypes = {
-            a: PropTypes.Number
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Number' },
-        },
-      ],
-    },
-    {
-      code: `
-        import PropTypes from "prop-types";
-        class Component extends Inferno.Component {};
-        Component.propTypes = {
-          a: PropTypes.shape({
-            b: PropTypes.String,
-            c: PropTypes.number.isRequired,
-          })
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'String' },
-        },
-      ],
-    },
-    {
-      code: `
-        import PropTypes from "prop-types";
-        class Component extends Inferno.Component {};
-        Component.propTypes = {
-          a: PropTypes.oneOfType([
-            PropTypes.bools,
-            PropTypes.number,
-          ])
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'bools' },
-        },
-      ],
-    },
-    {
-      code: `
-        import PropTypes from "prop-types";
-        class Component extends Inferno.Component {};
-        Component.propTypes = {
-          a: PropTypes.bools,
-          b: PropTypes.Array,
-          c: PropTypes.function,
-          d: PropTypes.objectof,
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'bools' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Array' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'function' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'objectof' },
-        },
-      ],
-    },
-    {
-      code: `
-        import PropTypes from "prop-types";
-        class Component extends Inferno.Component {};
-        Component.childContextTypes = {
-          a: PropTypes.bools,
-          b: PropTypes.Array,
-          c: PropTypes.function,
-          d: PropTypes.objectof,
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'bools' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Array' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'function' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'objectof' },
-        },
-      ],
-    },
-    {
-      code: `
-        import PropTypes from 'prop-types';
-        class Component extends Inferno.Component {};
-        Component.childContextTypes = {
-          a: PropTypes.bools,
-          b: PropTypes.Array,
-          c: PropTypes.function,
-          d: PropTypes.objectof,
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'bools' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Array' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'function' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'objectof' },
-        },
-      ],
-    },
+    // {
+    //   code: `
+    //     import PropTypes from "prop-types";
+    //     class Component extends Inferno.Component {
+    //       static propTypes = {
+    //         a: PropTypes.number.isrequired
+    //       }
+    //     };
+    //   `,
+    //   features: ['class fields'],
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropTypeChain',
+    //       data: { name: 'isrequired' },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: `
+    //     import PropTypes from "prop-types";
+    //     class Component extends Inferno.Component {
+    //       static propTypes = {
+    //         a: PropTypes.Number
+    //       }
+    //     };
+    //   `,
+    //   features: ['class fields'],
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Number' },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: `
+    //     import PropTypes from "prop-types";
+    //     class Component extends Inferno.Component {};
+    //     Component.propTypes = {
+    //         a: PropTypes.Number
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Number' },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: `
+    //     import PropTypes from "prop-types";
+    //     class Component extends Inferno.Component {};
+    //     Component.propTypes = {
+    //       a: PropTypes.shape({
+    //         b: PropTypes.String,
+    //         c: PropTypes.number.isRequired,
+    //       })
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'String' },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: `
+    //     import PropTypes from "prop-types";
+    //     class Component extends Inferno.Component {};
+    //     Component.propTypes = {
+    //       a: PropTypes.oneOfType([
+    //         PropTypes.bools,
+    //         PropTypes.number,
+    //       ])
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'bools' },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: `
+    //     import PropTypes from "prop-types";
+    //     class Component extends Inferno.Component {};
+    //     Component.propTypes = {
+    //       a: PropTypes.bools,
+    //       b: PropTypes.Array,
+    //       c: PropTypes.function,
+    //       d: PropTypes.objectof,
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'bools' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Array' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'function' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'objectof' },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: `
+    //     import PropTypes from "prop-types";
+    //     class Component extends Inferno.Component {};
+    //     Component.childContextTypes = {
+    //       a: PropTypes.bools,
+    //       b: PropTypes.Array,
+    //       c: PropTypes.function,
+    //       d: PropTypes.objectof,
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'bools' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Array' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'function' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'objectof' },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: `
+    //     import PropTypes from 'prop-types';
+    //     class Component extends Inferno.Component {};
+    //     Component.childContextTypes = {
+    //       a: PropTypes.bools,
+    //       b: PropTypes.Array,
+    //       c: PropTypes.function,
+    //       d: PropTypes.objectof,
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'bools' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Array' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'function' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'objectof' },
+    //     },
+    //   ],
+    // },
     {
       code: `
         import PropTypes from 'prop-types';
@@ -1486,37 +1486,37 @@ ruleTester.run('no-typos', rule, {
         },
       ],
     },
-    {
-      code: `
-        import RealPropTypes from 'prop-types';
-        class Component extends Inferno.Component {};
-        Component.childContextTypes = {
-          a: RealPropTypes.bools,
-          b: RealPropTypes.Array,
-          c: RealPropTypes.function,
-          d: RealPropTypes.objectof,
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'bools' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Array' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'function' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'objectof' },
-        },
-      ],
-    },
+    // {
+    //   code: `
+    //     import RealPropTypes from 'prop-types';
+    //     class Component extends Inferno.Component {};
+    //     Component.childContextTypes = {
+    //       a: RealPropTypes.bools,
+    //       b: RealPropTypes.Array,
+    //       c: RealPropTypes.function,
+    //       d: RealPropTypes.objectof,
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'bools' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Array' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'function' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'objectof' },
+    //     },
+    //   ],
+    // },
     {
       code: `
       import Inferno from 'inferno';
@@ -1540,37 +1540,37 @@ ruleTester.run('no-typos', rule, {
         },
       ],
     },
-    {
-      code: `
-        import Inferno from 'inferno';
-        class Component extends Inferno.Component {};
-        Component.childContextTypes = {
-          a: Inferno.PropTypes.bools,
-          b: Inferno.PropTypes.Array,
-          c: Inferno.PropTypes.function,
-          d: Inferno.PropTypes.objectof,
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'bools' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Array' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'function' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'objectof' },
-        },
-      ],
-    },
+    // {
+    //   code: `
+    //     import Inferno from 'inferno';
+    //     class Component extends Inferno.Component {};
+    //     Component.childContextTypes = {
+    //       a: Inferno.PropTypes.bools,
+    //       b: Inferno.PropTypes.Array,
+    //       c: Inferno.PropTypes.function,
+    //       d: Inferno.PropTypes.objectof,
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'bools' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Array' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'function' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'objectof' },
+    //     },
+    //   ],
+    // },
     {
       code: `
       import { PropTypes } from 'inferno';
@@ -1606,37 +1606,37 @@ ruleTester.run('no-typos', rule, {
         },
       ],
     },
-    {
-      code: `
-        import { PropTypes } from 'inferno';
-        class Component extends Inferno.Component {};
-        Component.childContextTypes = {
-          a: PropTypes.bools,
-          b: PropTypes.Array,
-          c: PropTypes.function,
-          d: PropTypes.objectof,
-        }
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'bools' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Array' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'function' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'objectof' },
-        },
-      ],
-    },
+    // {
+    //   code: `
+    //     import { PropTypes } from 'inferno';
+    //     class Component extends Inferno.Component {};
+    //     Component.childContextTypes = {
+    //       a: PropTypes.bools,
+    //       b: PropTypes.Array,
+    //       c: PropTypes.function,
+    //       d: PropTypes.objectof,
+    //     }
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'bools' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Array' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'function' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'objectof' },
+    //     },
+    //   ],
+    // },
     {
       code: `
       import PropTypes from 'prop-types';
@@ -1708,39 +1708,39 @@ ruleTester.run('no-typos', rule, {
         },
       ],
     },
-    {
-      code: `
-        import Inferno from 'inferno';
-        import PropTypes from 'prop-types';
-        const Component = Inferno.createClass({
-          childContextTypes: {
-            a: PropTypes.bools,
-            b: PropTypes.Array,
-            c: PropTypes.function,
-            d: PropTypes.objectof,
-          }
-        });
-      `,
-      parserOptions,
-      errors: [
-        {
-          messageId: 'typoPropType',
-          data: { name: 'bools' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'Array' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'function' },
-        },
-        {
-          messageId: 'typoPropType',
-          data: { name: 'objectof' },
-        },
-      ],
-    },
+    // {
+    //   code: `
+    //     import Inferno from 'inferno';
+    //     import PropTypes from 'prop-types';
+    //     const Component = Inferno.createClass({
+    //       childContextTypes: {
+    //         a: PropTypes.bools,
+    //         b: PropTypes.Array,
+    //         c: PropTypes.function,
+    //         d: PropTypes.objectof,
+    //       }
+    //     });
+    //   `,
+    //   parserOptions,
+    //   errors: [
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'bools' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'Array' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'function' },
+    //     },
+    //     {
+    //       messageId: 'typoPropType',
+    //       data: { name: 'objectof' },
+    //     },
+    //   ],
+    // },
     {
       code: `
         import Inferno from 'inferno';

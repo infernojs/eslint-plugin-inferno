@@ -11,10 +11,11 @@ This rule checks whether the declared static class properties and lifecycle meth
 It makes sure that the following class properties have
 no casing typos:
 
-- propTypes
 - contextTypes
 - childContextTypes
 - defaultProps
+
+Unlike in React version `prop-types` are not checked
 
 and the following inferno lifecycle methods:
 
