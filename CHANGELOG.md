@@ -18,13 +18,30 @@ Everything re-branched from upstream.
 All bug fixes included from upstream.
 * [`sort-prop-types`]: give errors on TS types ([#3615][] @akulsr0)
 * [`no-invalid-html-attribute`]: add support for `apple-touch-startup-image` `rel` attributes in `link` tags ([#3638][] @thomashockaday)
+* [`no-unknown-property`]: add requireDataLowercase option ([#3645][] @HermanBilous)
+* [`no-unknown-property`]: add `displaystyle` on `<math>` ([#3652][] @lounsbrough)
+* [`prefer-read-only-props`], [`prop-types`], component detection: allow components to be async functions ([#3654][] @pnodet)
+* [`no-unknown-property`]: support `onResize` on audio/video tags ([#3662][] @caesar1030)
 
 ### Fixed
 * [`jsx-no-leaked-render`]: preserve RHS parens for multiline jsx elements while fixing ([#3623][] @akulsr0)
 * [`jsx-key`]: detect conditional returns ([#3630][] @yialo)
 * [`jsx-newline`]: prevent a crash when `allowMultilines ([#3633][] @ljharb)
 
+### Changed
+* [Refactor] `propTypes`: extract type params to var ([#3634][] @HenryBrown0)
+* [Refactor] [`boolean-prop-naming`]: invert if statement ([#3634][] @HenryBrown0)
+* [Refactor] [`function-component-definition`]: exit early if no type params ([#3634][] @HenryBrown0)
+* [Refactor] [`jsx-props-no-multi-spaces`]: extract type parameters to var ([#3634][] @HenryBrown0)
+* [Docs] [`jsx-key`]: fix correct example ([#3656][] @developer-bandi)
+
+[#3662]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3662
+[#3656]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3656
+[#3654]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3654
+[#3652]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3652
+[#3645]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3645
 [#3638]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3638
+[#3634]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3634
 [#3633]: https://github.com/jsx-eslint/eslint-plugin-react/issues/3633
 [#3630]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3630
 [#3623]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3623
