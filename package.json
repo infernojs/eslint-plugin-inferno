@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.33.2",
+  "version": "7.33.3",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
