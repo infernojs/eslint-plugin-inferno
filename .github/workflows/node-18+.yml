@@ -29,14 +29,9 @@ jobs:
           - 8
           - 7
           - 6
-          - 5
-          - 4
-          - 4.14 # last version without messageId
-          - 3
         babel-eslint:
-          - 10
-          - 9
           - 8
+          - 7
 
     steps:
       - uses: actions/checkout@v3
