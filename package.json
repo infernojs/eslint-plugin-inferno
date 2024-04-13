@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-inferno",
-  "version": "7.33.3",
+  "version": "7.34.0",
   "description": "Inferno specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
@@ -23,48 +23,47 @@
   "homepage": "https://github.com/infernojs/eslint-plugin-inferno",
   "bugs": "https://github.com/infernojs/eslint-plugin-inferno/issues",
   "dependencies": {
-    "array.prototype.tosorted": "^1.1.2",
     "doctrine": "^3.0.0",
-    "es-iterator-helpers": "^1.0.15",
+    "es-iterator-helpers": "^1.0.18",
     "estraverse": "^5.3.0",
     "jsx-ast-utils": "^3.3.5",
-    "minimatch": "^9.0.3",
+    "minimatch": "^9.0.4",
     "resolve": "^2.0.0-next.5",
-    "semver": "^7.5.4"
+    "semver": "^7.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.6",
-    "@babel/eslint-parser": "^7.23.3",
-    "@babel/plugin-syntax-decorators": "^7.23.3",
-    "@babel/plugin-syntax-do-expressions": "^7.23.3",
-    "@babel/plugin-syntax-function-bind": "^7.23.3",
-    "@babel/preset-react": "^7.23.3",
-    "@types/eslint": "=8.44.8",
+    "@babel/core": "^7.24.4",
+    "@babel/eslint-parser": "^7.24.1",
+    "@babel/plugin-syntax-decorators": "^7.24.1",
+    "@babel/plugin-syntax-do-expressions": "^7.24.1",
+    "@babel/plugin-syntax-function-bind": "^7.24.1",
+    "@babel/preset-react": "^7.24.1",
+    "@types/eslint": "=8.56.9",
     "@types/estree": "^1.0.5",
-    "@types/node": "^20.10.4",
-    "@typescript-eslint/parser": "^6.14.0",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/parser": "^6.21.0",
     "aud": "^2.0.4",
     "babel-eslint": "^8.2.6",
-    "babel-plugin-inferno": "^6.7.0",
+    "babel-plugin-inferno": "^6.7.1",
     "eslint": "^8",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-doc-generator": "^1.6.1",
-    "eslint-plugin-eslint-plugin": "^5.2.1",
-    "eslint-plugin-import": "^2.29.0",
+    "eslint-doc-generator": "^1.7.0",
+    "eslint-plugin-eslint-plugin": "^5.5.1",
+    "eslint-plugin-import": "^2.29.1",
     "espree": "^9.6.1",
     "jackspeak": "=2.3.6",
-    "markdownlint-cli": "^0.38.0",
-    "mocha": "^10.2.0",
-    "glob": "=10.3.10",
+    "markdownlint-cli": "^0.39.0",
+    "mocha": "^10.4.0",
+    "glob": "=10.3.12",
     "npmignore": "^0.3.1",
     "sinon": "^17.0.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "eslint": "^6 || ^7 || ^8"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "keywords": [
     "eslint",

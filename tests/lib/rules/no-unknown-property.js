@@ -41,12 +41,16 @@ ruleTester.run('no-unknown-property', rule, {
       features: ['jsx namespace'],
     },
     { code: '<App clip-path="bar" />;' },
+    {
+      code: '<App dataNotAnDataAttribute="yes" />;',
+      options: [{ requireDataLowercase: true }],
+    },
     // Some HTML/DOM elements with common attributes should work
     { code: '<div className="bar"></div>;' },
     { code: '<div onMouseDown={this._onMouseDown}></div>;' },
     { code: '<a href="someLink" download="foo">Read more</a>' },
     { code: '<area download="foo" />' },
-    { code: '<img src="cat_keyboard.jpeg" alt="A cat sleeping on a keyboard" align="top" />' },
+    { code: '<img src="cat_keyboard.jpeg" alt="A cat sleeping on a keyboard" align="top" fetchPriority="high" />' },
     { code: '<input type="password" required />' },
     { code: '<input ref={this.input} type="radio" />' },
     { code: '<input type="file" webkitdirectory="" />' },
@@ -155,6 +159,22 @@ ruleTester.run('no-unknown-property', rule, {
     // fbs
     { code: '<fbs desc="foo" doNotExtract />;' },
     { code: '<math displaystyle="true" />;' },
+    {
+      code: `
+        <div className="App" data-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash="customValue">
+          Hello, world!
+        </div>
+      `,
+    },
+    {
+      code: `
+        <div>
+          <button popovertarget="my-popover" popovertargetaction="toggle">Open Popover</button>
+
+          <div popover id="my-popover">Greetings, one and all!</div>
+        </div>
+      `,
+    },
   ]),
   invalid: parsers.all([
     {
@@ -577,7 +597,34 @@ ruleTester.run('no-unknown-property', rule, {
       ],
     },
     {
-      code: '<div data-testID="bar" data-under_sCoRe="bar" />;',
+      code: '<div data-testID="bar" data-under_sCoRe="bar" dataNotAnDataAttribute="yes" />;',
+      errors: [
+        {
+          messageId: 'dataLowercaseRequired',
+          data: {
+            name: 'data-testID',
+            lowerCaseName: 'data-testid',
+          },
+        },
+        {
+          messageId: 'dataLowercaseRequired',
+          data: {
+            name: 'data-under_sCoRe',
+            lowerCaseName: 'data-under_score',
+          },
+        },
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'dataNotAnDataAttribute',
+            lowerCaseName: 'datanotandataattribute',
+          },
+        },
+      ],
+      options: [{ requireDataLowercase: true }],
+    },
+    {
+      code: '<App data-testID="bar" data-under_sCoRe="bar" dataNotAnDataAttribute="yes" />;',
       errors: [
         {
           messageId: 'dataLowercaseRequired',
@@ -631,6 +678,22 @@ ruleTester.run('no-unknown-property', rule, {
             name: 'webkitdirectory',
             tagName: 'div',
             allowedTags: 'input',
+          },
+        },
+      ],
+    },
+    {
+      code: `
+        <div className="App" data-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash:c="customValue">
+          Hello, world!
+        </div>
+      `,
+      features: ['no-ts'],
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'data-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash-crash:c',
           },
         },
       ],

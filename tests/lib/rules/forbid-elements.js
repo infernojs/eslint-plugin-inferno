@@ -82,6 +82,9 @@ ruleTester.run('forbid-elements', rule, {
       code: 'Inferno.createElement(1)',
       options: [{ forbid: ['button'] }],
     },
+    {
+      code: 'Inferno.createElement()',
+    },
   ]),
 
   invalid: parsers.all([

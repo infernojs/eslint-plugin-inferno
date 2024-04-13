@@ -1,4 +1,17 @@
 # Change Log
+## 2023-10-23
+
+NodeJS v20 required.
+
+Everything re-branched from upstream.
+All bug fixes included from upstream.
+
+Following polyfills have been removed:
+```
+"array.prototype.findlast"
+"array.prototype.toreversed"
+```
+
 All notable changes to this project will be documented in this file.
 ## 2023-10-23
 Everything re-branched from upstream.
