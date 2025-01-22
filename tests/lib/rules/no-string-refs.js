@@ -157,6 +157,6 @@ ruleTester.run('no-refs', rule, {
         { messageId: 'thisRefsDeprecated' },
         { messageId: 'stringInRefDeprecated' },
       ],
-    }
+    },
   ]),
 });
