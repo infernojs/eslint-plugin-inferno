@@ -7,7 +7,7 @@ Inferno specific linting rules for ESLint. Linting logic has been optimized for 
 Some of the rules has been removed because they don't work in context of InfernoJS.
 Please see [not supported rules] section.
 
-This plugins support NodeJS v20+ and eslint v7+
+This plugins support NodeJS v20+ and eslint v8+
 Legacy versions of nodejs and eslint are not supported to reduce code complexity
 
 # Installation

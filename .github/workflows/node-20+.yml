@@ -28,7 +28,6 @@ jobs:
         eslint:
           - 9
           - 8
-          - 7
         babel-eslint:
           - 10
           - 9
