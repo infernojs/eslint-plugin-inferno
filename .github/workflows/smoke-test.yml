@@ -7,7 +7,7 @@ on:
 
 jobs:
   smoke-test:
-    if: ${{ github.repository == 'jsx-eslint/eslint-plugin-react' || github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.repository == 'jsx-eslint/eslint-plugin-inferno' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +18,7 @@ jobs:
           skip-ls-check: true
       - run: |
           npm link
-          npm link eslint-plugin-react
+          npm link eslint-plugin-inferno
       - uses: AriPerkkio/eslint-remote-tester-run-action@v4
         with:
           issue-title: 'Results of weekly scheduled smoke test'
