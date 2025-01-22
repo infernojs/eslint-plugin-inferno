@@ -157,23 +157,6 @@ ruleTester.run('no-refs', rule, {
         { messageId: 'thisRefsDeprecated' },
         { messageId: 'stringInRefDeprecated' },
       ],
-    },
-    {
-      code: `
-        var Hello = createClass({
-          componentDidMount: function() {
-          var component = this.refs.hello;
-          },
-          render: function() {
-            return <div ref={\`hello\${index}\`}>Hello {this.props.name}</div>;
-          }
-        });
-      `,
-      options: [{ noTemplateLiterals: true }],
-      errors: [
-        { messageId: 'thisRefsDeprecated' },
-        { messageId: 'stringInRefDeprecated' },
-      ],
-    },
+    }
   ]),
 });

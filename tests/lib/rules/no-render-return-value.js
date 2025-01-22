@@ -42,12 +42,6 @@ ruleTester.run('no-render-return-value', rule, {
       code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
     },
     {
-      code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
-    },
-    {
-      code: 'Inferno.render(<div ref={ref => this.node = ref}/>, document.body);',
-    },
-    {
       code: 'var foo = render(<div />, root)',
     },
     {
@@ -111,24 +105,6 @@ ruleTester.run('no-render-return-value', rule, {
     },
     {
       code: 'var v; v = Inferno.render(<div />, document.body);',
-      errors: [
-        {
-          messageId: 'noReturnValue',
-          data: { node: 'Inferno' },
-        },
-      ],
-    },
-    {
-      code: 'var inst = Inferno.render(<div />, document.body);',
-      errors: [
-        {
-          messageId: 'noReturnValue',
-          data: { node: 'Inferno' },
-        },
-      ],
-    },
-    {
-      code: 'var inst = Inferno.render(<div />, document.body);',
       errors: [
         {
           messageId: 'noReturnValue',

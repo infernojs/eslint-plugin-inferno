@@ -86,19 +86,6 @@ ruleTester.run('no-find-dom-node', rule, {
     },
     {
       code: `
-        var Hello = createClass({
-          componentDidMount: function() {
-            Inferno.findDOMNode(this).scrollIntoView();
-          },
-          render: function() {
-            return <div>Hello</div>;
-          }
-        });
-      `,
-      errors: [{ messageId: 'noFindDOMNode' }],
-    },
-    {
-      code: `
         class Hello extends Component {
           componentDidMount() {
             findDOMNode(this).scrollIntoView();
