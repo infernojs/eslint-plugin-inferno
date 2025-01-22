@@ -175,7 +175,6 @@ Enable the rules that you would like to use.
 
 ```json
   "rules": {
-    "inferno/jsx-uses-inferno": "error",
     "inferno/jsx-uses-vars": "error",
   }
 ```
@@ -276,7 +275,6 @@ module.exports = [
     },
     rules: {
       // ... any rules you want
-      'inferno/jsx-uses-inferno': 'error',
       'inferno/jsx-uses-vars': 'error',
      },
     // ... others are omitted for brevity
@@ -346,7 +344,6 @@ module.exports = [
 | [jsx-sort-props](docs/rules/jsx-sort-props.md)                                               | Enforce props alphabetical sorting                                                                                                           |    | 🔧 |    |    |
 | [jsx-space-before-closing](docs/rules/jsx-space-before-closing.md)                           | Enforce spacing before closing bracket in JSX                                                                                                |    | 🔧 |    | ❌  |
 | [jsx-tag-spacing](docs/rules/jsx-tag-spacing.md)                                             | Enforce whitespace in and around the JSX opening and closing brackets                                                                        |    | 🔧 |    |    |
-| [jsx-uses-inferno](docs/rules/jsx-uses-inferno.md)                                           | Disallow Inferno to be incorrectly marked as unused                                                                                          |    |    |    |    |
 | [jsx-uses-vars](docs/rules/jsx-uses-vars.md)                                                 | Disallow variables used in JSX to be incorrectly marked as unused                                                                            | ☑️ |    |    |    |
 | [jsx-wrap-multilines](docs/rules/jsx-wrap-multilines.md)                                     | Disallow missing parentheses around multiline JSX                                                                                            |    | 🔧 |    |    |
 | [no-access-state-in-setstate](docs/rules/no-access-state-in-setstate.md)                     | Disallow when this.state is accessed within setState                                                                                         |    |    |    |    |
