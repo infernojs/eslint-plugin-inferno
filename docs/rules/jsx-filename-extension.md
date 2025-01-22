@@ -52,7 +52,7 @@ If enabled, files that do not contain code (i.e. are empty, contain only whitesp
 
 ```js
 "rules": {
-  "react/jsx-filename-extension": [1, { "ignoreFilesWithoutCode": true }]
+  "inferno/jsx-filename-extension": [1, { "ignoreFilesWithoutCode": true }]
 }
 ```
 

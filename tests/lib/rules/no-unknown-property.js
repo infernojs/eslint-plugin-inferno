@@ -9,7 +9,7 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/no-unknown-property');
 
 const parsers = require('../../helpers/parsers');
@@ -82,6 +82,9 @@ ruleTester.run('no-unknown-property', rule, {
     // Inferno related attributes
     { code: '<input type="checkbox" defaultChecked={this.state.checkbox} />' },
     { code: '<div onTouchStart={this.startAnimation} onTouchEnd={this.stopAnimation} onTouchCancel={this.cancel} onTouchMove={this.move} onMouseMoveCapture={this.capture} onTouchCancelCapture={this.log} />' },
+    // {
+    //   code: '<link precedence="medium" href="https://foo.bar" rel="canonical" />',
+    // },
     // Case ignored attributes, for `charset` discussion see https://github.com/jsx-eslint/eslint-plugin-react/pull/1863
     { code: '<meta charset="utf-8" />;' },
     { code: '<meta charSet="utf-8" />;' },
@@ -172,6 +175,15 @@ ruleTester.run('no-unknown-property', rule, {
           <button popovertarget="my-popover" popovertargetaction="toggle">Open Popover</button>
 
           <div popover id="my-popover">Greetings, one and all!</div>
+        </div>
+      `,
+    },
+    {
+      code: `
+        <div>
+          <button popoverTarget="my-popover" popoverTargetAction="toggle">Open Popover</button>
+
+          <div id="my-popover" onBeforeToggle={this.onBeforeToggle} popover>Greetings, one and all!</div>
         </div>
       `,
     },

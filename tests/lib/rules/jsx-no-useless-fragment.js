@@ -8,7 +8,7 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-no-useless-fragment');
 const parsers = require('../../helpers/parsers');
 
@@ -194,7 +194,7 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
     },
     {
       code: '<div><>{"a"}{"b"}</></div>',
-      output: '<div><>{"a"}{"b"}</></div>',
+      output: null,
       errors: [{ messageId: 'ChildOfHtmlElement', type: 'JSXFragment' }],
       features: ['fragment', 'ts-old', 'no-ts-new', 'no-babel', 'no-default'],
     },

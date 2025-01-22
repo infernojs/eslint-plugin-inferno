@@ -9,7 +9,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-fragments');
 
 const parsers = require('../../helpers/parsers');
@@ -133,7 +133,7 @@ ruleTester.run('jsx-fragments', rule, {
     },
     {
       code: '<><Foo /></>',
-      output: '<><Foo /></>', // should get '<Act.Frag><Foo /></Act.Frag>', but the old TS parser lacks opening/closing Fragment info
+      output: null, // should get '<Act.Frag><Foo /></Act.Frag>', but the old TS parser lacks opening/closing Fragment info
       features: ['fragment', 'no-babel', 'ts', 'no-ts-new'],
       options: ['element'],
       settings,

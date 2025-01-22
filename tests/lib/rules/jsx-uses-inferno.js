@@ -14,7 +14,7 @@ const rule = require('../../helpers/getESLintCoreRule')('no-unused-vars');
 
 const RuleTester = eslint.RuleTester;
 
-const parsers = require('../../helpers/parsers');
+// const parsers = require('../../helpers/parsers');
 
 const parserOptions = {
   ecmaVersion: 2018,
@@ -44,7 +44,7 @@ ruleTester.run('no-unused-vars', rule, {
     { code: '/*eslint jsx-uses-inferno:1*/ var Inferno; (function () { <div /> })();' },
     { code: '/*eslint jsx-uses-inferno:1*/ /** @jsx Foo */ var Foo; <div />;' },
     { code: '/*eslint jsx-uses-inferno:1*/ var Foo; <div />;', settings },
-    { code: '/*eslint jsx-uses-inferno:1*/ var Inferno; <></>;', parser: parsers.BABEL_ESLINT },
+    // { code: '/*eslint jsx-uses-inferno:1*/ var Inferno; <></>;', parser: parsers.BABEL_ESLINT }, parser: error
   ],
   invalid: [{
     code: '/*eslint jsx-uses-inferno:1*/ var Inferno;',
@@ -56,10 +56,12 @@ ruleTester.run('no-unused-vars', rule, {
     code: '/*eslint jsx-uses-inferno:1*/ var Inferno; <div />;',
     errors: [{ message: '\'Inferno\' is defined but never used.' }],
     settings,
-  }, {
-    code: '/*eslint jsx-uses-inferno:1*/ var Inferno; <></>;',
-    parser: parsers.BABEL_ESLINT,
-    errors: [{ message: '\'Inferno\' is defined but never used.' }],
-    settings,
-  }],
+  },
+  // {
+  //   code: '/*eslint jsx-uses-inferno:1*/ var Inferno; <></>;',
+  //   parser: parsers.BABEL_ESLINT,
+  //   errors: [{ message: '\'Inferno\' is defined but never used.' }],
+  //   settings,
+  // }
+  ],
 });

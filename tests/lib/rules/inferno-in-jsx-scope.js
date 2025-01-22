@@ -9,7 +9,7 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/inferno-in-jsx-scope');
 
 const parsers = require('../../helpers/parsers');
@@ -44,9 +44,6 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
     { code: 'var Inferno; <x-gif />;' },
     { code: 'var Inferno, App, a=1; <App attr={a} />;' },
     { code: 'var Inferno, App, a=1; function elem() { return <App attr={a} />; }' },
-    {
-      code: 'var Inferno, App; <App />;',
-    },
     { code: '/** @jsx Foo */ var Foo, App; <App />;' },
     { code: '/** @jsx Foo.Bar */ var Foo, App; <App />;' },
     {

@@ -16,7 +16,7 @@ const PROPERTY_ASSIGNMENT = 'property assignment';
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/static-property-placement');
 
 const parsers = require('../../helpers/parsers');
@@ -39,7 +39,7 @@ const ruleTester = new RuleTester(ruleTesterConfig);
 ruleTester.run('static-property-placement', rule, {
   valid: parsers.all([
     // ------------------------------------------------------------------------------
-    // Ignore createClass/createInfernoClass and Static Functional Components
+    // Ignore createClass/createClass and Static Functional Components
     // ------------------------------------------------------------------------------
     {
       // Do not error on createClass pragma

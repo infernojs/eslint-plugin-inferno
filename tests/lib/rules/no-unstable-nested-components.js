@@ -9,7 +9,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/no-unstable-nested-components');
 
 const parsers = require('../../helpers/parsers');
@@ -578,6 +578,18 @@ ruleTester.run('no-unstable-nested-components', rule, {
       `,
       options: [{
         allowAsProps: true,
+      }],
+    },
+    {
+      code: `
+        function ParentComponent() {
+          return <Table
+            rowRenderer={(rowData) => <Row data={data} />}
+          />
+        }
+      `,
+      options: [{
+        propNamePattern: '*Renderer',
       }],
     },
     /* TODO These minor cases are currently falsely marked due to component detection

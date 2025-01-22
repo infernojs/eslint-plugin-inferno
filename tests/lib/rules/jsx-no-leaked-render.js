@@ -11,7 +11,7 @@
 
 const semver = require('semver');
 const eslintPkg = require('eslint/package.json');
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-no-leaked-render');
 
 const parsers = require('../../helpers/parsers');
@@ -126,14 +126,6 @@ ruleTester.run('jsx-no-leaked-render', rule, {
       `,
       options: [{ validStrategies: ['coerce', 'ternary'] }],
     },
-    {
-      code: `
-        const Component = ({ elements, count }) => {
-          return <div>{!!count && <List elements={elements}/>}</div>
-        }
-      `,
-      options: [{ validStrategies: ['coerce'] }],
-    },
 
     // Fixes for:
     // - https://github.com/jsx-eslint/eslint-plugin-react/issues/3292
@@ -191,6 +183,24 @@ ruleTester.run('jsx-no-leaked-render', rule, {
       code: `
         const Component = ({ elements, count }) => {
           return <div>{count ? <List elements={elements}/> : <EmptyList />}</div>
+        }
+      `,
+      options: [{ validStrategies: ['coerce'] }],
+    },
+    {
+      code: `
+        const isOpen = true;
+        const Component = () => {
+          return <Popover open={isOpen && items.length > 0} />
+        }
+      `,
+      options: [{ validStrategies: ['coerce'] }],
+    },
+    {
+      code: `
+        const isOpen = false;
+        const Component = () => {
+          return <Popover open={isOpen && items.length > 0} />
         }
       `,
       options: [{ validStrategies: ['coerce'] }],
@@ -928,5 +938,25 @@ ruleTester.run('jsx-no-leaked-render', rule, {
         column: 16,
       }],
     } : [],
+    {
+      code: `
+        const isOpen = 0;
+        const Component = () => {
+          return <Popover open={isOpen && items.length > 0} />
+        }
+      `,
+      output: `
+        const isOpen = 0;
+        const Component = () => {
+          return <Popover open={!!isOpen && items.length > 0} />
+        }
+      `,
+      options: [{ validStrategies: ['coerce'] }],
+      errors: [{
+        message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
+        line: 4,
+        column: 33,
+      }],
+    },
   )),
 });

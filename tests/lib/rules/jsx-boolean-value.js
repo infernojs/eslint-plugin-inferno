@@ -9,7 +9,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-boolean-value');
 
 const parsers = require('../../helpers/parsers');
@@ -51,6 +51,10 @@ ruleTester.run('jsx-boolean-value', rule, {
     {
       code: '<App />;',
       options: ['never', { assumeUndefinedIsFalse: true }],
+    },
+    {
+      code: '<App foo={false} />;',
+      options: ['never', { assumeUndefinedIsFalse: false }],
     },
     {
       code: '<App foo={false} />;',
@@ -137,6 +141,21 @@ ruleTester.run('jsx-boolean-value', rule, {
       errors: [
         {
           messageId: 'omitPropAndBoolean',
+          data: { propName: 'foo' },
+        },
+        {
+          messageId: 'omitPropAndBoolean',
+          data: { propName: 'bak' },
+        },
+      ],
+    },
+    {
+      code: '<App foo={true} bak={false} />;',
+      output: '<App foo  />;',
+      options: ['never', { assumeUndefinedIsFalse: true }],
+      errors: [
+        {
+          messageId: 'omitBoolean',
           data: { propName: 'foo' },
         },
         {

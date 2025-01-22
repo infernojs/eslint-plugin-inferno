@@ -15,9 +15,9 @@ Example of **incorrect** code for this rule:
 <input type="checkbox" checked defaultChecked />
 <input type="radio" checked defaultChecked />
 
-React.createElement('input', { checked: false });
-React.createElement('input', { type: 'checkbox', checked: true });
-React.createElement('input', { type: 'checkbox', checked: true, defaultChecked: true });
+Inferno.createElement('input', { checked: false });
+Inferno.createElement('input', { type: 'checkbox', checked: true });
+Inferno.createElement('input', { type: 'checkbox', checked: true, defaultChecked: true });
 ```
 
 Example of **correct** code for this rule:
@@ -28,16 +28,16 @@ Example of **correct** code for this rule:
 <input type="checkbox" checked onChange readOnly />
 <input type="checkbox" defaultChecked />
 
-React.createElement('input', { type: 'checkbox', checked: true, onChange() {} });
-React.createElement('input', { type: 'checkbox', checked: true, readOnly: true });
-React.createElement('input', { type: 'checkbox', checked: true, onChange() {}, readOnly: true });
-React.createElement('input', { type: 'checkbox', defaultChecked: true });
+Inferno.createElement('input', { type: 'checkbox', checked: true, onChange() {} });
+Inferno.createElement('input', { type: 'checkbox', checked: true, readOnly: true });
+Inferno.createElement('input', { type: 'checkbox', checked: true, onChange() {}, readOnly: true });
+Inferno.createElement('input', { type: 'checkbox', defaultChecked: true });
 ```
 
 ## Rule Options
 
 ```js
-"react/checked-requires-onchange-or-readonly": [<enabled>, {
+"inferno/checked-requires-onchange-or-readonly": [<enabled>, {
   "ignoreMissingProperties": <boolean>,
   "ignoreExclusiveCheckedAttribute": <boolean>
 }]

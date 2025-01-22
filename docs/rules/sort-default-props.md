@@ -11,7 +11,7 @@ This rule checks all components and verifies that all `defaultProps` declaration
 The following patterns are considered warnings:
 
 ```jsx
-var Component = createInfernoClass({
+var Component = createClass({
 ...
   getDefaultProps: function() {
     return {
@@ -91,7 +91,7 @@ export default class ClassWithSpreadInPropTypes extends BaseClass {
 The following patterns are considered okay and do **not** cause warnings:
 
 ```jsx
-var Component = createInfernoClass({
+var Component = createClass({
 ...
   getDefaultProps: function() {
     return {

@@ -9,7 +9,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/no-is-mounted');
 
 const parsers = require('../../helpers/parsers');
@@ -55,6 +55,17 @@ ruleTester.run('no-is-mounted', rule, {
             return <div>Hello</div>;
           }
         });
+      `,
+    },
+    {
+      code: `
+        class Hello extends Inferno.Component {
+          notIsMounted() {}
+          render() {
+            this.notIsMounted();
+            return <div>Hello</div>;
+          }
+        };
       `,
     },
   ]),

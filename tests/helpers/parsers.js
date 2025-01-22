@@ -1,6 +1,5 @@
 'use strict';
 
-const path = require('path');
 const semver = require('semver');
 const version = require('eslint/package.json').version;
 const tsParserVersion = require('@typescript-eslint/parser/package.json').version;
@@ -27,12 +26,10 @@ function minEcmaVersion(features, parserOptions) {
   return Number.isFinite(result) ? result : undefined;
 }
 
-const NODE_MODULES = '../../node_modules';
-
 const parsers = {
-  BABEL_ESLINT: path.join(__dirname, NODE_MODULES, 'babel-eslint'),
-  '@BABEL_ESLINT': path.join(__dirname, NODE_MODULES, '@babel/eslint-parser'),
-  '@TYPESCRIPT_ESLINT': path.join(__dirname, NODE_MODULES, '@typescript-eslint/parser/dist/index.js'),
+  BABEL_ESLINT: require.resolve('babel-eslint'),
+  '@BABEL_ESLINT': require.resolve('@babel/eslint-parser'),
+  '@TYPESCRIPT_ESLINT': require.resolve('@typescript-eslint/parser'),
   disableNewTS,
   skipDueToMultiErrorSorting: semver.satisfies(process.versions.node, '^8 || ^9'),
   babelParserOptions: function parserOptions(test, features) {
@@ -40,13 +37,11 @@ const parsers = {
       ...test.parserOptions,
       requireConfigFile: false,
       babelOptions: {
-        presets: [
-          '@babel/preset-react',
-        ],
         plugins: [
           '@babel/plugin-syntax-do-expressions',
           '@babel/plugin-syntax-function-bind',
           ['@babel/plugin-syntax-decorators', { legacy: true }],
+          'babel-plugin-inferno',
         ],
         parserOpts: {
           allowSuperOutsideMethod: false,
@@ -99,7 +94,7 @@ const parsers = {
           && {
             errors: testObject.errors.map(
               (errorObject) => {
-                const nextSuggestions = errorObject.suggestions && {
+                const nextSuggestions = errorObject.suggestions && typeof errorObject.suggestions !== 'number' && {
                   // eslint-disable-next-line max-len
                   suggestions: errorObject.suggestions.map((suggestion) => ({ ...suggestion, output: suggestion.output + extraComment })),
                 };

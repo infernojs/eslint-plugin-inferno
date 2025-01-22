@@ -1,10 +1,8 @@
 # Disallow missing Inferno when using JSX (`inferno/inferno-in-jsx-scope`)
 
-🚫 This rule is _disabled_ in the 🏃 `jsx-runtime` [config](https://github.com/jsx-eslint/eslint-plugin-react/#shareable-configs).
-
 <!-- end auto-generated rule header -->
 
-💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`. This rule is disabled in the following configs: `jsx-runtime`.
+💼 This rule is enabled in the following [configs](https://github.com/infernojs/eslint-plugin-inferno#shareable-configurations): `all`.
 
 Note:
 This rule is not part of recommended set, because `babel-plugin-inferno` can handle inferno import declaration automatically.

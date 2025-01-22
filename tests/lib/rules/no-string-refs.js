@@ -9,7 +9,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/no-string-refs');
 
 const parsers = require('../../helpers/parsers');
@@ -59,6 +59,19 @@ ruleTester.run('no-refs', rule, {
         });
       `,
     },
+    // This has not been supported in inferno for years, not sure if it ever was
+    // {
+    //   code: `
+    //     var Hello = createClass({
+    //       componentDidMount: function() {
+    //         var component = this.refs.hello;
+    //       },
+    //       render: function() {
+    //         return <div>Hello {this.props.name}</div>;
+    //       }
+    //     });
+    //   `,
+    // },
   ]),
 
   invalid: parsers.all([
@@ -119,6 +132,23 @@ ruleTester.run('no-refs', rule, {
           },
           render: function() {
             return <div ref={\`hello\`}>Hello {this.props.name}</div>;
+          }
+        });
+      `,
+      options: [{ noTemplateLiterals: true }],
+      errors: [
+        { messageId: 'thisRefsDeprecated' },
+        { messageId: 'stringInRefDeprecated' },
+      ],
+    },
+    {
+      code: `
+        var Hello = createClass({
+          componentDidMount: function() {
+          var component = this.refs.hello;
+          },
+          render: function() {
+            return <div ref={\`hello\${index}\`}>Hello {this.props.name}</div>;
           }
         });
       `,

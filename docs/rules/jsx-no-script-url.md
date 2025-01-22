@@ -74,7 +74,7 @@ Indicates if the `linkComponents` config in [global shared settings](https://git
 
 ```json
 {
-  "react/jsx-no-script-url": [
+  "inferno/jsx-no-script-url": [
     "error",
     [
       {
@@ -96,6 +96,6 @@ If only global settings should be used for this rule, the array option can be om
 ```jsonc
 {
   // same as ["error", [], { "includeFromSettings": true }]
-  "react/jsx-no-script-url": ["error", { "includeFromSettings": true }]
+  "inferno/jsx-no-script-url": ["error", { "includeFromSettings": true }]
 }
 ```

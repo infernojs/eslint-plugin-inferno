@@ -1,4 +1,14 @@
 # Change Log
+## 2025-01-22
+
+Everything re-branched from upstream.
+All bug fixes included from upstream.
+
+**Support Eslint v9 flat configs**
+
+`"react/boolean-prop-naming"` rule ported for Typescript / Flow users as `"inferno/boolean-prop-naming"`
+
+
 ## 2023-10-23
 
 NodeJS v20 required.

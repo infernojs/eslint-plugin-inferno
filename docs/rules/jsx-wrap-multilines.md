@@ -71,7 +71,7 @@ Examples of **incorrect** code for this rule, when configured with `never`:
 ```jsx
 var singleLineJSX = <p>Hello</p>
 
-var Hello = createReactClass({
+var Hello = createClass({
   render: function() {
     return (
       <div>

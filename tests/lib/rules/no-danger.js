@@ -9,7 +9,7 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/no-danger');
 
 const parsers = require('../../helpers/parsers');
@@ -32,6 +32,26 @@ ruleTester.run('no-danger', rule, {
     { code: '<App />;' },
     { code: '<App dangerouslySetInnerHTML={{ __html: "" }} />;' },
     { code: '<div className="bar"></div>;' },
+    {
+      code: '<div className="bar"></div>;',
+      options: [{ customComponentNames: ['*'] }],
+    },
+    {
+      code: `
+        function App() {
+          return <Title dangerouslySetInnerHTML={{ __html: "<span>hello</span>" }} />;
+        }
+      `,
+      options: [{ customComponentNames: ['Home'] }],
+    },
+    {
+      code: `
+        function App() {
+          return <TextMUI dangerouslySetInnerHTML={{ __html: "<span>hello</span>" }} />;
+        }
+      `,
+      options: [{ customComponentNames: ['MUI*'] }],
+    },
   ]),
   invalid: parsers.all([
     {
@@ -40,6 +60,116 @@ ruleTester.run('no-danger', rule, {
         {
           messageId: 'dangerousProp',
           data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+    {
+      code: '<App dangerouslySetInnerHTML={{ __html: "<span>hello</span>" }} />;',
+      options: [{ customComponentNames: ['*'] }],
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+    {
+      code: `
+        function App() {
+          return <Title dangerouslySetInnerHTML={{ __html: "<span>hello</span>" }} />;
+        }
+      `,
+      options: [{ customComponentNames: ['Title'] }],
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+    {
+      code: `
+        function App() {
+          return <TextFoo dangerouslySetInnerHTML={{ __html: "<span>hello</span>" }} />;
+        }
+      `,
+      options: [{ customComponentNames: ['*Foo'] }],
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+    {
+      code: `
+        function App() {
+          return <FooText dangerouslySetInnerHTML={{ __html: "<span>hello</span>" }} />;
+        }
+      `,
+      options: [{ customComponentNames: ['Foo*'] }],
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+    {
+      code: `
+        function App() {
+          return <TextMUI dangerouslySetInnerHTML={{ __html: "<span>hello</span>" }} />;
+        }
+      `,
+      options: [{ customComponentNames: ['*MUI'] }],
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+    {
+      code: `
+        import type { ComponentProps } from "inferno";
+
+        const Comp = "div";
+        const Component = () => <></>;
+
+        const NestedComponent = (_props: ComponentProps<"div">) => <></>;
+
+        Component.NestedComponent = NestedComponent;
+
+        function App() {
+          return (
+            <>
+              <div dangerouslySetInnerHTML={{ __html: "<div>aaa</div>" }} />
+              <Comp dangerouslySetInnerHTML={{ __html: "<div>aaa</div>" }} />
+
+              <Component.NestedComponent
+                dangerouslySetInnerHTML={{ __html: '<div>aaa</div>' }}
+              />
+            </>
+          );
+        }
+      `,
+      features: ['fragment', 'types'],
+      options: [{ customComponentNames: ['*'] }],
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+          line: 14,
+        },
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+          line: 15,
+        },
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+          line: 18,
         },
       ],
     },

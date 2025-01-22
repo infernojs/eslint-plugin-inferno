@@ -4,9 +4,9 @@
 
 'use strict';
 
-const RuleTester = require('eslint').RuleTester;
 const semver = require('semver');
 const eslintPkg = require('eslint/package.json');
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/destructuring-assignment');
 
 const parsers = require('../../helpers/parsers');
@@ -807,5 +807,68 @@ ${'            '}
         features: ['ts', 'no-babel'],
       },
     ] : [],
+    {
+      code: `
+        type Props = { text: string };
+        export const MyComponent: Inferno.FC<Props> = (props) => {
+          type MyType = typeof props.text;
+          return <div>{props.text as MyType}</div>;
+        };
+      `,
+      options: ['always', { destructureInSignature: 'always' }],
+      features: ['types', 'no-babel'],
+      errors: [
+        {
+          messageId: 'useDestructAssignment',
+          type: 'TSQualifiedName',
+          data: { type: 'props' },
+        },
+        {
+          messageId: 'useDestructAssignment',
+          type: 'MemberExpression',
+          data: { type: 'props' },
+        },
+      ],
+    },
+    {
+      code: `
+        type Props = { text: string };
+        export const MyOtherComponent: Inferno.FC<Props> = (props) => {
+          const { text } = props;
+          type MyType = typeof props.text;
+          return <div>{text as MyType}</div>;
+        };
+      `,
+      options: ['always', { destructureInSignature: 'always' }],
+      features: ['types', 'no-babel'],
+      errors: [
+        {
+          messageId: 'useDestructAssignment',
+          type: 'TSQualifiedName',
+          data: { type: 'props' },
+        },
+      ],
+    },
+    {
+      code: `
+        function C(props: Props) {
+          void props.a
+          typeof props.b
+          return <div />
+        }
+      `,
+      options: ['always'],
+      features: ['types'],
+      errors: [
+        {
+          messageId: 'useDestructAssignment',
+          data: { type: 'props' },
+        },
+        {
+          messageId: 'useDestructAssignment',
+          data: { type: 'props' },
+        },
+      ],
+    },
   )),
 });

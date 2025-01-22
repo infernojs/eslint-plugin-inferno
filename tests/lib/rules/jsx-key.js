@@ -9,7 +9,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-key');
 
 const parsers = require('../../helpers/parsers');
@@ -408,6 +408,21 @@ ruleTester.run('jsx-key', rule, {
         { messageId: 'missingIterKey' },
         { messageId: 'missingIterKey' },
       ],
+    },
+    {
+      code: `
+        const TestCase = () => {
+          const list = [1, 2, 3, 4, 5];
+
+          return (
+            <div>
+              {list.map(x => <div {...spread} key={x} />)}
+            </div>
+          );
+        };
+      `,
+      options: [{ checkKeyMustBeforeSpread: true }],
+      errors: [{ messageId: 'keyBeforeSpread' }],
     },
   ]),
 });

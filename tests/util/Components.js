@@ -1,12 +1,12 @@
 'use strict';
 
 const assert = require('assert');
-const eslint = require('eslint');
 
+const RuleTester = require('../helpers/ruleTester');
 const Components = require('../../lib/util/Components');
 const parsers = require('../helpers/parsers');
 
-const ruleTester = new eslint.RuleTester({
+const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',

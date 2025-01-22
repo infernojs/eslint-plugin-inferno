@@ -11,7 +11,7 @@
 
 const babelEslintVersion = require('babel-eslint/package.json').version;
 const semver = require('semver');
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 
 const rule = require('../../../lib/rules/sort-default-props');
 
@@ -34,7 +34,7 @@ ruleTester.run('sort-default-props', rule, {
   valid: parsers.all([].concat(
     {
       code: `
-        var First = createInfernoClass({
+        var First = createClass({
           render: function() {
             return <div />;
           }
@@ -43,7 +43,7 @@ ruleTester.run('sort-default-props', rule, {
     },
     {
       code: `
-        var First = createInfernoClass({
+        var First = createClass({
           propTypes: {
             A: PropTypes.any,
             Z: PropTypes.string,
@@ -66,7 +66,7 @@ ruleTester.run('sort-default-props', rule, {
     },
     {
       code: `
-        var First = createInfernoClass({
+        var First = createClass({
           propTypes: {
             a: PropTypes.any,
             A: PropTypes.any,
@@ -90,7 +90,7 @@ ruleTester.run('sort-default-props', rule, {
     },
     {
       code: `
-        var First = createInfernoClass({
+        var First = createClass({
           propTypes: {
             a: PropTypes.any,
             z: PropTypes.string
@@ -105,7 +105,7 @@ ruleTester.run('sort-default-props', rule, {
             return <div />;
           }
         });
-        var Second = createInfernoClass({
+        var Second = createClass({
           propTypes: {
             AA: PropTypes.any,
             ZZ: PropTypes.string
@@ -222,7 +222,7 @@ ruleTester.run('sort-default-props', rule, {
     } : [],
     {
       code: `
-        var Hello = createInfernoClass({
+        var Hello = createClass({
           render: function() {
             let { a, ...b } = obj;
             let c = { ...d };
@@ -233,7 +233,7 @@ ruleTester.run('sort-default-props', rule, {
     },
     {
       code: `
-        var First = createInfernoClass({
+        var First = createClass({
           propTypes: {
             barRequired: PropTypes.func.isRequired,
             onBar: PropTypes.func,

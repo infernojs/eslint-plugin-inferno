@@ -9,7 +9,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/button-has-type');
 
 const parsers = require('../../helpers/parsers');
@@ -75,7 +75,7 @@ ruleTester.run('button-has-type', rule, {
     },
     {
       code: `
-        function MyComponent(): ReactElement {
+        function MyComponent(): InfernoElement {
           const buttonProps: (Required<Attributes> & ButtonHTMLAttributes<HTMLButtonElement>)[] = [
             {
               children: 'test',
@@ -89,7 +89,7 @@ ruleTester.run('button-has-type', rule, {
           return <>
             {
               buttonProps.map(
-                ({ key, ...props }: Required<Attributes> & ButtonHTMLAttributes<HTMLButtonElement>): ReactElement =>
+                ({ key, ...props }: Required<Attributes> & ButtonHTMLAttributes<HTMLButtonElement>): InfernoElement =>
                   <button key={key} type="button" {...props} />
               )
             }
@@ -302,6 +302,12 @@ ruleTester.run('button-has-type', rule, {
           messageId: 'forbiddenValue',
           data: { value: 'reset' },
         },
+      ],
+    },
+    {
+      code: 'Inferno.createElement("button", {...extraProps})',
+      errors: [
+        { messageId: 'missingType' },
       ],
     },
     {

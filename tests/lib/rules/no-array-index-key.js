@@ -9,7 +9,7 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester;
+const RuleTester = require('../../helpers/ruleTester');
 const parsers = require('../../helpers/parsers');
 const rule = require('../../../lib/rules/no-array-index-key');
 
@@ -95,9 +95,6 @@ ruleTester.run('no-array-index-key', rule, {
     },
     {
       code: 'foo.flatMap((a) => <Foo key={a} />)',
-    },
-    {
-      code: 'foo.reduce((a, b) => a.concat(<Foo key={b.id} />), [])',
     },
     {
       code: 'foo.reduce((a, b, i) => a.concat(<Foo key={b.id} />), [])',

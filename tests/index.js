@@ -10,6 +10,7 @@ const plugin = require('..');
 const index = require('../lib/rules');
 
 const ruleFiles = fs.readdirSync(path.resolve(__dirname, '../lib/rules/'))
+  .filter((f) => f.endsWith('.js'))
   .map((f) => path.basename(f, '.js'))
   .filter((f) => f !== 'index');
 
@@ -34,8 +35,7 @@ describe('all rule files should be exported by the plugin', () => {
 describe('deprecated rules', () => {
   it('marks all deprecated rules as deprecated', () => {
     ruleFiles.forEach((ruleName) => {
-      console.log(ruleName);
-      const inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
+      const inDeprecatedRules = !!plugin.deprecatedRules[ruleName];
       const isDeprecated = plugin.rules[ruleName].meta.deprecated;
       if (inDeprecatedRules) {
         assert(isDeprecated, `${ruleName} metadata should mark it as deprecated`);
@@ -78,9 +78,9 @@ describe('configurations', () => {
     });
 
     ruleFiles.forEach((ruleName) => {
-      const inDeprecatedRules = Boolean(plugin.deprecatedRules[ruleName]);
+      const inDeprecatedRules = !!plugin.deprecatedRules[ruleName];
       const inConfig = typeof plugin.configs[configName].rules[`inferno/${ruleName}`] !== 'undefined';
-      assert(inDeprecatedRules ^ inConfig); // eslint-disable-line no-bitwise
+      assert(inDeprecatedRules ^ inConfig, ruleName); // eslint-disable-line no-bitwise
     });
   });
 });
