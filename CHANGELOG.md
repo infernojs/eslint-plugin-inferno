@@ -1,4 +1,7 @@
 # Change Log
+## 2025-01-23 (7.37.5)
+- bugfix: Do not raise errors for InfernoJs optimization flags
+
 ## 2025-01-22
 
 Everything re-branched from upstream.

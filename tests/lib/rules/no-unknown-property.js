@@ -29,6 +29,15 @@ const parserOptions = {
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-unknown-property', rule, {
   valid: parsers.all([
+    // Inferno optimization flags should be fine
+    { code: '<div $HasKeyedChildren />;' },
+    { code: '<div $HasNonKeyedChildren />;' },
+    { code: '<div $HasVNodeChildren />;' },
+    { code: '<div $HasTextChildren />;' },
+    { code: '<div $ReCreate />;' },
+    { code: '<div $ChildFlag="{1}" />;' },
+    { code: '<div $Flags="{1}" />;' },
+
     // Inferno components and their props/attributes should be fine
     { code: '<App class="bar" />;' },
     { code: '<App for="bar" />;' },
