@@ -2,6 +2,7 @@
 ## 2025-01-23 (7.37.5)
 - bugfix: Do not raise errors for InfernoJs optimization flags
 - bugfix: DO not raise error for Functional component hooks
+- bugfix: Changed `inferno/no-unknown-property` to better support InfernoJS attributes
 
 ## 2025-01-22
 
