@@ -1,4 +1,8 @@
 # Change Log
+## 2025-01-23 (7.37.6)
+- bugfix: allow using lowercased variants of semi-synthetic events  
+- bugfix: added intermediate as allowed attribute
+
 ## 2025-01-23 (7.37.5)
 - bugfix: Do not raise errors for InfernoJs optimization flags
 - bugfix: DO not raise error for Functional component hooks
