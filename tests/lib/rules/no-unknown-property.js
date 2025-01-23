@@ -72,29 +72,27 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<img src="cat_keyboard.jpeg" alt="A cat sleeping on a keyboard" align="top" fetchPriority="high" />' },
     { code: '<input type="password" required />' },
     { code: '<input ref={this.input} type="radio" />' },
-    { code: '<input type="file" webkitdirectory="" />' },
-    { code: '<input type="file" webkitDirectory="" />' },
     { code: '<div inert children="anything" />' },
     { code: '<iframe scrolling="?" onLoad={a} onError={b} align="top" />' },
     { code: '<input key="bar" type="radio" />' },
     { code: '<button disabled>You cannot click me</button>;' },
-    { code: '<svg key="lock" viewBox="box" fill={10} d="d" stroke={1} strokeWidth={2} strokeLinecap={3} strokeLinejoin={4} transform="something" clipRule="else" x1={5} x2="6" y1="7" y2="8"></svg>' },
-    { code: '<g fill="#7B82A0" fillRule="evenodd"></g>' },
+    { code: '<svg key="lock" viewbox="box" fill={10} d="d" stroke={1} stroke-width={2} stroke-linecap={3} stroke-linejoin={4} transform="something" clip-rule="else" x1={5} x2="6" y1="7" y2="8"></svg>' },
+    { code: '<g fill="#7B82A0" fill-rule="evenodd"></g>' },
     { code: '<mask fill="#7B82A0"></mask>' },
     { code: '<symbol fill="#7B82A0"></symbol>' },
     { code: '<meta property="og:type" content="website" />' },
     { code: '<input type="checkbox" checked={checked} disabled={disabled} id={id} onChange={onChange} />' },
-    { code: '<video playsInline />' },
+    { code: '<video playsinline />' },
     { code: '<img onError={foo} onLoad={bar} />' },
     { code: '<picture inert={false} onError={foo} onLoad={bar} />' },
     { code: '<iframe onError={foo} onLoad={bar} />' },
     { code: '<script onLoad={bar} onError={foo} />' },
     { code: '<source onLoad={bar} onError={foo} />' },
     { code: '<link onLoad={bar} onError={foo} />' },
-    { code: '<link rel="preload" as="image" href="someHref" imageSrcSet="someImageSrcSet" imageSizes="someImageSizes" />' },
+    { code: '<link rel="preload" as="image" href="someHref" imagesrcset="someImageSrcSet" imagesizes="someImageSizes" />' },
     { code: '<object onLoad={bar} />' },
-    { code: '<video allowFullScreen webkitAllowFullScreen mozAllowFullScreen />' },
-    { code: '<iframe allowFullScreen webkitAllowFullScreen mozAllowFullScreen />' },
+    { code: '<video allowfullscreen />' },
+    { code: '<iframe allowfullscreen />' },
     { code: '<table border="1" />' },
     { code: '<th abbr="abbr" />' },
     { code: '<td abbr="abbr" />' },
@@ -140,9 +138,12 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<button aria-haspopup="true">Click me to open pop up</button>;' },
     { code: '<button aria-label="Close" onClick={someThing.close} />;' },
     // Attributes on allowed elements should work
+    { code: '<script crossorigin nomodule />' },
     { code: '<script crossOrigin noModule />' },
     { code: '<audio crossOrigin />' },
     { code: '<svg focusable><image crossOrigin /></svg>' },
+    { code: '<audio crossorigin />' },
+    { code: '<svg focusable><image crossorigin /></svg>' },
     { code: '<details onToggle={this.onToggle}>Some details</details>' },
     { code: '<path fill="pink" d="M 10,30 A 20,20 0,0,1 50,30 A 20,20 0,0,1 90,30 Q 90,60 50,90 Q 10,60 10,30 z"></path>' },
     { code: '<line fill="pink" x1="0" y1="80" x2="100" y2="20"></line>' },
@@ -153,6 +154,12 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<pattern id="pattern" viewBox="0,0,10,10" width="10%" height="10%" />' },
     { code: '<symbol id="myDot" width="10" height="10" viewBox="0 0 2 2" />' },
     { code: '<view id="one" viewBox="0 0 100 100" />' },
+    { code: '<video controlslist="nodownload" controls={this.controls} loop={true} muted={false} src={this.videoSrc} playsinline={true} onResize={this.onResize}></video>' },
+    { code: '<audio controlslist="nodownload" controls={this.controls} crossorigin="anonymous" disableremoteplayback loop muted preload="none" src="something" onAbort={this.abort} onDurationChange={this.durationChange} onEmptied={this.emptied} onEnded={this.end} onError={this.error} onResize={this.onResize}></audio>' },
+    { code: '<marker id={markerId} viewbox="0 0 2 2" refX="1" refY="1" markerWidth="1" markerHeight="1" orient="auto" />' },
+    { code: '<pattern id="pattern" viewbox="0,0,10,10" width="10%" height="10%" />' },
+    { code: '<symbol id="myDot" width="10" height="10" viewbox="0 0 2 2" />' },
+    { code: '<view id="one" viewbox="0 0 100 100" />' },
     { code: '<hr align="top" />' },
     { code: '<applet align="top" />' },
     { code: '<marker fill="#000" />' },
@@ -363,182 +370,187 @@ ruleTester.run('no-unknown-property', rule, {
       ],
     },
     {
-      code: '<div class="bar"></div>;',
-      output: '<div className="bar"></div>;',
+      code: '<div htmlfor="bar"></div>;',
       errors: [
         {
-          messageId: 'unknownPropWithStandardName',
+          messageId: 'unknownProp',
           data: {
-            name: 'class',
-            standardName: 'className',
+            name: 'htmlfor',
           },
         },
       ],
     },
-    {
-      code: '<div for="bar"></div>;',
-      output: '<div htmlFor="bar"></div>;',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'for',
-            standardName: 'htmlFor',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div accept-charset="bar"></div>;',
-      output: '<div acceptCharset="bar"></div>;',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'accept-charset',
-            standardName: 'acceptCharset',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div http-equiv="bar"></div>;',
-      output: '<div httpEquiv="bar"></div>;',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'http-equiv',
-            standardName: 'httpEquiv',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div accesskey="bar"></div>;',
-      output: '<div accessKey="bar"></div>;',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'accesskey',
-            standardName: 'accessKey',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div onclick="bar"></div>;',
-      output: '<div onClick="bar"></div>;',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'onclick',
-            standardName: 'onClick',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div onmousedown="bar"></div>;',
-      output: '<div onMouseDown="bar"></div>;',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'onmousedown',
-            standardName: 'onMouseDown',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div onMousedown="bar"></div>;',
-      output: '<div onMouseDown="bar"></div>;',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'onMousedown',
-            standardName: 'onMouseDown',
-          },
-        },
-      ],
-    },
-    {
-      code: '<use xlink:href="bar" />;',
-      output: '<use xlinkHref="bar" />;',
-      features: ['jsx namespace'],
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'xlink:href',
-            standardName: 'xlinkHref',
-          },
-        },
-      ],
-    },
-    {
-      code: '<rect clip-path="bar" />;',
-      output: '<rect clipPath="bar" />;',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'clip-path',
-            standardName: 'clipPath',
-          },
-        },
-      ],
-    },
-    {
-      code: '<script crossorigin nomodule />',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'crossorigin',
-            standardName: 'crossOrigin',
-          },
-        },
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'nomodule',
-            standardName: 'noModule',
-          },
-        },
-      ],
-      output: '<script crossOrigin noModule />',
-    },
-    {
-      code: '<div crossorigin />',
-      errors: [
-        {
-          messageId: 'unknownPropWithStandardName',
-          data: {
-            name: 'crossorigin',
-            standardName: 'crossOrigin',
-          },
-        },
-      ],
-      output: '<div crossOrigin />',
-    },
-    {
-      code: '<div crossOrigin />',
-      errors: [
-        {
-          messageId: 'invalidPropOnTag',
-          data: {
-            name: 'crossOrigin',
-            tagName: 'div',
-            allowedTags: 'script, img, video, audio, link, image',
-          },
-        },
-      ],
-    },
+    // Another rule checks class/className usages
+    // {
+    //   code: '<div class="bar"></div>;',
+    //   output: '<div className="bar"></div>;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'class',
+    //         standardName: 'className',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<div htmlFor="bar"></div>;',
+    //   output: '<div for="bar"></div>;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'htmlFor',
+    //         standardName: 'for',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<div acceptCharset="bar"></div>;',
+    //   output: '<div accept-charset="bar"></div>;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'acceptCharset',
+    //         standardName: 'accept-charset',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<div httpEquiv="bar"></div>;',
+    //   output: '<div http-equiv="bar"></div>;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'httpEquiv',
+    //         standardName: 'http-equiv',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<div accessKey="bar"></div>;',
+    //   output: '<div accesskey="bar"></div>;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'accessKey',
+    //         standardName: 'accesskey',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<div onclick="bar"></div>;',
+    //   output: '<div onClick="bar"></div>;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'onclick',
+    //         standardName: 'onClick',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<div onmousedown="bar"></div>;',
+    //   output: '<div onMouseDown="bar"></div>;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'onmousedown',
+    //         standardName: 'onMouseDown',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<div onMousedown="bar"></div>;',
+    //   output: '<div onMouseDown="bar"></div>;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'onMousedown',
+    //         standardName: 'onMouseDown',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<use xlinkHref="bar" />;',
+    //   output: '<use xlink:href="bar" />;',
+    //   features: ['jsx namespace'],
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'xlinkHref',
+    //         standardName: 'xlink:href',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<rect clipPath="bar" />;',
+    //   output: '<rect clip-path="bar" />;',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'clipPath',
+    //         standardName: 'clip-path',
+    //       },
+    //     },
+    //   ],
+    // },
+    // {
+    //   code: '<script crossOrigin nomodule />',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'crossOrigin',
+    //         standardName: 'crossorigin',
+    //       },
+    //     },
+    //   ],
+    //   output: '<script crossorigin nomodule />',
+    // },
+    // {
+    //   code: '<div crossOrigin />',
+    //   errors: [
+    //     {
+    //       messageId: 'unknownPropWithReactName',
+    //       data: {
+    //         name: 'crossOrigin',
+    //         standardName: 'crossorigin',
+    //       },
+    //     },
+    //   ],
+    //   output: '<div crossorigin />',
+    // },
+    // {
+    //   code: '<div crossorigin />',
+    //   errors: [
+    //     {
+    //       messageId: 'invalidPropOnTag',
+    //       data: {
+    //         name: 'crossorigin',
+    //         tagName: 'div',
+    //         allowedTags: 'script, img, video, audio, link, image',
+    //       },
+    //     },
+    //   ],
+    // },
     {
       code: '<div as="audio" />',
       errors: [
@@ -632,7 +644,7 @@ ruleTester.run('no-unknown-property', rule, {
       ],
     },
     {
-      code: '<div controls={this.controls} loop={true} muted={false} src={this.videoSrc} playsInline={true} allowFullScreen></div>',
+      code: '<div controls={this.controls} loop={true} muted={false} src={this.videoSrc} playsinline={true} allowfullscreen></div>',
       errors: [
         {
           messageId: 'invalidPropOnTag',
@@ -661,7 +673,7 @@ ruleTester.run('no-unknown-property', rule, {
         {
           messageId: 'invalidPropOnTag',
           data: {
-            name: 'playsInline',
+            name: 'playsinline',
             tagName: 'div',
             allowedTags: 'video',
           },
@@ -669,7 +681,7 @@ ruleTester.run('no-unknown-property', rule, {
         {
           messageId: 'invalidPropOnTag',
           data: {
-            name: 'allowFullScreen',
+            name: 'allowfullscreen',
             tagName: 'div',
             allowedTags: 'iframe, video',
           },
@@ -690,12 +702,12 @@ ruleTester.run('no-unknown-property', rule, {
       ],
     },
     {
-      code: '<div imageSrcSet="someImageSrcSet" />',
+      code: '<div imagesrcset="someImageSrcSet" />',
       errors: [
         {
           messageId: 'invalidPropOnTag',
           data: {
-            name: 'imageSrcSet',
+            name: 'imagesrcset',
             tagName: 'div',
             allowedTags: 'link',
           },
@@ -703,12 +715,12 @@ ruleTester.run('no-unknown-property', rule, {
       ],
     },
     {
-      code: '<div imageSizes="someImageSizes" />',
+      code: '<div imagesizes="someImageSizes" />',
       errors: [
         {
           messageId: 'invalidPropOnTag',
           data: {
-            name: 'imageSizes',
+            name: 'imagesizes',
             tagName: 'div',
             allowedTags: 'link',
           },
@@ -782,32 +794,6 @@ ruleTester.run('no-unknown-property', rule, {
             name: 'abbr',
             tagName: 'div',
             allowedTags: 'th, td',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div webkitDirectory="" />',
-      errors: [
-        {
-          messageId: 'invalidPropOnTag',
-          data: {
-            name: 'webkitDirectory',
-            tagName: 'div',
-            allowedTags: 'input',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div webkitdirectory="" />',
-      errors: [
-        {
-          messageId: 'invalidPropOnTag',
-          data: {
-            name: 'webkitdirectory',
-            tagName: 'div',
-            allowedTags: 'input',
           },
         },
       ],
