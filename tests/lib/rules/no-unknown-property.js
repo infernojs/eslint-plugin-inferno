@@ -48,6 +48,8 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<App onComponentWillDisappear={foo} />;' },
     { code: '<App onComponentWillMove={foo} />;' },
 
+    { code: '<select selectedIndex={1} />;' },
+
     // Inferno components and their props/attributes should be fine
     { code: '<App class="bar" />;' },
     { code: '<App for="bar" />;' },
@@ -215,6 +217,19 @@ ruleTester.run('no-unknown-property', rule, {
     },
   ]),
   invalid: parsers.all([
+    {
+      code: '<div selectedIndex={foo} />;',
+      errors: [
+        {
+          messageId: 'invalidPropOnTag',
+          data: {
+            name: 'selectedIndex',
+            tagName: 'div',
+            allowedTags: 'select',
+          },
+        },
+      ],
+    },
     {
       code: '<div onComponentWillMount={foo} />;',
       errors: [

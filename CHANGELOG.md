@@ -1,4 +1,7 @@
 # Change Log
+## 2025-01-23 (7.37.7)
+- bugfix: Allow using 'selectedIndex' attribute on select elements
+
 ## 2025-01-23 (7.37.6)
 - bugfix: allow using lowercased variants of semi-synthetic events  
 - bugfix: added intermediate as allowed attribute
