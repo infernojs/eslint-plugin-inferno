@@ -38,6 +38,16 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<div $ChildFlag="{1}" />;' },
     { code: '<div $Flags="{1}" />;' },
 
+    { code: '<App onComponentWillMount={foo} />;' },
+    { code: '<App onComponentDidMount={foo} />;' },
+    { code: '<App onComponentDidAppear={foo} />;' },
+    { code: '<App onComponentShouldUpdate={foo} />;' },
+    { code: '<App onComponentWillUpdate={foo} />;' },
+    { code: '<App onComponentDidUpdate={foo} />;' },
+    { code: '<App onComponentWillUnmount={foo} />;' },
+    { code: '<App onComponentWillDisappear={foo} />;' },
+    { code: '<App onComponentWillMove={foo} />;' },
+
     // Inferno components and their props/attributes should be fine
     { code: '<App class="bar" />;' },
     { code: '<App for="bar" />;' },
@@ -198,6 +208,105 @@ ruleTester.run('no-unknown-property', rule, {
     },
   ]),
   invalid: parsers.all([
+    {
+      code: '<div onComponentWillMount={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentWillMount',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div onComponentDidMount={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentDidMount',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div onComponentDidAppear={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentDidAppear',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div onComponentShouldUpdate={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentShouldUpdate',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div onComponentWillUpdate={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentWillUpdate',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div onComponentDidUpdate={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentDidUpdate',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div onComponentWillUnmount={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentWillUnmount',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div onComponentWillDisappear={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentWillDisappear',
+          },
+        },
+      ],
+    },
+    {
+      code: '<div onComponentWillMove={foo} />;',
+      errors: [
+        {
+          messageId: 'unknownProp',
+          data: {
+            name: 'onComponentWillMove',
+          },
+        },
+      ],
+    },
     {
       code: '<div allowTransparency="true" />',
       errors: [

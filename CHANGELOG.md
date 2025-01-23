@@ -1,6 +1,7 @@
 # Change Log
 ## 2025-01-23 (7.37.5)
 - bugfix: Do not raise errors for InfernoJs optimization flags
+- bugfix: DO not raise error for Functional component hooks
 
 ## 2025-01-22
 
