@@ -6,6 +6,33 @@
 - bugfix: allow using lowercased variants of semi-synthetic events  
 - bugfix: added intermediate as allowed attribute
 
+### Added
+* [`jsx-props-no-multi-spaces`]: improve autofix for multi-line ([#3930][] @justisb)
+
+### Fixed
+* [`no-unknown-property`]: allow `onLoad` on `body` ([#3923][] @DerekStapleton)
+
+[#3930]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3930
+[#3923]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3923
+
+## [7.37.5] - 2025.04.03
+
+### Fixed
+* [`no-unknown-property`]: allow shadow root attrs on `<template>` ([#3912][] @ljharb)
+* [`prop-types`]: support `ComponentPropsWithRef` from a namespace import ([#3651][] @corydeppen)
+* [`jsx-no-constructed-context-values`]: detect constructed context values in React 19 `<Context>` usage ([#3910][] @TildaDares)
+* [`no-unknown-property`]: allow `transform-origin` on `rect` ([#3914][] @ljharb)
+
+### Changed
+* [Docs] [`button-has-type`]: clean up phrasing ([#3909][] @hamirmahal)
+
+[7.37.5]: https://github.com/jsx-eslint/eslint-plugin-react/compare/v7.37.4...v7.37.5
+[#3914]: https://github.com/jsx-eslint/eslint-plugin-react/issues/3914
+[#3912]: https://github.com/jsx-eslint/eslint-plugin-react/issues/3912
+[#3910]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3910
+[#3909]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3909
+[#3651]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3651
+
 ## 2025-01-23 (7.37.5)
 - bugfix: Do not raise errors for InfernoJs optimization flags
 - bugfix: DO not raise error for Functional component hooks

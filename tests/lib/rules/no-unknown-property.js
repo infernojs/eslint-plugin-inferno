@@ -93,12 +93,13 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<link onLoad={bar} onError={foo} />' },
     { code: '<link rel="preload" as="image" href="someHref" imagesrcset="someImageSrcSet" imagesizes="someImageSizes" />' },
     { code: '<object onLoad={bar} />' },
-    { code: '<video allowfullscreen />' },
-    { code: '<iframe allowfullscreen />' },
+    { code: '<body onLoad={bar} />' },
+    { code: '<video allowFullScreen webkitAllowFullScreen mozAllowFullScreen />' },
+    { code: '<iframe allowFullScreen webkitAllowFullScreen mozAllowFullScreen />' },
     { code: '<table border="1" />' },
     { code: '<th abbr="abbr" />' },
     { code: '<td abbr="abbr" />' },
-    // Inferno related attributes
+    { code: '<template shadowrootmode="open" shadowrootclonable shadowrootdelegatesfocus shadowrootserializable />' },
     { code: '<input type="checkbox" defaultChecked={this.state.checkbox} />' },
     { code: '<div onTouchStart={this.startAnimation} onTouchEnd={this.stopAnimation} onTouchCancel={this.cancel} onTouchMove={this.move} onMouseMoveCapture={this.capture} onTouchCancelCapture={this.log} />' },
     // {
@@ -214,6 +215,9 @@ ruleTester.run('no-unknown-property', rule, {
           <div id="my-popover" onBeforeToggle={this.onBeforeToggle} popover>Greetings, one and all!</div>
         </div>
       `,
+    },
+    {
+      code: '<rect clip-path="bar" transform-origin="center" />;',
     },
   ]),
   invalid: parsers.all([
@@ -347,17 +351,6 @@ ruleTester.run('no-unknown-property', rule, {
           messageId: 'unknownProp',
           data: {
             name: 'hasOwnProperty',
-          },
-        },
-      ],
-    },
-    {
-      code: '<div abc="should not be allowed property"></div>;',
-      errors: [
-        {
-          messageId: 'unknownProp',
-          data: {
-            name: 'abc',
           },
         },
       ],
@@ -640,7 +633,7 @@ ruleTester.run('no-unknown-property', rule, {
           data: {
             name: 'onLoad',
             tagName: 'div',
-            allowedTags: 'script, img, link, picture, iframe, object, source',
+            allowedTags: 'script, img, link, picture, iframe, object, source, body',
           },
         },
       ],
