@@ -219,6 +219,14 @@ ruleTester.run('no-unknown-property', rule, {
     {
       code: '<rect clip-path="bar" transform-origin="center" />;',
     },
+    // Inferno FLAGS
+    { code: '<div $Flags={342} />;' },
+    { code: '<div $ChildFlag={3} />;' },
+    { code: '<div $HasKeyedChildren />;' },
+    { code: '<div $HasNonKeyedChildren />;' },
+    { code: '<div $HasVNodeChildren />;' },
+    { code: '<div $HasTextChildren />;' },
+    { code: '<div $ReCreate />;' },
   ]),
   invalid: parsers.all([
     {
