@@ -1,4 +1,6 @@
-# Enforce ES5 or ES6 class for Inferno Components (`inferno/prefer-es6-class`)
+# inferno/prefer-es6-class
+
+� Enforce ES5 or ES6 class for React Components.
 
 <!-- end auto-generated rule header -->
 

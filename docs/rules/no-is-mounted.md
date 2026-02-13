@@ -1,6 +1,8 @@
-# Disallow usage of isMounted (`inferno/no-is-mounted`)
+# inferno/no-is-mounted
 
-💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+� Disallow usage of isMounted.
+
+� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

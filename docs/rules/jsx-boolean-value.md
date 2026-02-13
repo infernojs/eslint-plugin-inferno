@@ -1,6 +1,8 @@
-# Enforce boolean attributes notation in JSX (`inferno/jsx-boolean-value`)
+# inferno/jsx-boolean-value
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Enforce boolean attributes notation in JSX.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

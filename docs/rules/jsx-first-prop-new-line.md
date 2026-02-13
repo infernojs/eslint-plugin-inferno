@@ -1,6 +1,8 @@
-# Enforce proper position of the first property in JSX (`inferno/jsx-first-prop-new-line`)
+# inferno/jsx-first-prop-new-line
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Enforce proper position of the first property in JSX.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

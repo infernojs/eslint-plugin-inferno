@@ -1,6 +1,8 @@
-# Enforce or disallow spaces around equal signs in JSX attributes (`inferno/jsx-equals-spacing`)
+# inferno/jsx-equals-spacing
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Enforce or disallow spaces around equal signs in JSX attributes.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

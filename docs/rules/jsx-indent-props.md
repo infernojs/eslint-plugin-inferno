@@ -1,6 +1,8 @@
-# Enforce props indentation in JSX (`inferno/jsx-indent-props`)
+# inferno/jsx-indent-props
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Enforce props indentation in JSX.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

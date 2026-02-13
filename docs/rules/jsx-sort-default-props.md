@@ -1,4 +1,6 @@
-# Enforce defaultProps declarations alphabetical sorting (`inferno/jsx-sort-default-props`)
+# inferno/jsx-sort-default-props
+
+� Enforce defaultProps declarations alphabetical sorting.
 
 ❌ This rule is deprecated. It was replaced by [`inferno/sort-default-props`](sort-default-props.md).
 

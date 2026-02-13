@@ -1,6 +1,8 @@
-# Enforce whitespace in and around the JSX opening and closing brackets (`inferno/jsx-tag-spacing`)
+# inferno/jsx-tag-spacing
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Enforce whitespace in and around the JSX opening and closing brackets.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

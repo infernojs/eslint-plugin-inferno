@@ -1,4 +1,6 @@
-# Enforce event handler naming conventions in JSX (`inferno/jsx-handler-names`)
+# inferno/jsx-handler-names
+
+� Enforce event handler naming conventions in JSX.
 
 <!-- end auto-generated rule header -->
 

@@ -166,7 +166,7 @@ ruleTester.run('no-unknown-property', rule, {
     { code: '<hr align="top" />' },
     { code: '<applet align="top" />' },
     { code: '<marker fill="#000" />' },
-    { code: '<dialog onClose={handler} open id="dialog" returnValue="something" onCancel={handler2} />' },
+    { code: '<dialog closedby="something" onClose={handler} open id="dialog" returnValue="something" onCancel={handler2} />' },
     {
       code: `
         <table align="top">

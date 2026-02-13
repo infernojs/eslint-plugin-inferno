@@ -1,4 +1,6 @@
-# Disallow certain props on DOM Nodes (`inferno/forbid-dom-props`)
+# inferno/forbid-dom-props
+
+� Disallow certain props on DOM Nodes.
 
 <!-- end auto-generated rule header -->
 

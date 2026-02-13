@@ -1,4 +1,6 @@
-# Enforce using `onChange` or `readonly` attribute when `checked` is used (`inferno/checked-requires-onchange-or-readonly`)
+# inferno/checked-requires-onchange-or-readonly
+
+� Enforce using `onChange` or `readonly` attribute when `checked` is used.
 
 <!-- end auto-generated rule header -->
 

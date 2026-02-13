@@ -1,4 +1,6 @@
-# Enforce that namespaces are not used in Inferno elements (`inferno/no-namespace`)
+# inferno/no-namespace
+
+� Enforce that namespaces are not used in React elements.
 
 <!-- end auto-generated rule header -->
 

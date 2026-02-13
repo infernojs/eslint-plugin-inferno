@@ -1,6 +1,8 @@
-# Disallow undeclared variables in JSX (`inferno/jsx-no-undef`)
+# inferno/jsx-no-undef
 
-💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+� Disallow undeclared variables in JSX.
+
+� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

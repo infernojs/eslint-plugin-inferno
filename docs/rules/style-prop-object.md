@@ -1,4 +1,6 @@
-# Enforce style prop value is an object (`inferno/style-prop-object`)
+# inferno/style-prop-object
+
+� Enforce style prop value is an object.
 
 <!-- end auto-generated rule header -->
 

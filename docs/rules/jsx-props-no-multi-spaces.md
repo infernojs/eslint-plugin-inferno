@@ -1,6 +1,8 @@
-# Disallow multiple spaces between inline JSX props (`inferno/jsx-props-no-multi-spaces`)
+# inferno/jsx-props-no-multi-spaces
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Disallow multiple spaces between inline JSX props.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

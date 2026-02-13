@@ -1,4 +1,6 @@
-# Disallow file extensions that may contain JSX (`inferno/jsx-filename-extension`)
+# inferno/jsx-filename-extension
+
+� Disallow file extensions that may contain JSX.
 
 <!-- end auto-generated rule header -->
 

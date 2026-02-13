@@ -1,6 +1,8 @@
-# Disallow duplicate properties in JSX (`inferno/jsx-no-duplicate-props`)
+# inferno/jsx-no-duplicate-props
 
-💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+� Disallow duplicate properties in JSX.
+
+� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

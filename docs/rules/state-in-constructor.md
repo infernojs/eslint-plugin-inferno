@@ -1,4 +1,6 @@
-# Enforce class component state initialization style (`inferno/state-in-constructor`)
+# inferno/state-in-constructor
+
+� Enforce class component state initialization style.
 
 <!-- end auto-generated rule header -->
 

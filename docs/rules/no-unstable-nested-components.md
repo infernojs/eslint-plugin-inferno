@@ -1,4 +1,6 @@
-# Disallow creating unstable components inside components (`inferno/no-unstable-nested-components`)
+# inferno/no-unstable-nested-components
+
+� Disallow creating unstable components inside components.
 
 <!-- end auto-generated rule header -->
 

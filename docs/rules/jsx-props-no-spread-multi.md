@@ -1,4 +1,6 @@
-# Disallow JSX prop spreading the same identifier multiple times (`inferno/jsx-props-no-spread-multi`)
+# inferno/jsx-props-no-spread-multi
+
+� Disallow JSX prop spreading the same identifier multiple times.
 
 <!-- end auto-generated rule header -->
 

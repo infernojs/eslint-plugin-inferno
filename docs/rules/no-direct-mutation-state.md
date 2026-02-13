@@ -1,6 +1,8 @@
-# Disallow direct mutation of this.state (`inferno/no-direct-mutation-state`)
+# inferno/no-direct-mutation-state
 
-💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+� Disallow direct mutation of this.state.
+
+� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

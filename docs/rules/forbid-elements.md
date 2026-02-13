@@ -1,4 +1,6 @@
-# Disallow certain elements (`inferno/forbid-elements`)
+# inferno/forbid-elements
+
+� Disallow certain elements.
 
 <!-- end auto-generated rule header -->
 

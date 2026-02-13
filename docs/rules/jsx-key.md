@@ -1,6 +1,8 @@
-# Disallow missing `key` props in iterators/collection literals (`inferno/jsx-key`)
+# inferno/jsx-key
 
-💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+� Disallow missing `key` props in iterators/collection literals.
+
+� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

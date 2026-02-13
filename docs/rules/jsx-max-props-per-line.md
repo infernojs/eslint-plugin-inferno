@@ -1,6 +1,8 @@
-# Enforce maximum of props on a single line in JSX (`inferno/jsx-max-props-per-line`)
+# inferno/jsx-max-props-per-line
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Enforce maximum of props on a single line in JSX.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

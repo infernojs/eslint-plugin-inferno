@@ -1,6 +1,8 @@
-# Enforce props alphabetical sorting (`inferno/jsx-sort-props`)
+# inferno/jsx-sort-props
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Enforce props alphabetical sorting.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

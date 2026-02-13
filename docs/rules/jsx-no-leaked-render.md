@@ -1,6 +1,8 @@
-# Disallow problematic leaked values from being rendered (`inferno/jsx-no-leaked-render`)
+# inferno/jsx-no-leaked-render
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Disallow problematic leaked values from being rendered.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 
@@ -18,15 +20,15 @@ const Example = () => {
     <>
       {0 && <Something />}
       {/* Inferno: renders undesired 0 */}
-      {/* Inferno Native: crashes 💥 */}
+      {/* Inferno Native: crashes � */}
 
       {NaN && <Something />}
       {/* Inferno: renders undesired NaN */}
-      {/* Inferno Native: crashes 💥 */}
+      {/* Inferno Native: crashes � */}
 
       {'' && <Something />}
       {/* Inferno: renders nothing */}
-      {/* Inferno Native, with Inferno < 18: crashes 💥 */}
+      {/* Inferno Native, with Inferno < 18: crashes � */}
     </>
   )
 }

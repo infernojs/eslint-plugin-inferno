@@ -1,4 +1,6 @@
-# Enforce sandbox attribute on iframe elements (`inferno/iframe-missing-sandbox`)
+# inferno/iframe-missing-sandbox
+
+� Enforce sandbox attribute on iframe elements.
 
 <!-- end auto-generated rule header -->
 

@@ -1,4 +1,6 @@
-# Disallow JSX prop spreading (`inferno/jsx-props-no-spreading`)
+# inferno/jsx-props-no-spreading
+
+� Disallow JSX prop spreading.
 
 <!-- end auto-generated rule header -->
 

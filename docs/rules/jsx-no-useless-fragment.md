@@ -1,6 +1,8 @@
-# Disallow unnecessary fragments (`inferno/jsx-no-useless-fragment`)
+# inferno/jsx-no-useless-fragment
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Disallow unnecessary fragments.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

@@ -1,4 +1,6 @@
-# Enforce defaultProps declarations alphabetical sorting (`inferno/sort-default-props`)
+# inferno/sort-default-props
+
+� Enforce defaultProps declarations alphabetical sorting.
 
 <!-- end auto-generated rule header -->
 

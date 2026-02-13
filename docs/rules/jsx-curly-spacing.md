@@ -1,6 +1,8 @@
-# Enforce or disallow spaces inside of curly braces in JSX attributes and expressions (`inferno/jsx-curly-spacing`)
+# inferno/jsx-curly-spacing
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Enforce or disallow spaces inside of curly braces in JSX attributes and expressions.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

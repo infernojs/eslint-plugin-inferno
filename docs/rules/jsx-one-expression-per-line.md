@@ -1,6 +1,8 @@
-# Require one JSX element per line (`inferno/jsx-one-expression-per-line`)
+# inferno/jsx-one-expression-per-line
 
-🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+� Require one JSX element per line.
+
+� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

@@ -1,4 +1,6 @@
-# Disallow declaring unused methods of component class (`inferno/no-unused-class-component-methods`)
+# inferno/no-unused-class-component-methods
+
+� Disallow declaring unused methods of component class.
 
 <!-- end auto-generated rule header -->
 
