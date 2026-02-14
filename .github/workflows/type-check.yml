@@ -13,7 +13,6 @@ jobs:
       fail-fast: false
       matrix:
         ts_version:
-          - 4.5
           - '5.0'
           - 5.5
           - 5.6
