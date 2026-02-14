@@ -115,8 +115,6 @@ jobs:
         name: "nvm install lts/* && npm install"
         with:
           node-version: "lts/*"
-        env:
-          NPM_CONFIG_LEGACY_PEER_DEPS: true
 
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
 
