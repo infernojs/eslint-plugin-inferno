@@ -1,4 +1,8 @@
 # Change Log
+## 2026-02-14 (7.40.0)
+- Support eslint v10
+- Support 'closedby' -> 'dialog' attribute
+
 ## 2025-01-23 (7.37.7)
 - bugfix: Allow using 'selectedIndex' attribute on select elements
 
