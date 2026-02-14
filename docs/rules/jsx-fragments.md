@@ -1,8 +1,8 @@
 # inferno/jsx-fragments
 
-� Enforce shorthand or standard form for React fragments.
+📝 Enforce shorthand or standard form for Inferno fragments.
 
-� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

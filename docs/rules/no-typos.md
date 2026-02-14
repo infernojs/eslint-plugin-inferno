@@ -1,6 +1,6 @@
 # inferno/no-typos
 
-� Disallow common typos.
+📝 Disallow common typos.
 
 <!-- end auto-generated rule header -->
 

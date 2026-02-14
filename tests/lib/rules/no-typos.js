@@ -596,7 +596,7 @@ ruleTester.run('no-typos', rule, {
       features: ['class fields'],
       parserOptions,
       errors: [
-        { messageId: 'typoStaticClassProp', type: 'Identifier' },
+        { messageId: 'typoStaticClassProp' },
       ],
     },
     {
@@ -606,7 +606,7 @@ ruleTester.run('no-typos', rule, {
       `,
       parserOptions,
       errors: [
-        { messageId: 'typoStaticClassProp', type: 'Identifier' },
+        { messageId: 'typoStaticClassProp' },
       ],
     },
     {
@@ -616,7 +616,7 @@ ruleTester.run('no-typos', rule, {
       `,
       parserOptions,
       errors: [
-        { messageId: 'typoStaticClassProp', type: 'Identifier' },
+        { messageId: 'typoStaticClassProp' },
       ],
     },
     {
@@ -654,7 +654,7 @@ ruleTester.run('no-typos', rule, {
       features: ['class fields'],
       parserOptions,
       errors: [
-        { messageId: 'typoStaticClassProp', type: 'Identifier' },
+        { messageId: 'typoStaticClassProp' },
       ],
     },
     {
@@ -760,7 +760,7 @@ ruleTester.run('no-typos', rule, {
       features: ['class fields'],
       parserOptions,
       errors: [
-        { messageId: 'typoStaticClassProp', type: 'Identifier' },
+        { messageId: 'typoStaticClassProp' },
       ],
     },
     {
@@ -770,7 +770,7 @@ ruleTester.run('no-typos', rule, {
       `,
       parserOptions,
       errors: [
-        { messageId: 'typoStaticClassProp', type: 'Identifier' },
+        { messageId: 'typoStaticClassProp' },
       ],
     },
     {
@@ -780,7 +780,7 @@ ruleTester.run('no-typos', rule, {
       `,
       parserOptions,
       errors: [
-        { messageId: 'typoStaticClassProp', type: 'Identifier' },
+        { messageId: 'typoStaticClassProp' },
       ],
     },
     {

@@ -1,6 +1,6 @@
 # inferno/forbid-component-props
 
-� Disallow certain props on components.
+📝 Disallow certain props on Components.
 
 <!-- end auto-generated rule header -->
 

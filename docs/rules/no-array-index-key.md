@@ -1,6 +1,6 @@
 # inferno/no-array-index-key
 
-� Disallow usage of Array index in keys.
+📝 Disallow usage of Array index in keys.
 
 <!-- end auto-generated rule header -->
 

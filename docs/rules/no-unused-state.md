@@ -1,6 +1,6 @@
 # inferno/no-unused-state
 
-� Disallow definitions of unused state.
+📝 Disallow definitions of unused state.
 
 <!-- end auto-generated rule header -->
 

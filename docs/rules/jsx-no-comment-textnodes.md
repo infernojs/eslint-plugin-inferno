@@ -1,8 +1,8 @@
 # inferno/jsx-no-comment-textnodes
 
-� Disallow comments from being inserted as text nodes.
+📝 Disallow comments from being inserted as text nodes.
 
-� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

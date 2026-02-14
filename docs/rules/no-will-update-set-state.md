@@ -1,6 +1,6 @@
 # inferno/no-will-update-set-state
 
-� Disallow usage of setState in componentWillUpdate.
+📝 Disallow usage of setState in componentWillUpdate.
 
 <!-- end auto-generated rule header -->
 

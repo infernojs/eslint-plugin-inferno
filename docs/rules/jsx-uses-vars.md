@@ -1,8 +1,8 @@
 # inferno/jsx-uses-vars
 
-� Disallow variables used in JSX to be incorrectly marked as unused.
+📝 Disallow variables used in JSX to be incorrectly marked as unused.
 
-� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

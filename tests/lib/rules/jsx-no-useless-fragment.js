@@ -90,21 +90,21 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
     {
       code: '<></>',
       output: null,
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXFragment' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
       features: ['fragment'],
     },
     {
       code: '<>{}</>',
       output: null,
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXFragment' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
       features: ['fragment'],
     },
     parsers.skipDueToMultiErrorSorting ? [] : {
       code: '<p>moo<>foo</></p>',
       output: '<p>moofoo</p>',
       errors: [
-        { messageId: 'NeedsMoreChildren', type: 'JSXFragment' },
-        { messageId: 'ChildOfHtmlElement', type: 'JSXFragment' },
+        { messageId: 'NeedsMoreChildren' },
+        { messageId: 'ChildOfHtmlElement' },
       ],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
@@ -118,15 +118,15 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
       code: '<p><>{meow}</></p>',
       output: '<p>{meow}</p>',
       errors: [
-        { messageId: 'NeedsMoreChildren', type: 'JSXFragment' },
-        { messageId: 'ChildOfHtmlElement', type: 'JSXFragment' },
+        { messageId: 'NeedsMoreChildren' },
+        { messageId: 'ChildOfHtmlElement' },
       ],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
     {
       code: '<><div/></>',
       output: '<div/>',
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXFragment' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
     {
@@ -138,12 +138,12 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
       output: `
         <div/>
       `,
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXFragment' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
     {
       code: '<Fragment />',
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXElement' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
     },
     {
       code: `
@@ -154,7 +154,7 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
       output: `
         <Foo />
       `,
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXElement' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
     },
     {
       code: `
@@ -168,34 +168,34 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
           fragment: 'SomeFragment',
         },
       },
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXElement' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
     },
     {
       // Not safe to fix this case because `Eeee` might require child be InfernoElement
       code: '<Eeee><>foo</></Eeee>',
       output: null,
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXFragment' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
     parsers.skipDueToMultiErrorSorting ? [] : {
       code: '<div><>foo</></div>',
       output: '<div>foo</div>',
       errors: [
-        { messageId: 'NeedsMoreChildren', type: 'JSXFragment' },
-        { messageId: 'ChildOfHtmlElement', type: 'JSXFragment' },
+        { messageId: 'NeedsMoreChildren' },
+        { messageId: 'ChildOfHtmlElement' },
       ],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
     {
       code: '<div><>{"a"}{"b"}</></div>',
       output: '<div>{"a"}{"b"}</div>',
-      errors: [{ messageId: 'ChildOfHtmlElement', type: 'JSXFragment' }],
+      errors: [{ messageId: 'ChildOfHtmlElement' }],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and next test case
     },
     {
       code: '<div><>{"a"}{"b"}</></div>',
       output: null,
-      errors: [{ messageId: 'ChildOfHtmlElement', type: 'JSXFragment' }],
+      errors: [{ messageId: 'ChildOfHtmlElement' }],
       features: ['fragment', 'ts-old', 'no-ts-new', 'no-babel', 'no-default'],
     },
     {
@@ -211,13 +211,13 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
           <Eeee />
           {"a"}{"b"}
         </section>`,
-      errors: [{ messageId: 'ChildOfHtmlElement', type: 'JSXFragment' }],
+      errors: [{ messageId: 'ChildOfHtmlElement' }],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
     {
       code: '<div><Fragment>{"a"}{"b"}</Fragment></div>',
       output: '<div>{"a"}{"b"}</div>',
-      errors: [{ messageId: 'ChildOfHtmlElement', type: 'JSXElement' }],
+      errors: [{ messageId: 'ChildOfHtmlElement' }],
     },
     {
       // whitepace tricky case
@@ -236,15 +236,15 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
           git <b>hub</b>
         </section>`,
       errors: [
-        { messageId: 'ChildOfHtmlElement', type: 'JSXFragment', line: 3 },
-        { messageId: 'ChildOfHtmlElement', type: 'JSXFragment', line: 7 },
+        { messageId: 'ChildOfHtmlElement', line: 3 },
+        { messageId: 'ChildOfHtmlElement', line: 7 },
       ],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
     {
       code: '<div>a <>{""}{""}</> a</div>',
       output: '<div>a {""}{""} a</div>',
-      errors: [{ messageId: 'ChildOfHtmlElement', type: 'JSXFragment' }],
+      errors: [{ messageId: 'ChildOfHtmlElement' }],
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },
     parsers.skipDueToMultiErrorSorting ? [] : {
@@ -263,15 +263,15 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
         );
       `,
       errors: [
-        { messageId: 'NeedsMoreChildren', type: 'JSXElement', line: 4 },
-        { messageId: 'ChildOfHtmlElement', type: 'JSXElement', line: 4 },
+        { messageId: 'NeedsMoreChildren', line: 4 },
+        { messageId: 'ChildOfHtmlElement', line: 4 },
       ],
     },
     // Ensure allowExpressions still catches expected violations
     {
       code: '<><Foo>{moo}</Foo></>',
       options: [{ allowExpressions: true }],
-      errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXFragment' }],
+      errors: [{ messageId: 'NeedsMoreChildren' }],
       output: '<Foo>{moo}</Foo>',
       features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old
     },

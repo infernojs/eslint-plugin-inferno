@@ -1,6 +1,6 @@
 # inferno/forbid-elements
 
-� Disallow certain elements.
+📝 Disallow certain elements.
 
 <!-- end auto-generated rule header -->
 

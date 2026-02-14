@@ -1,6 +1,6 @@
 # inferno/no-object-type-as-default-prop
 
-� Disallow usage of referential-type variables as default param in functional component.
+📝 Disallow usage of referential-type variables as default param in functional component.
 
 <!-- end auto-generated rule header -->
 

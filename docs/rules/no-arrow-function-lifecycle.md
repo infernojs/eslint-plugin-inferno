@@ -1,8 +1,8 @@
 # inferno/no-arrow-function-lifecycle
 
-� Lifecycle methods should be methods on the prototype, not class fields.
+📝 Lifecycle methods should be methods on the prototype, not class fields.
 
-� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

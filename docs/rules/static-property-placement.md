@@ -1,6 +1,6 @@
 # inferno/static-property-placement
 
-� Enforces where React component static properties should be positioned.
+📝 Enforces where Inferno component static properties should be positioned.
 
 <!-- end auto-generated rule header -->
 

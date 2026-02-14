@@ -25,10 +25,10 @@ const parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-const LEFT_MISSING_ERROR = { messageId: 'expectedAfter', type: 'Punctuator' };
-const LEFT_UNEXPECTED_ERROR = { messageId: 'unexpectedAfter', type: 'Punctuator' };
-const RIGHT_MISSING_ERROR = { messageId: 'expectedBefore', type: 'Punctuator' };
-const RIGHT_UNEXPECTED_ERROR = { messageId: 'unexpectedBefore', type: 'Punctuator' };
+const LEFT_MISSING_ERROR = { messageId: 'expectedAfter' };
+const LEFT_UNEXPECTED_ERROR = { messageId: 'unexpectedAfter' };
+const RIGHT_MISSING_ERROR = { messageId: 'expectedBefore' };
+const RIGHT_UNEXPECTED_ERROR = { messageId: 'unexpectedBefore' };
 // const EXPECTED_BETWEEN = {messageId: 'expectedBetween', type: 'Identifier'};
 
 const CONSISTENT = ['consistent'];

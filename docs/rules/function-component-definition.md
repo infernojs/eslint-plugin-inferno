@@ -1,8 +1,8 @@
 # inferno/function-component-definition
 
-� Enforce a specific function type for function components.
+📝 Enforce a specific function type for function components.
 
-� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

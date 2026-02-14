@@ -34,41 +34,41 @@
     ]
   },
   "dependencies": {
-    "doctrine": "^3.0.0",
-    "es-iterator-helpers": "^1.2.2",
-    "estraverse": "^5.3.0",
-    "jsx-ast-utils": "^3.3.5",
-    "minimatch": "^10.1.1",
-    "semver": "^7.7.3"
+    "doctrine": "^3",
+    "es-iterator-helpers": "^1",
+    "estraverse": "^5",
+    "jsx-ast-utils": "^3",
+    "minimatch": "^10",
+    "semver": "^7"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/eslint-parser": "^7.28.5",
+    "@babel/core": "^7.29.0",
+    "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-syntax-decorators": "^7.28.6",
     "@babel/plugin-syntax-do-expressions": "^7.28.6",
     "@babel/plugin-syntax-function-bind": "^7.28.6",
     "@types/eslint": "=9.6.1",
     "@types/estree": "^1.0.8",
-    "@types/node": "^25.0.3",
+    "@types/node": "^25.2.3",
     "@typescript-eslint/parser": "^8",
     "babel-eslint": "^10",
-    "babel-plugin-inferno": "^6.8.4",
-    "eslint":  "^8 || ^9",
+    "babel-plugin-inferno": "^6.8.5",
+    "eslint": "^8 || ^9 || ^10",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-doc-generator": "^2.4.0",
-    "eslint-plugin-eslint-plugin": "^7.2.0",
+    "eslint-doc-generator": "^3.0.2",
+    "eslint-plugin-eslint-plugin": "^7.3.1",
     "eslint-plugin-import": "^2.32.0",
-    "espree": "^11.0.0",
-    "glob": "=13.0.0",
-    "jackspeak": "=4.1.1",
+    "espree": "^11.1.0",
+    "glob": "=13.0.3",
+    "jackspeak": "=4.2.3",
     "markdownlint-cli": "^0.47.0",
     "mocha": "^11.7.5",
-    "npmignore": "^0.3.3",
+    "npmignore": "^0.3.5",
     "sinon": "^21.0.1",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "eslint": "^8 || ^9.7"
+    "eslint": "^8 || ^9 || ^10"
   },
   "engines": {
     "node": ">=20"

@@ -1,6 +1,6 @@
 # inferno/no-danger
 
-� Disallow usage of dangerous JSX properties.
+📝 Disallow usage of dangerous JSX properties.
 
 <!-- end auto-generated rule header -->
 

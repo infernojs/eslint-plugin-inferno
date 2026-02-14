@@ -1,8 +1,8 @@
 # inferno/destructuring-assignment
 
-� Enforce consistent usage of destructuring assignment of props, state, and context.
+📝 Enforce consistent usage of destructuring assignment of props, state, and context.
 
-� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

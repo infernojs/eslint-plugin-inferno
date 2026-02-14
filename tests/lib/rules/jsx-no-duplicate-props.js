@@ -30,7 +30,6 @@ const ruleTester = new RuleTester({ parserOptions });
 
 const expectedError = {
   messageId: 'noDuplicateProps',
-  type: 'JSXAttribute',
 };
 
 const ignoreCaseArgs = [{

@@ -1,6 +1,6 @@
 # inferno/sort-comp
 
-� Enforce component methods order.
+📝 Enforce component methods order.
 
 <!-- end auto-generated rule header -->
 

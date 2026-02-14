@@ -1,8 +1,8 @@
 # inferno/no-invalid-html-attribute
 
-� Disallow usage of invalid attributes.
+📝 Disallow usage of invalid attributes.
 
-� This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
+💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 
 <!-- end auto-generated rule header -->
 

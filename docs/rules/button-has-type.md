@@ -1,6 +1,6 @@
 # inferno/button-has-type
 
-� Disallow usage of `button` elements without an explicit `type` attribute.
+📝 Disallow usage of `button` elements without an explicit `type` attribute.
 
 <!-- end auto-generated rule header -->
 

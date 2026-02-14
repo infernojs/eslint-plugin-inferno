@@ -1,6 +1,6 @@
 # inferno/require-optimization
 
-� Enforce React components to have a shouldComponentUpdate method.
+📝 Enforce Inferno components to have a shouldComponentUpdate method.
 
 <!-- end auto-generated rule header -->
 

@@ -1,6 +1,6 @@
 # inferno/jsx-no-bind
 
-� Disallow `.bind()` or arrow functions in JSX props.
+📝 Disallow `.bind()` or arrow functions in JSX props.
 
 <!-- end auto-generated rule header -->
 

@@ -1,8 +1,8 @@
 # inferno/no-find-dom-node
 
-� Disallow usage of findDOMNode.
+📝 Disallow usage of findDOMNode.
 
-� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

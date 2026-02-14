@@ -1,6 +1,6 @@
 # inferno/jsx-no-literals
 
-� Disallow usage of string literals in JSX.
+📝 Disallow usage of string literals in JSX.
 
 <!-- end auto-generated rule header -->
 

@@ -1,8 +1,8 @@
 # inferno/forward-ref-uses-ref
 
-� Require all forwardRef components include a ref parameter.
+📝 Require all forwardRef components include a ref parameter.
 
-� This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
+💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 
 <!-- end auto-generated rule header -->
 

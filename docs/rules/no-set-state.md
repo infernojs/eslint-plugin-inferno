@@ -1,6 +1,6 @@
 # inferno/no-set-state
 
-� Disallow usage of setState.
+📝 Disallow usage of setState.
 
 <!-- end auto-generated rule header -->
 

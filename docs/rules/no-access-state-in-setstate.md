@@ -1,6 +1,6 @@
 # inferno/no-access-state-in-setstate
 
-� Disallow when this.state is accessed within setState.
+📝 Disallow when this.state is accessed within setState.
 
 <!-- end auto-generated rule header -->
 

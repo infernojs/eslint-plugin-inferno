@@ -1,6 +1,6 @@
 # inferno/no-adjacent-inline-elements
 
-� Disallow adjacent inline elements not separated by whitespace.
+📝 Disallow adjacent inline elements not separated by whitespace.
 
 <!-- end auto-generated rule header -->
 

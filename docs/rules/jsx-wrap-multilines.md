@@ -1,8 +1,8 @@
 # inferno/jsx-wrap-multilines
 
-� Disallow missing parentheses around multiline JSX.
+📝 Disallow missing parentheses around multiline JSX.
 
-� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

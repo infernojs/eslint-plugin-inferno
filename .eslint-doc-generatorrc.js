@@ -1,4 +1,7 @@
 /** @type {import('eslint-doc-generator').GenerateOptions} */
+
+'use strict';
+
 const config = {
   configEmoji: [
     ['recommended', '☑️'],

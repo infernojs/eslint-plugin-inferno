@@ -1,6 +1,6 @@
 # inferno/no-unstable-nested-components
 
-� Disallow creating unstable components inside components.
+📝 Disallow creating unstable components inside components.
 
 <!-- end auto-generated rule header -->
 

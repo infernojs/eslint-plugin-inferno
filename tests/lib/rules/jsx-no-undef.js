@@ -41,27 +41,26 @@ if (semver.major(eslintPkg.version) < 9) {
 ruleTester.run('jsx-no-undef', rule, {
   valid: parsers.all([
     {
-      code: '/*eslint no-undef:1*/ var Inferno, App; Inferno.render(<App />);',
+      code: 'var Inferno, App; Inferno.render(<App />);',
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<img />);',
+      code: 'var Inferno; Inferno.render(<img />);',
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<x-gif />);',
+      code: 'var Inferno; Inferno.render(<x-gif />);',
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.Foo />);',
+      code: 'var Inferno, app; Inferno.render(<app.Foo />);',
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno, app; Inferno.render(<app.foo.Bar />);',
+      code: 'var Inferno, app; Inferno.render(<app.foo.Bar />);',
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Apppp:Foo />);',
+      code: 'var Inferno; Inferno.render(<Apppp:Foo />);',
       features: ['jsx namespace'],
     },
     {
       code: `
-        /*eslint no-undef:1*/
         var Inferno;
         class Hello extends Inferno.Component {
           render() {
@@ -93,7 +92,7 @@ ruleTester.run('jsx-no-undef', rule, {
 
   invalid: parsers.all([
     {
-      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<App />);',
+      code: 'var Inferno; Inferno.render(<App />);',
       errors: [
         {
           messageId: 'undefined',
@@ -102,7 +101,7 @@ ruleTester.run('jsx-no-undef', rule, {
       ],
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Appp.Foo />);',
+      code: 'var Inferno; Inferno.render(<Appp.Foo />);',
       errors: [
         {
           messageId: 'undefined',
@@ -111,7 +110,7 @@ ruleTester.run('jsx-no-undef', rule, {
       ],
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.Foo />);',
+      code: 'var Inferno; Inferno.render(<appp.Foo />);',
       errors: [
         {
           messageId: 'undefined',
@@ -120,7 +119,7 @@ ruleTester.run('jsx-no-undef', rule, {
       ],
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<appp.foo.Bar />);',
+      code: 'var Inferno; Inferno.render(<appp.foo.Bar />);',
       errors: [
         {
           messageId: 'undefined',
@@ -150,7 +149,7 @@ ruleTester.run('jsx-no-undef', rule, {
       },
     },
     {
-      code: '/*eslint no-undef:1*/ var Inferno; Inferno.render(<Foo />);',
+      code: 'var Inferno; Inferno.render(<Foo />);',
       errors: [
         {
           messageId: 'undefined',

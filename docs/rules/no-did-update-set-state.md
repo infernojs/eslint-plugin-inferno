@@ -1,6 +1,6 @@
 # inferno/no-did-update-set-state
 
-� Disallow usage of setState in componentDidUpdate.
+📝 Disallow usage of setState in componentDidUpdate.
 
 <!-- end auto-generated rule header -->
 

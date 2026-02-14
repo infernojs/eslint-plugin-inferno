@@ -1,6 +1,6 @@
 # inferno/no-redundant-should-component-update
 
-� Disallow usage of shouldComponentUpdate when extending React.PureComponent.
+📝 Disallow usage of shouldComponentUpdate when extending Inferno.PureComponent.
 
 <!-- end auto-generated rule header -->
 

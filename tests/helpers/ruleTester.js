@@ -4,6 +4,67 @@ const ESLintRuleTester = require('eslint').RuleTester;
 const semver = require('semver');
 const eslintPkg = require('eslint/package.json');
 
+function getSyntheticFilenameExtension(test) {
+  if (!test || typeof test !== 'object') {
+    return 'js';
+  }
+
+  const parser = typeof test.parser === 'string' ? test.parser : '';
+  const code = typeof test.code === 'string' ? test.code : '';
+
+  // Loose heuristic: enough for TS/TSX parsing mode in @typescript-eslint/parser.
+  const looksLikeJsx = /<\s*\/|\/\s*>/u.test(code);
+
+  if (parser.includes('@typescript-eslint/parser')) {
+    return looksLikeJsx ? 'tsx' : 'ts';
+  }
+
+  if (parser.includes('@babel/eslint-parser') || parser.includes('babel-eslint')) {
+    return looksLikeJsx ? 'jsx' : 'js';
+  }
+
+  return 'js';
+}
+
+function sanitizeTestCase(test, kind, { ruleName, index } = {}) {
+  if (typeof test !== 'object' || test === null) {
+    return test;
+  }
+
+  if (semver.major(eslintPkg.version) < 10) {
+    return test;
+  }
+
+  // ESLint v10 RuleTester is stricter:
+  // - `type` in error objects is no longer supported.
+  // - valid test cases can't contain `errors` or `output`.
+  const sanitizedTest = { ...test };
+
+  if (kind === 'valid') {
+    delete sanitizedTest.errors;
+    delete sanitizedTest.output;
+  }
+
+  if (semver.major(eslintPkg.version) >= 10 && !('filename' in sanitizedTest) && ruleName) {
+    const extension = getSyntheticFilenameExtension(sanitizedTest);
+    sanitizedTest.filename = `${ruleName}.${kind}.${index}.${extension}`;
+  }
+
+  if (kind === 'invalid' && Array.isArray(sanitizedTest.errors)) {
+    sanitizedTest.errors = sanitizedTest.errors.map((error) => {
+      if (typeof error !== 'object' || error === null) {
+        return error;
+      }
+
+      // eslint-disable-next-line no-unused-vars -- strips the key for eslint v10+
+      const { type, ...rest } = error;
+      return rest;
+    });
+  }
+
+  return sanitizedTest;
+}
+
 // `item` can be a config passed to the constructor, or a test case object/string
 function convertToFlat(item, plugins) {
   if (typeof item === 'string') {
@@ -97,8 +158,8 @@ if (semver.major(eslintPkg.version) >= 9) {
 
     run(ruleName, rule, tests) {
       const newTests = {
-        valid: tests.valid.map((test) => convertToFlat(test, this[PLUGINS])),
-        invalid: tests.invalid.map((test) => convertToFlat(test, this[PLUGINS])),
+        valid: tests.valid.map((test, index) => convertToFlat(sanitizeTestCase(test, 'valid', { ruleName, index }), this[PLUGINS])),
+        invalid: tests.invalid.map((test, index) => convertToFlat(sanitizeTestCase(test, 'invalid', { ruleName, index }), this[PLUGINS])),
       };
 
       super.run(ruleName, rule, newTests);

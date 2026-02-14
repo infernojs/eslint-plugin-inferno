@@ -1,4 +1,6 @@
-# Disallow missing Inferno when using JSX (`inferno/inferno-in-jsx-scope`)
+# inferno/inferno-in-jsx-scope
+
+📝 Disallow missing Inferno when using JSX.
 
 <!-- end auto-generated rule header -->
 

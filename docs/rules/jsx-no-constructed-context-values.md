@@ -1,6 +1,6 @@
 # inferno/jsx-no-constructed-context-values
 
-� Disallows JSX context provider values from taking values that will cause needless rerenders.
+📝 Disallows JSX context provider values from taking values that will cause needless rerenders.
 
 <!-- end auto-generated rule header -->
 

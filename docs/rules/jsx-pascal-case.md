@@ -1,6 +1,6 @@
 # inferno/jsx-pascal-case
 
-� Enforce PascalCase for user-defined JSX components.
+📝 Enforce PascalCase for user-defined JSX components.
 
 <!-- end auto-generated rule header -->
 

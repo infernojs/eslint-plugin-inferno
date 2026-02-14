@@ -1,8 +1,8 @@
 # inferno/require-render-return
 
-� Enforce ES5 or ES6 class for returning value in render function.
+📝 Enforce ES5 or ES6 class for returning value in render function.
 
-� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

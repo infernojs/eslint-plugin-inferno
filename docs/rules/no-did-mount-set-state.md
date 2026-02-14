@@ -1,6 +1,6 @@
 # inferno/no-did-mount-set-state
 
-� Disallow usage of setState in componentDidMount.
+📝 Disallow usage of setState in componentDidMount.
 
 <!-- end auto-generated rule header -->
 

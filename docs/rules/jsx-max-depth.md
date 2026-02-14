@@ -1,6 +1,6 @@
 # inferno/jsx-max-depth
 
-� Enforce JSX maximum depth.
+📝 Enforce JSX maximum depth.
 
 <!-- end auto-generated rule header -->
 

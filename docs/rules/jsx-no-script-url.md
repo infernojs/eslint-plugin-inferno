@@ -1,6 +1,6 @@
 # inferno/jsx-no-script-url
 
-� Disallow usage of `javascript:` URLs.
+📝 Disallow usage of `javascript:` URLs.
 
 <!-- end auto-generated rule header -->
 

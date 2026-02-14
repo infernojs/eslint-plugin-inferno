@@ -1,8 +1,8 @@
 # inferno/jsx-closing-bracket-location
 
-� Enforce closing bracket location in JSX.
+📝 Enforce closing bracket location in JSX.
 
-� This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
 <!-- end auto-generated rule header -->
 

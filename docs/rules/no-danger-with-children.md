@@ -1,8 +1,8 @@
 # inferno/no-danger-with-children
 
-� Disallow when a DOM element is using both children and dangerouslySetInnerHTML.
+📝 Disallow when a DOM element is using both children and dangerouslySetInnerHTML.
 
-� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

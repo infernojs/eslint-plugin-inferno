@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 'use strict';
 
 const semver = require('semver');

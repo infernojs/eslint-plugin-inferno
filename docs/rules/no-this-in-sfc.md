@@ -1,6 +1,6 @@
 # inferno/no-this-in-sfc
 
-� Disallow `this` from being used in stateless functional components.
+📝 Disallow `this` from being used in stateless functional components.
 
 <!-- end auto-generated rule header -->
 

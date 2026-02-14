@@ -1,8 +1,8 @@
 # inferno/no-render-return-value
 
-� Disallow usage of the return value of ReactDOM.render.
+📝 Disallow usage of the return value of Inferno.render.
 
-� This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
+💼 This rule is enabled in the ☑️ `recommended` [config](https://github.com/infernojs/eslint-plugin-inferno/#shareable-configs).
 
 <!-- end auto-generated rule header -->
 

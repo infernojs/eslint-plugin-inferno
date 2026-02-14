@@ -1,6 +1,6 @@
 # inferno/jsx-child-element-spacing
 
-� Enforce or disallow spaces inside of curly braces in JSX attributes and expressions.
+📝 Enforce or disallow spaces inside of curly braces in JSX attributes and expressions.
 
 <!-- end auto-generated rule header -->
 

@@ -1,6 +1,6 @@
 # inferno/no-multi-comp
 
-� Disallow multiple component definition per file.
+📝 Disallow multiple component definition per file.
 
 <!-- end auto-generated rule header -->
 
