@@ -31,23 +31,26 @@ function sanitizeTestCase(test, kind, { ruleName, index } = {}) {
     return test;
   }
 
+  const sanitizedTest = { ...test };
+
+  // ESLint v9+ (and some parsers) can use `filename` for parsing mode, and
+  // ESLint v10 RuleTester can fail on duplicate test cases. Ensure each test
+  // case has a stable, unique filename unless it explicitly provided one.
+  if (!('filename' in sanitizedTest) && ruleName) {
+    const extension = getSyntheticFilenameExtension(sanitizedTest);
+    sanitizedTest.filename = `${ruleName}.${kind}.${index}.${extension}`;
+  }
+
   if (semver.major(eslintPkg.version) < 10) {
-    return test;
+    return sanitizedTest;
   }
 
   // ESLint v10 RuleTester is stricter:
   // - `type` in error objects is no longer supported.
   // - valid test cases can't contain `errors` or `output`.
-  const sanitizedTest = { ...test };
-
   if (kind === 'valid') {
     delete sanitizedTest.errors;
     delete sanitizedTest.output;
-  }
-
-  if (semver.major(eslintPkg.version) >= 10 && !('filename' in sanitizedTest) && ruleName) {
-    const extension = getSyntheticFilenameExtension(sanitizedTest);
-    sanitizedTest.filename = `${ruleName}.${kind}.${index}.${extension}`;
   }
 
   if (kind === 'invalid' && Array.isArray(sanitizedTest.errors)) {
