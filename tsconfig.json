@@ -9,15 +9,15 @@
     "esModuleInterop": true,   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
 
     /* Strict Type-Checking Options */
-    // "strict": true,                        /* Enable all strict type-checking options. */
+    "strict": false,                       /* Off by default up to TS 6, on by default from TS 7, so pin it. */
     "noImplicitAny": false,                /* Raise error on expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": true,              /* Enable strict null checks. */
     // "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
     "strictFunctionTypes": true,           /* Enable strict checking of function types. */
     "strictBindCallApply": true,           /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
     "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
-    "alwaysStrict": false,                 /* Parse in strict mode and emit "use strict" for each source file. */
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["node"]                      /* TS 7 no longer auto-includes every installed `@types` package. */
   },
   "include": ["lib", "types"],
 }

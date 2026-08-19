@@ -7,15 +7,19 @@ permissions:
 
 jobs:
   test:
-    name: TS ${{ matrix.ts_version }}, "${{ matrix.ts_lib }}"
+    name: ESLint ${{ matrix.eslint_version }}, TS ${{ matrix.ts_version }}, "${{ matrix.ts_lib }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
+        eslint_version:
+          - '8'
+          - '9'
         ts_version:
           - '5.0'
           - 5.5
           - 5.6
+          - '6.0'
         ts_lib:
           - esnext
     steps:
@@ -29,6 +33,16 @@ jobs:
         with:
           node-version: 'lts/*'
           skip-ls-check: true
+
+      - name: select eslint types
+        run: |
+          if [ "${{ matrix.eslint_version }}" = "9" ]; then
+            npm uninstall --no-save @types/eslint
+            npm install --no-save eslint@^9 typescript@^5
+          else
+            npm uninstall --no-save @types/eslint
+            npm install --no-save eslint@^${{ matrix.eslint_version }}
+          fi
 
       - name: build types
         run: npm run build-types
@@ -47,6 +61,10 @@ jobs:
 
       - name: npm install working directory
         run: npm install
+        working-directory: test-published-types
+
+      - name: select eslint for published types
+        run: npm install --no-save eslint@^${{ matrix.eslint_version }}
         working-directory: test-published-types
 
       - name: install eslint-plugin-inferno and typescript version ${{ matrix.ts_version }}

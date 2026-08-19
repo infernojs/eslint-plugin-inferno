@@ -36,6 +36,12 @@ const settings = {
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-key', rule, {
   valid: parsers.all([
+    {
+      code: `
+        [1, 2, 3].map((item) => {
+         return item === 'bar' ? <div key={item}>{item}</div> : <span key={item}>{item}</span>;
+        })`,
+    },
     { code: 'fn()' },
     { code: '[1, 2, 3].map(function () {})' },
     { code: '<App />;' },
@@ -205,8 +211,62 @@ ruleTester.run('jsx-key', rule, {
       `,
       settings,
     },
+    { code: '[1, 2, 3].map(x => { return x && <App key={x} />; });' },
+    { code: '[1, 2, 3].map(x => { return x && y && <App key={x} />; });' },
+    { code: '[1, 2, 3].map(x => { return x && foo(); });' },
   ]),
   invalid: parsers.all([
+    {
+      code: `
+        [1, 2, 3].map((item) => {
+          return item === 'bar' ? <div>{item}</div> : <span>{item}</span>;
+        })`,
+      errors: [
+        { messageId: 'missingIterKey' },
+        { messageId: 'missingIterKey' },
+      ],
+    },
+    {
+      code: `
+        [1, 2, 3].map(function(item) {
+          return item === 'bar' ? <div>{item}</div> : <span>{item}</span>;
+        })`,
+      errors: [
+        { messageId: 'missingIterKey' },
+        { messageId: 'missingIterKey' },
+      ],
+    },
+    {
+      code: `
+        Array.from([1, 2, 3], (item) => {
+          return item === 'bar' ? <div>{item}</div> : <span>{item}</span>;
+        })`,
+      errors: [
+        { messageId: 'missingIterKey' },
+        { messageId: 'missingIterKey' },
+      ],
+    },
+    {
+      code: `
+        import { Fragment } from 'inferno';
+
+        const ITEMS = ['bar', 'foo'];
+
+        export default function BugIssue() {
+          return (
+            <Fragment>
+              {ITEMS.map((item) => {
+                return item === 'bar' ? <div>{item}</div> : <span>{item}</span>;
+              })}
+            </Fragment>
+          );
+        }
+      `,
+      errors: [
+        { messageId: 'missingIterKey' },
+        { messageId: 'missingIterKey' },
+      ],
+    },
     {
       code: '[<App />];',
       errors: [{ messageId: 'missingArrayKey' }],
@@ -423,6 +483,14 @@ ruleTester.run('jsx-key', rule, {
       `,
       options: [{ checkKeyMustBeforeSpread: true }],
       errors: [{ messageId: 'keyBeforeSpread' }],
+    },
+    {
+      code: '[1, 2, 3].map(x => { return x && <App />; });',
+      errors: [{ messageId: 'missingIterKey' }],
+    },
+    {
+      code: '[1, 2, 3].map(x => { return x || y || <App />; });',
+      errors: [{ messageId: 'missingIterKey' }],
     },
   ]),
 });

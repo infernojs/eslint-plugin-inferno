@@ -95,7 +95,6 @@ const parsers = {
             errors: testObject.errors.map(
               (errorObject) => {
                 const nextSuggestions = errorObject.suggestions && typeof errorObject.suggestions !== 'number' && {
-                  // eslint-disable-next-line max-len
                   suggestions: errorObject.suggestions.map((suggestion) => ({ ...suggestion, output: suggestion.output + extraComment })),
                 };
 

@@ -122,7 +122,8 @@ module.exports = [
       globals: mochaGlobals,
     },
     rules: {
-      'no-template-curly-in-string': 1,
+      // test fixtures are source code kept in plain strings, so `${...}` is expected
+      'no-template-curly-in-string': 0,
     },
   },
 

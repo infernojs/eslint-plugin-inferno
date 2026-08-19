@@ -12,14 +12,36 @@
 
 ### Added
 * [`jsx-props-no-multi-spaces`]: improve autofix for multi-line ([#3930][] @justisb)
+* [`jsx-handler-names`]: support namespaced component names ([#3943][] @takuji)
+* [`jsx-no-leaked-render`]: add `ignoreAttributes` option ([#3441][] @aleclarson)
+* [`jsx-sort-props`]: add `sortFirst` option ([#3965][] @loderunner)
+* [`jsx-no-literals`]: add `restrictedAttributes` option ([#3950][] @ushiboy)
+* [`forbid-dom-props`]: Add `disallowedValues` option for forbidden props ([#3877][] @makxca)
 
 ### Fixed
 * [`no-unknown-property`]: allow `onLoad` on `body` ([#3923][] @DerekStapleton)
 * [`no-unknown-property`]: allow `closedby` on `dialog` ([#3980][] @ljharb)
+* [`no-unknown-property`]: add `onScrollEnd` and `onScrollEndCapture` events as known properties ([#3958][] @xfeeefeee)
+* Remove extra space from CLI warning ([#3942][] @junaidkbr)
+* [`jsx-key`]: detect missing keys in return statement with ternary operator ([#3928][] @hyeonbinHur)
+* [`jsx-key`]: detect missing keys in logical expressions ([#3986][] @yalperg)
 
+### Changed
+* [Docs] [`no-array-index-key`]: add template literal examples ([#3978][] @akahoshi1421)
+
+[#3986]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3986
+[#3978]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3978
+[#3958]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3958
 [#3980]: https://github.com/jsx-eslint/eslint-plugin-react/issues/3980
+[#3965]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3965
+[#3950]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3950
+[#3943]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3943
+[#3942]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3942
 [#3930]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3930
+[#3928]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3928
 [#3923]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3923
+[#3877]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3877
+[#3441]: https://github.com/jsx-eslint/eslint-plugin-react/pull/3441
 
 ## [7.37.5] - 2025.04.03
 

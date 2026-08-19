@@ -2,7 +2,7 @@
 
 📝 Enforce spacing before closing bracket in JSX.
 
-❌ This rule is deprecated.
+❌ This rule is deprecated. It was replaced by [`inferno/jsx-tag-spacing`](jsx-tag-spacing.md).
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 

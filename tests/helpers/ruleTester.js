@@ -59,7 +59,7 @@ function sanitizeTestCase(test, kind, { ruleName, index } = {}) {
         return error;
       }
 
-      // eslint-disable-next-line no-unused-vars -- strips the key for eslint v10+
+      // `type` is stripped here; eslint v10+ no longer accepts it in error objects
       const { type, ...rest } = error;
       return rest;
     });

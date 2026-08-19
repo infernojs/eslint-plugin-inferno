@@ -2,7 +2,7 @@
 
 📝 Enforce defaultProps declarations alphabetical sorting.
 
-❌ This rule is deprecated.
+❌ This rule is deprecated. It was replaced by [`inferno/sort-default-props`](sort-default-props.md).
 
 <!-- end auto-generated rule header -->
 
