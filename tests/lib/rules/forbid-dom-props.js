@@ -181,6 +181,16 @@ ruleTester.run('forbid-dom-props', rule, {
         },
       ],
     },
+    {
+      code: `
+        var First = createClass({
+          propTypes: externalPropTypes,
+          render: function() {
+            return <input type="text" disabled />;
+          }
+        });
+      `,
+    },
   ]),
 
   invalid: parsers.all([
