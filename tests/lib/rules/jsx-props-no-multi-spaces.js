@@ -32,6 +32,10 @@ const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-props-no-multi-spaces', rule, {
   valid: parsers.all([].concat(
     {
+      // An inline comment surrounded by single spaces is not extra spacing
+      code: '<App foo /* comment */ bar />',
+    },
+    {
       code: `
         <App />
       `,

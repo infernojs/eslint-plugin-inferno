@@ -244,6 +244,32 @@ ruleTester.run('no-invalid-html-attribute', rule, {
   ]),
   invalid: parsers.all([].concat(
     {
+      // createElement calls must be detected with a custom pragma
+      code: 'h.createElement("a", { rel: "alternatex" })',
+      settings: {
+        inferno: {
+          pragma: 'h',
+        },
+      },
+      errors: [
+        {
+          messageId: 'neverValid',
+          data: {
+            attributeName: 'rel',
+            reportingValue: 'alternatex',
+          },
+          suggestions: [
+            {
+              messageId: 'suggestRemoveInvalid',
+              data: { reportingValue: 'alternatex' },
+              output: 'h.createElement("a", { rel: "" })',
+            },
+          ],
+          type: 'Literal',
+        },
+      ],
+    },
+    {
       code: '<a rel="alternatex"></a>',
       errors: [
         {

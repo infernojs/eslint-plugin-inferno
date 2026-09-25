@@ -409,6 +409,17 @@ ruleTester.run('jsx-closing-bracket-location', rule, {
 
   invalid: parsers.all([
     {
+      // Autofix must not delete comments
+      code: `
+        <App
+          foo // comment
+        />
+      `,
+      output: null,
+      options: ['after-props'],
+      errors: [{ messageId: 'bracketLocation' }],
+    },
+    {
       code: `
         <App
         />

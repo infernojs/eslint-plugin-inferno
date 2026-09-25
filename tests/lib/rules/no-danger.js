@@ -55,6 +55,29 @@ ruleTester.run('no-danger', rule, {
   ]),
   invalid: parsers.all([
     {
+      // Namespaced names must not crash the `customComponentNames` matching
+      code: '<svg:foo dangerouslySetInnerHTML={{ __html: "" }} />;',
+      options: [{ customComponentNames: ['*'] }],
+      features: ['jsx namespace'],
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+    {
+      // Deep member expressions must be matched by their full name
+      code: '<A.B.C dangerouslySetInnerHTML={{ __html: "" }} />;',
+      options: [{ customComponentNames: ['A.B.C'] }],
+      errors: [
+        {
+          messageId: 'dangerousProp',
+          data: { name: 'dangerouslySetInnerHTML' },
+        },
+      ],
+    },
+    {
       code: '<div dangerouslySetInnerHTML={{ __html: "" }}></div>;',
       errors: [
         {

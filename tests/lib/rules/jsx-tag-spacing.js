@@ -296,6 +296,13 @@ ruleTester.run('jsx-tag-spacing', rule, {
 
   invalid: parsers.all([
     {
+      // Autofix must not delete comments
+      code: '<App/* comment */ />',
+      output: null,
+      options: beforeSelfClosingOptions('never'),
+      errors: [{ messageId: 'beforeSelfCloseNoSpace' }],
+    },
+    {
       code: '<App/>',
       output: '<App />',
       options: beforeSelfClosingOptions('always'),

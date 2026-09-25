@@ -992,6 +992,16 @@ ruleTester.run('jsx-wrap-multilines', rule, {
 
   invalid: parsers.all([
     {
+      // Autofix must not delete comments
+      code: `
+        const a = (/* comment */<div>
+        </div>);
+      `,
+      output: null,
+      options: [{ declaration: 'never' }],
+      errors: [{ messageId: 'extraParens' }],
+    },
+    {
       code: RETURN_PAREN,
       output: RETURN_NO_PAREN,
       options: [OPTIONS_ALL_NEVER],

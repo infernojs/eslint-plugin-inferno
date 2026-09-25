@@ -362,6 +362,40 @@ ruleTester.run('no-arrow-function-lifecycle', rule, {
 
   invalid: parsers.all([
     {
+      // Autofix must keep destructured and default parameters
+      code: `
+        class Hello extends Inferno.Component {
+          componentDidUpdate = ({ a }, prevState = {}) => { foo(a, prevState); }
+          render() { return <div />; }
+        }
+      `,
+      features: ['class fields'],
+      errors: [{ message: 'componentDidUpdate is a Inferno lifecycle method, and should not be an arrow function or in a class field. Use an instance method instead.' }],
+      output: `
+        class Hello extends Inferno.Component {
+          componentDidUpdate({ a }, prevState = {}) { foo(a, prevState); }
+          render() { return <div />; }
+        }
+      `,
+    },
+    {
+      // Autofix must keep `async`
+      code: `
+        class Hello extends Inferno.Component {
+          componentDidMount = async () => { await foo(); }
+          render() { return <div />; }
+        }
+      `,
+      features: ['class fields'],
+      errors: [{ message: 'componentDidMount is a Inferno lifecycle method, and should not be an arrow function or in a class field. Use an instance method instead.' }],
+      output: `
+        class Hello extends Inferno.Component {
+          async componentDidMount() { await foo(); }
+          render() { return <div />; }
+        }
+      `,
+    },
+    {
       code: `
         var Hello = createClass({
           render: () => { return <div />; }

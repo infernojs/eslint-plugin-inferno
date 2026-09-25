@@ -374,6 +374,34 @@ ruleTester.run('prefer-stateless-function', rule, {
 
   invalid: parsers.all([
     {
+      // A function component before the class must not stop the check
+      code: `
+        const Hello = () => <div/>;
+        class Foo extends Inferno.Component {
+          render() {
+            return <div>{this.props.foo}</div>;
+          }
+        }
+      `,
+      errors: [{ messageId: 'componentShouldBePure', line: 3 }],
+    },
+    {
+      // A stateful class before the pure one must not stop the check
+      code: `
+        class Bar extends Inferno.Component {
+          render() {
+            return <div>{this.state.bar}</div>;
+          }
+        }
+        class Foo extends Inferno.Component {
+          render() {
+            return <div>{this.props.foo}</div>;
+          }
+        }
+      `,
+      errors: [{ messageId: 'componentShouldBePure', line: 7 }],
+    },
+    {
       // Only use this.props
       code: `
         class Foo extends Inferno.Component {

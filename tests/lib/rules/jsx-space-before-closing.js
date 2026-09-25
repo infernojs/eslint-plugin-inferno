@@ -83,6 +83,13 @@ ruleTester.run('jsx-space-before-closing', rule, {
 
   invalid: parsers.all([
     {
+      // Autofix must not delete comments
+      code: '<App/* comment */ />',
+      output: null,
+      options: ['never'],
+      errors: [{ messageId: 'noSpaceBeforeClose' }],
+    },
+    {
       code: '<App/>',
       output: '<App />',
       errors: [{ messageId: 'needSpaceBeforeClose' }],

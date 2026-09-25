@@ -449,6 +449,15 @@ ruleTester.run('function-component-definition', rule, {
 
   invalid: parsers.all([
     {
+      // Autofix must not delete the other declarators of the same declaration
+      code: `
+        const Hello = (props) => <div/>, answer = 42;
+      `,
+      output: null,
+      options: [{ namedComponents: 'function-declaration' }],
+      errors: [{ messageId: 'function-declaration' }],
+    },
+    {
       code: `
         function Hello(props) {
           return <div/>;

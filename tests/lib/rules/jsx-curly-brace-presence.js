@@ -34,6 +34,12 @@ const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('jsx-curly-brace-presence', rule, {
   valid: parsers.all([].concat(
     {
+      // `propElementValues: 'never'` must not require curly braces (circular autofix)
+      code: `<App horror=<div /> />`,
+      options: [{ propElementValues: 'never' }],
+      features: ['no-ts'],
+    },
+    {
       code: '<App {...props}>foo</App>',
     },
     {
@@ -482,6 +488,19 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
 
   invalid: parsers.all([].concat(
     {
+      // HTML entities must stay outside the string literal, or the rendered text changes
+      code: '<App>a&amp;b</App>',
+      options: [{ children: 'always' }],
+      output: '<App>{"a"}&amp;{"b"}</App>',
+      errors: [{ messageId: 'missingCurly' }],
+    },
+    {
+      code: '<App prop="a&amp;b" />',
+      options: [{ props: 'always' }],
+      output: null,
+      errors: [{ messageId: 'missingCurly' }],
+    },
+    {
       code: '<App prop={`foo`} />',
       options: [{ props: 'never' }],
       output: '<App prop="foo" />',
@@ -760,15 +779,16 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
       errors: [{ messageId: 'missingCurly' }],
     },
     {
+      // HTML entities are not decoded in JS strings, so the attribute can't be wrapped
       code: `<App prop='foo &middot; bar' />`,
       options: [{ props: 'always' }],
-      output: `<App prop={"foo &middot; bar"} />`,
+      output: null,
       errors: [{ messageId: 'missingCurly' }],
     },
     {
       code: '<App>foo &middot; bar</App>',
       options: [{ children: 'always' }],
-      output: '<App>{"foo &middot; bar"}</App>',
+      output: '<App>{"foo "}&middot;{" bar"}</App>',
       errors: [{ messageId: 'missingCurly' }],
     },
     {

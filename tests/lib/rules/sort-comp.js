@@ -728,6 +728,43 @@ ruleTester.run('sort-comp', rule, {
   invalid: parsers.all([
     {
       code: `
+        // Must report every mis-ordered component in the file, not only the first one
+        class Hello extends Inferno.Component {
+          render() {
+            return <div>Hello</div>;
+          }
+          componentDidMount() {}
+        }
+        class World extends Inferno.Component {
+          render() {
+            return <div>World</div>;
+          }
+          componentDidMount() {}
+        }
+      `,
+      errors: [
+        {
+          messageId: 'unsortedProps',
+          data: {
+            propA: 'render',
+            position: 'after',
+            propB: 'componentDidMount',
+          },
+          line: 4,
+        },
+        {
+          messageId: 'unsortedProps',
+          data: {
+            propA: 'render',
+            position: 'after',
+            propB: 'componentDidMount',
+          },
+          line: 10,
+        },
+      ],
+    },
+    {
+      code: `
         // Must force a lifecycle method to be placed before render
         var Hello = createClass({
           render: function() {

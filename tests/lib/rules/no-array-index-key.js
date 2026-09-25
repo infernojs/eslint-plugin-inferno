@@ -141,6 +141,14 @@ ruleTester.run('no-array-index-key', rule, {
 
   invalid: parsers.all([].concat(
     {
+      // Inferno exports createElement from `inferno-create-element`, not from `inferno`
+      code: `
+        import { createElement } from 'inferno-create-element';
+        foo.map((bar, i) => createElement('Foo', { key: i }));
+      `,
+      errors: [{ messageId: 'noArrayIndex' }],
+    },
+    {
       code: 'foo.map((bar, i) => <Foo key={i} />)',
       errors: [{ messageId: 'noArrayIndex' }],
     },

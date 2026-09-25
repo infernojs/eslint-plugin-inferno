@@ -32,6 +32,16 @@ const allowReferrerErrors = [{ messageId: 'noTargetBlankWithoutNoopener' }];
 
 ruleTester.run('jsx-no-target-blank', rule, {
   valid: parsers.all([
+    // `links: false` disables the check on links
+    {
+      code: '<a href="https://example.com" target="_blank"></a>',
+      options: [{ links: false }],
+    },
+    // `allowReferrer` also applies to forms
+    {
+      code: '<form action="https://example.com" target="_blank" rel="noopener"></form>',
+      options: [{ forms: true, allowReferrer: true }],
+    },
     { code: '<a href="foobar"></a>' },
     { code: '<a randomTag></a>' },
     { code: '<a target />' },

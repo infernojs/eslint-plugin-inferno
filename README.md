@@ -181,7 +181,8 @@ Enable the rules that you would like to use.
 
 ### Shareable configs
 These rules have been removed because they don't make sense in context of InfernoJS.
-InfernoJS does not have prop-types or UNSAFE_ -lifecycle methods.
+InfernoJS does not have prop-types, UNSAFE_ -lifecycle methods, context providers or `isMounted`,
+and it accepts `style` as a string.
 
 * react/default-props-match-prop-types
 * react/display-name
@@ -196,8 +197,9 @@ InfernoJS does not have prop-types or UNSAFE_ -lifecycle methods.
 * react/prefer-read-only-props
 * react/style-prop-object
 * react/hook-use-state
-* react/prefer-read-only-props
 * react/prefer-exact-props
+* react/jsx-no-constructed-context-values
+* react/no-is-mounted
 
 ## Other useful plugins
 
@@ -326,7 +328,6 @@ module.exports = [
 | [jsx-newline](docs/rules/jsx-newline.md)                                                     | Require or prevent a new line after jsx elements and expressions.                                                                            |    | 🔧 |    |    |
 | [jsx-no-bind](docs/rules/jsx-no-bind.md)                                                     | Disallow `.bind()` or arrow functions in JSX props                                                                                           |    |    |    |    |
 | [jsx-no-comment-textnodes](docs/rules/jsx-no-comment-textnodes.md)                           | Disallow comments from being inserted as text nodes                                                                                          | ☑️ |    |    |    |
-| [jsx-no-constructed-context-values](docs/rules/jsx-no-constructed-context-values.md)         | Disallows JSX context provider values from taking values that will cause needless rerenders                                                  |    |    |    |    |
 | [jsx-no-duplicate-props](docs/rules/jsx-no-duplicate-props.md)                               | Disallow duplicate properties in JSX                                                                                                         | ☑️ |    |    |    |
 | [jsx-no-leaked-render](docs/rules/jsx-no-leaked-render.md)                                   | Disallow problematic leaked values from being rendered                                                                                       |    | 🔧 |    |    |
 | [jsx-no-literals](docs/rules/jsx-no-literals.md)                                             | Disallow usage of string literals in JSX                                                                                                     |    |    |    |    |
@@ -358,7 +359,6 @@ module.exports = [
 | [no-direct-mutation-state](docs/rules/no-direct-mutation-state.md)                           | Disallow direct mutation of this.state                                                                                                       | ☑️ |    |    |    |
 | [no-find-dom-node](docs/rules/no-find-dom-node.md)                                           | Disallow usage of findDOMNode                                                                                                                | ☑️ |    |    |    |
 | [no-invalid-html-attribute](docs/rules/no-invalid-html-attribute.md)                         | Disallow usage of invalid attributes                                                                                                         |    |    | 💡 |    |
-| [no-is-mounted](docs/rules/no-is-mounted.md)                                                 | Disallow usage of isMounted                                                                                                                  | ☑️ |    |    |    |
 | [no-multi-comp](docs/rules/no-multi-comp.md)                                                 | Disallow multiple component definition per file                                                                                              |    |    |    |    |
 | [no-namespace](docs/rules/no-namespace.md)                                                   | Enforce that namespaces are not used in Inferno elements                                                                                     |    |    |    |    |
 | [no-object-type-as-default-prop](docs/rules/no-object-type-as-default-prop.md)               | Disallow usage of referential-type variables as default param in functional component                                                        |    |    |    |    |
@@ -383,7 +383,6 @@ module.exports = [
 | [sort-default-props](docs/rules/sort-default-props.md)                                       | Enforce defaultProps declarations alphabetical sorting                                                                                       |    |    |    |    |
 | [state-in-constructor](docs/rules/state-in-constructor.md)                                   | Enforce class component state initialization style                                                                                           |    |    |    |    |
 | [static-property-placement](docs/rules/static-property-placement.md)                         | Enforces where Inferno component static properties should be positioned.                                                                     |    |    |    |    |
-| [style-prop-object](docs/rules/style-prop-object.md)                                         | Enforce style prop value is an object                                                                                                        |    |    |    |    |
 | [void-dom-elements-no-children](docs/rules/void-dom-elements-no-children.md)                 | Disallow void DOM elements (e.g. `<img />`, `<br />`) from receiving children                                                                |    |    |    |    |
 
 <!-- end auto-generated rules list -->

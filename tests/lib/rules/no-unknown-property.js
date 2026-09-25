@@ -29,6 +29,16 @@ const parserOptions = {
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('no-unknown-property', rule, {
   valid: parsers.all([
+    // SVG presentation attribute `font-variant` (was mangled to 'font-constiant')
+    { code: '<svg><text font-variant="small-caps" /></svg>;' },
+    // Pointer events are valid DOM events
+    { code: '<div onPointerDown={f} />;' },
+    { code: '<div onPointerUp={f} onPointerMove={f} onPointerCancel={f} />;' },
+    { code: '<div onPointerEnter={f} onPointerLeave={f} onPointerOver={f} onPointerOut={f} />;' },
+    { code: '<div onGotPointerCapture={f} onLostPointerCapture={f} />;' },
+    // Inferno attaches any lowercase `on*` prop as a native event listener
+    { code: '<input onchange={f} oninput={f} />;' },
+    { code: '<div onscroll={f} />;' },
     // Inferno optimization flags should be fine
     { code: '<div $HasKeyedChildren />;' },
     { code: '<div $HasNonKeyedChildren />;' },

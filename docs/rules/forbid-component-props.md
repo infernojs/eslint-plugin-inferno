@@ -4,7 +4,7 @@
 
 <!-- end auto-generated rule header -->
 
-By default, this rule prevents passing of [props that add lots of complexity](https://medium.com/brigade-engineering/don-t-pass-css-classes-between-components-e9f7ab192785) (`className`, `style`) to Components. This rule only applies to Components (e.g. `<Foo />`) and not DOM nodes (e.g. `<div />`). The list of forbidden props can be customized with the `forbid` option.
+By default, this rule prevents passing of [props that add lots of complexity](https://medium.com/brigade-engineering/don-t-pass-css-classes-between-components-e9f7ab192785) (`className`, `class`, `style`) to Components. This rule only applies to Components (e.g. `<Foo />`) and not DOM nodes (e.g. `<div />`). The list of forbidden props can be customized with the `forbid` option.
 
 ## Rule Details
 
@@ -45,7 +45,7 @@ Examples of **correct** code for this rule:
 
 ### `forbid`
 
-An array specifying the names of props that are forbidden. The default value of this option is `['className', 'style']`.
+An array specifying the names of props that are forbidden. The default value of this option is `['className', 'class', 'style']`.
 Each array element can either be a string with the property name or object specifying the property name or glob string, an optional
 custom message, and a component allowlist:
 

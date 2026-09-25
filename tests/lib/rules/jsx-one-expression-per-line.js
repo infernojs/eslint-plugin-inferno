@@ -9,6 +9,11 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
+const assert = require('assert');
+const Linter = require('eslint').Linter;
+const semver = require('semver');
+const eslintPkg = require('eslint/package.json');
+
 const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-one-expression-per-line');
 
@@ -1637,4 +1642,23 @@ Go to page 2
       parserOptions,
     },
   ]),
+});
+
+describe('jsx-one-expression-per-line autofix over multiple passes', () => {
+  before(function skipOnOldESLint() {
+    if (!semver.satisfies(eslintPkg.version, '>= 8.23.0')) {
+      this.skip();
+    }
+  });
+
+  it('keeps the space between text and the following element', () => {
+    const linter = new Linter({ configType: 'flat' });
+    const result = linter.verifyAndFix('<a>x <b/></a>;', [{
+      plugins: { inferno: { rules: { 'jsx-one-expression-per-line': rule } } },
+      languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
+      rules: { 'inferno/jsx-one-expression-per-line': 'error' },
+    }], 'test.js');
+
+    assert.match(result.output, /x\s*\{' '\}\s*<b\/>/);
+  });
 });

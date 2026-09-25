@@ -87,6 +87,13 @@ ruleTester.run('jsx-equals-spacing', rule, {
   ]),
 
   invalid: parsers.all([].concat(
+    {
+      // Autofix must not delete comments
+      code: '<App foo /* comment */={bar} />',
+      output: null,
+      options: ['never'],
+      errors: [{ messageId: 'noSpaceBefore' }],
+    },
     parsers.skipDueToMultiErrorSorting ? [] : {
       code: '<App foo = {bar} />',
       output: '<App foo={bar} />',

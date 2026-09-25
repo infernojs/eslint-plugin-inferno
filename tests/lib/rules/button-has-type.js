@@ -101,6 +101,16 @@ ruleTester.run('button-has-type', rule, {
   ]),
   invalid: parsers.all([
     {
+      // Inferno exports createElement from `inferno-create-element`, not from `inferno`
+      code: `
+        import { createElement } from 'inferno-create-element';
+        createElement("button");
+      `,
+      errors: [
+        { messageId: 'missingType' },
+      ],
+    },
+    {
       code: '<button/>',
       errors: [
         { messageId: 'missingType' },

@@ -137,6 +137,22 @@ ruleTester.run('forbid-component-props', rule, {
       ],
     },
     {
+      // Deep member expressions are matched by their full name
+      code: `
+        const item = (<Antd.Layout.Content className="antdFoo" />);
+      `,
+      options: [
+        {
+          forbid: [
+            {
+              propName: 'className',
+              allowedFor: ['Antd.Layout.Content'],
+            },
+          ],
+        },
+      ],
+    },
+    {
       code: `
         const item = (<this.InfernoModal className="foo" />);
       `,
@@ -325,6 +341,17 @@ ruleTester.run('forbid-component-props', rule, {
   ]),
 
   invalid: parsers.all([
+    {
+      // Inferno accepts `class` as well as `className`, so both are forbidden by default
+      code: '<Foo class="bar" />;',
+      errors: [
+        {
+          messageId: 'propIsForbidden',
+          data: { prop: 'class' },
+          type: 'JSXAttribute',
+        },
+      ],
+    },
     {
       code: `
         var First = createClass({

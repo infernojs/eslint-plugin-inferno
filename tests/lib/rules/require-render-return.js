@@ -155,6 +155,47 @@ ruleTester.run('require-render-return', rule, {
 
   invalid: parsers.all([
     {
+      // A function component before the class must not stop the check
+      code: `
+        const Hello = () => <div/>;
+        class B extends Inferno.Component {
+          render() { <div/>; }
+        }
+      `,
+      errors: [{ messageId: 'noRenderReturn', line: 4 }],
+    },
+    {
+      // A valid class before the invalid one must not stop the check
+      code: `
+        class A extends Inferno.Component {
+          render() { return <div/>; }
+        }
+        class B extends Inferno.Component {
+          render() { <div/>; }
+        }
+      `,
+      errors: [{ messageId: 'noRenderReturn', line: 6 }],
+    },
+    {
+      // JSDoc @extends on an exported class (ESLint 10 getJSDocComment polyfill)
+      code: `
+        /** @extends Inferno.Component */
+        export default class Hello extends Base {
+          render() {}
+        }
+      `,
+      errors: [{ messageId: 'noRenderReturn' }],
+    },
+    {
+      code: `
+        /** @extends Inferno.Component */
+        export class Hello extends Base {
+          render() {}
+        }
+      `,
+      errors: [{ messageId: 'noRenderReturn' }],
+    },
+    {
       // Missing return in ES5 class
       code: `
         var Hello = createClass({

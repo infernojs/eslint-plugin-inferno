@@ -175,6 +175,14 @@ ruleTester.run('no-children-prop', rule, {
   ]),
   invalid: parsers.all([
     {
+      // Inferno exports createElement from `inferno-create-element`, not from `inferno`
+      code: `
+        import { createElement } from 'inferno-create-element';
+        createElement("div", {children: "Children"});
+      `,
+      errors: [{ messageId: 'passChildrenAsArgs' }],
+    },
+    {
       code: '<div children />;', // not a valid use case but make sure we don't crash
       errors: [{ messageId: 'nestChildren' }],
     },

@@ -51,7 +51,6 @@ const configs = {
       'inferno/no-danger-with-children': SEVERITY_ERROR,
       'inferno/no-direct-mutation-state': SEVERITY_ERROR,
       'inferno/no-find-dom-node': SEVERITY_ERROR,
-      'inferno/no-is-mounted': SEVERITY_ERROR,
       'inferno/no-render-return-value': SEVERITY_ERROR,
       'inferno/no-string-refs': SEVERITY_ERROR,
       'inferno/no-unescaped-entities': SEVERITY_ERROR,

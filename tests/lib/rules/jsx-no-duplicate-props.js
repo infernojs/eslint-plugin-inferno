@@ -57,6 +57,19 @@ ruleTester.run('jsx-no-duplicate-props', rule, {
     },
   ]),
   invalid: parsers.all([
+    // Inferno aliases set the same prop; babel-plugin-inferno refuses to compile these
+    {
+      code: '<div class="a" className="b" />;',
+      errors: [expectedError],
+    },
+    {
+      code: '<label for="a" htmlFor="b" />;',
+      errors: [expectedError],
+    },
+    {
+      code: '<div onDoubleClick={a} onDblClick={b} />;',
+      errors: [expectedError],
+    },
     {
       code: '<App a a />;',
       errors: [expectedError],

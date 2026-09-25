@@ -9,7 +9,10 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
+const ruleNoUnusedVars = require('../../helpers/getESLintCoreRule')('no-unused-vars');
+
 const RuleTester = require('../../helpers/ruleTester');
+const getRuleDefiner = require('../../helpers/getRuleDefiner');
 const rule = require('../../../lib/rules/inferno-in-jsx-scope');
 
 const parsers = require('../../helpers/parsers');
@@ -131,4 +134,21 @@ ruleTester.run('inferno-in-jsx-scope', rule, {
       ],
     },
   ]),
+});
+
+// The import required by inferno-in-jsx-scope must not be reported by no-unused-vars
+const unusedVarsRuleTester = new RuleTester({ parserOptions });
+getRuleDefiner(unusedVarsRuleTester).defineRule('inferno/inferno-in-jsx-scope', rule);
+
+unusedVarsRuleTester.run('no-unused-vars', ruleNoUnusedVars, {
+  valid: parsers.all([
+    {
+      code: `
+        /* eslint inferno/inferno-in-jsx-scope: 1 */
+        import * as Inferno from 'inferno';
+        export const a = <div />;
+      `,
+    },
+  ]),
+  invalid: [],
 });

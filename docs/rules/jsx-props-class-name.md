@@ -14,6 +14,9 @@
 
 This rule will enforce one or the other to keep consistency in your code.
 
+It only checks DOM elements (e.g. `<div />`), because components (e.g. `<Foo />`) receive `class` and `className` as
+two different props.
+
 **Fixable:** This rule is automatically fixable using the `--fix` flag on the command line.
 
 ## Rule Options

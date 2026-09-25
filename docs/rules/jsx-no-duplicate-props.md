@@ -16,6 +16,13 @@ Examples of **incorrect** code for this rule:
 <Hello name="John" name="John" />;
 ```
 
+On DOM elements, Inferno treats `class` and `className`, `for` and `htmlFor`, and `onDoubleClick` and `onDblClick`
+as the same prop, so using both is also a duplicate:
+
+```jsx
+<div class="foo" className="bar" />;
+```
+
 Examples of **correct** code for this rule:
 
 ```jsx

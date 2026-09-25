@@ -1,4 +1,28 @@
 # Change Log
+## Unreleased
+- `inferno/jsx-no-constructed-context-values` rule removed, InfernoJS does not have context providers.
+- `inferno/no-is-mounted` rule removed (also from `recommended`), InfernoJS components do not have `isMounted`.
+- `inferno/style-prop-object` rule removed, InfernoJS accepts `style` as a string.
+- bugfix: `no-unknown-property` allows `font-variant`, pointer events and lowercase native event handlers (e.g. `onchange`)
+- bugfix: `jsx-no-duplicate-props` reports `class`/`className`, `for`/`htmlFor` and `onDoubleClick`/`onDblClick` on DOM elements
+- bugfix: `jsx-props-class-name` only checks DOM elements and does not autofix into a duplicate prop
+- bugfix: `forbid-component-props` forbids `class` by default, and `allowedFor` matches names like `A.B.C`
+- bugfix: `inferno-in-jsx-scope` marks the pragma as used, so `no-unused-vars` does not report it
+- bugfix: `require-render-return` and `prefer-stateless-function` check every component in a file
+- bugfix: `sort-comp` reports every mis-ordered component in a file
+- bugfix: `@extends Inferno.Component` JSDoc is detected on exported classes with ESLint 10
+- bugfix: `createElement` imported from `inferno-create-element` or `inferno-compat` is detected
+- bugfix: `no-invalid-html-attribute` respects the pragma setting
+- bugfix: `void-dom-elements-no-children` detects children when the props argument is not an object
+- bugfix: `jsx-no-target-blank` respects `links: false`, and `allowReferrer` for forms
+- bugfix: `jsx-curly-brace-presence` no longer loops with `propElementValues: 'never'` or changes text with HTML entities
+- bugfix: `no-arrow-function-lifecycle` autofix keeps destructured/default parameters and `async`
+- bugfix: `function-component-definition` does not autofix declarations with several declarators
+- bugfix: `no-danger` does not crash on namespaced elements and matches names like `A.B.C`
+- bugfix: `jsx-one-expression-per-line` autofix keeps the space between text and an element
+- bugfix: `jsx-props-no-multi-spaces` allows comments between props
+- bugfix: `jsx-tag-spacing`, `jsx-space-before-closing`, `jsx-equals-spacing`, `jsx-closing-bracket-location` and `jsx-wrap-multilines` autofixes do not delete comments
+
 ## 2026-02-14 (7.40.0)
 - Support eslint v10
 - Support 'closedby' -> 'dialog' attribute

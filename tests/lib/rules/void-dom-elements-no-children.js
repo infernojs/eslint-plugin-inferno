@@ -93,6 +93,38 @@ ruleTester.run('void-dom-elements-no-children', rule, {
   ]),
   invalid: parsers.all([
     {
+      // Inferno exports createElement from `inferno-create-element`, not from `inferno`
+      code: `
+        import { createElement } from 'inferno-create-element';
+        createElement("br", {}, "Foo");
+      `,
+      errors: [
+        {
+          messageId: 'noChildrenInVoidEl',
+          data: { element: 'br' },
+        },
+      ],
+    },
+    {
+      // Children must be detected when the props argument is not an object literal
+      code: 'Inferno.createElement("br", undefined, "Foo");',
+      errors: [
+        {
+          messageId: 'noChildrenInVoidEl',
+          data: { element: 'br' },
+        },
+      ],
+    },
+    {
+      code: 'Inferno.createElement("br", null, "Foo");',
+      errors: [
+        {
+          messageId: 'noChildrenInVoidEl',
+          data: { element: 'br' },
+        },
+      ],
+    },
+    {
       code: '<br>Foo</br>;',
       errors: [
         {
